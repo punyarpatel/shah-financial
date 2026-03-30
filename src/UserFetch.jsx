@@ -6,7 +6,11 @@ function UserFetch() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
+  // Function to fetch users
+  const fetchUsers = () => {
+    setLoading(true);
+    setError("");
+
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => {
         if (!response.ok) {
@@ -22,16 +26,30 @@ function UserFetch() {
         setError(err.message);
         setLoading(false);
       });
+  };
+
+  // Fetch users when component loads
+  useEffect(() => {
+    fetchUsers();
   }, []);
 
+  // Filter users by search
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(search.toLowerCase())
   );
 
+  // Clear search
   const clearFilter = () => {
     setSearch("");
   };
 
+  // Reload / Refetch users
+  const reloadUsers = () => {
+    setSearch("");
+    fetchUsers();
+  };
+
+  // Get initials for avatar
   const getInitials = (name) => {
     return name
       .split(" ")
@@ -56,8 +74,13 @@ function UserFetch() {
             onChange={(e) => setSearch(e.target.value)}
             style={styles.input}
           />
+
           <button onClick={clearFilter} style={styles.button}>
             Clear Filter
+          </button>
+
+          <button onClick={reloadUsers} style={styles.reloadButton}>
+            🔄 Reload
           </button>
         </div>
 
@@ -161,6 +184,18 @@ const styles = {
     borderRadius: "12px",
     border: "none",
     background: "linear-gradient(135deg, #ff9966, #ff5e62)",
+    color: "#fff",
+    fontWeight: "600",
+    cursor: "pointer",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+    transition: "0.3s ease",
+  },
+  reloadButton: {
+    padding: "14px 22px",
+    fontSize: "17px",
+    borderRadius: "12px",
+    border: "none",
+    background: "linear-gradient(135deg, #36d1dc, #5b86e5)",
     color: "#fff",
     fontWeight: "600",
     cursor: "pointer",
