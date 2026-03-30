@@ -1,124 +1,29 @@
 import React, { useEffect, useState } from "react";
 
-// Modernized CSS-in-JS (Optimized for performance and readability)
-const styles = {
-  wrapper: {
-    minHeight: "100vh",
-    background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
-    padding: "40px 20px",
-    fontFamily: "'Inter', -apple-system, sans-serif",
-    color: "#f8fafc",
-  },
-  container: {
-    maxWidth: "1200px",
-    margin: "0 auto",
-  },
-  header: {
-    textAlign: "center",
-    marginBottom: "50px",
-  },
-  title: {
-    fontSize: "clamp(2rem, 5vw, 3.5rem)",
-    fontWeight: "800",
-    background: "linear-gradient(to right, #38bdf8, #818cf8)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    marginBottom: "10px",
-  },
-  searchSection: {
-    position: "sticky",
-    top: "20px",
-    zIndex: 100,
-    background: "rgba(30, 41, 59, 0.7)",
-    backdropFilter: "blur(12px)",
-    padding: "20px",
-    borderRadius: "24px",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    display: "flex",
-    gap: "12px",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.3)",
-    marginBottom: "40px",
-  },
-  input: {
-    flex: "1",
-    minWidth: "260px",
-    padding: "12px 20px",
-    borderRadius: "12px",
-    border: "1px solid #334155",
-    background: "#0f172a",
-    color: "#fff",
-    fontSize: "16px",
-    outline: "none",
-    transition: "border-color 0.2s",
-  },
-  btn: {
-    padding: "12px 24px",
-    borderRadius: "12px",
-    border: "none",
-    fontWeight: "600",
-    cursor: "pointer",
-    transition: "all 0.2s ease",
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-  },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-    gap: "24px",
-  },
-  card: {
-    background: "rgba(255, 255, 255, 0.03)",
-    border: "1px solid rgba(255, 255, 255, 0.08)",
-    borderRadius: "24px",
-    padding: "24px",
-    transition: "transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s",
-    cursor: "pointer",
-    position: "relative",
-    overflow: "hidden",
-  },
-  avatar: {
-    width: "50px",
-    height: "50px",
-    borderRadius: "14px",
-    background: "linear-gradient(135deg, #38bdf8, #2563eb)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontWeight: "bold",
-    fontSize: "18px",
-    marginBottom: "20px",
-  },
-  badge: {
-    fontSize: "12px",
-    padding: "4px 10px",
-    borderRadius: "20px",
-    background: "rgba(56, 189, 248, 0.1)",
-    color: "#38bdf8",
-    fontWeight: "600",
-  }
-};
-
 function UserFetch() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const fetchUsers = async () => {
-    setLoading(true);
+  // Optimized Fetch: keeps the search state intact
+  const fetchUsers = async (isManualRefresh = false) => {
+    if (isManualRefresh) setIsRefreshing(true);
+    else setLoading(true);
+    
     setError("");
+
     try {
       const response = await fetch("https://jsonplaceholder.typicode.com/users");
-      if (!response.ok) throw new Error("Server communication failed");
+      if (!response.ok) throw new Error("Failed to sync directory");
       const data = await response.json();
       setUsers(data);
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
+      setIsRefreshing(false);
     }
   };
 
@@ -126,85 +31,75 @@ function UserFetch() {
     fetchUsers();
   }, []);
 
-  const filteredUsers = users.filter((u) =>
-    u.name.toLowerCase().includes(search.toLowerCase())
+  // Filter logic remains reactive to the 'search' state
+  const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(search.toLowerCase())
   );
+
+  // New Refresh Logic: Does NOT call setSearch("")
+  const handleRefresh = () => {
+    fetchUsers(true); 
+  };
 
   return (
     <div style={styles.wrapper}>
       <div style={styles.container}>
-        <header style={styles.header}>
-          <h1 style={styles.title}>Network Intelligence</h1>
-          <p style={{ color: "#94a3b8" }}>Real-time directory of verified personnel</p>
-        </header>
+        <div style={styles.header}>
+          <h1 style={styles.title}>Personnel Directory</h1>
+          <p style={styles.subtitle}>Management Interface v2.4</p>
+        </div>
 
-        <div style={styles.searchSection}>
-          <input
-            style={styles.input}
-            placeholder="Search by name..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            onFocus={(e) => (e.target.style.borderColor = "#38bdf8")}
-            onBlur={(e) => (e.target.style.borderColor = "#334155")}
-          />
+        <div style={styles.controlPanel}>
+          <div style={styles.searchWrapper}>
+            <input
+              type="text"
+              placeholder="Filter by name..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              style={styles.input}
+            />
+            {search && (
+              <button onClick={() => setSearch("")} style={styles.clearBadge}>
+                ✕
+              </button>
+            )}
+          </div>
+
           <button 
-            style={{ ...styles.btn, background: "#334155", color: "#fff" }}
-            onClick={() => setSearch("")}
+            onClick={handleRefresh} 
+            style={{
+              ...styles.refreshBtn,
+              opacity: isRefreshing ? 0.7 : 1,
+              transform: isRefreshing ? "scale(0.95)" : "scale(1)"
+            }}
+            disabled={isRefreshing}
           >
-            Clear
-          </button>
-          <button 
-            style={{ ...styles.btn, background: "#38bdf8", color: "#0f172a" }}
-            onClick={fetchUsers}
-          >
-            Refresh Data
+            {isRefreshing ? "⏳ Syncing..." : "🔄 Refresh Data"}
           </button>
         </div>
 
+        <div style={styles.metaInfo}>
+          <span>Showing <b>{filteredUsers.length}</b> results</span>
+          {search && <span> for "<i>{search}</i>"</span>}
+        </div>
+
         {loading ? (
-          <div style={{ textAlign: "center", padding: "50px" }}>
-            <div className="spinner"></div> {/* Add CSS spinner if desired */}
-            <p>Syncing Database...</p>
-          </div>
-        ) : error ? (
-          <div style={{ textAlign: "center", color: "#f87171" }}>{error}</div>
+          <div style={styles.loader}>Initial Loading...</div>
         ) : (
           <div style={styles.grid}>
             {filteredUsers.map((user) => (
-              <div
-                key={user.id}
-                style={styles.card}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "scale(1.03)";
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.07)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "scale(1)";
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.03)";
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <div style={styles.avatar}>
-                    {user.name.split(" ").map(n => n[0]).join("")}
+              <div key={user.id} style={styles.card}>
+                <div style={styles.cardHeader}>
+                  <div style={styles.avatar}>{user.name[0]}</div>
+                  <div>
+                    <div style={styles.name}>{user.name}</div>
+                    <div style={styles.username}>@{user.username}</div>
                   </div>
-                  <span style={styles.badge}>ID: {user.id}</span>
                 </div>
-
-                <h3 style={{ fontSize: "20px", margin: "0 0 8px 0" }}>{user.name}</h3>
-                <p style={{ color: "#94a3b8", fontSize: "14px", marginBottom: "16px" }}>
-                   @{user.username}
-                </p>
-
-                <div style={{ fontSize: "14px", display: "grid", gap: "8px" }}>
-                  <div style={{ display: "flex", gap: "10px" }}>
-                    <span style={{ color: "#38bdf8" }}>✉️</span> {user.email}
-                  </div>
-                  <div style={{ display: "flex", gap: "10px" }}>
-                    <span style={{ color: "#38bdf8" }}>🏢</span> {user.company.name}
-                  </div>
-                  <div style={{ display: "flex", gap: "10px" }}>
-                    <span style={{ color: "#38bdf8" }}>📍</span> {user.address.city}
-                  </div>
+                <div style={styles.divider} />
+                <div style={styles.details}>
+                  <p><b>Email:</b> {user.email}</p>
+                  <p><b>Company:</b> {user.company.name}</p>
                 </div>
               </div>
             ))}
@@ -214,5 +109,139 @@ function UserFetch() {
     </div>
   );
 }
+
+// Updated Modern Styles
+const styles = {
+  wrapper: {
+    minHeight: "100vh",
+    backgroundColor: "#f4f7fe",
+    padding: "40px 20px",
+    fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+  },
+  container: {
+    maxWidth: "1100px",
+    margin: "0 auto",
+  },
+  header: {
+    marginBottom: "30px",
+  },
+  title: {
+    fontSize: "32px",
+    fontWeight: "800",
+    color: "#1b2559",
+    margin: 0,
+  },
+  subtitle: {
+    color: "#a3aed0",
+    fontSize: "16px",
+    marginTop: "5px",
+  },
+  controlPanel: {
+    display: "flex",
+    gap: "15px",
+    marginBottom: "20px",
+    alignItems: "center",
+  },
+  searchWrapper: {
+    position: "relative",
+    flex: 1,
+  },
+  input: {
+    width: "100%",
+    padding: "15px 20px",
+    borderRadius: "15px",
+    border: "none",
+    backgroundColor: "#fff",
+    boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.05)",
+    fontSize: "16px",
+    outline: "none",
+    color: "#1b2559",
+  },
+  clearBadge: {
+    position: "absolute",
+    right: "15px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    border: "none",
+    background: "#f4f7fe",
+    borderRadius: "50%",
+    width: "25px",
+    height: "25px",
+    cursor: "pointer",
+    fontSize: "12px",
+    color: "#a3aed0",
+  },
+  refreshBtn: {
+    padding: "15px 25px",
+    borderRadius: "15px",
+    border: "none",
+    backgroundColor: "#4318FF",
+    color: "#fff",
+    fontWeight: "bold",
+    cursor: "pointer",
+    transition: "0.2s all ease",
+    boxShadow: "0px 10px 20px rgba(67, 24, 255, 0.2)",
+  },
+  metaInfo: {
+    marginBottom: "25px",
+    color: "#707eae",
+    fontSize: "14px",
+  },
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+    gap: "20px",
+  },
+  card: {
+    backgroundColor: "#fff",
+    borderRadius: "20px",
+    padding: "20px",
+    boxShadow: "0px 18px 40px rgba(112, 144, 176, 0.12)",
+    border: "1px solid transparent",
+    transition: "border 0.3s ease",
+  },
+  cardHeader: {
+    display: "flex",
+    alignItems: "center",
+    gap: "15px",
+  },
+  avatar: {
+    width: "50px",
+    height: "50px",
+    borderRadius: "12px",
+    backgroundColor: "#F4F7FE",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#4318FF",
+    fontWeight: "800",
+    fontSize: "20px",
+  },
+  name: {
+    fontSize: "18px",
+    fontWeight: "bold",
+    color: "#1b2559",
+  },
+  username: {
+    color: "#a3aed0",
+    fontSize: "14px",
+  },
+  divider: {
+    height: "1px",
+    backgroundColor: "#f4f7fe",
+    margin: "15px 0",
+  },
+  details: {
+    fontSize: "14px",
+    color: "#707eae",
+    lineHeight: "1.8",
+  },
+  loader: {
+    textAlign: "center",
+    padding: "100px",
+    color: "#a3aed0",
+    fontSize: "18px",
+  }
+};
 
 export default UserFetch;
