@@ -1,589 +1,770 @@
 import React, { useEffect, useState } from "react";
 
-/* ─── Per-user gradient palettes ─── */
-const PALETTES = [
-  { from: "#f953c6", to: "#b91d73", shadow: "rgba(249,83,198,0.35)" },
-  { from: "#4facfe", to: "#00f2fe", shadow: "rgba(79,172,254,0.35)" },
-  { from: "#43e97b", to: "#38f9d7", shadow: "rgba(67,233,123,0.35)" },
-  { from: "#fa709a", to: "#fee140", shadow: "rgba(250,112,154,0.35)" },
-  { from: "#a18cd1", to: "#fbc2eb", shadow: "rgba(161,140,209,0.35)" },
-  { from: "#ffecd2", to: "#fcb69f", shadow: "rgba(252,182,159,0.35)" },
-  { from: "#667eea", to: "#764ba2", shadow: "rgba(102,126,234,0.35)" },
-  { from: "#11998e", to: "#38ef7d", shadow: "rgba(17,153,142,0.35)" },
-  { from: "#f7971e", to: "#ffd200", shadow: "rgba(247,151,30,0.35)" },
-  { from: "#ee0979", to: "#ff6a00", shadow: "rgba(238,9,121,0.35)" },
+/* ── Cartoon color palettes per user ── */
+const TOONS = [
+  { bg: "#FF6B6B", light: "#FFB3B3", emoji: "🦊", hat: "🎩" },
+  { bg: "#4ECDC4", light: "#A8F0EC", emoji: "🐸", hat: "🌟" },
+  { bg: "#FFE66D", light: "#FFF5B7", emoji: "🐱", hat: "🎀" },
+  { bg: "#A29BFE", light: "#D8D5FF", emoji: "🐰", hat: "🎈" },
+  { bg: "#FD79A8", light: "#FFB8D1", emoji: "🦄", hat: "✨" },
+  { bg: "#6C5CE7", light: "#B2A9F7", emoji: "🦉", hat: "🔮" },
+  { bg: "#00B894", light: "#81ECEC", emoji: "🐊", hat: "🌿" },
+  { bg: "#E17055", light: "#FAB1A0", emoji: "🦁", hat: "👑" },
+  { bg: "#FDCB6E", light: "#FFEAA7", emoji: "🐼", hat: "🎭" },
+  { bg: "#74B9FF", light: "#C7E8FF", emoji: "🐳", hat: "🎪" },
 ];
 
 const css = `
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Boogaloo&family=Nunito:wght@400;600;700;800;900&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #f0f2f8;
-  --surface: #ffffff;
-  --text-primary: #12132a;
-  --text-secondary: #6b7099;
-  --text-muted: #a8adc7;
-  --border: rgba(0,0,0,0.07);
-  --radius: 24px;
+  --black: #1a1a2e;
+  --outline: 3px solid #1a1a2e;
+  --outline-thick: 4px solid #1a1a2e;
+  --outline-xl: 5px solid #1a1a2e;
+  --shadow: 5px 5px 0px #1a1a2e;
+  --shadow-lg: 8px 8px 0px #1a1a2e;
+  --shadow-sm: 3px 3px 0px #1a1a2e;
+  --bg-page: #FFF9E6;
+  --bg-dots: radial-gradient(circle, #e8dfc7 1.5px, transparent 1.5px);
+  --yellow: #FFE66D;
+  --pink: #FF6B9D;
+  --blue: #74B9FF;
+  --green: #55EFC4;
+  --red: #FF7675;
+  --purple: #A29BFE;
 }
 
-.ud-root {
+html { scroll-behavior: smooth; }
+
+.ct-root {
   min-height: 100vh;
-  background: var(--bg);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  color: var(--text-primary);
-  padding-bottom: 80px;
+  background-color: var(--bg-page);
+  background-image: var(--bg-dots);
+  background-size: 24px 24px;
+  font-family: 'Nunito', sans-serif;
+  overflow-x: hidden;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23FFE66D' stroke='%231a1a2e' stroke-width='3'/%3E%3Ccircle cx='11' cy='13' r='2' fill='%231a1a2e'/%3E%3Ccircle cx='21' cy='13' r='2' fill='%231a1a2e'/%3E%3Cpath d='M10 20 Q16 26 22 20' stroke='%231a1a2e' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") 16 16, auto;
 }
 
-.ud-hero {
+/* ── WOBBLE KEYFRAMES ── */
+@keyframes wobble {
+  0%,100% { transform: rotate(-1deg) scale(1); }
+  50%      { transform: rotate(1deg) scale(1.02); }
+}
+@keyframes float {
+  0%,100% { transform: translateY(0px); }
+  50%      { transform: translateY(-10px); }
+}
+@keyframes squish {
+  0%,100% { transform: scaleY(1) scaleX(1); }
+  30%     { transform: scaleY(0.85) scaleX(1.15); }
+  60%     { transform: scaleY(1.1) scaleX(0.95); }
+}
+@keyframes spin-in {
+  from { transform: rotate(-180deg) scale(0); opacity: 0; }
+  to   { transform: rotate(0deg) scale(1); opacity: 1; }
+}
+@keyframes pop-in {
+  0%   { transform: scale(0) rotate(-10deg); opacity: 0; }
+  70%  { transform: scale(1.15) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+@keyframes slide-down {
+  from { transform: translateY(-30px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+@keyframes rainbow-border {
+  0%   { border-color: #FF6B6B; }
+  20%  { border-color: #FFE66D; }
+  40%  { border-color: #4ECDC4; }
+  60%  { border-color: #A29BFE; }
+  80%  { border-color: #FD79A8; }
+  100% { border-color: #FF6B6B; }
+}
+@keyframes star-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes boing {
+  0%,100% { transform: scale(1); }
+  25%     { transform: scale(1.3, 0.7); }
+  50%     { transform: scale(0.8, 1.3); }
+  75%     { transform: scale(1.1, 0.9); }
+}
+@keyframes dash {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes wiggle {
+  0%,100% { transform: rotate(0deg); }
+  25%     { transform: rotate(-5deg); }
+  75%     { transform: rotate(5deg); }
+}
+
+/* ── HERO ── */
+.ct-hero {
   position: relative;
+  background: #FF6B9D;
+  border-bottom: var(--outline-xl);
+  padding: 48px 48px 80px;
   overflow: hidden;
-  padding: 70px 60px 100px;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 }
 
-.ud-hero::before {
-  content: '';
+.ct-hero-stripes {
   position: absolute;
-  width: 600px; height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(102,126,234,0.25) 0%, transparent 70%);
-  top: -200px; right: -100px;
-  pointer-events: none;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 20px,
+    rgba(255,255,255,0.08) 20px,
+    rgba(255,255,255,0.08) 40px
+  );
 }
 
-.ud-hero::after {
-  content: '';
+.ct-hero-cloud {
   position: absolute;
-  width: 400px; height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(249,83,198,0.15) 0%, transparent 70%);
-  bottom: -150px; left: 40px;
-  pointer-events: none;
+  font-size: 80px;
+  opacity: 0.18;
+  user-select: none;
+  animation: float 4s ease-in-out infinite;
 }
+.ct-hero-cloud:nth-child(2) { top: 10px; right: 80px; animation-delay: 0.5s; font-size: 60px; }
+.ct-hero-cloud:nth-child(3) { bottom: 20px; left: 60px; animation-delay: 1s; font-size: 50px; }
+.ct-hero-cloud:nth-child(4) { top: 30px; right: 220px; animation-delay: 2s; font-size: 40px; }
 
-.ud-hero-inner {
+.ct-hero-inner {
   position: relative;
   z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
-}
-
-.ud-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 100px;
-  padding: 6px 16px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
-  margin-bottom: 24px;
-}
-
-.ud-tag-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: #43e97b;
-  box-shadow: 0 0 8px #43e97b;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
-}
-
-.ud-title {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(40px, 6vw, 72px);
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  margin-bottom: 16px;
-}
-
-.ud-title em {
-  font-style: italic;
-  background: linear-gradient(90deg, #f953c6, #4facfe);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.ud-subtitle {
-  font-size: 16px;
-  color: rgba(255,255,255,0.45);
-  font-weight: 400;
-  max-width: 400px;
-  line-height: 1.6;
-}
-
-.ud-stats {
   display: flex;
-  gap: 12px;
-  margin-top: 48px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
   flex-wrap: wrap;
 }
 
-.ud-stat {
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.1);
-  backdrop-filter: blur(8px);
-  border-radius: 16px;
-  padding: 16px 24px;
-}
+.ct-hero-text {}
 
-.ud-stat-num {
-  font-family: 'Fraunces', serif;
-  font-size: 28px;
-  font-weight: 700;
+.ct-title {
+  font-family: 'Boogaloo', cursive;
+  font-size: clamp(52px, 8vw, 96px);
   color: #fff;
+  text-shadow: 5px 5px 0px var(--black);
+  line-height: 0.95;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+  animation: slide-down 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+
+.ct-title span {
+  color: var(--yellow);
+  display: inline-block;
+  animation: wiggle 2s ease-in-out infinite;
+}
+
+.ct-subtitle {
+  font-size: 18px;
+  color: rgba(255,255,255,0.9);
+  font-weight: 700;
+  max-width: 340px;
+  line-height: 1.5;
+  background: rgba(0,0,0,0.15);
+  border-radius: 16px;
+  padding: 10px 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+/* stat bubbles */
+.ct-stat-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ct-stat-bubble {
+  background: #fff;
+  border: var(--outline-thick);
+  border-radius: 20px;
+  padding: 14px 24px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  animation: pop-in 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.ct-stat-bubble:hover {
+  transform: translate(-3px,-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.ct-stat-num {
+  font-family: 'Boogaloo', cursive;
+  font-size: 36px;
+  color: var(--black);
   line-height: 1;
-  margin-bottom: 4px;
 }
 
-.ud-stat-label {
+.ct-stat-label {
   font-size: 11px;
-  color: rgba(255,255,255,0.35);
-  letter-spacing: 0.08em;
+  font-weight: 800;
   text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #888;
 }
 
-.ud-search-section {
+/* ── SEARCH PANEL ── */
+.ct-search-wrap {
   max-width: 1200px;
-  margin: -36px auto 0;
-  padding: 0 60px;
+  margin: -32px auto 0;
+  padding: 0 48px;
   position: relative;
   z-index: 10;
+  animation: slide-down 0.5s 0.2s both;
 }
 
-.ud-search-card {
-  background: var(--surface);
-  border-radius: 20px;
+.ct-search-panel {
+  background: var(--yellow);
+  border: var(--outline-xl);
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg);
   padding: 20px 24px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.ud-search-icon { color: var(--text-muted); font-size: 18px; flex-shrink: 0; }
-
-.ud-search-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 15px;
-  color: var(--text-primary);
-  background: transparent;
-}
-
-.ud-search-input::placeholder { color: var(--text-muted); }
-
-.ud-search-clear {
-  background: #f0f2f8;
-  border: none;
-  border-radius: 50%;
-  width: 28px; height: 28px;
-  cursor: pointer;
-  color: var(--text-secondary);
-  font-size: 14px;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s;
-}
-
-.ud-search-clear:hover { background: #e0e3ef; }
-
-.ud-divider-v {
-  width: 1px;
-  height: 32px;
-  background: var(--border);
+.ct-search-emoji {
+  font-size: 28px;
+  animation: float 3s ease-in-out infinite;
   flex-shrink: 0;
 }
 
-.ud-refresh {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: #fff;
-  border: none;
+.ct-search-input {
+  flex: 1;
+  background: #fff;
+  border: var(--outline);
   border-radius: 14px;
-  padding: 12px 22px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 13px;
+  padding: 12px 16px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
   font-weight: 700;
+  color: var(--black);
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.ct-search-input:focus {
+  transform: translate(-2px,-2px);
+  box-shadow: var(--shadow);
+  animation: rainbow-border 3s linear infinite;
+}
+
+.ct-search-input::placeholder { color: #bbb; }
+
+.ct-clear-btn {
+  background: var(--red);
+  border: var(--outline);
+  border-radius: 50%;
+  width: 36px; height: 36px;
+  font-size: 16px;
   cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900;
+  color: #fff;
+  transition: transform 0.1s, box-shadow 0.1s;
+  flex-shrink: 0;
+}
+
+.ct-clear-btn:hover {
+  transform: translate(-2px,-2px) rotate(15deg);
+  box-shadow: var(--shadow);
+}
+
+.ct-refresh-btn {
+  background: var(--black);
+  color: var(--yellow);
+  border: var(--outline);
+  border-radius: 16px;
+  padding: 12px 22px;
+  font-family: 'Boogaloo', cursive;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
   white-space: nowrap;
-  transition: opacity 0.2s, transform 0.2s;
-  box-shadow: 0 8px 20px rgba(102,126,234,0.3);
+  transition: transform 0.1s, box-shadow 0.1s;
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
 }
 
-.ud-refresh:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
-.ud-refresh:disabled { opacity: 0.5; cursor: not-allowed; }
+.ct-refresh-btn:hover:not(:disabled) {
+  transform: translate(-3px,-3px);
+  box-shadow: var(--shadow-lg);
+}
 
-.ud-body {
+.ct-refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.ct-refresh-icon {
+  display: inline-block;
+  font-size: 20px;
+}
+.ct-refresh-btn:not(:disabled) .ct-refresh-icon {
+  animation: star-spin 3s linear infinite;
+}
+
+/* ── BODY ── */
+.ct-body {
   max-width: 1200px;
-  margin: 40px auto 0;
-  padding: 0 60px;
+  margin: 48px auto 0;
+  padding: 0 48px;
 }
 
-.ud-results-bar {
+.ct-results-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 28px;
+  gap: 12px;
+  margin-bottom: 32px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--black);
 }
 
-.ud-results-text {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 500;
+.ct-results-pill {
+  background: var(--black);
+  color: var(--yellow);
+  border-radius: 100px;
+  padding: 4px 14px;
+  font-family: 'Boogaloo', cursive;
+  font-size: 20px;
 }
 
-.ud-results-text b { color: var(--text-primary); }
-
-.ud-grid {
+/* ── GRID ── */
+.ct-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 28px;
 }
 
-.ud-card {
-  background: var(--surface);
-  border-radius: var(--radius);
+/* ── CARD ── */
+.ct-card {
+  background: #fff;
+  border: var(--outline-thick);
+  border-radius: 28px;
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
   cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
-  animation: cardIn 0.5s ease both;
+  animation: pop-in 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+  transition: transform 0.15s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.15s;
+  position: relative;
 }
 
-@keyframes cardIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+.ct-card:hover {
+  transform: translate(-5px,-5px) rotate(-1deg);
+  box-shadow: 12px 12px 0px var(--black);
 }
 
-.ud-card:hover {
-  transform: translateY(-8px) scale(1.01);
-  box-shadow: 0 24px 48px rgba(0,0,0,0.12);
+.ct-card:hover .ct-card-emoji {
+  animation: boing 0.5s ease;
 }
 
-.ud-card-strip {
-  height: 120px;
+/* card top band */
+.ct-card-band {
+  height: 100px;
   position: relative;
   display: flex;
-  align-items: flex-end;
-  padding: 0 24px 0;
+  align-items: center;
+  justify-content: center;
+  border-bottom: var(--outline-thick);
+  overflow: hidden;
 }
 
-.ud-card-avatar {
-  width: 64px; height: 64px;
-  border-radius: 18px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Fraunces', serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: #fff;
-  border: 3px solid #fff;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-  transform: translateY(50%);
-  flex-shrink: 0;
+.ct-card-band-stripes {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255,255,255,0.15) 10px,
+    rgba(255,255,255,0.15) 20px
+  );
+}
+
+.ct-card-emoji {
+  font-size: 52px;
   position: relative;
+  z-index: 1;
+  filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.2));
+  transition: transform 0.2s;
+}
+
+.ct-card-id {
+  position: absolute;
+  top: 10px; right: 12px;
+  background: rgba(0,0,0,0.25);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
+  border-radius: 100px;
+  border: 2px solid rgba(255,255,255,0.4);
+  z-index: 1;
+}
+
+/* avatar circle */
+.ct-avatar {
+  position: absolute;
+  bottom: -28px;
+  left: 24px;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  border: var(--outline-thick);
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Boogaloo', cursive;
+  font-size: 22px;
+  color: var(--black);
+  box-shadow: var(--shadow-sm);
   z-index: 2;
 }
 
-.ud-card-id-badge {
-  margin-left: auto;
-  background: rgba(0,0,0,0.25);
-  backdrop-filter: blur(4px);
-  border-radius: 100px;
-  padding: 4px 10px;
-  font-size: 10px;
-  color: rgba(255,255,255,0.8);
-  letter-spacing: 0.1em;
-  font-weight: 600;
-  margin-bottom: 12px;
+/* card body */
+.ct-card-body {
+  padding: 36px 22px 22px;
 }
 
-.ud-card-body { padding: 44px 24px 24px; }
-
-.ud-card-name {
-  font-family: 'Fraunces', serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
+.ct-card-name {
+  font-family: 'Boogaloo', cursive;
+  font-size: 24px;
+  color: var(--black);
+  line-height: 1.1;
   margin-bottom: 2px;
 }
 
-.ud-card-username {
+.ct-card-username {
   font-size: 12px;
-  color: var(--text-muted);
-  font-weight: 500;
-  margin-bottom: 20px;
-}
-
-.ud-card-divider {
-  height: 1px;
-  background: var(--border);
+  font-weight: 800;
+  color: #aaa;
   margin-bottom: 16px;
+  display: flex; align-items: center; gap: 4px;
 }
 
-.ud-card-field {
+.ct-card-divider {
+  height: 3px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+  border: none;
+}
+
+.ct-field {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
   margin-bottom: 10px;
   font-size: 13px;
+  font-weight: 700;
 }
 
-.ud-card-field-icon {
-  width: 28px; height: 28px;
-  border-radius: 8px;
-  background: #f0f2f8;
+.ct-field-icon {
+  width: 30px; height: 30px;
+  border-radius: 10px;
+  border: 2px solid var(--black);
   display: flex; align-items: center; justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   flex-shrink: 0;
-  margin-top: -1px;
+  box-shadow: 2px 2px 0 var(--black);
 }
 
-.ud-card-field-label {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  font-weight: 600;
-  margin-bottom: 1px;
-}
-
-.ud-card-field-value {
-  color: var(--text-secondary);
-  font-weight: 500;
-  line-height: 1.4;
+.ct-field-text {
+  color: #555;
+  font-size: 13px;
   word-break: break-all;
+  line-height: 1.3;
 }
 
-.ud-card-footer {
-  margin-top: 18px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
+.ct-card-footer {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 3px dashed rgba(0,0,0,0.1);
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.ud-card-city-pill {
-  border-radius: 100px;
-  padding: 5px 12px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #fff;
-}
-
-.ud-view-btn {
-  margin-left: auto;
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 6px 14px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.ud-view-btn:hover { background: #f0f2f8; color: var(--text-primary); }
-
-.ud-modal-bg {
-  position: fixed; inset: 0;
-  background: rgba(12,13,30,0.65);
-  backdrop-filter: blur(6px);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 1000;
-  padding: 20px;
-  animation: bgIn 0.25s ease;
-}
-
-@keyframes bgIn { from { opacity: 0; } to { opacity: 1; } }
-
-.ud-modal {
-  background: var(--surface);
-  border-radius: 28px;
-  width: 100%; max-width: 480px;
-  overflow: hidden;
-  box-shadow: 0 40px 80px rgba(0,0,0,0.25);
-  animation: modalIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
-}
-
-@keyframes modalIn {
-  from { opacity: 0; transform: scale(0.88) translateY(20px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-.ud-modal-strip {
-  height: 140px;
-  position: relative;
-  display: flex; align-items: center; justify-content: center;
-}
-
-.ud-modal-avatar {
-  width: 80px; height: 80px;
-  border-radius: 22px;
-  border: 4px solid #fff;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Fraunces', serif;
-  font-size: 32px;
-  font-weight: 700;
-  color: #fff;
-}
-
-.ud-modal-close-x {
-  position: absolute;
-  top: 14px; right: 14px;
-  background: rgba(0,0,0,0.2);
-  border: none;
-  border-radius: 50%;
-  width: 32px; height: 32px;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s;
-}
-
-.ud-modal-close-x:hover { background: rgba(0,0,0,0.35); }
-
-.ud-modal-body { padding: 28px 32px 32px; }
-
-.ud-modal-name {
-  font-family: 'Fraunces', serif;
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-  margin-bottom: 2px;
-}
-
-.ud-modal-handle {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 24px;
-}
-
-.ud-modal-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 24px;
-}
-
-.ud-modal-field {
-  background: #f7f8fc;
-  border-radius: 14px;
-  padding: 12px 14px;
-}
-
-.ud-modal-field.full { grid-column: span 2; }
-
-.ud-modal-field-label {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.ud-modal-field-value {
-  font-size: 13px;
-  color: var(--text-primary);
-  font-weight: 600;
-  word-break: break-all;
-  line-height: 1.4;
-}
-
-.ud-modal-close-btn {
-  width: 100%;
-  padding: 15px;
-  border: none;
-  border-radius: 16px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+.ct-city-tag {
+  font-family: 'Boogaloo', cursive;
   font-size: 15px;
-  font-weight: 700;
   color: #fff;
-  cursor: pointer;
-  transition: opacity 0.2s, transform 0.2s;
+  border: 2px solid var(--black);
+  border-radius: 100px;
+  padding: 3px 12px;
+  box-shadow: 2px 2px 0 var(--black);
 }
 
-.ud-modal-close-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.ct-peek-btn {
+  margin-left: auto;
+  background: var(--yellow);
+  border: 2px solid var(--black);
+  border-radius: 12px;
+  padding: 5px 14px;
+  font-family: 'Boogaloo', cursive;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
 
-.ud-loader {
+.ct-peek-btn:hover {
+  transform: translate(-2px,-2px);
+  box-shadow: var(--shadow);
+}
+
+/* ── LOADER ── */
+.ct-loader {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  min-height: 320px;
+  gap: 24px;
+  min-height: 340px;
 }
 
-.ud-loader-dots { display: flex; gap: 8px; }
-
-.ud-loader-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
+.ct-loader-faces {
+  display: flex; gap: 16px;
 }
 
-.ud-loader-dot:nth-child(1) { animation: dotBounce 1.2s ease-in-out 0s infinite; }
-.ud-loader-dot:nth-child(2) { animation: dotBounce 1.2s ease-in-out 0.2s infinite; }
-.ud-loader-dot:nth-child(3) { animation: dotBounce 1.2s ease-in-out 0.4s infinite; }
+.ct-loader-face {
+  font-size: 48px;
+  animation: boing 1s ease-in-out infinite;
+}
+.ct-loader-face:nth-child(2) { animation-delay: 0.15s; }
+.ct-loader-face:nth-child(3) { animation-delay: 0.3s; }
 
-@keyframes dotBounce {
-  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
-  40% { transform: translateY(-10px); opacity: 1; }
+.ct-loader-text {
+  font-family: 'Boogaloo', cursive;
+  font-size: 28px;
+  color: var(--black);
 }
 
-.ud-loader-text { font-size: 13px; color: var(--text-muted); letter-spacing: 0.08em; }
+.ct-loader-dots span {
+  display: inline-block;
+  animation: boing 1s ease-in-out infinite;
+}
+.ct-loader-dots span:nth-child(2) { animation-delay: 0.2s; }
+.ct-loader-dots span:nth-child(3) { animation-delay: 0.4s; }
 
-.ud-empty {
+/* ── EMPTY ── */
+.ct-empty {
   text-align: center;
   padding: 80px 20px;
-  color: var(--text-muted);
 }
 
-.ud-empty-icon { font-size: 48px; margin-bottom: 16px; }
+.ct-empty-emoji {
+  font-size: 72px;
+  animation: float 3s ease-in-out infinite;
+  display: block;
+  margin-bottom: 16px;
+}
 
-.ud-empty-text {
-  font-family: 'Fraunces', serif;
-  font-size: 22px;
-  color: var(--text-secondary);
+.ct-empty-text {
+  font-family: 'Boogaloo', cursive;
+  font-size: 32px;
+  color: var(--black);
   margin-bottom: 8px;
 }
 
-.ud-empty-sub { font-size: 14px; }
+.ct-empty-sub {
+  font-size: 16px;
+  font-weight: 700;
+  color: #999;
+}
+
+/* ── MODAL OVERLAY ── */
+.ct-modal-bg {
+  position: fixed; inset: 0;
+  background: rgba(26,26,46,0.7);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: bgIn 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+@keyframes bgIn { from { opacity: 0; } to { opacity: 1; } }
+
+.ct-modal {
+  background: #fff;
+  border: var(--outline-xl);
+  border-radius: 32px;
+  width: 100%; max-width: 500px;
+  overflow: hidden;
+  box-shadow: 12px 12px 0px var(--black);
+  animation: spin-in 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  position: relative;
+}
+
+/* modal confetti header */
+.ct-modal-band {
+  height: 160px;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  border-bottom: var(--outline-xl);
+  overflow: hidden;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ct-modal-band-stripes {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 16px,
+    rgba(255,255,255,0.15) 16px,
+    rgba(255,255,255,0.15) 32px
+  );
+}
+
+.ct-modal-emoji {
+  font-size: 64px;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.25));
+  animation: float 3s ease-in-out infinite;
+}
+
+.ct-modal-hat {
+  font-size: 28px;
+  position: relative;
+  z-index: 1;
+  animation: wiggle 2s ease-in-out infinite;
+}
+
+.ct-modal-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  background: #fff;
+  border: var(--outline);
+  border-radius: 50%;
+  width: 36px; height: 36px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2;
+  transition: transform 0.15s;
+  font-weight: 900;
+}
+
+.ct-modal-close:hover { transform: rotate(90deg) scale(1.1); }
+
+.ct-modal-body { padding: 28px 32px 32px; }
+
+.ct-modal-name {
+  font-family: 'Boogaloo', cursive;
+  font-size: 32px;
+  color: var(--black);
+  margin-bottom: 2px;
+}
+
+.ct-modal-handle {
+  font-size: 14px;
+  font-weight: 800;
+  color: #bbb;
+  margin-bottom: 24px;
+}
+
+.ct-modal-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.ct-modal-field {
+  border: var(--outline);
+  border-radius: 16px;
+  padding: 12px 14px;
+  box-shadow: var(--shadow-sm);
+  background: #FAFAFA;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.ct-modal-field:hover {
+  transform: translate(-2px,-2px);
+  box-shadow: var(--shadow);
+}
+
+.ct-modal-field.full { grid-column: span 2; }
+
+.ct-modal-field-label {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.ct-modal-field-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.ct-modal-close-btn {
+  width: 100%;
+  padding: 16px;
+  border: var(--outline-thick);
+  border-radius: 18px;
+  font-family: 'Boogaloo', cursive;
+  font-size: 22px;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 0.1s, box-shadow 0.1s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+
+.ct-modal-close-btn:hover {
+  transform: translate(-3px,-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── DECORATIVE FLOATERS ── */
+.ct-floater {
+  position: fixed;
+  pointer-events: none;
+  font-size: 32px;
+  animation: float 6s ease-in-out infinite;
+  opacity: 0.15;
+  z-index: 0;
+  user-select: none;
+}
 
 @media (max-width: 700px) {
-  .ud-hero { padding: 48px 24px 80px; }
-  .ud-search-section { padding: 0 16px; }
-  .ud-body { padding: 0 16px; }
-  .ud-modal-grid { grid-template-columns: 1fr; }
-  .ud-modal-field.full { grid-column: span 1; }
+  .ct-hero { padding: 36px 20px 64px; }
+  .ct-search-wrap { padding: 0 16px; }
+  .ct-body { padding: 0 16px; }
+  .ct-modal-fields { grid-template-columns: 1fr; }
+  .ct-modal-field.full { grid-column: span 1; }
 }
 `;
 
 function getInitials(name) {
   return name.split(" ").map(w => w[0]).join("").toUpperCase();
 }
+
+const FLOATERS = ["⭐", "💫", "🌈", "✨", "🎈", "🌟", "🎉", "🦋", "🌸", "🍭"];
 
 export default function UserFetch() {
   const [users, setUsers] = useState([]);
@@ -598,7 +779,7 @@ export default function UserFetch() {
     setError("");
     try {
       const res = await fetch("https://jsonplaceholder.typicode.com/users");
-      if (!res.ok) throw new Error("Failed to fetch users");
+      if (!res.ok) throw new Error("Oops! Something went wrong 😵");
       setUsers(await res.json());
     } catch (e) {
       setError(e.message);
@@ -614,139 +795,167 @@ export default function UserFetch() {
     u.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const getPalette = (id) => PALETTES[(id - 1) % PALETTES.length];
+  const getToon = (id) => TOONS[(id - 1) % TOONS.length];
 
   return (
-    <div className="ud-root">
+    <div className="ct-root">
       <style>{css}</style>
 
-      {/* HERO */}
-      <div className="ud-hero">
-        <div className="ud-hero-inner">
-          <div className="ud-tag">
-            <span className="ud-tag-dot" />
-            Live Directory
+      {/* background floaters */}
+      {FLOATERS.map((f, i) => (
+        <div
+          key={i}
+          className="ct-floater"
+          style={{
+            left: `${(i * 11) % 95}%`,
+            top: `${(i * 17 + 5) % 90}%`,
+            animationDelay: `${i * 0.7}s`,
+            fontSize: `${24 + (i % 3) * 12}px`,
+          }}
+        >{f}</div>
+      ))}
+
+      {/* ── HERO ── */}
+      <div className="ct-hero">
+        <div className="ct-hero-stripes" />
+        <div className="ct-hero-cloud">☁️</div>
+        <div className="ct-hero-cloud">☁️</div>
+        <div className="ct-hero-cloud">⛅</div>
+        <div className="ct-hero-cloud">☁️</div>
+
+        <div className="ct-hero-inner">
+          <div className="ct-hero-text">
+            <div className="ct-title">
+              TOON<br /><span>SQUAD!</span>
+            </div>
+            <p className="ct-subtitle">🎉 Your favourite cartoon crew — all in one place!</p>
           </div>
-          <h1 className="ud-title">Meet the <em>Team</em></h1>
-          <p className="ud-subtitle">Browse, search, and explore everyone in your organisation at a glance.</p>
-          <div className="ud-stats">
-            <div className="ud-stat">
-              <div className="ud-stat-num">{users.length || "—"}</div>
-              <div className="ud-stat-label">Total Members</div>
-            </div>
-            <div className="ud-stat">
-              <div className="ud-stat-num">{filtered.length}</div>
-              <div className="ud-stat-label">Showing</div>
-            </div>
-            <div className="ud-stat">
-              <div className="ud-stat-num">{new Set(users.map(u => u.company?.name)).size || "—"}</div>
-              <div className="ud-stat-label">Companies</div>
-            </div>
+
+          <div className="ct-stat-row">
+            {[
+              { num: users.length || "?", label: "Characters", delay: "0s" },
+              { num: filtered.length, label: "On Screen", delay: "0.1s" },
+              { num: new Set(users.map(u => u.company?.name)).size || "?", label: "Studios", delay: "0.2s" },
+            ].map((s, i) => (
+              <div className="ct-stat-bubble" key={i} style={{ animationDelay: s.delay }}>
+                <div className="ct-stat-num">{s.num}</div>
+                <div className="ct-stat-label">{s.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* SEARCH */}
-      <div className="ud-search-section">
-        <div className="ud-search-card">
-          <span className="ud-search-icon">🔍</span>
+      {/* ── SEARCH ── */}
+      <div className="ct-search-wrap">
+        <div className="ct-search-panel">
+          <span className="ct-search-emoji">🔍</span>
           <input
-            className="ud-search-input"
+            className="ct-search-input"
             type="text"
-            placeholder="Search by name..."
+            placeholder="Find your fave character..."
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
           {search && (
-            <button className="ud-search-clear" onClick={() => setSearch("")}>✕</button>
+            <button className="ct-clear-btn" onClick={() => setSearch("")}>✕</button>
           )}
-          <div className="ud-divider-v" />
-          <button className="ud-refresh" onClick={() => fetchUsers(true)} disabled={isRefreshing}>
-            {isRefreshing ? "⏳ Syncing…" : "↻ Refresh"}
+          <button
+            className="ct-refresh-btn"
+            onClick={() => fetchUsers(true)}
+            disabled={isRefreshing}
+          >
+            <span className="ct-refresh-icon">⭐</span>
+            {isRefreshing ? "Loading..." : "Reload!"}
           </button>
         </div>
       </div>
 
-      {/* BODY */}
-      <div className="ud-body">
+      {/* ── BODY ── */}
+      <div className="ct-body">
         {!loading && !error && (
-          <div className="ud-results-bar">
-            <p className="ud-results-text">
-              Showing <b>{filtered.length}</b> of <b>{users.length}</b> members
-              {search && <> for &ldquo;{search}&rdquo;</>}
-            </p>
+          <div className="ct-results-bar">
+            <span className="ct-results-pill">{filtered.length}</span>
+            characters found
+            {search && <> matching <strong>"{search}"</strong></>}
+            🎬
           </div>
         )}
 
         {loading ? (
-          <div className="ud-loader">
-            <div className="ud-loader-dots">
-              {PALETTES.slice(0, 3).map((p, i) => (
-                <div key={i} className="ud-loader-dot"
-                  style={{ background: `linear-gradient(135deg, ${p.from}, ${p.to})` }} />
-              ))}
+          <div className="ct-loader">
+            <div className="ct-loader-faces">
+              <span className="ct-loader-face">🐱</span>
+              <span className="ct-loader-face">🦊</span>
+              <span className="ct-loader-face">🐸</span>
             </div>
-            <p className="ud-loader-text">Fetching members…</p>
+            <div className="ct-loader-text">
+              Loading cast
+              <span className="ct-loader-dots">
+                <span>.</span><span>.</span><span>.</span>
+              </span>
+            </div>
           </div>
         ) : error ? (
-          <div className="ud-empty">
-            <div className="ud-empty-icon">⚠️</div>
-            <p className="ud-empty-text">Couldn't load members</p>
-            <p className="ud-empty-sub">{error}</p>
+          <div className="ct-empty">
+            <span className="ct-empty-emoji">😵</span>
+            <p className="ct-empty-text">Uh oh, something broke!</p>
+            <p className="ct-empty-sub">{error}</p>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="ud-empty">
-            <div className="ud-empty-icon">🔭</div>
-            <p className="ud-empty-text">No one found</p>
-            <p className="ud-empty-sub">Try a different search term</p>
+          <div className="ct-empty">
+            <span className="ct-empty-emoji">🔭</span>
+            <p className="ct-empty-text">No characters found!</p>
+            <p className="ct-empty-sub">Try searching for someone else 🤔</p>
           </div>
         ) : (
-          <div className="ud-grid">
+          <div className="ct-grid">
             {filtered.map((user, i) => {
-              const pal = getPalette(user.id);
+              const toon = getToon(user.id);
               return (
-                <div key={user.id} className="ud-card"
-                  style={{ animationDelay: `${i * 50}ms` }}
-                  onClick={() => setSelectedUser(user)}>
-                  <div className="ud-card-strip"
-                    style={{ background: `linear-gradient(135deg, ${pal.from}, ${pal.to})` }}>
-                    <div className="ud-card-avatar"
-                      style={{ background: `linear-gradient(135deg, ${pal.from}, ${pal.to})` }}>
+                <div
+                  key={user.id}
+                  className="ct-card"
+                  style={{ animationDelay: `${i * 60}ms` }}
+                  onClick={() => setSelectedUser(user)}
+                >
+                  {/* band */}
+                  <div className="ct-card-band" style={{ background: toon.bg }}>
+                    <div className="ct-card-band-stripes" />
+                    <span className="ct-card-emoji">{toon.emoji}</span>
+                    <div className="ct-card-id">#{String(user.id).padStart(2, "0")}</div>
+                    <div className="ct-avatar" style={{ borderColor: toon.bg, color: toon.bg }}>
                       {getInitials(user.name)}
                     </div>
-                    <div className="ud-card-id-badge">#{String(user.id).padStart(2, "0")}</div>
                   </div>
-                  <div className="ud-card-body">
-                    <div className="ud-card-name">{user.name}</div>
-                    <div className="ud-card-username">@{user.username}</div>
-                    <div className="ud-card-divider" />
-                    <div className="ud-card-field">
-                      <div className="ud-card-field-icon">📧</div>
-                      <div>
-                        <div className="ud-card-field-label">Email</div>
-                        <div className="ud-card-field-value">{user.email}</div>
-                      </div>
+
+                  {/* body */}
+                  <div className="ct-card-body">
+                    <div className="ct-card-name">{user.name}</div>
+                    <div className="ct-card-username">👾 @{user.username}</div>
+
+                    <hr className="ct-card-divider" style={{ background: toon.light }} />
+
+                    <div className="ct-field">
+                      <div className="ct-field-icon" style={{ background: toon.light, borderColor: toon.bg }}>📧</div>
+                      <span className="ct-field-text">{user.email}</span>
                     </div>
-                    <div className="ud-card-field">
-                      <div className="ud-card-field-icon">🏢</div>
-                      <div>
-                        <div className="ud-card-field-label">Company</div>
-                        <div className="ud-card-field-value">{user.company.name}</div>
-                      </div>
+                    <div className="ct-field">
+                      <div className="ct-field-icon" style={{ background: toon.light, borderColor: toon.bg }}>🏢</div>
+                      <span className="ct-field-text">{user.company.name}</span>
                     </div>
-                    <div className="ud-card-field">
-                      <div className="ud-card-field-icon">📞</div>
-                      <div>
-                        <div className="ud-card-field-label">Phone</div>
-                        <div className="ud-card-field-value">{user.phone}</div>
-                      </div>
+                    <div className="ct-field">
+                      <div className="ct-field-icon" style={{ background: toon.light, borderColor: toon.bg }}>📞</div>
+                      <span className="ct-field-text">{user.phone}</span>
                     </div>
-                    <div className="ud-card-footer">
-                      <div className="ud-card-city-pill"
-                        style={{ background: `linear-gradient(135deg, ${pal.from}, ${pal.to})` }}>
+
+                    <div className="ct-card-footer">
+                      <div className="ct-city-tag" style={{ background: toon.bg }}>
                         📍 {user.address.city}
                       </div>
-                      <button className="ud-view-btn">View profile →</button>
+                      <button className="ct-peek-btn" style={{ background: toon.light }}>
+                        Peek! 👀
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -756,52 +965,59 @@ export default function UserFetch() {
         )}
       </div>
 
-      {/* MODAL */}
+      {/* ── MODAL ── */}
       {selectedUser && (() => {
-        const pal = getPalette(selectedUser.id);
+        const toon = getToon(selectedUser.id);
         return (
-          <div className="ud-modal-bg" onClick={() => setSelectedUser(null)}>
-            <div className="ud-modal" onClick={e => e.stopPropagation()}>
-              <div className="ud-modal-strip"
-                style={{ background: `linear-gradient(135deg, ${pal.from}, ${pal.to})` }}>
-                <div className="ud-modal-avatar">{getInitials(selectedUser.name)}</div>
-                <button className="ud-modal-close-x" onClick={() => setSelectedUser(null)}>✕</button>
+          <div className="ct-modal-bg" onClick={() => setSelectedUser(null)}>
+            <div className="ct-modal" onClick={e => e.stopPropagation()}>
+              <div className="ct-modal-band" style={{ background: toon.bg }}>
+                <div className="ct-modal-band-stripes" />
+                <span className="ct-modal-hat">{toon.hat}</span>
+                <span className="ct-modal-emoji">{toon.emoji}</span>
+                <button className="ct-modal-close" onClick={() => setSelectedUser(null)}>✕</button>
               </div>
-              <div className="ud-modal-body">
-                <div className="ud-modal-name">{selectedUser.name}</div>
-                <div className="ud-modal-handle">@{selectedUser.username}</div>
-                <div className="ud-modal-grid">
-                  <div className="ud-modal-field">
-                    <div className="ud-modal-field-label">Email</div>
-                    <div className="ud-modal-field-value">{selectedUser.email}</div>
+
+              <div className="ct-modal-body">
+                <div className="ct-modal-name">{selectedUser.name}</div>
+                <div className="ct-modal-handle">👾 @{selectedUser.username}</div>
+
+                <div className="ct-modal-fields">
+                  <div className="ct-modal-field">
+                    <div className="ct-modal-field-label">📧 Email</div>
+                    <div className="ct-modal-field-value">{selectedUser.email}</div>
                   </div>
-                  <div className="ud-modal-field">
-                    <div className="ud-modal-field-label">Phone</div>
-                    <div className="ud-modal-field-value">{selectedUser.phone}</div>
+                  <div className="ct-modal-field">
+                    <div className="ct-modal-field-label">📞 Phone</div>
+                    <div className="ct-modal-field-value">{selectedUser.phone}</div>
                   </div>
-                  <div className="ud-modal-field">
-                    <div className="ud-modal-field-label">Company</div>
-                    <div className="ud-modal-field-value">{selectedUser.company.name}</div>
+                  <div className="ct-modal-field">
+                    <div className="ct-modal-field-label">🏢 Studio</div>
+                    <div className="ct-modal-field-value">{selectedUser.company.name}</div>
                   </div>
-                  <div className="ud-modal-field">
-                    <div className="ud-modal-field-label">Website</div>
-                    <div className="ud-modal-field-value">{selectedUser.website}</div>
+                  <div className="ct-modal-field">
+                    <div className="ct-modal-field-label">🌐 Website</div>
+                    <div className="ct-modal-field-value">{selectedUser.website}</div>
                   </div>
-                  <div className="ud-modal-field full">
-                    <div className="ud-modal-field-label">Address</div>
-                    <div className="ud-modal-field-value">
-                      {selectedUser.address.street}, {selectedUser.address.suite}, {selectedUser.address.city} — {selectedUser.address.zipcode}
+                  <div className="ct-modal-field full">
+                    <div className="ct-modal-field-label">📍 Home Base</div>
+                    <div className="ct-modal-field-value">
+                      {selectedUser.address.street}, {selectedUser.address.suite},<br />
+                      {selectedUser.address.city} — {selectedUser.address.zipcode}
                     </div>
                   </div>
-                  <div className="ud-modal-field full">
-                    <div className="ud-modal-field-label">Company Tagline</div>
-                    <div className="ud-modal-field-value">"{selectedUser.company.catchPhrase}"</div>
+                  <div className="ct-modal-field full">
+                    <div className="ct-modal-field-label">🎭 Catchphrase</div>
+                    <div className="ct-modal-field-value">"{selectedUser.company.catchPhrase}"</div>
                   </div>
                 </div>
-                <button className="ud-modal-close-btn"
-                  style={{ background: `linear-gradient(135deg, ${pal.from}, ${pal.to})` }}
-                  onClick={() => setSelectedUser(null)}>
-                  Close Profile
+
+                <button
+                  className="ct-modal-close-btn"
+                  style={{ background: toon.bg }}
+                  onClick={() => setSelectedUser(null)}
+                >
+                  See ya later! {toon.emoji}
                 </button>
               </div>
             </div>
