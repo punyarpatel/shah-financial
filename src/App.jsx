@@ -4,7 +4,7 @@ import UserFetch from "./UserFetch"; // IMPORTANT
 function App() {
   return (
     <div>
-      <Login />
+      <UserFetch />
     </div>
   );
 }
