@@ -1,262 +1,218 @@
 import React, { useEffect, useState } from "react";
 
+// Modernized CSS-in-JS (Optimized for performance and readability)
+const styles = {
+  wrapper: {
+    minHeight: "100vh",
+    background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+    padding: "40px 20px",
+    fontFamily: "'Inter', -apple-system, sans-serif",
+    color: "#f8fafc",
+  },
+  container: {
+    maxWidth: "1200px",
+    margin: "0 auto",
+  },
+  header: {
+    textAlign: "center",
+    marginBottom: "50px",
+  },
+  title: {
+    fontSize: "clamp(2rem, 5vw, 3.5rem)",
+    fontWeight: "800",
+    background: "linear-gradient(to right, #38bdf8, #818cf8)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    marginBottom: "10px",
+  },
+  searchSection: {
+    position: "sticky",
+    top: "20px",
+    zIndex: 100,
+    background: "rgba(30, 41, 59, 0.7)",
+    backdropFilter: "blur(12px)",
+    padding: "20px",
+    borderRadius: "24px",
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+    display: "flex",
+    gap: "12px",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.3)",
+    marginBottom: "40px",
+  },
+  input: {
+    flex: "1",
+    minWidth: "260px",
+    padding: "12px 20px",
+    borderRadius: "12px",
+    border: "1px solid #334155",
+    background: "#0f172a",
+    color: "#fff",
+    fontSize: "16px",
+    outline: "none",
+    transition: "border-color 0.2s",
+  },
+  btn: {
+    padding: "12px 24px",
+    borderRadius: "12px",
+    border: "none",
+    fontWeight: "600",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+  },
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+    gap: "24px",
+  },
+  card: {
+    background: "rgba(255, 255, 255, 0.03)",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
+    borderRadius: "24px",
+    padding: "24px",
+    transition: "transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s",
+    cursor: "pointer",
+    position: "relative",
+    overflow: "hidden",
+  },
+  avatar: {
+    width: "50px",
+    height: "50px",
+    borderRadius: "14px",
+    background: "linear-gradient(135deg, #38bdf8, #2563eb)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontWeight: "bold",
+    fontSize: "18px",
+    marginBottom: "20px",
+  },
+  badge: {
+    fontSize: "12px",
+    padding: "4px 10px",
+    borderRadius: "20px",
+    background: "rgba(56, 189, 248, 0.1)",
+    color: "#38bdf8",
+    fontWeight: "600",
+  }
+};
+
 function UserFetch() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Function to fetch users
-  const fetchUsers = () => {
+  const fetchUsers = async () => {
     setLoading(true);
     setError("");
-
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch users");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setUsers(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+    try {
+      const response = await fetch("https://jsonplaceholder.typicode.com/users");
+      if (!response.ok) throw new Error("Server communication failed");
+      const data = await response.json();
+      setUsers(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // Fetch users when component loads
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  // Filter users by search
-  const filteredUsers = users.filter((user) =>
-    user.name.toLowerCase().includes(search.toLowerCase())
+  const filteredUsers = users.filter((u) =>
+    u.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  // Clear search
-  const clearFilter = () => {
-    setSearch("");
-  };
-
-  // Reload / Refetch users
-  const reloadUsers = () => {
-    setSearch("");
-    fetchUsers();
-  };
-
-  // Get initials for avatar
-  const getInitials = (name) => {
-    return name
-      .split(" ")
-      .map((word) => word[0])
-      .join("")
-      .toUpperCase();
-  };
-
   return (
-    <div style={styles.container}>
-      <div style={styles.overlay}>
-        <h1 style={styles.heading}>👥 User Directory</h1>
-        <p style={styles.subheading}>
-          Search and explore user information easily
-        </p>
+    <div style={styles.wrapper}>
+      <div style={styles.container}>
+        <header style={styles.header}>
+          <h1 style={styles.title}>Network Intelligence</h1>
+          <p style={{ color: "#94a3b8" }}>Real-time directory of verified personnel</p>
+        </header>
 
-        <div style={styles.searchBox}>
+        <div style={styles.searchSection}>
           <input
-            type="text"
-            placeholder="🔍 Search by name..."
+            style={styles.input}
+            placeholder="Search by name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            style={styles.input}
+            onFocus={(e) => (e.target.style.borderColor = "#38bdf8")}
+            onBlur={(e) => (e.target.style.borderColor = "#334155")}
           />
-
-          <button onClick={clearFilter} style={styles.button}>
-            Clear Filter
+          <button 
+            style={{ ...styles.btn, background: "#334155", color: "#fff" }}
+            onClick={() => setSearch("")}
+          >
+            Clear
           </button>
-
-          <button onClick={reloadUsers} style={styles.reloadButton}>
-            🔄 Reload
+          <button 
+            style={{ ...styles.btn, background: "#38bdf8", color: "#0f172a" }}
+            onClick={fetchUsers}
+          >
+            Refresh Data
           </button>
         </div>
 
-        <p style={styles.count}>Showing {filteredUsers.length} users</p>
-
-        {loading && <h2 style={styles.message}>⏳ Loading users...</h2>}
-        {error && <h2 style={styles.error}>❌ {error}</h2>}
-
-        {!loading && !error && filteredUsers.length === 0 && (
-          <h2 style={styles.message}>😕 No users found</h2>
-        )}
-
-        <div style={styles.cardContainer}>
-          {!loading &&
-            !error &&
-            filteredUsers.map((user) => (
+        {loading ? (
+          <div style={{ textAlign: "center", padding: "50px" }}>
+            <div className="spinner"></div> {/* Add CSS spinner if desired */}
+            <p>Syncing Database...</p>
+          </div>
+        ) : error ? (
+          <div style={{ textAlign: "center", color: "#f87171" }}>{error}</div>
+        ) : (
+          <div style={styles.grid}>
+            {filteredUsers.map((user) => (
               <div
                 key={user.id}
                 style={styles.card}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-8px) scale(1.02)";
-                  e.currentTarget.style.boxShadow =
-                    "0 12px 30px rgba(0,0,0,0.18)";
+                  e.currentTarget.style.transform = "scale(1.03)";
+                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.07)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0) scale(1)";
-                  e.currentTarget.style.boxShadow =
-                    "0 6px 18px rgba(0,0,0,0.12)";
+                  e.currentTarget.style.transform = "scale(1)";
+                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.03)";
                 }}
               >
-                <div style={styles.avatar}>{getInitials(user.name)}</div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <div style={styles.avatar}>
+                    {user.name.split(" ").map(n => n[0]).join("")}
+                  </div>
+                  <span style={styles.badge}>ID: {user.id}</span>
+                </div>
 
-                <h2 style={styles.name}>{user.name}</h2>
+                <h3 style={{ fontSize: "20px", margin: "0 0 8px 0" }}>{user.name}</h3>
+                <p style={{ color: "#94a3b8", fontSize: "14px", marginBottom: "16px" }}>
+                   @{user.username}
+                </p>
 
-                <p style={styles.text}>
-                  <strong>📧 Email:</strong> {user.email}
-                </p>
-                <p style={styles.text}>
-                  <strong>🏢 Company:</strong> {user.company.name}
-                </p>
-                <p style={styles.text}>
-                  <strong>🌐 Website:</strong> {user.website}
-                </p>
-                <p style={styles.text}>
-                  <strong>📍 City:</strong> {user.address.city}
-                </p>
+                <div style={{ fontSize: "14px", display: "grid", gap: "8px" }}>
+                  <div style={{ display: "flex", gap: "10px" }}>
+                    <span style={{ color: "#38bdf8" }}>✉️</span> {user.email}
+                  </div>
+                  <div style={{ display: "flex", gap: "10px" }}>
+                    <span style={{ color: "#38bdf8" }}>🏢</span> {user.company.name}
+                  </div>
+                  <div style={{ display: "flex", gap: "10px" }}>
+                    <span style={{ color: "#38bdf8" }}>📍</span> {user.address.city}
+                  </div>
+                </div>
               </div>
             ))}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    minHeight: "100vh",
-    background: "linear-gradient(135deg, #667eea, #764ba2)",
-    padding: "30px",
-    fontFamily: "'Poppins', sans-serif",
-  },
-  overlay: {
-    backgroundColor: "rgba(255,255,255,0.12)",
-    backdropFilter: "blur(10px)",
-    borderRadius: "20px",
-    padding: "30px",
-    minHeight: "90vh",
-  },
-  heading: {
-    textAlign: "center",
-    fontSize: "48px",
-    fontWeight: "700",
-    color: "#fff",
-    marginBottom: "10px",
-  },
-  subheading: {
-    textAlign: "center",
-    fontSize: "18px",
-    color: "#f1f1f1",
-    marginBottom: "30px",
-  },
-  searchBox: {
-    display: "flex",
-    justifyContent: "center",
-    gap: "15px",
-    marginBottom: "20px",
-    flexWrap: "wrap",
-  },
-  input: {
-    padding: "14px 18px",
-    width: "300px",
-    fontSize: "18px",
-    borderRadius: "12px",
-    border: "none",
-    outline: "none",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-  },
-  button: {
-    padding: "14px 22px",
-    fontSize: "17px",
-    borderRadius: "12px",
-    border: "none",
-    background: "linear-gradient(135deg, #ff9966, #ff5e62)",
-    color: "#fff",
-    fontWeight: "600",
-    cursor: "pointer",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-    transition: "0.3s ease",
-  },
-  reloadButton: {
-    padding: "14px 22px",
-    fontSize: "17px",
-    borderRadius: "12px",
-    border: "none",
-    background: "linear-gradient(135deg, #36d1dc, #5b86e5)",
-    color: "#fff",
-    fontWeight: "600",
-    cursor: "pointer",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-    transition: "0.3s ease",
-  },
-  count: {
-    textAlign: "center",
-    fontSize: "20px",
-    color: "#fff",
-    marginBottom: "30px",
-    fontWeight: "500",
-  },
-  message: {
-    textAlign: "center",
-    color: "#fff",
-    marginBottom: "20px",
-  },
-  error: {
-    textAlign: "center",
-    color: "#ffcccc",
-    marginBottom: "20px",
-  },
-  cardContainer: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-    gap: "25px",
-  },
-  card: {
-    background: "rgba(255,255,255,0.95)",
-    padding: "25px",
-    borderRadius: "18px",
-    boxShadow: "0 6px 18px rgba(0,0,0,0.12)",
-    transition: "all 0.3s ease",
-    border: "1px solid rgba(255,255,255,0.3)",
-  },
-  avatar: {
-    width: "65px",
-    height: "65px",
-    borderRadius: "50%",
-    background: "linear-gradient(135deg, #667eea, #764ba2)",
-    color: "#fff",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "22px",
-    fontWeight: "bold",
-    marginBottom: "18px",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
-  },
-  name: {
-    fontSize: "26px",
-    marginBottom: "18px",
-    color: "#222",
-  },
-  text: {
-    fontSize: "17px",
-    marginBottom: "12px",
-    lineHeight: "1.6",
-    color: "#444",
-  },
-};
 
 export default UserFetch;
