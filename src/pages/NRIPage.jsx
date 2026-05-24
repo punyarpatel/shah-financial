@@ -313,7 +313,7 @@ const NRIPage = () => {
               ].map((step) => (
                 <div key={step.num} className={cardStyles}>
                   <div className="text-[#c9922a] font-serif text-[48px] leading-none mb-2 opacity-40">{step.num}</div>
-                  <h3 className="font-semibold text-[#0d2545] text-[16px] mb-2">{step.title}</h3>
+                  <h3 className="font-serif font-semibold text-[#0d2545] text-[16px] mb-2">{step.title}</h3>
                   <p className="text-[#5c6478] text-[14px] leading-[1.6]">{step.desc}</p>
                 </div>
               ))}

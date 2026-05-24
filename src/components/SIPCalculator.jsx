@@ -57,7 +57,13 @@ const GOALS = [
 
 const SIPCalculator = () => {
   const [activeGoalId, setActiveGoalId] = useState('custom');
+  const [calcMode, setCalcMode] = useState('sip'); // 'sip' | 'lumpsum'
   const [sip, setSip] = useState(10000);
+  const [showEmailForm, setShowEmailForm] = useState(false);
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [rate, setRate] = useState(12);
   const [years, setYears] = useState(10);
   const [inflation, setInflation] = useState(6);
@@ -66,6 +72,23 @@ const SIPCalculator = () => {
   const navigate = useNavigate();
 
   const activeGoal = GOALS.find(g => g.id === activeGoalId);
+
+  const handleEmailSubmit = (e) => {
+    e.preventDefault();
+    if (!email || !name) return;
+    setIsSubmitting(true);
+    // Simulate API call to send report
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setShowEmailForm(false);
+        setIsSubmitted(false);
+        setEmail('');
+        setName('');
+      }, 5000);
+    }, 1500);
+  };
 
   const applySuggestedValues = () => {
     if (activeGoal && activeGoal.id !== 'custom') {
@@ -98,8 +121,18 @@ const SIPCalculator = () => {
   const { corpus, invested, gain, chartData, inflationAdjustedCorpus } = useMemo(() => {
     const r = rate / 100 / 12;
     const n = years * 12;
-    const investedAmt = sip * n;
-    const corpusAmt = sip * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+    
+    let investedAmt = 0;
+    let corpusAmt = 0;
+
+    if (calcMode === 'sip') {
+      investedAmt = sip * n;
+      corpusAmt = sip * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+    } else {
+      investedAmt = sip;
+      corpusAmt = sip * Math.pow(1 + r, n);
+    }
+
     const gainAmt = corpusAmt - investedAmt;
     const inflationAdjusted = corpusAmt / Math.pow(1 + (inflation / 100), years);
     
@@ -107,8 +140,17 @@ const SIPCalculator = () => {
     const data = [];
     for (let y = 0; y <= years; y++) {
       const months = y * 12;
-      const inv = sip * months;
-      const corp = months === 0 ? 0 : sip * ((Math.pow(1 + r, months) - 1) / r) * (1 + r);
+      let inv = 0;
+      let corp = 0;
+      
+      if (calcMode === 'sip') {
+        inv = sip * months;
+        corp = months === 0 ? 0 : sip * ((Math.pow(1 + r, months) - 1) / r) * (1 + r);
+      } else {
+        inv = sip;
+        corp = sip * Math.pow(1 + r, months);
+      }
+
       data.push({
         year: `Yr ${y}`,
         invested: inv,
@@ -117,7 +159,7 @@ const SIPCalculator = () => {
     }
 
     return { corpus: corpusAmt, invested: investedAmt, gain: gainAmt, chartData: data, inflationAdjustedCorpus: inflationAdjusted };
-  }, [sip, rate, years, inflation]);
+  }, [sip, rate, years, inflation, calcMode]);
 
   const wealthRatio = (corpus / invested).toFixed(2);
   
@@ -146,16 +188,49 @@ const SIPCalculator = () => {
     <section id="calculator" className="w-full bg-white py-[3.5rem] px-4">
       <div className="max-w-4xl mx-auto">
         
-        {/* Header */}
-        <div className="text-gold text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]">
-          Our Calculator
+        {/* Header & Toggle */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-[2rem]">
+          <div>
+            <div className="text-gold text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]">
+              Our Calculator
+            </div>
+            <h2 className="font-serif text-[28px] font-semibold mb-[0.75rem] text-textDark leading-tight">
+              See What Your Money Can Grow To.
+            </h2>
+            <p className="text-muted text-[15px] leading-[1.6] font-light">
+              A simple estimate to get you thinking about your financial future.
+            </p>
+          </div>
+          
+          {/* Mode Toggle */}
+          <div className="flex flex-col items-start md:items-end gap-2 shrink-0">
+            <div className="flex bg-[#F1F5F9] rounded-[100px] p-1 border border-[#E2E8F0] shadow-inner">
+              <button
+                onClick={() => { setCalcMode('sip'); setSip(10000); }}
+                className={`px-5 py-2 rounded-[100px] text-[13.5px] font-semibold transition-all duration-300 ${
+                  calcMode === 'sip' 
+                    ? 'bg-white text-[#0d2545] shadow-sm' 
+                    : 'text-[#64748B] hover:text-[#0d2545]'
+                }`}
+              >
+                Monthly SIP
+              </button>
+              <button
+                onClick={() => { setCalcMode('lumpsum'); setSip(100000); }}
+                className={`px-5 py-2 rounded-[100px] text-[13.5px] font-semibold transition-all duration-300 ${
+                  calcMode === 'lumpsum' 
+                    ? 'bg-white text-[#0d2545] shadow-sm' 
+                    : 'text-[#64748B] hover:text-[#0d2545]'
+                }`}
+              >
+                One-time
+              </button>
+            </div>
+            <div className="text-[12px] text-[#64748B] px-1 w-full text-left md:text-right transition-all duration-300">
+              {calcMode === 'sip' ? 'Invest a fixed amount every month' : 'Invest a single amount upfront'}
+            </div>
+          </div>
         </div>
-        <h2 className="font-serif text-[28px] font-semibold mb-[0.75rem] text-textDark leading-tight">
-          See What Your SIP Can Grow To.
-        </h2>
-        <p className="text-muted text-[15px] leading-[1.6] font-light mb-[2rem]">
-          A simple estimate to get you thinking about your financial future.
-        </p>
 
         {/* Goal Pills */}
         <div className="flex flex-wrap gap-2 mb-[1.5rem]">
@@ -197,14 +272,22 @@ const SIPCalculator = () => {
         <div className="bg-[#333333] rounded-[12px] p-[1.5rem] sm:p-[2rem] shadow-xl">
           
           <div className="flex flex-col gap-[2rem]">
-            <SliderRow label="Monthly SIP" value={sip} min={1000} max={100000} step={1000} onChange={setSip} display={fmt(sip)} />
+            <SliderRow 
+              label={calcMode === 'sip' ? "Monthly SIP" : "Investment Amount"} 
+              value={sip} 
+              min={calcMode === 'sip' ? 1000 : 10000} 
+              max={calcMode === 'sip' ? 100000 : 5000000} 
+              step={calcMode === 'sip' ? 1000 : 10000} 
+              onChange={setSip} 
+              display={fmt(sip)} 
+            />
             <SliderRow label="Expected Rate" value={rate} min={12} max={20} step={0.5} onChange={setRate} display={`${rate}%`} />
             <SliderRow label="Time Period" value={years} min={1} max={30} step={1} onChange={setYears} display={`${years} yrs`} />
             <SliderRow label="Assumed Inflation" value={inflation} min={4} max={12} step={0.5} onChange={setInflation} display={`${inflation}%`} />
           </div>
 
           {/* Result Box */}
-          <div className="bg-[#1E293B] rounded-[10px] p-[1.5rem] mt-[2.5rem] flex flex-col md:flex-row justify-between items-start md:items-center gap-[1.5rem] md:gap-0 border border-blue-900/30">
+          <div className={`bg-[#1E293B] ${showEmailForm ? 'rounded-t-[10px]' : 'rounded-[10px]'} p-[1.5rem] mt-[2.5rem] flex flex-col md:flex-row justify-between items-start md:items-center gap-[1.5rem] md:gap-0 border border-blue-900/30 transition-all duration-300`}>
             <div className="w-full md:w-auto flex-1">
               <div className="text-white/60 text-[13px] mb-1">Estimated corpus</div>
               <div className="font-serif text-white text-[32px] sm:text-[36px] font-semibold leading-tight">
@@ -232,14 +315,60 @@ const SIPCalculator = () => {
                   </div>
                 </div>
               )}
-              <button 
-                onClick={handleScrollToContact}
-                className="bg-transparent border border-white/20 text-white text-[13px] px-[20px] py-[10px] rounded-[6px] font-medium hover:bg-white/5 transition-colors whitespace-nowrap w-full sm:w-auto text-center flex items-center justify-center gap-2"
-              >
-                Start This SIP ↗
-              </button>
+              <div className="flex flex-col gap-2 w-full mt-2">
+                <button 
+                  onClick={handleScrollToContact}
+                  className="bg-[#D4AF37] text-white text-[14px] px-[20px] py-[10px] rounded-[6px] font-semibold hover:bg-[#C09B2E] transition-colors whitespace-nowrap w-full text-center shadow-md"
+                >
+                  {calcMode === 'sip' ? 'Start This SIP ↗' : 'Start Investing ↗'}
+                </button>
+                <button 
+                  onClick={() => setShowEmailForm(!showEmailForm)}
+                  className="bg-transparent border border-white/20 text-white text-[13px] px-[20px] py-[10px] rounded-[6px] font-medium hover:bg-white/5 transition-colors whitespace-nowrap w-full text-center flex items-center justify-center gap-2"
+                >
+                  Email my wealth report ✉️
+                </button>
+              </div>
             </div>
           </div>
+
+          {/* Email Capture Form */}
+          {showEmailForm && (
+            <div className="bg-[#172033] border-x border-b border-blue-900/30 p-[1.5rem] rounded-b-[10px] flex flex-col shadow-xl origin-top animate-fade-in">
+              {isSubmitted ? (
+                <div className="text-[#34A853] flex items-center justify-center gap-2 font-medium text-[14px] py-3 text-center">
+                  ✅ Your detailed wealth report is on its way to {email}!
+                </div>
+              ) : (
+                <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3">
+                  <input 
+                    type="text" 
+                    placeholder="Your Name" 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    className="flex-1 bg-[#0F172A] border border-white/10 rounded-[6px] px-3 py-2 text-[14px] text-white focus:outline-none focus:border-gold placeholder:text-white/30"
+                  />
+                  <input 
+                    type="email" 
+                    placeholder="Your Email Address" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="flex-[1.5] bg-[#0F172A] border border-white/10 rounded-[6px] px-3 py-2 text-[14px] text-white focus:outline-none focus:border-gold placeholder:text-white/30"
+                  />
+                  <button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="bg-white text-[#0F172A] px-5 py-2 rounded-[6px] font-semibold text-[13px] hover:bg-gray-200 transition-colors disabled:opacity-50 shrink-0"
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Report'}
+                  </button>
+                </form>
+              )}
+            </div>
+          )}
+
         </div>
 
         {/* Metrics Grid */}

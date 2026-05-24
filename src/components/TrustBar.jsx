@@ -2,10 +2,13 @@ import React from 'react';
 
 const TrustBar = () => {
   const trustItems = [
-    'AMFI Reg. No: ARN-XXXXX',
-    'IRDAI License: XXXXXXXXX',
+    'AMFI Reg: ARN-XXXXX',
+    'SBI Mutual Fund',
+    'HDFC Mutual Fund',
+    'ICICI Prudential',
+    'Nippon India',
     'NJ Wealth Partner',
-    'Prudent · FundzBazar Partner'
+    'Prudent Partner'
   ];
 
   // Repeat the core items to ensure they fill the screen, then duplicate exactly once 
@@ -37,7 +40,7 @@ const TrustBar = () => {
               />
             </svg>
             
-            <span className="text-muted text-[12px] sm:text-[13px] font-normal tracking-[0.03em] leading-tight">
+            <span className="text-navy text-[12px] sm:text-[13px] font-semibold tracking-[0.03em] leading-tight">
               {item}
             </span>
           </div>

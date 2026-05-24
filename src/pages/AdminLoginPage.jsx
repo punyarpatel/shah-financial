@@ -42,7 +42,7 @@ const AdminLoginPage = () => {
         </div>
 
         {/* Heading */}
-        <h1 className="text-[20px] font-semibold text-[#0d2545] text-center mb-[4px]">
+        <h1 className="font-serif text-[20px] font-semibold text-[#0d2545] text-center mb-[4px]">
           Admin Login
         </h1>
         <p className="text-[#5c6478] text-[13px] text-center mb-[1.5rem]">

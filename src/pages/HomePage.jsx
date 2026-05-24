@@ -13,7 +13,7 @@ import FadeIn from '../components/animations/FadeIn';
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col relative">
+    <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
         <title>Shah Financial Services — AMFI Registered MFD Ahmedabad</title>
         <meta 

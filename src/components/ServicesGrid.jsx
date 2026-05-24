@@ -75,7 +75,7 @@ const ServicesGrid = () => {
           {servicesData.map((service) => (
             <StaggerItem key={service.id}>
               <div 
-                className="group flex flex-col h-full rounded-[14px] p-[2rem] transition-all duration-300 hover:-translate-y-1 bg-white text-textDark border border-navy/10 hover:bg-navy hover:border-navy hover:shadow-lg"
+                className="group flex flex-col h-full rounded-[14px] p-[2rem] transition-all duration-300 hover:-translate-y-2 bg-white text-textDark border border-navy/10 hover:bg-navy hover:border-navy hover:shadow-xl"
               >
                 <div className="text-[32px] mb-[1.25rem]">{service.icon}</div>
                 

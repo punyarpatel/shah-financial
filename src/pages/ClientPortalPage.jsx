@@ -49,7 +49,7 @@ const ClientPortalPage = () => {
             {/* Card 1: NJ Wealth */}
             <div className={cardStyles} onClick={handleNJLogin}>
               <div className="text-[40px] mb-[1rem]">🏦</div>
-              <h2 className="text-[18px] text-[#0d2545] font-semibold mb-[0.5rem]">NJ Wealth Portal</h2>
+              <h2 className="font-serif text-[18px] text-[#0d2545] font-semibold mb-[0.5rem]">NJ Wealth Portal</h2>
               <p className="text-[#5c6478] text-[13px] leading-[1.5] mb-[1.5rem]">
                 For clients whose portfolio is managed through the NJ Wealth platform.
               </p>
@@ -61,7 +61,7 @@ const ClientPortalPage = () => {
             {/* Card 2: Prudent FundzBazar */}
             <div className={cardStyles} onClick={handlePrudentLogin}>
               <div className="text-[40px] mb-[1rem]">📊</div>
-              <h2 className="text-[18px] text-[#0d2545] font-semibold mb-[0.5rem]">Prudent FundzBazar</h2>
+              <h2 className="font-serif text-[18px] text-[#0d2545] font-semibold mb-[0.5rem]">Prudent FundzBazar</h2>
               <p className="text-[#5c6478] text-[13px] leading-[1.5] mb-[1.5rem]">
                 For clients on the Prudent FundzBazar platform.
               </p>
