@@ -7,3 +7,4 @@ dist-ssr
 .DS_Store
 backend/node_modules
 *.log
+cloudflared.exe
