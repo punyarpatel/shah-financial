@@ -1,140 +1,22 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  color: #333333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+@keyframes spin-y {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
 }
 
-.app-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 900px;
-  background-color: #ffffff;
-  border-radius: 24px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  padding: 40px;
-}
-
-/* Top bar styling - no background color */
-.top-bar {
-  background-color: transparent;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-}
-
-.days-container {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.day-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.day-btn {
-  padding: 10px 15px;
-  background-color: transparent;
-  border: none;
-  color: #555555;
-  cursor: pointer;
-  border-radius: 20px;
-  font-size: 16px;
-  transition: 0.3s;
-}
-
-.day-btn:hover {
-  background-color: #f0f0f0;
-}
-
-.active-day {
-  background-color: #eeeeee;
-  color: #000000;
-  font-weight: bold;
-}
-
-/* Single dot underneath days */
-.dots-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 2px;
-  height: 6px;
-}
-
-.pending-dot {
-  width: 6px;
-  height: 6px;
-  background-color: #2196F3;
-  border-radius: 50%;
-}
-
-/* Main content layout */
-.main-content {
-  display: flex;
-  gap: 40px;
-}
-
-.left-panel, .right-panel {
-  flex: 1;
-}
-
-/* List styling */
-.task-list {
-  list-style-type: none;
-}
-
-.task-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 0; /* No borders, no background */
-  margin-bottom: 5px;
-}
-
-/* Custom circular blue checkbox */
-.task-item input {
-  margin-left: 15px;
-  appearance: none;
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #2196F3;
-  border-radius: 50%;
-  outline: none;
-  cursor: pointer;
-  position: relative;
-}
-
-.task-item input:checked {
-  background-color: #2196F3;
-}
-
-.task-item input:checked::after {
-  content: '';
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 8px;
-  height: 8px;
-  background-color: white;
-  border-radius: 50%;
-}
-
-.completed-text {
-  text-decoration: line-through;
-  color: #888888;
+.animate-spin-y {
+  animation: spin-y 20s linear infinite;
 }

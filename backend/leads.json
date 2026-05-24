@@ -1,0 +1,38 @@
+[
+  {
+    "id": "86edbae3-ae98-4bc9-890c-90fbbb6f3289",
+    "name": "Test User",
+    "phone": "9876543210",
+    "city": "Mumbai",
+    "interest": "",
+    "is_nri": "No — I am based in India",
+    "nri_country": "",
+    "message": "This is an automated test submission",
+    "status": "new",
+    "created_at": "2026-05-19T10:48:34.060Z"
+  },
+  {
+    "id": "c8a712a4-bbe2-4b92-880d-2c7aa59d9fdf",
+    "name": "Punya Patel",
+    "phone": "9876543210",
+    "city": "Ahmedabad",
+    "interest": "Mutual Fund SIP",
+    "is_nri": "No — I am based in India",
+    "nri_country": "",
+    "message": "",
+    "status": "new",
+    "created_at": "2026-05-19T10:52:06.154Z"
+  },
+  {
+    "id": "bab4169c-0371-494c-bb4a-f214dab8bde3",
+    "name": "pearl patel",
+    "phone": "9876543210",
+    "city": "mumbai",
+    "interest": "Mutual Fund SIP",
+    "is_nri": "No — I am based in India",
+    "nri_country": "",
+    "message": "",
+    "status": "new",
+    "created_at": "2026-05-19T11:54:13.065Z"
+  }
+]

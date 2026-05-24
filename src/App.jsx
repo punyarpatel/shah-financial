@@ -1,90 +1,79 @@
-import React, { useState } from 'react';
-import './index.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import ScrollToTop from './components/ScrollToTop';
 
-const initialTasks = [
-  { id: 1, title: 'Wake up early and drink water', completed: false },
-  { id: 2, title: '30 minutes of stretching and jogging', completed: false },
-  { id: 3, title: 'Read a chapter of the React book', completed: false },
-  { id: 4, title: 'Get 8 hours of restful sleep', completed: false },
-  { id: 5, title: 'Check emails', completed: false },
-  { id: 6, title: 'Plan the next day', completed: false }
-];
+// Pages
+import HomePage from './pages/HomePage';
+import NRIPage from './pages/NRIPage';
+import AboutPage from './pages/AboutPage';
+import MutualFundPage from './pages/MutualFundPage';
+import InsurancePage from './pages/InsurancePage';
+import RetirementPage from './pages/RetirementPage';
+import ELSSPage from './pages/ELSSPage';
+import GoalPlanningPage from './pages/GoalPlanningPage';
+import BlogPage from './pages/BlogPage';
+import SingleBlogPage from './pages/SingleBlogPage';
+import ClientPortalPage from './pages/ClientPortalPage';
+import AdminLoginPage from './pages/AdminLoginPage';
+import AdminDashboardPage from './pages/AdminDashboardPage';
 
-const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+// ProtectedRoute Component
+const ProtectedRoute = ({ children }) => {
+  const isAdmin = localStorage.getItem('isAdmin') === 'true';
+  if (!isAdmin) {
+    return <Navigate to="/admin/login" replace />;
+  }
+  return children;
+};
+
+// NotFoundPage Component
+const NotFoundPage = () => {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#faf8f4]">
+      <h1 className="text-[120px] font-serif font-bold text-[#0d2545] leading-none mb-4">404</h1>
+      <p className="text-[#5c6478] text-[18px] mb-8">Page not found</p>
+      <Link 
+        to="/" 
+        className="bg-[#c9922a] text-white px-8 py-3 rounded-[8px] font-medium hover:bg-[#f0c96a] transition-colors"
+      >
+        Go to Home
+      </Link>
+    </div>
+  );
+};
 
 export default function App() {
-  const [tasks, setTasks] = useState(initialTasks);
-  const [selectedDay, setSelectedDay] = useState(DAYS[new Date().getDay()]);
-
-  // Toggle checkbox state
-  const toggleTask = (taskId) => {
-    setTasks(tasks.map(task => 
-      task.id === taskId ? { ...task, completed: !task.completed } : task
-    ));
-  };
-
-  // Separate tasks into two halves for both sides
-  const half = Math.ceil(tasks.length / 2);
-  const leftTasks = tasks.slice(0, half);
-  const rightTasks = tasks.slice(half);
-
   return (
-    <div className="app-container">
-      {/* Top Bar with No Color */}
-      <header className="top-bar">
-        <div className="days-container">
-          {DAYS.map(day => (
-            <div key={day} className="day-wrapper">
-              <button 
-                className={`day-btn ${selectedDay === day ? 'active-day' : ''}`}
-                onClick={() => setSelectedDay(day)}
-              >
-                {day}
-              </button>
-              <div className="dots-container">
-                <span className="pending-dot"></span>
-              </div>
-            </div>
-          ))}
+    <HelmetProvider>
+      <BrowserRouter>
+        <div className="min-h-screen bg-gray-100 flex flex-col relative">
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/nri" element={<NRIPage />} />
+            <Route path="/services/mutual-funds" element={<MutualFundPage />} />
+            <Route path="/services/insurance" element={<InsurancePage />} />
+            <Route path="/services/retirement" element={<RetirementPage />} />
+            <Route path="/services/elss" element={<ELSSPage />} />
+            <Route path="/services/goal-planning" element={<GoalPlanningPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<SingleBlogPage />} />
+            <Route path="/client-portal" element={<ClientPortalPage />} />
+            <Route path="/admin/login" element={<AdminLoginPage />} />
+            <Route 
+              path="/admin/dashboard" 
+              element={
+                <ProtectedRoute>
+                  <AdminDashboardPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
         </div>
-      </header>
-
-      {/* Main Content */}
-      <div className="main-content">
-        
-        {/* Left Side Tasks */}
-        <div className="left-panel">
-          <ul className="task-list">
-            {leftTasks.map(task => (
-              <li key={task.id} className="task-item">
-                <span className={task.completed ? "completed-text" : ""}>{task.title}</span>
-                <input 
-                  type="checkbox" 
-                  checked={task.completed} 
-                  onChange={() => toggleTask(task.id)} 
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Right Side Tasks */}
-        <div className="right-panel">
-          <ul className="task-list">
-            {rightTasks.map(task => (
-              <li key={task.id} className="task-item">
-                <span className={task.completed ? "completed-text" : ""}>{task.title}</span>
-                <input 
-                  type="checkbox" 
-                  checked={task.completed} 
-                  onChange={() => toggleTask(task.id)} 
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-
-      </div>
-    </div>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }

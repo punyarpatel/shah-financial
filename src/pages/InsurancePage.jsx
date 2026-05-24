@@ -1,0 +1,303 @@
+import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import WhatsAppFloat from '../components/WhatsAppFloat';
+import api from '../lib/api';
+import FadeIn from '../components/animations/FadeIn';
+
+const InsurancePage = () => {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [interest, setInterest] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleScrollToContact = () => {
+    const contactSection = document.getElementById('ins-contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleWhatsApp = () => {
+    window.open('https://wa.me/919800000000?text=Hi!%20I%20am%20looking%20for%20an%20insurance%20quote.%20Can%20you%20help%20me%20find%20the%20right%20cover%3F', '_blank');
+  };
+
+  const handleNriWhatsApp = () => {
+    const message = encodeURIComponent("Hello! I'm interested in buying a health insurance policy in India. I currently live in [country] and would like coverage for when I visit India for medical treatment or procedures. Can you help me understand my options?");
+    window.open(`https://wa.me/919800000000?text=${message}`, '_blank');
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!name || !phone) {
+      setError('Please enter your name and phone number');
+      return;
+    }
+    setError('');
+    setLoading(true);
+
+    try {
+      await api.post('/api/leads', {
+        name,
+        phone,
+        interest: `Insurance Advisory - ${interest || 'Not Specified'}`,
+        message: 'Lead from Insurance Page',
+      });
+      setSuccess(true);
+    } catch (err) {
+      setError('Something went wrong. Please try again');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const labelStyles = "text-[#c9922a] text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]";
+  const titleStyles = "font-serif text-[28px] text-[#1a1a2e] font-semibold mb-[2rem] leading-tight";
+  const cardStyles = "bg-white border border-[#0d2545]/12 rounded-[12px] p-[1.5rem] h-full transition-transform hover:-translate-y-1";
+  const inputStyles = "w-full px-[12px] py-[10px] border border-white/15 rounded-[8px] text-[14px] font-sans text-white bg-white/5 outline-none focus:border-[#c9922a] focus:bg-white/10 placeholder-white/35 transition-colors";
+  const formLabelStyles = "block text-[12px] text-white/60 uppercase tracking-[0.04em] font-medium mb-[4px]";
+
+  const insuranceTypes = [
+    {
+      icon: '🛡️',
+      title: 'Life Insurance',
+      description: 'Term plans, ULIPs, endowment — we compare and recommend what genuinely suits you, not what pays the highest commission.',
+    },
+    {
+      icon: '🏥',
+      title: 'Health Insurance',
+      description: 'Individual, family floater, senior citizen plans, top-up covers. We help you understand waiting periods, exclusions, and claim processes before you buy.',
+    },
+    {
+      icon: '🚗',
+      title: 'Motor Insurance',
+      description: 'Car and two-wheeler — comprehensive and third party. Quick renewals, claim support included.',
+    },
+    {
+      icon: '🏠',
+      title: 'Fire & Burglary',
+      description: 'Protect your home, shop, or office against fire, theft, and natural calamities.',
+    },
+    {
+      icon: '🚢',
+      title: 'Marine Insurance',
+      description: 'Cargo and transit coverage for businesses moving goods.',
+    },
+    {
+      icon: '👷',
+      title: 'Workmen\'s Compensation (WC)',
+      description: 'Mandatory coverage for businesses with workers — we handle compliance too.',
+    },
+    {
+      icon: '👥',
+      title: 'Group Health Insurance',
+      description: 'Affordable employee health covers for SMEs and corporates. We handle the entire group policy setup and renewals.',
+    },
+    {
+      icon: '➕',
+      title: 'And More',
+      description: 'Liability, shop owner policies, professional indemnity, and whatever your specific situation needs.',
+    },
+  ];
+
+  const partners = ['HDFC Ergo', 'ICICI Lombard', 'Go Digit', 'Tata AIG', 'Bajaj Allianz', 'Reliance General', 'Edelweiss Zuno'];
+
+  return (
+    <div className="min-h-screen bg-gray-100 flex flex-col relative">
+      <Helmet>
+        <title>Life & General Insurance — Shah Financial Services</title>
+        <meta name="description" content="Term life, health, motor, fire, marine, and group insurance from India's most trusted insurers. Compare and get covered today." />
+      </Helmet>
+
+      <Navbar />
+
+      {/* Hero Section */}
+      <section className="bg-[#0d2545] py-[4rem] w-full">
+        <FadeIn delay={0.1}>
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="inline-flex items-center gap-[6px] bg-[#c9922a]/15 border border-[#c9922a]/30 rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]">
+              <span className="text-[#f0c96a] text-[11px] uppercase tracking-[0.12em]">Life & General Insurance</span>
+            </div>
+
+            <h1 className="font-serif text-[36px] md:text-[48px] text-white font-semibold leading-[1.2] mb-[1.25rem] max-w-4xl">
+              Every Insurance You'll Ever Need — Under One Roof
+            </h1>
+
+            <p className="text-white/65 text-[16px] leading-[1.6] mb-[2rem] max-w-2xl">
+              Insurance is not a product — it's a promise to your family. We work with India's most trusted insurers so you always get the right cover at the right price.
+            </p>
+
+            <div className="flex flex-wrap gap-4 mt-[2rem]">
+              <a
+                href="tel:+919898000000"
+                className="bg-white/10 text-white border border-white/20 px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-white/20 transition-colors flex items-center gap-2"
+              >
+                <span className="text-[18px]">📞</span> Call Us
+              </a>
+              <button
+                onClick={handleWhatsApp}
+                className="bg-[#25D366] text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-[#22c35e] transition-colors flex items-center gap-2 shadow-lg shadow-[#25D366]/20"
+              >
+                <span className="text-[18px]">💬</span> WhatsApp for a Free Quote
+              </button>
+              <button
+                onClick={handleScrollToContact}
+                className="bg-[#c9922a] text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-[#f0c96a] transition-colors shadow-lg shadow-[#c9922a]/20"
+              >
+                Get Covered Today
+              </button>
+            </div>
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* Partners Trust Badges Section */}
+      <section className="bg-white py-[2.5rem] w-full border-b border-[#0d2545]/10">
+        <FadeIn>
+          <div className="max-w-7xl mx-auto px-4">
+            <p className="text-[#5c6478] text-[12px] uppercase tracking-[0.15em] font-medium mb-[1.25rem]">Our Insurance Partners</p>
+            <div className="flex flex-wrap gap-3 items-center">
+              {partners.map((partner, idx) => (
+                <div
+                  key={idx}
+                  className="bg-[#faf8f4] border border-[#0d2545]/10 rounded-[8px] px-[16px] py-[8px] text-[#0d2545] text-[13px] font-semibold shadow-sm select-none"
+                >
+                  {partner}
+                </div>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* Insurance Types Grid */}
+      <section className="bg-[#faf8f4] py-[4.5rem] w-full">
+        <FadeIn>
+          <div className="max-w-7xl mx-auto px-4">
+            <div className={labelStyles}>What We Cover</div>
+            <h2 className={titleStyles}>Complete Insurance Solutions</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-[3rem]">
+              {insuranceTypes.map((type) => (
+                <div key={type.title} className={cardStyles}>
+                  <div className="text-[32px] mb-3">{type.icon}</div>
+                  <h3 className="font-serif text-[17px] text-[#0d2545] font-semibold mb-2">{type.title}</h3>
+                  <p className="text-[#5c6478] text-[13px] leading-[1.6]">{type.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* NRI Health Insurance Callout */}
+      <section className="bg-white py-[4.5rem] w-full">
+        <FadeIn>
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="bg-[#0d2545] rounded-[20px] p-8 md:p-12 relative overflow-hidden">
+              {/* Background accent */}
+              <div className="absolute top-0 right-0 w-72 h-72 bg-[#c9922a] rounded-full blur-[100px] opacity-10 pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
+
+              <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-8 justify-between">
+                <div className="max-w-2xl">
+                  <div className="inline-flex items-center gap-2 bg-[#c9922a]/20 border border-[#c9922a]/40 rounded-full px-[14px] py-[4px] mb-4">
+                    <span className="text-[#f0c96a] text-[11px] uppercase tracking-[0.12em]">🌍 NRI Special</span>
+                  </div>
+                  <h3 className="font-serif text-[26px] md:text-[32px] text-white font-semibold mb-3 leading-tight">
+                    NRI Health Insurance in India
+                  </h3>
+                  <p className="text-white/70 text-[15px] leading-[1.7]">
+                    Visiting India for medical treatment or procedures? We help NRIs get the right health insurance coverage in India — so you can access world-class care without worrying about costs.
+                  </p>
+                </div>
+                <div className="flex-shrink-0">
+                  <button
+                    onClick={handleNriWhatsApp}
+                    className="bg-[#25D366] text-white px-[28px] py-[14px] rounded-[10px] font-semibold hover:bg-[#22c35e] transition-colors flex items-center gap-3 shadow-xl shadow-[#25D366]/20 whitespace-nowrap text-[15px]"
+                  >
+                    <span className="text-[20px]">💬</span>
+                    WhatsApp Us About NRI Cover
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* Contact / Lead Form */}
+      <section id="ins-contact" className="bg-[#0d2545] py-[5rem] w-full border-t border-white/5">
+        <FadeIn>
+          <div className="max-w-3xl mx-auto px-4">
+            <div className="text-center mb-10">
+              <h2 className="font-serif text-[32px] text-white font-semibold mb-3">
+                Get Covered Today
+              </h2>
+              <p className="text-[#f0c96a] text-[19px] font-serif italic">
+                "One call is all it takes. We assess, compare, and get you covered."
+              </p>
+            </div>
+
+            <div className="bg-white/5 border border-white/10 rounded-[16px] p-[2rem] md:p-[2.5rem] shadow-2xl backdrop-blur-sm">
+              {success ? (
+                <div className="bg-green-500/15 border border-green-500/30 rounded-[10px] p-[2rem] text-center text-[#4ade80]">
+                  <div className="text-[32px] mb-2">✅</div>
+                  <h3 className="font-serif text-[24px] mb-2">Request Received</h3>
+                  <p>Thank you! Our insurance advisor will contact you within 24 hours.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="md:col-span-2">
+                    <label className={formLabelStyles}>Full Name</label>
+                    <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Your Name" className={inputStyles} />
+                  </div>
+
+                  <div className="md:col-span-1">
+                    <label className={formLabelStyles}>Phone / WhatsApp</label>
+                    <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="+91 XXXXX XXXXX" className={inputStyles} />
+                  </div>
+
+                  <div className="md:col-span-1">
+                    <label className={formLabelStyles}>Insurance Type</label>
+                    <select value={interest} onChange={e => setInterest(e.target.value)} className={`${inputStyles} appearance-none cursor-pointer`}>
+                      <option value="" className="bg-[#0d2545]">Select an option</option>
+                      <option value="Life Insurance" className="bg-[#0d2545]">Life Insurance</option>
+                      <option value="Health Insurance" className="bg-[#0d2545]">Health Insurance</option>
+                      <option value="Motor Insurance" className="bg-[#0d2545]">Motor Insurance</option>
+                      <option value="Fire & Burglary" className="bg-[#0d2545]">Fire & Burglary</option>
+                      <option value="Marine Insurance" className="bg-[#0d2545]">Marine Insurance</option>
+                      <option value="Workmen's Compensation" className="bg-[#0d2545]">Workmen's Compensation</option>
+                      <option value="Group Health Insurance" className="bg-[#0d2545]">Group Health Insurance</option>
+                      <option value="NRI Health Insurance" className="bg-[#0d2545]">NRI Health Insurance</option>
+                      <option value="Not Sure" className="bg-[#0d2545]">Not Sure — Help Me Decide</option>
+                    </select>
+                  </div>
+
+                  {error && (
+                    <div className="md:col-span-2 bg-red-500/10 border border-red-500/30 text-[#f87171] py-2 px-3 rounded-[6px] text-[13px] mt-2">
+                      {error}
+                    </div>
+                  )}
+
+                  <div className="md:col-span-2 mt-3">
+                    <button type="submit" disabled={loading} className="w-full bg-[#c9922a] text-white border-none py-[14px] rounded-[8px] text-[15px] font-medium hover:bg-[#f0c96a] transition-colors disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-[#c9922a]/20">
+                      {loading ? 'Submitting...' : 'Request a Free Quote'}
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </FadeIn>
+      </section>
+
+      <Footer />
+      <WhatsAppFloat />
+    </div>
+  );
+};
+
+export default InsurancePage;
