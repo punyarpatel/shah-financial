@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import supabase from '../lib/supabase';
 import api from '../lib/api';
 
 const AdminDashboardPage = () => {
@@ -8,29 +9,46 @@ const AdminDashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    if (localStorage.getItem('isAdmin') !== 'true') {
-      navigate('/admin');
-      return;
-    }
-
-    const fetchLeads = async () => {
-      try {
-        const response = await api.get('/api/leads');
-        setLeads(response.data || []);
-      } catch (err) {
-        console.error('Error fetching leads:', err);
-      } finally {
-        setLoading(false);
+  const fetchLeads = async () => {
+    try {
+      const [sbRes, apiRes] = await Promise.allSettled([
+        supabase.from('leads').select('*').order('created_at', { ascending: false }),
+        api.get('/api/leads')
+      ]);
+      
+      let allLeads = [];
+      if (sbRes.status === 'fulfilled' && sbRes.value.data) {
+        allLeads = [...allLeads, ...sbRes.value.data];
       }
+      if (apiRes.status === 'fulfilled' && apiRes.value.data) {
+        allLeads = [...allLeads, ...apiRes.value.data];
+      }
+      
+      // Sort combined leads by date descending
+      allLeads.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+      setLeads(allLeads);
+    } catch (err) {
+      console.error('Error fetching leads:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const checkSessionAndFetch = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        navigate('/admin/login');
+        return;
+      }
+      fetchLeads();
     };
-    
-    fetchLeads();
+    checkSessionAndFetch();
   }, [navigate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('isAdmin');
-    navigate('/admin');
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate('/admin/login');
   };
 
   const handleExportCSV = () => {
@@ -60,13 +78,17 @@ const AdminDashboardPage = () => {
     window.URL.revokeObjectURL(url);
   };
 
-  const handleStatusUpdate = async (id, newStatus) => {
+  const handleStatusUpdate = async (leadId, newStatus) => {
+    // Optimistic UI update
+    setLeads(prev => prev.map(l => l.id === leadId ? { ...l, status: newStatus } : l));
+    
+    // Try updating Supabase first (if it's a UUID, it might be in Supabase or Node)
+    // We will blindly try both APIs for the update since we merged the data.
     try {
-      // Optimistic UI update
-      setLeads(leads.map(l => l.id === id ? { ...l, status: newStatus } : l));
-      await api.patch(`/api/leads/${id}`, { status: newStatus });
-    } catch (err) {
-      console.error('Failed to update status', err);
+      await supabase.from('leads').update({ status: newStatus }).eq('id', leadId);
+      await api.patch(`/api/leads/${leadId}`, { status: newStatus }).catch(() => {});
+    } finally {
+      fetchLeads();
     }
   };
 

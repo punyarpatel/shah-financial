@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import api from '../lib/api';
+import supabase from '../lib/supabase';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
@@ -15,28 +15,41 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !phone) {
-      setError('Please enter your name and phone number');
+    if (!name || !phone || !city || !interest || !isNri) {
+      setError('Please fill out all required fields');
+      return;
+    }
+    const cleanPhone = phone.replace(/\D/g, '');
+    if (cleanPhone.length < 10) {
+      setError('Phone number must have at least 10 digits');
       return;
     }
     setError('');
     setLoading(true);
 
-    try {
-      await api.post('/api/leads', {
-        name,
-        phone,
-        city,
-        interest,
-        isNri,
-        message
-      });
-      setSuccess(true);
-    } catch (err) {
-      setError('Something went wrong. Please try again');
-    } finally {
+    const { error } = await supabase
+      .from('leads')
+      .insert([{
+        name: name,
+        phone: phone,
+        city: city,
+        interest: interest,
+        is_nri: isNri,
+        nri_country: '',
+        message: message,
+        status: 'new',
+        created_at: new Date().toISOString()
+      }]);
+
+    if (error) {
+      console.error('Full error:', error);
+      setError(error.message);
       setLoading(false);
+      return;
     }
+
+    setSuccess(true);
+    setLoading(false);
   };
 
   const inputStyles = "w-full px-[12px] py-[10px] border border-white/15 rounded-[8px] text-[14px] font-sans text-white bg-white/5 outline-none focus:border-gold focus:bg-white/10 placeholder-white/35 transition-colors";

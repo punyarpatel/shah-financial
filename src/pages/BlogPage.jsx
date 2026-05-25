@@ -14,7 +14,8 @@ const BlogPage = () => {
   return (
     <div className="min-h-screen bg-[#faf8f4] flex flex-col relative">
       <Helmet>
-        <title>Financial Education — Shah Financial Services</title>
+        <title>Financial Insights & Education — Shah Financial Services</title>
+        <meta name="description" content="Expert articles on mutual funds, SIP investing, tax-saving ELSS, insurance planning, NRI investments, and personal finance from Shah Financial Services, Ahmedabad." />
       </Helmet>
 
       <Navbar />

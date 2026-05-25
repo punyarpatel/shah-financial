@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import supabase from '../lib/supabase';
 
 const AdminLoginPage = () => {
   const [email, setEmail] = useState('');
@@ -8,21 +9,23 @@ const AdminLoginPage = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
-    // Simulate small network delay
-    setTimeout(() => {
-      if (email === 'admin@shahfinancial.in' && password === 'Admin@123') {
-        localStorage.setItem('isAdmin', 'true');
-        navigate('/admin/dashboard');
-      } else {
-        setError('Invalid email or password.');
-      }
+    const { error: authError } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (authError) {
+      setError('Invalid email or password.');
       setLoading(false);
-    }, 600);
+      return;
+    }
+
+    navigate('/admin/dashboard');
   };
 
   const labelStyles = "block text-[#5c6478] text-[12px] uppercase tracking-[0.04em] mb-[4px] font-medium";

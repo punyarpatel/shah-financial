@@ -27,6 +27,7 @@ const navData = {
     { icon: '🛡️', title: 'Term vs Endowment', desc: 'Choose the right protection for your family.', link: '/blog/term-vs-endowment' },
     { icon: '🌍', title: 'NRI Investing Guide', desc: 'DTAA benefits and NRE account setup.', link: '/blog/nri-guide-investing' },
     { icon: '💰', title: 'Save Tax with ELSS', desc: 'Maximize Section 80C deductions.', link: '/blog/elss-tax-saving' },
+    { icon: '🎯', title: 'Goal-Based Planning', desc: 'Align your investments with life goals.', link: '/blog/goal-based-wealth-planning' },
   ],
   client: [
     { icon: '🏦', title: 'NJ Wealth Portal', desc: 'Login for NJ Wealth managed portfolios.', link: '/client-portal' },

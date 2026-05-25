@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
+import supabase from './lib/supabase';
 import { HelmetProvider } from 'react-helmet-async';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -19,13 +20,34 @@ import AdminLoginPage from './pages/AdminLoginPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 
 // ProtectedRoute Component
-const ProtectedRoute = ({ children }) => {
-  const isAdmin = localStorage.getItem('isAdmin') === 'true';
-  if (!isAdmin) {
-    return <Navigate to="/admin/login" replace />;
+function ProtectedRoute({ children }) {
+  const [session, setSession] = useState(undefined);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+  }, []);
+
+  if (session === undefined) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        fontFamily: 'DM Sans',
+        color: '#5c6478'
+      }}>
+        Loading...
+      </div>
+    );
   }
+
+  if (!session) return <Navigate to="/admin/login" replace />;
+
   return children;
-};
+}
 
 // NotFoundPage Component
 const NotFoundPage = () => {

@@ -10,6 +10,7 @@ import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import FadeIn from '../components/animations/FadeIn';
+import BlogSection from '../components/BlogSection';
 
 const HomePage = () => {
   return (
@@ -37,6 +38,12 @@ const HomePage = () => {
       <FadeIn>
         <div id="calculator">
           <SIPCalculator />
+        </div>
+      </FadeIn>
+
+      <FadeIn>
+        <div id="blog-section">
+          <BlogSection />
         </div>
       </FadeIn>
 

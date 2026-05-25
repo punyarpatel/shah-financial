@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
-import api from '../lib/api';
+import supabase from '../lib/supabase';
 import FadeIn from '../components/animations/FadeIn';
 
 const InsurancePage = () => {
@@ -32,26 +32,41 @@ const InsurancePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !phone) {
-      setError('Please enter your name and phone number');
+    if (!name || !phone || !interest) {
+      setError('Please fill out all required fields');
+      return;
+    }
+    const cleanPhone = phone.replace(/\D/g, '');
+    if (cleanPhone.length < 10) {
+      setError('Phone number must have at least 10 digits');
       return;
     }
     setError('');
     setLoading(true);
 
-    try {
-      await api.post('/api/leads', {
+    const { error: sbError } = await supabase
+      .from('leads')
+      .insert([{
         name,
         phone,
         interest: `Insurance Advisory - ${interest || 'Not Specified'}`,
+        city: '',
+        is_nri: '',
+        nri_country: '',
         message: 'Lead from Insurance Page',
-      });
-      setSuccess(true);
-    } catch (err) {
-      setError('Something went wrong. Please try again');
-    } finally {
+        status: 'new',
+        created_at: new Date().toISOString()
+      }]);
+
+    if (sbError) {
+      console.error('Full error:', sbError);
+      setError(sbError.message);
       setLoading(false);
+      return;
     }
+
+    setSuccess(true);
+    setLoading(false);
   };
 
   const labelStyles = "text-[#c9922a] text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]";

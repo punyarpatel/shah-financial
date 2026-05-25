@@ -18,6 +18,7 @@ const AboutPage = () => {
     <div className="min-h-screen bg-[#faf8f4] flex flex-col relative">
       <Helmet>
         <title>About Us — Shah Financial Services Ahmedabad</title>
+        <meta name="description" content="Shah Financial Services — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 3,000+ families and 100+ NRI clients across India and abroad." />
       </Helmet>
 
       <Navbar />

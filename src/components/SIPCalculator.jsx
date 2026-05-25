@@ -59,11 +59,6 @@ const SIPCalculator = () => {
   const [activeGoalId, setActiveGoalId] = useState('custom');
   const [calcMode, setCalcMode] = useState('sip'); // 'sip' | 'lumpsum'
   const [sip, setSip] = useState(10000);
-  const [showEmailForm, setShowEmailForm] = useState(false);
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [rate, setRate] = useState(12);
   const [years, setYears] = useState(10);
   const [inflation, setInflation] = useState(6);
@@ -72,23 +67,6 @@ const SIPCalculator = () => {
   const navigate = useNavigate();
 
   const activeGoal = GOALS.find(g => g.id === activeGoalId);
-
-  const handleEmailSubmit = (e) => {
-    e.preventDefault();
-    if (!email || !name) return;
-    setIsSubmitting(true);
-    // Simulate API call to send report
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setShowEmailForm(false);
-        setIsSubmitted(false);
-        setEmail('');
-        setName('');
-      }, 5000);
-    }, 1500);
-  };
 
   const applySuggestedValues = () => {
     if (activeGoal && activeGoal.id !== 'custom') {
@@ -287,7 +265,7 @@ const SIPCalculator = () => {
           </div>
 
           {/* Result Box */}
-          <div className={`bg-[#1E293B] ${showEmailForm ? 'rounded-t-[10px]' : 'rounded-[10px]'} p-[1.5rem] mt-[2.5rem] flex flex-col md:flex-row justify-between items-start md:items-center gap-[1.5rem] md:gap-0 border border-blue-900/30 transition-all duration-300`}>
+          <div className="bg-[#1E293B] rounded-[10px] p-[1.5rem] mt-[2.5rem] flex flex-col md:flex-row justify-between items-start md:items-center gap-[1.5rem] md:gap-0 border border-blue-900/30 transition-all duration-300">
             <div className="w-full md:w-auto flex-1">
               <div className="text-white/60 text-[13px] mb-1">Estimated corpus</div>
               <div className="font-serif text-white text-[32px] sm:text-[36px] font-semibold leading-tight">
@@ -322,52 +300,9 @@ const SIPCalculator = () => {
                 >
                   {calcMode === 'sip' ? 'Start This SIP ↗' : 'Start Investing ↗'}
                 </button>
-                <button 
-                  onClick={() => setShowEmailForm(!showEmailForm)}
-                  className="bg-transparent border border-white/20 text-white text-[13px] px-[20px] py-[10px] rounded-[6px] font-medium hover:bg-white/5 transition-colors whitespace-nowrap w-full text-center flex items-center justify-center gap-2"
-                >
-                  Email my wealth report ✉️
-                </button>
               </div>
             </div>
           </div>
-
-          {/* Email Capture Form */}
-          {showEmailForm && (
-            <div className="bg-[#172033] border-x border-b border-blue-900/30 p-[1.5rem] rounded-b-[10px] flex flex-col shadow-xl origin-top animate-fade-in">
-              {isSubmitted ? (
-                <div className="text-[#34A853] flex items-center justify-center gap-2 font-medium text-[14px] py-3 text-center">
-                  ✅ Your detailed wealth report is on its way to {email}!
-                </div>
-              ) : (
-                <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3">
-                  <input 
-                    type="text" 
-                    placeholder="Your Name" 
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    className="flex-1 bg-[#0F172A] border border-white/10 rounded-[6px] px-3 py-2 text-[14px] text-white focus:outline-none focus:border-gold placeholder:text-white/30"
-                  />
-                  <input 
-                    type="email" 
-                    placeholder="Your Email Address" 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="flex-[1.5] bg-[#0F172A] border border-white/10 rounded-[6px] px-3 py-2 text-[14px] text-white focus:outline-none focus:border-gold placeholder:text-white/30"
-                  />
-                  <button 
-                    type="submit" 
-                    disabled={isSubmitting}
-                    className="bg-white text-[#0F172A] px-5 py-2 rounded-[6px] font-semibold text-[13px] hover:bg-gray-200 transition-colors disabled:opacity-50 shrink-0"
-                  >
-                    {isSubmitting ? 'Sending...' : 'Send Report'}
-                  </button>
-                </form>
-              )}
-            </div>
-          )}
 
         </div>
 
