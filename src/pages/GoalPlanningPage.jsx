@@ -1,39 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import supabase from '../lib/supabase';
 import FadeIn from '../components/animations/FadeIn';
-
-// Defined at module level so React never remounts it on parent re-renders
-const SliderRow = ({ label, value, min, max, step = 1, onChange }) => {
-  const [inputVal, setInputVal] = useState(String(value));
-  React.useEffect(() => { setInputVal(String(value)); }, [value]);
-  const handleBlur = () => {
-    const num = parseFloat(inputVal);
-    if (!isNaN(num)) onChange(Math.min(max, Math.max(min, num)));
-    else setInputVal(String(value));
-  };
-  return (
-    <div className="flex items-center gap-3">
-      <span className="text-white/70 text-[13px] w-[210px] flex-shrink-0">{label}</span>
-      <input type="range" min={min} max={max} step={step} value={value}
-        onChange={e => onChange(Number(e.target.value))}
-        className="flex-1 h-[4px] appearance-none bg-white/10 rounded-full outline-none cursor-pointer"
-        style={{ accentColor: '#c9922a' }} />
-      <input
-        type="number"
-        min={min} max={max} step={step}
-        value={inputVal}
-        onChange={e => setInputVal(e.target.value)}
-        onBlur={handleBlur}
-        onKeyDown={e => e.key === 'Enter' && e.currentTarget.blur()}
-        className="text-[#f0c96a] text-[13px] font-semibold w-[80px] text-right flex-shrink-0 bg-transparent border-b border-transparent hover:border-[#f0c96a]/40 focus:border-[#f0c96a] outline-none transition-colors cursor-text [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-      />
-    </div>
-  );
-};
 
 const GoalPlanningPage = () => {
   const [name, setName] = useState('');
@@ -43,11 +14,7 @@ const GoalPlanningPage = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
 
-  // Goal calculator state
-  const [goalAmount, setGoalAmount] = useState(2500000);
-  const [goalYears, setGoalYears] = useState(10);
-  const [calcRoi, setCalcRoi] = useState(12);
-  const [inflation, setInflation] = useState(6);
+
 
   const handleScrollToContact = () => {
     document.getElementById('goal-contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -100,78 +67,7 @@ const GoalPlanningPage = () => {
   const inputStyles = "w-full px-[12px] py-[10px] border border-white/15 rounded-[8px] text-[14px] font-sans text-white bg-white/5 outline-none focus:border-[#c9922a] focus:bg-white/10 placeholder-white/35 transition-colors";
   const formLabelStyles = "block text-[12px] text-white/60 uppercase tracking-[0.04em] font-medium mb-[4px]";
 
-  // Calculator logic — inflation-adjusted future goal, then SIP needed
-  const calc = useMemo(() => {
-    const inflatedGoal = goalAmount * Math.pow(1 + inflation / 100, goalYears);
-    const r = calcRoi / 100 / 12;
-    const n = goalYears * 12;
-    let sipNeeded = 0;
-    if (r > 0) {
-      sipNeeded = inflatedGoal * r / ((Math.pow(1 + r, n) - 1) * (1 + r));
-    } else {
-      sipNeeded = inflatedGoal / n;
-    }
-    const totalInvested = sipNeeded * n;
-    const gains = inflatedGoal - totalInvested;
-    // Chart data
-    const chartData = [];
-    for (let y = 0; y <= goalYears; y++) {
-      const mn = y * 12;
-      const fv = r > 0 ? sipNeeded * ((Math.pow(1 + r, mn) - 1) / r) * (1 + r) : sipNeeded * mn;
-      chartData.push({ year: y, corpus: fv, target: inflatedGoal * (y / goalYears) });
-    }
-    return { inflatedGoal, sipNeeded, totalInvested, gains, chartData };
-  }, [goalAmount, goalYears, calcRoi, inflation]);
 
-  const fmt = (val) => {
-    if (val >= 10000000) return `₹${(val / 10000000).toFixed(2)}Cr`;
-    if (val >= 100000) return `₹${(val / 100000).toFixed(1)}L`;
-    if (val >= 1000) return `₹${(val / 1000).toFixed(1)}K`;
-    return `₹${Math.round(val).toLocaleString('en-IN')}`;
-  };
-
-
-
-  // SVG Chart
-  const GoalChart = () => {
-    const W = 700, H = 180, PAD = { t: 10, r: 10, b: 35, l: 55 };
-    const data = calc.chartData;
-    if (!data || data.length < 2) return null;
-    const maxVal = calc.inflatedGoal;
-    const toX = (i) => PAD.l + (i / Math.max(1, data.length - 1)) * (W - PAD.l - PAD.r);
-    const toY = (val) => PAD.t + (1 - Math.min(1, val / maxVal)) * (H - PAD.t - PAD.b);
-    const corpusPts = data.map((d, i) => `${toX(i)},${toY(d.corpus)}`).join(' ');
-    const targetPts = data.map((d, i) => `${toX(i)},${toY(d.target)}`).join(' ');
-    const areaPath = `M${toX(0)},${toY(0)} ` + data.map((d, i) => `L${toX(i)},${toY(d.corpus)}`).join(' ') + ` L${toX(data.length - 1)},${toY(0)} Z`;
-    const yTicks = [0, 0.25, 0.5, 0.75, 1].map(f => ({ val: maxVal * f, y: toY(maxVal * f) }));
-    const xTicks = data.filter((_, i) => i % Math.max(1, Math.floor(data.length / 6)) === 0 || i === data.length - 1);
-    return (
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <linearGradient id="goalGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#c9922a" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="#c9922a" stopOpacity="0.02" />
-          </linearGradient>
-        </defs>
-        {yTicks.map((t, i) => (
-          <g key={i}>
-            <line x1={PAD.l} y1={t.y} x2={W - PAD.r} y2={t.y} stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
-            <text x={PAD.l - 6} y={t.y + 4} fill="rgba(255,255,255,0.35)" fontSize="10" textAnchor="end">{fmt(t.val)}</text>
-          </g>
-        ))}
-        <polyline points={targetPts} fill="none" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="5 3" />
-        <path d={areaPath} fill="url(#goalGrad)" />
-        <polyline points={corpusPts} fill="none" stroke="#c9922a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-        {xTicks.map((d, i) => (
-          <text key={i} x={toX(data.indexOf(d))} y={H - PAD.b + 16} fill="rgba(255,255,255,0.4)" fontSize="10" textAnchor="middle">Yr {d.year}</text>
-        ))}
-        <rect x={PAD.l} y={H - 10} width="12" height="3" rx="1" fill="#c9922a" />
-        <text x={PAD.l + 16} y={H - 6} fill="rgba(255,255,255,0.45)" fontSize="9">Corpus growth</text>
-        <line x1={PAD.l + 115} y1={H - 8} x2={PAD.l + 127} y2={H - 8} stroke="#4ade80" strokeWidth="1.5" strokeDasharray="5 3" />
-        <text x={PAD.l + 131} y={H - 6} fill="rgba(255,255,255,0.45)" fontSize="9">Goal target (inflation-adjusted)</text>
-      </svg>
-    );
-  };
 
   const steps = [
     { num: '01', icon: '🗣️', title: 'List Every Goal', desc: 'We sit with you and list every financial goal — big and small, near and far.' },
@@ -221,10 +117,7 @@ const GoalPlanningPage = () => {
                 className="bg-[#25D366] text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-[#22c35e] transition-colors flex items-center gap-2 shadow-lg shadow-[#25D366]/20">
                 <span className="text-[18px]">💬</span> WhatsApp Us
               </button>
-              <button onClick={() => document.getElementById('goal-calculator')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-white/10 text-white border border-white/20 px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-white/20 transition-colors flex items-center gap-2">
-                🗺️ Map My Goals
-              </button>
+
             </div>
           </div>
         </FadeIn>
@@ -297,64 +190,6 @@ const GoalPlanningPage = () => {
         </FadeIn>
       </section>
 
-      {/* Goal SIP Calculator */}
-      <section id="goal-calculator" className="bg-[#faf8f4] py-[5rem] w-full">
-        <FadeIn>
-          <div className="max-w-5xl mx-auto px-4">
-            <div className={labelStyles}>Goal Calculator</div>
-            <h2 className={titleStyles}>How much SIP do you need for your goal?</h2>
-            <p className="text-[#5c6478] text-[15px] mb-8 -mt-4">Enter your goal amount and timeline — we'll tell you exactly what SIP gets you there.</p>
-
-            {/* Sliders */}
-            <div className="bg-[#1e293b] rounded-[16px] p-6 md:p-8 mb-4 space-y-5">
-              <SliderRow label="Goal amount (today's value)" value={goalAmount} min={100000} max={50000000} step={100000} onChange={setGoalAmount} display={fmt(goalAmount)} />
-              <SliderRow label="Time to achieve goal" value={goalYears} min={1} max={30} onChange={setGoalYears} display={`${goalYears} yrs`} />
-              <SliderRow label="Expected return (CAGR)" value={calcRoi} min={6} max={18} step={0.5} onChange={setCalcRoi} display={`${calcRoi}%`} />
-              <SliderRow label="Inflation rate" value={inflation} min={2} max={10} step={0.5} onChange={setInflation} display={`${inflation}%`} />
-            </div>
-
-            {/* Results */}
-            <div className="bg-[#0d2545] rounded-[16px] p-6 mb-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <p className="text-white/50 text-[12px] uppercase tracking-wider mb-1">Inflation-adjusted goal</p>
-                  <p className="font-serif text-[38px] text-white font-bold leading-none">{fmt(calc.inflatedGoal)}</p>
-                  <p className="text-white/40 text-[12px] mt-1">Today's value: {fmt(goalAmount)}</p>
-                </div>
-                <div>
-                  <p className="text-white/50 text-[12px] uppercase tracking-wider mb-1">Monthly SIP needed</p>
-                  <p className="font-serif text-[38px] text-[#f0c96a] font-bold leading-none">{fmt(calc.sipNeeded)}</p>
-                  <p className="text-white/40 text-[12px] mt-1">For {goalYears} years</p>
-                </div>
-                <div>
-                  <p className="text-white/50 text-[12px] uppercase tracking-wider mb-1">Market gains for you</p>
-                  <p className="font-serif text-[38px] text-[#4ade80] font-bold leading-none">{fmt(calc.gains)}</p>
-                  <p className="text-white/40 text-[12px] mt-1">You invest: {fmt(calc.totalInvested)}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Chart */}
-            <div className="bg-[#1e293b] rounded-[16px] p-5 mb-5">
-              <GoalChart />
-            </div>
-
-            {/* Insight */}
-            <div className="bg-[#c9922a]/10 border border-[#c9922a]/30 rounded-[10px] px-5 py-4 mb-6 text-[#7a5520] text-[13px] leading-[1.6]">
-              To reach <strong>{fmt(calc.inflatedGoal)}</strong> in <strong>{goalYears} years</strong>, you need just <strong>{fmt(calc.sipNeeded)}/month</strong>. The market does the rest — contributing <strong>{fmt(calc.gains)}</strong> on top of your investment.
-            </div>
-
-            <div className="flex flex-wrap gap-3 justify-center">
-              <button onClick={handleScrollToContact} className="bg-[#c9922a] text-white px-[24px] py-[11px] rounded-[8px] font-medium hover:bg-[#f0c96a] transition-colors text-[14px]">
-                📅 Book a Goal Planning Session
-              </button>
-              <button onClick={handleWhatsApp} className="bg-[#25D366] text-white px-[24px] py-[11px] rounded-[8px] font-medium hover:bg-[#22c35e] transition-colors text-[14px] flex items-center gap-2">
-                💬 WhatsApp Us
-              </button>
-            </div>
-          </div>
-        </FadeIn>
-      </section>
 
       {/* Contact / Lead Form */}
       <section id="goal-contact" className="bg-[#0d2545] py-[5rem] w-full border-t border-white/5">
