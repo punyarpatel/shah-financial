@@ -21,7 +21,7 @@ const GoalPlanningPage = () => {
   };
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/919800000000?text=Hi!%20I%20would%20like%20to%20plan%20my%20financial%20goals%20with%20you.%20Can%20we%20book%20a%20goal%20planning%20session%3F', '_blank');
+    window.open('https://wa.me/919664977576?text=Hi!%20I%20would%20like%20to%20plan%20my%20financial%20goals%20with%20you.%20Can%20we%20book%20a%20goal%20planning%20session%3F', '_blank');
   };
 
   const handleSubmit = async (e) => {

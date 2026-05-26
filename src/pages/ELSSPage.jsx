@@ -53,7 +53,7 @@ const ELSSPage = () => {
   };
 
   const handleWhatsApp = () => {
-    window.open("https://wa.me/919800000000?text=Hi!%20I%20want%20to%20start%20my%20ELSS%20SIP%20to%20save%20tax%20under%20Section%2080C.%20Can%20you%20help%20me%20get%20started%3F", '_blank');
+    window.open("https://wa.me/919664977576?text=Hi!%20I%20want%20to%20start%20my%20ELSS%20SIP%20to%20save%20tax%20under%20Section%2080C.%20Can%20you%20help%20me%20get%20started%3F", '_blank');
   };
 
   const handleSubmit = async (e) => {
@@ -210,7 +210,7 @@ const ELSSPage = () => {
             </p>
 
             <div className="flex flex-wrap gap-4 mt-[2rem]">
-              <a href="tel:+919898000000"
+              <a href="tel:+919664977576"
                 className="bg-white/10 text-white border border-white/20 px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-white/20 transition-colors flex items-center gap-2">
                 <span className="text-[18px]">📞</span> Call Us
               </a>

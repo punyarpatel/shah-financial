@@ -37,8 +37,8 @@ const Footer = () => {
             <div>
               <h3 className={headingStyles}>Contact</h3>
               <a href="#contact" className={linkStyles}>Get in Touch</a>
-              <span className={textStyles}>+91 98XXX XXXXX</span>
-              <span className={textStyles}>contact@shahfinancial.in</span>
+              <a href="tel:+919664977576" className={linkStyles}>+91 96649 77576</a>
+              <a href="mailto:officeinsurance2017@gmail.com" className={linkStyles}>officeinsurance2017@gmail.com</a>
               <span className={textStyles}>Ahmedabad, Gujarat</span>
             </div>
 

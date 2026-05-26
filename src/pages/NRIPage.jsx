@@ -21,16 +21,16 @@ const NRIPage = () => {
   };
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/919800000000?text=Hi!%20I%20am%20an%20NRI%20and%20would%20like%20to%20discuss%20my%20investment%20and%20insurance%20options%20in%20India.', '_blank');
+    window.open('https://wa.me/919664977576?text=Hi!%20I%20am%20an%20NRI%20and%20would%20like%20to%20discuss%20my%20investment%20and%20insurance%20options%20in%20India.', '_blank');
   };
 
   const handleNriHealthWhatsApp = () => {
     const message = encodeURIComponent("Hello! I'm interested in buying a health insurance policy in India. I currently live in [country] and would like coverage for when I visit India for medical treatment or procedures. Can you help me understand my options?");
-    window.open(`https://wa.me/919800000000?text=${message}`, '_blank');
+    window.open(`https://wa.me/919664977576?text=${message}`, '_blank');
   };
 
   const handleEmail = () => {
-    window.location.href = 'mailto:info@shahfinancial.in?subject=NRI%20Investment%20%26%20Insurance%20Enquiry';
+    window.location.href = 'mailto:officeinsurance2017@gmail.com?subject=NRI%20Investment%20%26%20Insurance%20Enquiry';
   };
 
   const handleSubmit = async (e) => {

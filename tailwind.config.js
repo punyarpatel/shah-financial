@@ -26,11 +26,16 @@ export default {
         'spin-y': {
           from: { transform: 'rotateY(0deg)' },
           to: { transform: 'rotateY(-360deg)' }
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-12px)' }
         }
       },
       animation: {
         marquee: 'marquee 35s linear infinite',
-        'spin-y': 'spin-y 20s linear infinite'
+        'spin-y': 'spin-y 20s linear infinite',
+        float: 'float 5s ease-in-out infinite'
       }
     },
   },

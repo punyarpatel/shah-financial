@@ -53,7 +53,7 @@ const RetirementPage = () => {
   };
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/919800000000?text=Hi!%20I%20would%20like%20to%20discuss%20my%20retirement%20planning%20with%20you.', '_blank');
+    window.open('https://wa.me/919664977576?text=Hi!%20I%20would%20like%20to%20discuss%20my%20retirement%20planning%20with%20you.', '_blank');
   };
 
   const handleSubmit = async (e) => {

@@ -174,11 +174,11 @@ const ContactForm = () => {
           <div className="flex flex-row gap-[1.5rem] flex-wrap mt-[1.25rem] pt-[1.25rem] border-t border-white/10">
             <div>
               <strong className="block text-white/70 font-medium mb-[2px] text-[13px]">Email</strong>
-              <span className="text-white/45 text-[12px]">contact@shahfinancial.in</span>
+              <a href="mailto:officeinsurance2017@gmail.com" className="text-white/45 text-[12px] hover:text-[#c9922a] transition-colors">officeinsurance2017@gmail.com</a>
             </div>
             <div>
               <strong className="block text-white/70 font-medium mb-[2px] text-[13px]">Phone</strong>
-              <span className="text-white/45 text-[12px]">+91 98XXX XXXXX</span>
+              <a href="tel:+919664977576" className="text-white/45 text-[12px] hover:text-[#c9922a] transition-colors">+91 96649 77576</a>
             </div>
             <div>
               <strong className="block text-white/70 font-medium mb-[2px] text-[13px]">Office</strong>

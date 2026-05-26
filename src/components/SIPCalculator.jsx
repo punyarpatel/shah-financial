@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 // Defined at module level so React never remounts it on parent re-renders
-const SliderRow = ({ label, value, min, max, step = 1, onChange }) => {
+const SliderRow = ({ label, value, min, max, step = 1, onChange, prefix, suffix }) => {
   const [inputVal, setInputVal] = useState(String(value));
   React.useEffect(() => { setInputVal(String(value)); }, [value]);
   const handleBlur = () => {
@@ -15,15 +15,19 @@ const SliderRow = ({ label, value, min, max, step = 1, onChange }) => {
     <div className="flex flex-col sm:flex-row sm:items-center gap-[12px] sm:gap-[24px]">
       <div className="min-w-[140px] text-[14px] text-white/80 flex justify-between sm:block">
         <span>{label}</span>
-        <input
-          type="number"
-          min={min} max={max} step={step}
-          value={inputVal}
-          onChange={e => setInputVal(e.target.value)}
-          onBlur={handleBlur}
-          onKeyDown={e => e.key === 'Enter' && e.currentTarget.blur()}
-          className="sm:hidden font-medium text-white bg-transparent border-b border-transparent hover:border-white/40 focus:border-white outline-none text-right w-[80px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-        />
+        <div className="sm:hidden flex items-center justify-end gap-1">
+          {prefix && <span className="text-white/60 text-[13px]">{prefix}</span>}
+          <input
+            type="number"
+            min={min} max={max} step={step}
+            value={inputVal}
+            onChange={e => setInputVal(e.target.value)}
+            onBlur={handleBlur}
+            onKeyDown={e => e.key === 'Enter' && e.currentTarget.blur()}
+            className="font-medium text-white bg-transparent border-b border-transparent hover:border-white/40 focus:border-white outline-none text-right w-[75px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+          />
+          {suffix && <span className="text-white/60 text-[13px]">{suffix}</span>}
+        </div>
       </div>
       <input
         type="range"
@@ -32,27 +36,31 @@ const SliderRow = ({ label, value, min, max, step = 1, onChange }) => {
         onChange={e => onChange(Number(e.target.value))}
         className="flex-1 w-full h-[6px] bg-[#4A4A4A] rounded-lg appearance-none cursor-pointer accent-gold"
       />
-      <input
-        type="number"
-        min={min} max={max} step={step}
-        value={inputVal}
-        onChange={e => setInputVal(e.target.value)}
-        onBlur={handleBlur}
-        onKeyDown={e => e.key === 'Enter' && e.currentTarget.blur()}
-        className="hidden sm:block min-w-[80px] text-right text-[15px] font-medium text-white bg-transparent border-b border-transparent hover:border-white/40 focus:border-white outline-none transition-colors cursor-text [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-      />
+      <div className="hidden sm:flex items-center justify-end min-w-[100px]">
+        {prefix && <span className="mr-1 text-white/60 text-[14px]">{prefix}</span>}
+        <input
+          type="number"
+          min={min} max={max} step={step}
+          value={inputVal}
+          onChange={e => setInputVal(e.target.value)}
+          onBlur={handleBlur}
+          onKeyDown={e => e.key === 'Enter' && e.currentTarget.blur()}
+          className="text-right text-[15px] font-medium text-white bg-transparent border-b border-transparent hover:border-white/40 focus:border-white outline-none transition-colors cursor-text w-[80px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+        />
+        {suffix && <span className="ml-1 text-white/60 text-[14px]">{suffix}</span>}
+      </div>
     </div>
   );
 };
 
 const GOALS = [
   { id: 'custom', label: 'Custom SIP', icon: null, target: null, desc: null },
-  { id: 'retirement', label: 'Retirement', icon: '🛋️', target: 30000000, desc: 'Save for a ₹3.0Cr retirement fund.', defaultSip: 25000, defaultRate: 12, defaultYears: 15 },
-  { id: 'house', label: 'Buy a House', icon: '🏠', target: 5000000, desc: 'Save for a ₹50L down payment on your dream home.', defaultSip: 20000, defaultRate: 12, defaultYears: 10 },
+  { id: 'retirement', label: 'Retirement', icon: '🛋️', target: 30000000, desc: 'Save for a ₹3.0Cr retirement fund.', defaultSip: 25000, defaultRate: 12, defaultYears: 22 },
+  { id: 'house', label: 'Buy a House', icon: '🏠', target: 5000000, desc: 'Save for a ₹50L down payment on your dream home.', defaultSip: 20000, defaultRate: 12, defaultYears: 11 },
   { id: 'education', label: 'Child Education', icon: '🎓', target: 3000000, desc: 'Build a ₹30L corpus for higher education.', defaultSip: 10000, defaultRate: 12, defaultYears: 12 },
-  { id: 'car', label: 'Buy a Car', icon: '🚗', target: 2000000, desc: 'Plan for a ₹20L car purchase.', defaultSip: 15000, defaultRate: 12, defaultYears: 6 },
-  { id: 'wedding', label: 'Wedding', icon: '💍', target: 5000000, desc: 'Prepare for a ₹50L dream wedding.', defaultSip: 20000, defaultRate: 12, defaultYears: 6 },
-  { id: 'vacation', label: 'Dream Vacation', icon: '✈️', target: 2000000, desc: 'Save ₹20L for that round-the-world trip.', defaultSip: 10000, defaultRate: 12, defaultYears: 4 },
+  { id: 'car', label: 'Buy a Car', icon: '🚗', target: 2000000, desc: 'Plan for a ₹20L car purchase.', defaultSip: 15000, defaultRate: 12, defaultYears: 8 },
+  { id: 'wedding', label: 'Wedding', icon: '💍', target: 5000000, desc: 'Prepare for a ₹50L dream wedding.', defaultSip: 20000, defaultRate: 12, defaultYears: 11 },
+  { id: 'vacation', label: 'Dream Vacation', icon: '✈️', target: 2000000, desc: 'Save ₹20L for that round-the-world trip.', defaultSip: 10000, defaultRate: 12, defaultYears: 10 },
 ];
 
 // ─── 3D Pie Chart — solid wedges, thick extrusion, exploded slices, % labels ───
@@ -216,7 +224,6 @@ const SIPCalculator = () => {
   const [sip, setSip] = useState(10000);
   const [rate, setRate] = useState(12);
   const [years, setYears] = useState(10);
-  const [inflation, setInflation] = useState(6);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -228,7 +235,6 @@ const SIPCalculator = () => {
       setSip(activeGoal.defaultSip);
       setRate(activeGoal.defaultRate);
       setYears(activeGoal.defaultYears);
-      setInflation(6);
     }
   };
 
@@ -251,7 +257,7 @@ const SIPCalculator = () => {
     return `₹${Math.round(val).toLocaleString('en-IN')}`;
   };
 
-  const { corpus, invested, gain, chartData, inflationAdjustedCorpus } = useMemo(() => {
+  const { corpus, invested, gain, chartData } = useMemo(() => {
     const r = rate / 100 / 12;
     const n = years * 12;
 
@@ -267,7 +273,6 @@ const SIPCalculator = () => {
     }
 
     const gainAmt = corpusAmt - investedAmt;
-    const inflationAdjusted = corpusAmt / Math.pow(1 + (inflation / 100), years);
 
     const data = [];
     for (let y = 0; y <= years; y++) {
@@ -286,8 +291,8 @@ const SIPCalculator = () => {
       data.push({ year: `Yr ${y}`, invested: inv, total: corp });
     }
 
-    return { corpus: corpusAmt, invested: investedAmt, gain: gainAmt, chartData: data, inflationAdjustedCorpus: inflationAdjusted };
-  }, [sip, rate, years, inflation, calcMode]);
+    return { corpus: corpusAmt, invested: investedAmt, gain: gainAmt, chartData: data };
+  }, [sip, rate, years, calcMode]);
 
   const wealthRatio = (corpus / invested).toFixed(2);
 
@@ -366,7 +371,15 @@ const SIPCalculator = () => {
             return (
               <button
                 key={goal.id}
-                onClick={() => setActiveGoalId(goal.id)}
+                onClick={() => {
+                  setActiveGoalId(goal.id);
+                  setCalcMode('sip');
+                  if (goal.id !== 'custom') {
+                    setSip(goal.defaultSip);
+                    setRate(goal.defaultRate);
+                    setYears(goal.defaultYears);
+                  }
+                }}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-[13px] font-medium transition-colors ${
                   isActive
                     ? 'bg-[#B8860B] text-white shadow-md'
@@ -409,10 +422,10 @@ const SIPCalculator = () => {
                   max={calcMode === 'sip' ? 100000 : 5000000}
                   step={calcMode === 'sip' ? 1000 : 10000}
                   onChange={setSip}
+                  prefix="₹"
                 />
-                <SliderRow label="Expected Rate" value={rate} min={12} max={20} step={0.5} onChange={setRate} />
-                <SliderRow label="Time Period" value={years} min={1} max={30} step={1} onChange={setYears} />
-                <SliderRow label="Assumed Inflation" value={inflation} min={4} max={12} step={0.5} onChange={setInflation} />
+                <SliderRow label="Expected Rate" value={rate} min={12} max={20} step={0.5} onChange={setRate} suffix="%" />
+                <SliderRow label="Time Period" value={years} min={1} max={30} step={1} onChange={setYears} suffix="Yr" />
               </div>
 
               {/* Result Box */}
@@ -420,13 +433,10 @@ const SIPCalculator = () => {
                 <div className="w-full md:w-auto flex-1">
                   <div className="text-white/60 text-[13px] mb-1">Estimated corpus</div>
                   <div className="font-serif text-white text-[32px] sm:text-[36px] font-semibold leading-tight">
-                    {fmt(corpus)}
-                  </div>
-                  <div className="text-white/60 text-[13px] mt-1">
-                    Real value (inflation adj): <span className="text-white font-medium">{fmt(inflationAdjustedCorpus)}</span>
+                    {fmt(corpus)}<sup className="text-[18px] text-gold align-super ml-0.5">*</sup>
                   </div>
                   <div className="text-goldLight text-[13px] mt-2 font-medium">
-                    Invested: {fmt(invested)} &middot; Gain: {fmt(gain)}
+                    Invested: {fmt(invested)} &middot; Gain: {fmt(gain)}<sup className="text-[10px] text-goldLight align-super ml-0.5">*</sup>
                   </div>
                 </div>
 
@@ -464,7 +474,7 @@ const SIPCalculator = () => {
               </div>
               <div className="bg-[#2C2C2E] rounded-[10px] p-4">
                 <div className="text-white/60 text-[12px] mb-1">Est. returns</div>
-                <div className="text-white text-[18px] font-semibold">{fmt(gain)}</div>
+                <div className="text-white text-[18px] font-semibold">{fmt(gain)}<sup className="text-[11px] text-gold align-super ml-0.5">*</sup></div>
               </div>
               <div className="bg-[#2C2C2E] rounded-[10px] p-4">
                 <div className="text-white/60 text-[12px] mb-1">Wealth ratio</div>
@@ -476,27 +486,55 @@ const SIPCalculator = () => {
               </div>
             </div>
 
-            {/* Chart Section */}
-            <div className="mt-[3rem] h-[220px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={chartData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
-                  <defs>
-                    <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#D4AF37" stopOpacity={0.2} />
-                      <stop offset="95%" stopColor="#D4AF37" stopOpacity={0} />
-                    </linearGradient>
-                    <linearGradient id="colorInvested" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.1} />
-                      <stop offset="95%" stopColor="#3B82F6" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
-                  <XAxis dataKey="year" stroke="#5c6478" fontSize={12} tickLine={false} axisLine={false} minTickGap={30} />
-                  <YAxis stroke="#5c6478" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => fmt(val)} width={70} />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Area type="monotone" dataKey="total" name="Estimated Corpus" stroke="#D4AF37" strokeWidth={2} fillOpacity={1} fill="url(#colorTotal)" />
-                  <Area type="monotone" dataKey="invested" name="Total Invested" stroke="#64748B" strokeWidth={2} strokeDasharray="4 4" fillOpacity={1} fill="url(#colorInvested)" />
-                </AreaChart>
-              </ResponsiveContainer>
+            {/* Chart Section with Guide */}
+            <div className="mt-[3rem] flex flex-col md:flex-row items-center gap-6 w-full">
+              {/* Left: The Graph */}
+              <div className="h-[220px] flex-1 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={chartData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
+                    <defs>
+                      <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#D4AF37" stopOpacity={0.2} />
+                        <stop offset="95%" stopColor="#D4AF37" stopOpacity={0} />
+                      </linearGradient>
+                      <linearGradient id="colorInvested" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.1} />
+                        <stop offset="95%" stopColor="#3B82F6" stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
+                    <XAxis dataKey="year" stroke="#5c6478" fontSize={12} tickLine={false} axisLine={false} minTickGap={30} />
+                    <YAxis stroke="#5c6478" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => fmt(val)} width={70} />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Area type="monotone" dataKey="total" name="Estimated Corpus" stroke="#D4AF37" strokeWidth={2} fillOpacity={1} fill="url(#colorTotal)" />
+                    <Area type="monotone" dataKey="invested" name="Total Invested" stroke="#64748B" strokeWidth={2} strokeDasharray="4 4" fillOpacity={1} fill="url(#colorInvested)" />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+
+              {/* Right: Graph Guide Legend */}
+              <div className="flex md:flex-col flex-row gap-6 md:gap-4 shrink-0 bg-[#faf8f4]/60 md:bg-transparent p-3 md:p-0 rounded-lg w-full md:w-[160px] border border-navy/5 md:border-none justify-center md:justify-start">
+                {/* Gold Solid line - Estimated Corpus */}
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center shrink-0">
+                    <span className="w-[18px] h-[3px] bg-[#D4AF37] rounded-full inline-block" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-[12px] font-semibold text-textDark leading-none mb-1">Estimated Corpus</div>
+                    <div className="text-[10px] text-muted leading-none">Growth projection</div>
+                  </div>
+                </div>
+
+                {/* Slate Dashed line - Total Invested */}
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center shrink-0">
+                    <span className="w-[18px] h-[3px] border-t-2 border-dashed border-[#64748B] inline-block" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-[12px] font-semibold text-textDark leading-none mb-1">Total Invested</div>
+                    <div className="text-[10px] text-muted leading-none">Principal amount</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -506,7 +544,7 @@ const SIPCalculator = () => {
             {/* Total corpus label up top */}
             <div className="self-start w-full mb-5 pl-1">
               <div className="text-[#6B7280] text-[13px] font-medium mb-1">Resultant Value</div>
-              <div className="font-serif text-[32px] font-bold text-[#1a1a2e] leading-none">{fmt(corpus)}</div>
+              <div className="font-serif text-[32px] font-bold text-[#1a1a2e] leading-none">{fmt(corpus)}<sup className="text-[16px] text-[#c9922a] align-super ml-0.5">*</sup></div>
             </div>
 
             {/* 3D Pie Chart */}
@@ -530,7 +568,7 @@ const SIPCalculator = () => {
                 <span className="mt-[3px] w-[14px] h-[14px] rounded-sm shrink-0" style={{ background: 'linear-gradient(135deg,#f0c96a,#c9922a)' }} />
                 <div>
                   <div className="text-[#374151] text-[13px] font-medium leading-none mb-[6px]">Estimated Returns</div>
-                  <div className="text-[#c9922a] text-[22px] font-bold font-serif leading-none">{fmt(gain)}</div>
+                  <div className="text-[#c9922a] text-[22px] font-bold font-serif leading-none">{fmt(gain)}<sup className="text-[12px] align-super ml-0.5">*</sup></div>
                 </div>
               </div>
             </div>
@@ -542,7 +580,7 @@ const SIPCalculator = () => {
         {/* Disclaimer */}
         <div className="mt-[3rem] p-4 bg-[#faf8f4] rounded-lg border border-[#0d2545]/12 text-center">
           <p className="text-muted text-[11px] leading-[1.6]">
-            <strong>Disclaimer:</strong> The calculations provided by this SIP Calculator are for illustrative purposes only and do not represent actual returns or guarantee future results. Mutual fund investments are subject to market risks; please read all scheme-related documents carefully before investing. The "Assumed Inflation" and "Real value" calculations are estimates and actual purchasing power may vary.
+            <strong>Disclaimer:</strong> The calculations provided by this SIP Calculator are for illustrative purposes only and do not represent actual returns or guarantee future results. Mutual fund investments are subject to market risks; please read all scheme-related documents carefully before investing.
           </p>
         </div>
 

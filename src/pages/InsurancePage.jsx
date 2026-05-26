@@ -22,12 +22,12 @@ const InsurancePage = () => {
   };
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/919800000000?text=Hi!%20I%20am%20looking%20for%20an%20insurance%20quote.%20Can%20you%20help%20me%20find%20the%20right%20cover%3F', '_blank');
+    window.open('https://wa.me/919664977576?text=Hi!%20I%20am%20looking%20for%20an%20insurance%20quote.%20Can%20you%20help%20me%20find%20the%20right%20cover%3F', '_blank');
   };
 
   const handleNriWhatsApp = () => {
     const message = encodeURIComponent("Hello! I'm interested in buying a health insurance policy in India. I currently live in [country] and would like coverage for when I visit India for medical treatment or procedures. Can you help me understand my options?");
-    window.open(`https://wa.me/919800000000?text=${message}`, '_blank');
+    window.open(`https://wa.me/919664977576?text=${message}`, '_blank');
   };
 
   const handleSubmit = async (e) => {
@@ -147,7 +147,7 @@ const InsurancePage = () => {
 
             <div className="flex flex-wrap gap-4 mt-[2rem]">
               <a
-                href="tel:+919898000000"
+                href="tel:+919664977576"
                 className="bg-white/10 text-white border border-white/20 px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-white/20 transition-colors flex items-center gap-2"
               >
                 <span className="text-[18px]">📞</span> Call Us

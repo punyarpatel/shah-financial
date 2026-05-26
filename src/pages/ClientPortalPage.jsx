@@ -16,7 +16,7 @@ const ClientPortalPage = () => {
 
   const handleWhatsAppHelp = () => {
     const text = encodeURIComponent('Hi Shah Financial, I need help logging into my portfolio.');
-    window.open(`https://wa.me/919XXXXXXXXX?text=${text}`, '_blank');
+    window.open(`https://wa.me/919664977576?text=${text}`, '_blank');
   };
 
   const labelStyles = "text-[#c9922a] text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]";

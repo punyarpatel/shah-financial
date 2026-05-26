@@ -23,7 +23,7 @@ const MutualFundPage = () => {
 
   const handleWhatsApp = () => {
     // Note: This is the general WhatsApp link since this isn't specifically the NRI health insurance lead.
-    window.open('https://wa.me/919800000000?text=Hi!%20I%20am%20interested%20in%20starting%20a%20Mutual%20Fund%20investment.', '_blank');
+    window.open('https://wa.me/919664977576?text=Hi!%20I%20am%20interested%20in%20starting%20a%20Mutual%20Fund%20investment.', '_blank');
   };
 
   const handleSubmit = async (e) => {
@@ -98,7 +98,7 @@ const MutualFundPage = () => {
 
             <div className="flex flex-wrap gap-4 mt-[2rem]">
               <a 
-                href="tel:+919898000000"
+                href="tel:+919664977576"
                 className="bg-white/10 text-white border border-white/20 px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-white/20 transition-colors flex items-center gap-2"
               >
                 <span className="text-[18px]">📞</span> Call Us
