@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import TrustBar from '../components/TrustBar';
 import ServicesGrid from '../components/ServicesGrid';
+import WhyChooseUs from '../components/WhyChooseUs';
 import SIPCalculator from '../components/SIPCalculator';
 import Testimonials from '../components/Testimonials';
 import ContactForm from '../components/ContactForm';
@@ -40,6 +41,8 @@ const HomePage = () => {
           <SIPCalculator />
         </div>
       </FadeIn>
+
+      <WhyChooseUs />
 
       <FadeIn>
         <div id="blog-section">
