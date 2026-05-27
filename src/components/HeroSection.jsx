@@ -47,13 +47,20 @@ const HeroSection = () => {
           objectFit: 'cover',
           zIndex: 0,
           pointerEvents: 'none',
+          filter: 'drop-shadow(0 0 20px rgba(201, 168, 76, 0.3))',
         }}
       >
         <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
 
       {/* Dark Overlay to ensure text readability against the video */}
-      <div className="absolute inset-0 bg-[#0d2545]/80 pointer-events-none" style={{ zIndex: 1 }}></div>
+      <div 
+        className="absolute inset-0 pointer-events-none" 
+        style={{ 
+          zIndex: 1,
+          background: 'linear-gradient(135deg, rgba(10, 22, 40, 0.85) 0%, rgba(13, 31, 60, 0.75) 50%, rgba(10, 22, 40, 0.85) 100%)'
+        }}
+      />
 
       {/* Decorative Circles (Optional, kept for subtle texture) */}
       <div 
@@ -72,9 +79,21 @@ const HeroSection = () => {
         <FadeIn>
           <div className="max-w-[680px] mx-auto text-center">
             {/* Badge */}
-            <div className="inline-flex items-center gap-[6px] bg-[#c9922a]/15 border border-[#c9922a]/30 rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]">
-              <div className="w-[6px] h-[6px] bg-[#c9922a] rounded-full" />
-              <span className="text-[#f0c96a] text-[11px] uppercase tracking-[0.12em]">
+            <div 
+              className="inline-flex items-center gap-[6px] rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]"
+              style={{
+                border: '1px solid #c9a84c',
+                background: 'rgba(201, 168, 76, 0.1)'
+              }}
+            >
+              <div 
+                className="w-[6px] h-[6px] rounded-full" 
+                style={{ backgroundColor: '#c9a84c' }}
+              />
+              <span 
+                className="text-[11px] uppercase tracking-[0.12em]"
+                style={{ color: '#c9a84c' }}
+              >
                 AMFI Registered Mutual Fund Distributor
               </span>
             </div>
