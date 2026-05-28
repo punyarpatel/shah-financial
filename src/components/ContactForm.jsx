@@ -152,7 +152,7 @@ const ContactForm = () => {
               <button 
                 type="submit" 
                 disabled={loading}
-                className="w-full bg-[#0d2545] text-white border-none py-[13px] rounded-[8px] text-[14px] font-medium cursor-pointer font-sans hover:bg-[#1a3a6e] transition-colors mt-[0.5rem] disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full bg-navy text-white border-none py-[13px] rounded-[8px] text-[14px] font-medium cursor-pointer font-sans hover:bg-navy/80 transition-colors mt-[0.5rem] disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {loading ? 'Loading...' : 'Submit Enquiry'}
               </button>

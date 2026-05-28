@@ -34,7 +34,7 @@ const SliderRow = ({ label, value, min, max, step = 1, onChange, prefix, suffix 
         min={min} max={max} step={step}
         value={value}
         onChange={e => onChange(Number(e.target.value))}
-        className="flex-1 w-full h-[6px] bg-[#4A4A4A] rounded-lg appearance-none cursor-pointer accent-gold"
+        className="flex-1 w-full h-[6px] bg-white/10 rounded-lg appearance-none cursor-pointer accent-gold"
       />
       <div className="hidden sm:flex items-center justify-end min-w-[100px]">
         {prefix && <span className="mr-1 text-white/60 text-[14px]">{prefix}</span>}
@@ -306,7 +306,7 @@ const SIPCalculator = () => {
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-[#1C2838] p-3 rounded-lg shadow-lg border border-white/10">
+        <div className="bg-navy p-3 rounded-lg shadow-lg border border-gold/20">
           <p className="text-white/60 text-xs mb-1">{label}</p>
           <p className="text-gold font-medium text-sm">Total: {fmt(payload[0]?.value || 0)}</p>
           <p className="text-white font-medium text-sm">Invested: {fmt(payload[1]?.value || 0)}</p>
@@ -382,8 +382,8 @@ const SIPCalculator = () => {
                 }}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-[13px] font-medium transition-colors ${
                   isActive
-                    ? 'bg-[#B8860B] text-white shadow-md'
-                    : 'bg-[#333333] text-white/80 hover:bg-[#444444]'
+                    ? 'bg-gold text-white shadow-md'
+                    : 'bg-navy/[0.08] text-navy hover:bg-navy/[0.15]'
                 }`}
               >
                 {goal.icon && <span>{goal.icon}</span>}
@@ -395,9 +395,9 @@ const SIPCalculator = () => {
 
         {/* Active Goal Banner */}
         {activeGoal && activeGoal.id !== 'custom' && (
-          <div className="bg-[#2C2C2E] rounded-lg p-4 mb-[2rem] flex flex-col sm:flex-row items-start sm:items-center justify-between border border-[#3A3A3C]">
-            <div className="text-white/90 text-[14px]">
-              <span className="font-semibold text-white">{activeGoal.icon} {activeGoal.label}</span> — {activeGoal.desc}
+          <div className="bg-navy/[0.05] rounded-lg p-4 mb-[2rem] flex flex-col sm:flex-row items-start sm:items-center justify-between border border-navy/10">
+            <div className="text-textDark/80 text-[14px]">
+              <span className="font-semibold text-navy">{activeGoal.icon} {activeGoal.label}</span> — {activeGoal.desc}
             </div>
             <button
               onClick={applySuggestedValues}
@@ -413,7 +413,7 @@ const SIPCalculator = () => {
 
           {/* LEFT — Calculator Card */}
           <div className="flex-1 min-w-0">
-            <div className="bg-[#333333] rounded-[12px] p-[1.5rem] sm:p-[2rem] shadow-xl">
+            <div className="bg-navy rounded-[12px] p-[1.5rem] sm:p-[2rem] shadow-xl">
               <div className="flex flex-col gap-[2rem]">
                 <SliderRow
                   label={calcMode === 'sip' ? "Monthly SIP" : "Investment Amount"}
@@ -429,7 +429,7 @@ const SIPCalculator = () => {
               </div>
 
               {/* Result Box */}
-              <div className="bg-[#1E293B] rounded-[10px] p-[1.5rem] mt-[2.5rem] flex flex-col md:flex-row justify-between items-start md:items-center gap-[1.5rem] md:gap-0 border border-blue-900/30 transition-all duration-300">
+              <div className="bg-navy/80 rounded-[10px] p-[1.5rem] mt-[2.5rem] flex flex-col md:flex-row justify-between items-start md:items-center gap-[1.5rem] md:gap-0 border border-white/10 transition-all duration-300">
                 <div className="w-full md:w-auto flex-1">
                   <div className="text-white/60 text-[13px] mb-1">Estimated corpus</div>
                   <div className="font-serif text-white text-[32px] sm:text-[36px] font-semibold leading-tight">
@@ -446,9 +446,9 @@ const SIPCalculator = () => {
                       <div className="flex justify-between text-[12px] text-white/80 mb-2">
                         <span>Goal: {activeGoalProgress.toFixed(0)}% of {fmt(activeGoal.target)}</span>
                       </div>
-                      <div className="w-full bg-[#334155] h-[6px] rounded-full overflow-hidden">
+                      <div className="w-full bg-white/15 h-[6px] rounded-full overflow-hidden">
                         <div
-                          className="bg-[#D4AF37] h-full rounded-full transition-all duration-500"
+                          className="bg-gold h-full rounded-full transition-all duration-500"
                           style={{ width: `${activeGoalProgress}%` }}
                         />
                       </div>
@@ -457,7 +457,7 @@ const SIPCalculator = () => {
                   <div className="flex flex-col gap-2 w-full mt-2">
                     <button
                       onClick={handleScrollToContact}
-                      className="bg-[#D4AF37] text-white text-[14px] px-[20px] py-[10px] rounded-[6px] font-semibold hover:bg-[#C09B2E] transition-colors whitespace-nowrap w-full text-center shadow-md uppercase tracking-wide"
+                      className="bg-gold text-white text-[14px] px-[20px] py-[10px] rounded-[6px] font-semibold hover:bg-goldLight hover:text-navy transition-colors whitespace-nowrap w-full text-center shadow-md uppercase tracking-wide"
                     >
                       {calcMode === 'sip' ? 'START YOUR SIP TODAY ↗' : 'START INVESTING TODAY ↗'}
                     </button>
@@ -468,21 +468,21 @@ const SIPCalculator = () => {
 
             {/* Metrics Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
-              <div className="bg-[#2C2C2E] rounded-[10px] p-4">
-                <div className="text-white/60 text-[12px] mb-1">Total invested</div>
-                <div className="text-white text-[18px] font-semibold">{fmt(invested)}</div>
+              <div className="bg-navy/[0.05] border border-navy/10 rounded-[10px] p-4">
+                <div className="text-muted text-[12px] mb-1">Total invested</div>
+                <div className="text-navy text-[18px] font-semibold">{fmt(invested)}</div>
               </div>
-              <div className="bg-[#2C2C2E] rounded-[10px] p-4">
-                <div className="text-white/60 text-[12px] mb-1">Est. returns</div>
-                <div className="text-white text-[18px] font-semibold">{fmt(gain)}<sup className="text-[11px] text-gold align-super ml-0.5">*</sup></div>
+              <div className="bg-navy/[0.05] border border-navy/10 rounded-[10px] p-4">
+                <div className="text-muted text-[12px] mb-1">Est. returns</div>
+                <div className="text-navy text-[18px] font-semibold">{fmt(gain)}<sup className="text-[11px] text-gold align-super ml-0.5">*</sup></div>
               </div>
-              <div className="bg-[#2C2C2E] rounded-[10px] p-4">
-                <div className="text-white/60 text-[12px] mb-1">Wealth ratio</div>
-                <div className="text-white text-[18px] font-semibold">{wealthRatio}&times;</div>
+              <div className="bg-navy/[0.05] border border-navy/10 rounded-[10px] p-4">
+                <div className="text-muted text-[12px] mb-1">Wealth ratio</div>
+                <div className="text-navy text-[18px] font-semibold">{wealthRatio}&times;</div>
               </div>
-              <div className="bg-[#2C2C2E] rounded-[10px] p-4">
-                <div className="text-white/60 text-[12px] mb-1">CAGR equivalent</div>
-                <div className="text-white text-[18px] font-semibold">{rate}%</div>
+              <div className="bg-navy/[0.05] border border-navy/10 rounded-[10px] p-4">
+                <div className="text-muted text-[12px] mb-1">CAGR equivalent</div>
+                <div className="text-navy text-[18px] font-semibold">{rate}%</div>
               </div>
             </div>
 
@@ -494,19 +494,19 @@ const SIPCalculator = () => {
                   <AreaChart data={chartData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
                     <defs>
                       <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#D4AF37" stopOpacity={0.2} />
-                        <stop offset="95%" stopColor="#D4AF37" stopOpacity={0} />
+                        <stop offset="5%" stopColor="#c9922a" stopOpacity={0.2} />
+                        <stop offset="95%" stopColor="#c9922a" stopOpacity={0} />
                       </linearGradient>
                       <linearGradient id="colorInvested" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.1} />
-                        <stop offset="95%" stopColor="#3B82F6" stopOpacity={0} />
+                        <stop offset="5%" stopColor="#0d2545" stopOpacity={0.1} />
+                        <stop offset="95%" stopColor="#0d2545" stopOpacity={0} />
                       </linearGradient>
                     </defs>
                     <XAxis dataKey="year" stroke="#5c6478" fontSize={12} tickLine={false} axisLine={false} minTickGap={30} />
                     <YAxis stroke="#5c6478" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => fmt(val)} width={70} />
                     <Tooltip content={<CustomTooltip />} />
-                    <Area type="monotone" dataKey="total" name="Estimated Corpus" stroke="#D4AF37" strokeWidth={2} fillOpacity={1} fill="url(#colorTotal)" />
-                    <Area type="monotone" dataKey="invested" name="Total Invested" stroke="#64748B" strokeWidth={2} strokeDasharray="4 4" fillOpacity={1} fill="url(#colorInvested)" />
+                    <Area type="monotone" dataKey="total" name="Estimated Corpus" stroke="#c9922a" strokeWidth={2} fillOpacity={1} fill="url(#colorTotal)" />
+                    <Area type="monotone" dataKey="invested" name="Total Invested" stroke="#5c6478" strokeWidth={2} strokeDasharray="4 4" fillOpacity={1} fill="url(#colorInvested)" />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
@@ -516,7 +516,7 @@ const SIPCalculator = () => {
                 {/* Gold Solid line - Estimated Corpus */}
                 <div className="flex items-center gap-3">
                   <div className="flex items-center shrink-0">
-                    <span className="w-[18px] h-[3px] bg-[#D4AF37] rounded-full inline-block" />
+                    <span className="w-[18px] h-[3px] bg-gold rounded-full inline-block" />
                   </div>
                   <div className="text-left">
                     <div className="text-[12px] font-semibold text-textDark leading-none mb-1">Estimated Corpus</div>
@@ -527,7 +527,7 @@ const SIPCalculator = () => {
                 {/* Slate Dashed line - Total Invested */}
                 <div className="flex items-center gap-3">
                   <div className="flex items-center shrink-0">
-                    <span className="w-[18px] h-[3px] border-t-2 border-dashed border-[#64748B] inline-block" />
+                    <span className="w-[18px] h-[3px] border-t-2 border-dashed border-muted inline-block" />
                   </div>
                   <div className="text-left">
                     <div className="text-[12px] font-semibold text-textDark leading-none mb-1">Total Invested</div>
