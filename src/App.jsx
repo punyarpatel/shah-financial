@@ -8,6 +8,7 @@ import ScrollToTop from './components/ScrollToTop';
 import HomePage from './pages/HomePage';
 import NRIPage from './pages/NRIPage';
 import AboutPage from './pages/AboutPage';
+import ServicesPage from './pages/ServicesPage';
 import MutualFundPage from './pages/MutualFundPage';
 import InsurancePage from './pages/InsurancePage';
 import RetirementPage from './pages/RetirementPage';
@@ -74,6 +75,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/nri" element={<NRIPage />} />
+            <Route path="/services" element={<ServicesPage />} />
             <Route path="/services/mutual-funds" element={<MutualFundPage />} />
             <Route path="/services/insurance" element={<InsurancePage />} />
             <Route path="/services/retirement" element={<RetirementPage />} />

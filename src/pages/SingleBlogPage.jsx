@@ -20,14 +20,14 @@ const SingleBlogPage = () => {
 
   if (!blog) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-[#faf8f4]">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-cream">
         <Navbar />
         <div className="flex-grow flex flex-col items-center justify-center w-full">
-          <h1 className="text-[120px] font-serif font-bold text-[#0d2545] leading-none mb-4">404</h1>
-          <p className="text-[#5c6478] text-[18px] mb-8">Blog post not found</p>
+          <h1 className="text-[120px] font-serif font-bold text-navy leading-none mb-4">404</h1>
+          <p className="text-muted text-[18px] mb-8">Blog post not found</p>
           <Link 
             to="/blog" 
-            className="bg-[#c9922a] text-white px-8 py-3 rounded-[8px] font-medium hover:bg-[#f0c96a] transition-colors"
+            className="bg-gold text-white px-8 py-3 rounded-[8px] font-medium hover:bg-goldLight transition-colors"
           >
             Back to Blogs
           </Link>
@@ -38,7 +38,7 @@ const SingleBlogPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#faf8f4] flex flex-col relative">
+    <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
         <title>{blog.title} — Shah Financial Services</title>
       </Helmet>
@@ -48,34 +48,34 @@ const SingleBlogPage = () => {
       <section className="flex-grow py-[4rem] w-full">
         <div className="max-w-3xl mx-auto px-4">
           <FadeIn>
-            <Link to="/blog" className="text-[#c9922a] hover:text-[#0d2545] font-semibold text-[14px] mb-6 inline-flex items-center transition-colors">
+            <Link to="/blog" className="text-gold hover:text-navy font-semibold text-[14px] mb-6 inline-flex items-center transition-colors">
               &larr; Back to all blogs
             </Link>
             
             <div className="mb-8">
               <div className="flex items-center gap-[12px] mb-[1.25rem]">
-                <span className="text-[#c9922a] text-[11px] uppercase tracking-wider font-semibold bg-[#c9922a]/10 px-[8px] py-[3px] rounded-[4px]">
+                <span className="text-gold text-[11px] uppercase tracking-wider font-semibold bg-gold/10 px-[8px] py-[3px] rounded-[4px]">
                   {blog.category}
                 </span>
-                <span className="text-[#5c6478]/60 text-[12px] font-medium">
+                <span className="text-muted/60 text-[12px] font-medium">
                   {blog.date}
                 </span>
               </div>
-              <h1 className="font-serif text-[32px] md:text-[40px] text-[#0d2545] font-semibold mb-6 leading-tight">
+              <h1 className="font-serif text-[32px] md:text-[40px] text-navy font-semibold mb-6 leading-tight">
                 {blog.title}
               </h1>
             </div>
 
-            <div className="bg-white p-8 md:p-12 rounded-[14px] shadow-sm border border-[#0d2545]/10">
-              <div className="prose prose-lg max-w-none text-[#5c6478]">
-                <p className="text-[18px] leading-relaxed mb-6 font-medium text-[#0d2545]">
+            <div className="bg-white p-8 md:p-12 rounded-[14px] shadow-sm border border-navy/10">
+              <div className="prose prose-lg max-w-none text-muted">
+                <p className="text-[18px] leading-relaxed mb-6 font-medium text-navy">
                   {blog.excerpt}
                 </p>
                 <p className="text-[16px] leading-relaxed mb-8">
                   {blog.content}
                 </p>
                 
-                <h3 className="text-[#0d2545] text-[22px] font-serif font-semibold mt-8 mb-4">Key Takeaways</h3>
+                <h3 className="text-navy text-[22px] font-serif font-semibold mt-8 mb-4">Key Takeaways</h3>
                 <ul className="list-disc pl-5 mb-6 text-[16px] leading-relaxed space-y-2">
                   <li>Understand your financial goals before making an investment.</li>
                   <li>Consistency and discipline are crucial for long-term wealth creation.</li>

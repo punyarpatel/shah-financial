@@ -10,12 +10,12 @@ import StaggerGroup from '../components/animations/StaggerGroup';
 import StaggerItem from '../components/animations/StaggerItem';
 
 const AboutPage = () => {
-  const labelStyles = "text-[#c9922a] text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]";
-  const titleStyles = "font-serif text-[28px] md:text-[36px] text-[#1a1a2e] font-semibold mb-[2rem] leading-tight";
-  const cardStyles = "bg-white border border-[#0d2545]/12 rounded-[12px] p-[1.5rem]";
+  const labelStyles = "text-gold text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]";
+  const titleStyles = "font-serif text-[28px] md:text-[36px] text-textDark font-semibold mb-[2rem] leading-tight";
+  const cardStyles = "premium-card";
 
   return (
-    <div className="min-h-screen bg-[#faf8f4] flex flex-col relative">
+    <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
         <title>About Us — Shah Financial Services Ahmedabad</title>
         <meta name="description" content="Shah Financial Services — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 3,000+ families and 100+ NRI clients across India and abroad." />
@@ -24,11 +24,11 @@ const AboutPage = () => {
       <Navbar />
 
       {/* Section 1: Hero */}
-      <section id="story" className="bg-[#0d2545] py-[4rem] w-full">
+      <section id="story" className="bg-navy py-[4rem] w-full">
         <FadeIn delay={0.1}>
           <div className="max-w-7xl mx-auto px-4">
-            <div className="inline-flex items-center gap-[6px] bg-[#c9922a]/15 border border-[#c9922a]/30 rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]">
-              <span className="text-[#f0c96a] text-[11px] uppercase tracking-[0.12em]">Our Story</span>
+            <div className="inline-flex items-center gap-[6px] bg-gold/15 border border-gold/30 rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]">
+              <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">Our Story</span>
             </div>
             <h1 className="font-serif text-[36px] md:text-[48px] text-white font-semibold leading-tight mb-[1.25rem] max-w-3xl">
               A Family Built on Trust
@@ -41,7 +41,7 @@ const AboutPage = () => {
       </section>
 
       {/* Section 2: Why Choose Us */}
-      <section id="why-choose-us" className="bg-[#faf8f4] py-[3.5rem] w-full">
+      <section id="why-choose-us" className="bg-cream py-[3.5rem] w-full">
         <FadeIn>
           <div className="max-w-7xl mx-auto px-4">
             <div className={labelStyles}>Why Choose Us</div>
@@ -50,23 +50,23 @@ const AboutPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className={cardStyles}>
                 <div className="text-[24px] mb-3">🏛️</div>
-                <h3 className="font-serif text-[18px] text-[#0d2545] font-semibold mb-2">Registered and Compliant</h3>
-                <p className="text-[#5c6478] text-[14px] leading-[1.6]">AMFI registered MFD and IRDAI licensed insurance advisor. Full regulatory compliance.</p>
+                <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Registered and Compliant</h3>
+                <p className="text-muted text-[14px] leading-[1.6]">AMFI registered MFD and IRDAI licensed insurance advisor. Full regulatory compliance.</p>
               </div>
               <div className={cardStyles}>
                 <div className="text-[24px] mb-3">👤</div>
-                <h3 className="font-serif text-[18px] text-[#0d2545] font-semibold mb-2">Personalized Advisory</h3>
-                <p className="text-[#5c6478] text-[14px] leading-[1.6]">No generic advice. Every recommendation is tailored to your income goals and risk profile.</p>
+                <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Personalized Advisory</h3>
+                <p className="text-muted text-[14px] leading-[1.6]">No generic advice. Every recommendation is tailored to your income goals and risk profile.</p>
               </div>
               <div className={cardStyles}>
                 <div className="text-[24px] mb-3">🌍</div>
-                <h3 className="font-serif text-[18px] text-[#0d2545] font-semibold mb-2">NRI Specialist</h3>
-                <p className="text-[#5c6478] text-[14px] leading-[1.6]">Dedicated service for NRI clients with expertise in DTAA, KYC and cross-border investing.</p>
+                <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">NRI Specialist</h3>
+                <p className="text-muted text-[14px] leading-[1.6]">Dedicated service for NRI clients with expertise in DTAA, KYC and cross-border investing.</p>
               </div>
               <div className={cardStyles}>
                 <div className="text-[24px] mb-3">🤝</div>
-                <h3 className="font-serif text-[18px] text-[#0d2545] font-semibold mb-2">Long Term Partnership</h3>
-                <p className="text-[#5c6478] text-[14px] leading-[1.6]">We stay with you for decades. Your growth is our growth.</p>
+                <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Long Term Partnership</h3>
+                <p className="text-muted text-[14px] leading-[1.6]">We stay with you for decades. Your growth is our growth.</p>
               </div>
             </div>
           </div>
@@ -74,40 +74,40 @@ const AboutPage = () => {
       </section>
 
       {/* Section 3: Stats */}
-      <section className="bg-white py-[3.5rem] w-full border-y border-[#0d2545]/10">
+      <section className="bg-white py-[3.5rem] w-full border-y border-navy/10">
         <FadeIn>
           <div className="max-w-7xl mx-auto px-4">
             <StaggerGroup className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
               <StaggerItem>
                 <div>
-                  <div className="font-serif text-[36px] text-[#0d2545] font-semibold leading-none mb-2">
+                  <div className="font-serif text-[36px] text-navy font-semibold leading-none mb-2">
                     <AnimatedCounter value="3,000" suffix="+" />
                   </div>
-                  <div className="text-[#5c6478] text-[13px] uppercase tracking-wider">Clients</div>
+                  <div className="text-muted text-[13px] uppercase tracking-wider">Clients</div>
                 </div>
               </StaggerItem>
               <StaggerItem>
                 <div>
-                  <div className="font-serif text-[36px] text-[#0d2545] font-semibold leading-none mb-2">
+                  <div className="font-serif text-[36px] text-navy font-semibold leading-none mb-2">
                     <AnimatedCounter value="500" prefix="₹" suffix="Cr+" />
                   </div>
-                  <div className="text-[#5c6478] text-[13px] uppercase tracking-wider">AUM</div>
+                  <div className="text-muted text-[13px] uppercase tracking-wider">AUM</div>
                 </div>
               </StaggerItem>
               <StaggerItem>
                 <div>
-                  <div className="font-serif text-[36px] text-[#0d2545] font-semibold leading-none mb-2">
+                  <div className="font-serif text-[36px] text-navy font-semibold leading-none mb-2">
                     <AnimatedCounter value="15" suffix="+" />
                   </div>
-                  <div className="text-[#5c6478] text-[13px] uppercase tracking-wider">Years</div>
+                  <div className="text-muted text-[13px] uppercase tracking-wider">Years</div>
                 </div>
               </StaggerItem>
               <StaggerItem>
                 <div>
-                  <div className="font-serif text-[36px] text-[#0d2545] font-semibold leading-none mb-2">
+                  <div className="font-serif text-[36px] text-navy font-semibold leading-none mb-2">
                     <AnimatedCounter value="100" suffix="+" />
                   </div>
-                  <div className="text-[#5c6478] text-[13px] uppercase tracking-wider">NRI Clients</div>
+                  <div className="text-muted text-[13px] uppercase tracking-wider">NRI Clients</div>
                 </div>
               </StaggerItem>
             </StaggerGroup>
@@ -116,7 +116,7 @@ const AboutPage = () => {
       </section>
 
       {/* Section 4: Registrations */}
-      <section id="credentials" className="bg-[#faf8f4] py-[3.5rem] w-full">
+      <section id="credentials" className="bg-cream py-[3.5rem] w-full">
         <FadeIn>
           <div className="max-w-7xl mx-auto px-4">
             <div className={labelStyles}>Registrations</div>
@@ -125,20 +125,20 @@ const AboutPage = () => {
             <div className={`${cardStyles} max-w-3xl`}>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
-                  <span className="text-[#c9922a] mt-0.5">✅</span>
-                  <span className="text-[#5c6478] text-[15px]"><strong className="text-[#0d2545]">AMFI Registration No:</strong> ARN-XXXXX</span>
+                  <span className="text-gold mt-0.5">✅</span>
+                  <span className="text-muted text-[15px]"><strong className="text-navy">AMFI Registration No:</strong> ARN-XXXXX</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-[#c9922a] mt-0.5">✅</span>
-                  <span className="text-[#5c6478] text-[15px]"><strong className="text-[#0d2545]">IRDAI License No:</strong> XXXXXXXXX</span>
+                  <span className="text-gold mt-0.5">✅</span>
+                  <span className="text-muted text-[15px]"><strong className="text-navy">IRDAI License No:</strong> XXXXXXXXX</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-[#c9922a] mt-0.5">✅</span>
-                  <span className="text-[#5c6478] text-[15px]"><strong className="text-[#0d2545]">NJ Wealth Empanelled Partner:</strong> since 2010</span>
+                  <span className="text-gold mt-0.5">✅</span>
+                  <span className="text-muted text-[15px]"><strong className="text-navy">NJ Wealth Empanelled Partner:</strong> since 2010</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-[#c9922a] mt-0.5">✅</span>
-                  <span className="text-[#5c6478] text-[15px]"><strong className="text-[#0d2545]">Prudent Corporate FundzBazar:</strong> Partner</span>
+                  <span className="text-gold mt-0.5">✅</span>
+                  <span className="text-muted text-[15px]"><strong className="text-navy">Prudent Corporate FundzBazar:</strong> Partner</span>
                 </li>
               </ul>
             </div>
@@ -147,7 +147,7 @@ const AboutPage = () => {
       </section>
 
       {/* Section 4.5: Partners Carousel */}
-      <section className="py-[4rem] w-full bg-[#0d2545] overflow-hidden">
+      <section className="py-[4rem] w-full bg-navy overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 text-center mb-[2rem]">
            <h2 className="font-serif text-[28px] md:text-[36px] text-white font-semibold mb-2">
               Explore 5,000+ Mutual Funds & ETFs
@@ -170,30 +170,30 @@ const AboutPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               
               <div className={`${cardStyles} text-center flex flex-col items-center`}>
-                <div className="w-[64px] h-[64px] rounded-full bg-[#0d2545] text-[#f0c96a] flex items-center justify-center font-serif text-[24px] mb-4 shadow-md">
+                <div className="w-[64px] h-[64px] rounded-full bg-navy text-goldLight flex items-center justify-center font-serif text-[24px] mb-4 shadow-md">
                   RS
                 </div>
-                <h3 className="font-serif text-[16px] text-[#0d2545] font-semibold mb-1">Rajesh Shah</h3>
-                <div className="text-[#c9922a] text-[12px] font-medium uppercase tracking-wider mb-3">Founder and Principal Advisor</div>
-                <p className="text-[#5c6478] text-[13px] leading-[1.6]">15 plus years in mutual funds and insurance advisory.</p>
+                <h3 className="font-serif text-[16px] text-navy font-semibold mb-1">Rajesh Shah</h3>
+                <div className="text-gold text-[12px] font-medium uppercase tracking-wider mb-3">Founder and Principal Advisor</div>
+                <p className="text-muted text-[13px] leading-[1.6]">15 plus years in mutual funds and insurance advisory.</p>
               </div>
 
               <div className={`${cardStyles} text-center flex flex-col items-center`}>
-                <div className="w-[64px] h-[64px] rounded-full bg-[#0d2545] text-[#f0c96a] flex items-center justify-center font-serif text-[24px] mb-4 shadow-md">
+                <div className="w-[64px] h-[64px] rounded-full bg-navy text-goldLight flex items-center justify-center font-serif text-[24px] mb-4 shadow-md">
                   NS
                 </div>
-                <h3 className="font-serif text-[16px] text-[#0d2545] font-semibold mb-1">Nisha Shah</h3>
-                <div className="text-[#c9922a] text-[12px] font-medium uppercase tracking-wider mb-3">NRI Services Head</div>
-                <p className="text-[#5c6478] text-[13px] leading-[1.6]">Specialist in cross-border investments and DTAA planning.</p>
+                <h3 className="font-serif text-[16px] text-navy font-semibold mb-1">Nisha Shah</h3>
+                <div className="text-gold text-[12px] font-medium uppercase tracking-wider mb-3">NRI Services Head</div>
+                <p className="text-muted text-[13px] leading-[1.6]">Specialist in cross-border investments and DTAA planning.</p>
               </div>
 
               <div className={`${cardStyles} text-center flex flex-col items-center`}>
-                <div className="w-[64px] h-[64px] rounded-full bg-[#0d2545] text-[#f0c96a] flex items-center justify-center font-serif text-[24px] mb-4 shadow-md">
+                <div className="w-[64px] h-[64px] rounded-full bg-navy text-goldLight flex items-center justify-center font-serif text-[24px] mb-4 shadow-md">
                   AS
                 </div>
-                <h3 className="font-serif text-[16px] text-[#0d2545] font-semibold mb-1">Arjun Shah</h3>
-                <div className="text-[#c9922a] text-[12px] font-medium uppercase tracking-wider mb-3">Client Relations</div>
-                <p className="text-[#5c6478] text-[13px] leading-[1.6]">Ensuring every client gets timely support and portfolio updates.</p>
+                <h3 className="font-serif text-[16px] text-navy font-semibold mb-1">Arjun Shah</h3>
+                <div className="text-gold text-[12px] font-medium uppercase tracking-wider mb-3">Client Relations</div>
+                <p className="text-muted text-[13px] leading-[1.6]">Ensuring every client gets timely support and portfolio updates.</p>
               </div>
 
             </div>

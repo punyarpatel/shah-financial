@@ -20,3 +20,28 @@ html {
 .animate-spin-y {
   animation: spin-y 20s linear infinite;
 }
+
+@layer components {
+  /* Basic premium card */
+  .premium-card {
+    @apply bg-white border rounded-[12px] p-[1.5rem];
+    border-color: rgba(13, 37, 69, 0.12);
+  }
+
+  /* Interactive premium card with hover translate and shadow */
+  .premium-card-interactive {
+    @apply bg-white border rounded-[12px] p-[1.5rem] h-full transition-all duration-300;
+    border-color: rgba(13, 37, 69, 0.12);
+  }
+  .premium-card-interactive:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(13, 37, 69, 0.04), 0 4px 6px -2px rgba(13, 37, 69, 0.04);
+  }
+
+  /* Wide featured dashboard/layout card used on service pages */
+  .premium-feature-card {
+    @apply bg-white rounded-[16px] p-[40px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border;
+    border-color: rgba(13, 37, 69, 0.05);
+  }
+}
+

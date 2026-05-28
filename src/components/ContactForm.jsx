@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import supabase from '../lib/supabase';
+import { submitLead } from '../lib/leads';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
@@ -19,31 +19,20 @@ const ContactForm = () => {
       setError('Please fill out all required fields');
       return;
     }
-    const cleanPhone = phone.replace(/\D/g, '');
-    if (cleanPhone.length < 10) {
-      setError('Phone number must have at least 10 digits');
-      return;
-    }
     setError('');
     setLoading(true);
 
-    const { error } = await supabase
-      .from('leads')
-      .insert([{
-        name: name,
-        phone: phone,
-        city: city,
-        interest: interest,
-        is_nri: isNri,
-        nri_country: '',
-        message: message,
-        status: 'new',
-        created_at: new Date().toISOString()
-      }]);
+    const res = await submitLead({
+      name,
+      phone,
+      interest,
+      city,
+      is_nri: isNri,
+      message
+    });
 
-    if (error) {
-      console.error('Full error:', error);
-      setError(error.message);
+    if (!res.success) {
+      setError(res.error);
       setLoading(false);
       return;
     }

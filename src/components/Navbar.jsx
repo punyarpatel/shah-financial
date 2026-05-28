@@ -241,7 +241,7 @@ const Navbar = () => {
         {/* Right Side: Desktop Nav */}
         <div className="hidden md:flex items-center gap-6 h-full">
           <DesktopNavItem title="Home" mainLink="/" items={navData.home} handleLinkClick={handleLinkClick} />
-          <DesktopNavItem title="Services" mainLink="/#services" items={navData.services} handleLinkClick={handleLinkClick} />
+          <DesktopNavItem title="Services" mainLink="/services" items={navData.services} handleLinkClick={handleLinkClick} />
           <DesktopNavItem title="About" mainLink="/about" items={navData.about} handleLinkClick={handleLinkClick} />
           <DesktopNavItem title="Blog" mainLink="/blog" items={navData.blog} handleLinkClick={handleLinkClick} />
           <DesktopNavItem title="Client Login" mainLink="/client-portal" items={navData.client} handleLinkClick={handleLinkClick} />
@@ -278,7 +278,7 @@ const Navbar = () => {
         <div className="md:hidden absolute top-[64px] left-0 w-full bg-navy border-t border-white/10 shadow-lg max-h-[calc(100vh-64px)] overflow-y-auto">
           <div className="flex flex-col px-4 py-4 space-y-4">
             <MobileNavItem title="Home" mainLink="/" items={navData.home} isOpen={mobileMenus.home} toggleOpen={() => toggleMobileMenu('home')} handleLinkClick={handleLinkClick} />
-            <MobileNavItem title="Services" mainLink="/#services" items={navData.services} isOpen={mobileMenus.services} toggleOpen={() => toggleMobileMenu('services')} handleLinkClick={handleLinkClick} />
+            <MobileNavItem title="Services" mainLink="/services" items={navData.services} isOpen={mobileMenus.services} toggleOpen={() => toggleMobileMenu('services')} handleLinkClick={handleLinkClick} />
             <MobileNavItem title="About" mainLink="/about" items={navData.about} isOpen={mobileMenus.about} toggleOpen={() => toggleMobileMenu('about')} handleLinkClick={handleLinkClick} />
             <MobileNavItem title="Blog" mainLink="/blog" items={navData.blog} isOpen={mobileMenus.blog} toggleOpen={() => toggleMobileMenu('blog')} handleLinkClick={handleLinkClick} />
             <MobileNavItem title="Client Login" mainLink="/client-portal" items={navData.client} isOpen={mobileMenus.client} toggleOpen={() => toggleMobileMenu('client')} handleLinkClick={handleLinkClick} />
