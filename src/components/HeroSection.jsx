@@ -76,9 +76,9 @@ const HeroSection = () => {
 
       {/* Inner Content */}
       <div className="max-w-7xl mx-auto pt-[4rem] md:pt-[6rem] pb-[4rem] px-4 relative z-10">
-        <FadeIn>
-          <div className="max-w-[680px] mx-auto text-center">
-            {/* Badge */}
+        <div className="max-w-[680px] mx-auto text-center">
+          {/* Badge */}
+          <FadeIn delay={0.2}>
             <div 
               className="inline-flex items-center gap-[6px] rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]"
               style={{
@@ -97,18 +97,24 @@ const HeroSection = () => {
                 AMFI Registered Mutual Fund Distributor
               </span>
             </div>
+          </FadeIn>
 
-            {/* Heading */}
+          {/* Heading */}
+          <FadeIn delay={0.35}>
             <h1 className="font-serif text-[42px] font-semibold leading-[1.2] text-white mb-[1.25rem]">
               Your Trusted Partner for <em className="text-[#c9922a] not-italic">Financial Growth</em>
             </h1>
+          </FadeIn>
 
-            {/* Description */}
+          {/* Description */}
+          <FadeIn delay={0.5}>
             <p className="text-white/65 text-[16px] font-light leading-[1.6] mb-[2.5rem]">
               We provide personalized wealth management, mutual fund advisory, and comprehensive financial planning for individuals, families, and NRIs globally.
             </p>
+          </FadeIn>
 
-            {/* Buttons */}
+          {/* Buttons */}
+          <FadeIn delay={0.65}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-[4rem]">
               <button 
                 onClick={() => handleScrollToSection('contact')}
@@ -123,8 +129,10 @@ const HeroSection = () => {
                 Calculate SIP Returns
               </button>
             </div>
-            
-            {/* Stats */}
+          </FadeIn>
+          
+          {/* Stats */}
+          <FadeIn delay={0.8}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-[2rem] border-t border-white/10">
               {stats.map((stat, index) => (
                 <div key={index}>
@@ -137,8 +145,8 @@ const HeroSection = () => {
                 </div>
               ))}
             </div>
-          </div>
-        </FadeIn>
+          </FadeIn>
+        </div>
       </div>
     </section>
   );
