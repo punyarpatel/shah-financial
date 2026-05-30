@@ -1,10 +1,70 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import { submitLead } from '../lib/leads';
 import FadeIn from '../components/animations/FadeIn';
+
+const INSURANCE_TYPES = [
+  {
+    id: 'life',
+    icon: '🛡️',
+    title: 'Life Insurance',
+    description: 'Term plans, ULIPs, endowment — we compare and recommend what genuinely suits you, not what pays the highest commission.',
+    detailedDescription: 'We help you calculate your Human Life Value (HLV) to ensure your family\'s lifestyle, loans, and child education are fully covered with a high-claim-ratio term plan.'
+  },
+  {
+    id: 'health',
+    icon: '🏥',
+    title: 'Health Insurance',
+    description: 'Individual, family floater, senior citizen plans, top-up covers. We help you understand waiting periods, exclusions, and claim processes before you buy.',
+    detailedDescription: 'We analyze sub-limits, room rent caps, co-payments, pre-existing waiting periods, and restore benefits across 15+ insurers so you never face a claim rejection.'
+  },
+  {
+    id: 'motor',
+    icon: '🚗',
+    title: 'Motor Insurance',
+    description: 'Car and two-wheeler — comprehensive and third party. Quick renewals, claim support included.',
+    detailedDescription: 'We guide you through choosing Nil Depreciation, Engine Protection, and Return to Invoice add-ons, ensuring speedy claims and hassle-free cashless garage access.'
+  },
+  {
+    id: 'fire',
+    icon: '🏠',
+    title: 'Fire & Burglary',
+    description: 'Protect your home, shop, or office against fire, theft, and natural calamities.',
+    detailedDescription: 'Custom risk protection for buildings, machinery, and inventory. We design coverage limits that secure your commercial or personal properties against unforeseen disasters.'
+  },
+  {
+    id: 'marine',
+    icon: '🚢',
+    title: 'Marine Insurance',
+    description: 'Cargo and transit coverage for businesses moving goods.',
+    detailedDescription: 'Ensure your transit inventory is protected by sea, air, rail, or road. We cover import-export cargos and inland transits against damage and loss.'
+  },
+  {
+    id: 'workmen',
+    icon: '👷',
+    title: 'Workmen\'s Compensation (WC)',
+    description: 'Mandatory coverage for businesses with workers — we handle compliance too.',
+    detailedDescription: 'Protect your business against legal liabilities arising from employee injuries or accidents at the workplace, maintaining full compliance with labor laws.'
+  },
+  {
+    id: 'group-health',
+    icon: '👥',
+    title: 'Group Health Insurance',
+    description: 'Affordable employee health covers for SMEs and corporates. We handle the entire group policy setup and renewals.',
+    detailedDescription: 'Boost employee retention with customized corporate plans featuring day-one cover for families, maternity benefits, and highly competitive premiums.'
+  },
+  {
+    id: 'more',
+    icon: '➕',
+    title: 'And More',
+    description: 'Liability, shop owner policies, professional indemnity, and whatever your specific situation needs.',
+    detailedDescription: 'From professional indemnity for doctors to cyber liability insurance for startups, we construct customized risk management structures for all domains.'
+  },
+];
 
 const InsurancePage = () => {
   const [name, setName] = useState('');
@@ -14,6 +74,7 @@ const InsurancePage = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const [hovered, setHovered] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const handleScrollToContact = () => {
     document.getElementById('ins-contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -60,48 +121,7 @@ const InsurancePage = () => {
   const inputStyles = "w-full px-[12px] py-[10px] border border-white/15 rounded-[8px] text-[14px] font-sans text-white bg-white/5 outline-none focus:border-gold focus:bg-white/10 placeholder-white/35 transition-colors";
   const formLabelStyles = "block text-[12px] text-white/60 uppercase tracking-[0.04em] font-medium mb-[4px]";
 
-  const insuranceTypes = [
-    {
-      icon: '🛡️',
-      title: 'Life Insurance',
-      description: 'Term plans, ULIPs, endowment — we compare and recommend what genuinely suits you, not what pays the highest commission.',
-    },
-    {
-      icon: '🏥',
-      title: 'Health Insurance',
-      description: 'Individual, family floater, senior citizen plans, top-up covers. We help you understand waiting periods, exclusions, and claim processes before you buy.',
-    },
-    {
-      icon: '🚗',
-      title: 'Motor Insurance',
-      description: 'Car and two-wheeler — comprehensive and third party. Quick renewals, claim support included.',
-    },
-    {
-      icon: '🏠',
-      title: 'Fire & Burglary',
-      description: 'Protect your home, shop, or office against fire, theft, and natural calamities.',
-    },
-    {
-      icon: '🚢',
-      title: 'Marine Insurance',
-      description: 'Cargo and transit coverage for businesses moving goods.',
-    },
-    {
-      icon: '👷',
-      title: 'Workmen\'s Compensation (WC)',
-      description: 'Mandatory coverage for businesses with workers — we handle compliance too.',
-    },
-    {
-      icon: '👥',
-      title: 'Group Health Insurance',
-      description: 'Affordable employee health covers for SMEs and corporates. We handle the entire group policy setup and renewals.',
-    },
-    {
-      icon: '➕',
-      title: 'And More',
-      description: 'Liability, shop owner policies, professional indemnity, and whatever your specific situation needs.',
-    },
-  ];
+
 
   const partners = ['HDFC Ergo', 'ICICI Lombard', 'Go Digit', 'Tata AIG', 'Bajaj Allianz', 'Reliance General', 'Edelweiss Zuno'];
 
@@ -137,12 +157,6 @@ const InsurancePage = () => {
               >
                 <span className="text-[18px]">📞</span> Call Us
               </a>
-              <button
-                onClick={handleWhatsApp}
-                className="bg-[#25D366] text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-[#22c35e] transition-colors flex items-center gap-2 shadow-lg shadow-[#25D366]/20"
-              >
-                <span className="text-[18px]">💬</span> WhatsApp for a Free Quote
-              </button>
               <button
                 onClick={handleScrollToContact}
                 className="bg-gold text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-goldLight transition-colors shadow-lg shadow-gold/20"
@@ -287,15 +301,84 @@ const InsurancePage = () => {
               </div>
             </div>
 
-            {/* Original Grid of Insurance types */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-[4rem]">
-              {insuranceTypes.map((type) => (
-                <div key={type.title} className={cardStyles}>
-                  <div className="text-[32px] mb-3">{type.icon}</div>
-                  <h3 className="font-serif text-[17px] text-navy font-semibold mb-2">{type.title}</h3>
-                  <p className="text-muted text-[13px] leading-[1.6]">{type.description}</p>
-                </div>
-              ))}
+            {/* Interactive Grid of Insurance types */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-[4rem] relative">
+              {INSURANCE_TYPES.map((type, index) => {
+                const isHovered = hoveredIndex === index;
+                const isAnyHovered = hoveredIndex !== null;
+                
+                // Calculate slide translations based on relative position in a 4-column layout
+                let xTranslate = 0;
+                let yTranslate = 0;
+                
+                if (isAnyHovered && !isHovered) {
+                  const columns = 4;
+                  const r = Math.floor(index / columns);
+                  const c = index % columns;
+                  const hr = Math.floor(hoveredIndex / columns);
+                  const hc = hoveredIndex % columns;
+                  
+                  const dr = r - hr;
+                  const dc = c - hc;
+                  
+                  // Translate outwards away from the hovered card
+                  xTranslate = Math.sign(dc) * 60;
+                  yTranslate = Math.sign(dr) * 60;
+                }
+                
+                return (
+                  <motion.div
+                    key={type.id}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    style={{
+                      originX: 0.5,
+                      originY: 0.5,
+                    }}
+                    animate={{
+                      scale: isHovered ? 1.06 : isAnyHovered ? 0.92 : 1,
+                      x: xTranslate,
+                      y: yTranslate,
+                      opacity: isHovered ? 1 : isAnyHovered ? 0.2 : 1,
+                      zIndex: isHovered ? 50 : 1,
+                      boxShadow: isHovered 
+                        ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
+                        : '0 4px 6px rgba(13, 37, 69, 0.02)',
+                      borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
+                    }}
+                    transition={{
+                      type: 'spring',
+                      stiffness: 260,
+                      damping: 24,
+                    }}
+                    className="bg-white border rounded-[12px] p-[1.5rem] h-full flex flex-col justify-between cursor-pointer transition-colors duration-300"
+                  >
+                    <div>
+                      <div className="text-[32px] mb-3 select-none">{type.icon}</div>
+                      <h3 className="font-serif text-[17px] text-navy font-semibold mb-2">{type.title}</h3>
+                      <p className="text-muted text-[13px] leading-[1.6]">{type.description}</p>
+                    </div>
+
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ 
+                        height: isHovered ? 'auto' : 0, 
+                        opacity: isHovered ? 1 : 0,
+                        marginTop: isHovered ? 16 : 0
+                      }}
+                      transition={{ 
+                        duration: 0.35, 
+                        ease: [0.16, 1, 0.3, 1] 
+                      }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-muted text-[12.5px] leading-[1.6] border-t border-navy/5 pt-3">
+                        {type.detailedDescription}
+                      </p>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </FadeIn>

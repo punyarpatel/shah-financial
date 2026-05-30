@@ -1,10 +1,63 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import { submitLead } from '../lib/leads';
 import FadeIn from '../components/animations/FadeIn';
+
+const STEPS = [
+  { 
+    id: 'step1',
+    num: '01', 
+    icon: '🗣️', 
+    title: 'List Every Goal', 
+    description: 'We sit with you and list every financial goal — big and small, near and far.',
+    detailedDescription: 'We detail all your aspirations, from purchasing a home to funding higher education, categorizing them by priority and time horizon.'
+  },
+  { 
+    id: 'step2',
+    num: '02', 
+    icon: '🎯', 
+    title: 'Put a Number On It', 
+    description: 'We put a realistic rupee figure and timeline on each one, adjusted for inflation.',
+    detailedDescription: 'An education that costs ₹10L today will cost ₹20L+ in 10 years. We run detailed inflation calculations so you save for the actual future cost.'
+  },
+  { 
+    id: 'step3',
+    num: '03', 
+    icon: '🪣', 
+    title: 'Separate Buckets', 
+    description: 'We create dedicated investment buckets for each goal — nothing gets mixed up.',
+    detailedDescription: 'Each goal gets a specific portfolio of mutual funds matching its timeline. You\'ll know exactly which investment is for which dream.'
+  },
+  { 
+    id: 'step4',
+    num: '04', 
+    icon: '🔄', 
+    title: 'Track & Correct', 
+    description: 'We track progress every year and course-correct if needed due to life changes.',
+    detailedDescription: 'If you get a salary hike or your goals change, we adjust your monthly allocations so your plans stay aligned with your evolving life.'
+  },
+  { 
+    id: 'step5',
+    num: '05', 
+    icon: '✅', 
+    title: 'Goal Achieved', 
+    description: 'When the goal arrives — the money is ready. No scrambling, no shortfall.',
+    detailedDescription: 'We gradually shift your money to safer, liquid funds as your target date approaches, protecting your profits from sudden market drops.'
+  },
+  {
+    id: 'cta',
+    num: '🗺️',
+    icon: '🗺️',
+    title: 'Ready to Map Your Goals?',
+    description: 'Book a free session and we\'ll build your personalised goal map together.',
+    detailedDescription: 'Let\'s sit down and convert your dreams into an actionable financial blueprint. Click below to book your consultation.',
+    isCta: true
+  }
+];
 
 const GoalPlanningPage = () => {
   const [name, setName] = useState('');
@@ -14,6 +67,7 @@ const GoalPlanningPage = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const [hovered, setHovered] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const handleScrollToContact = () => {
     document.getElementById('goal-contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -54,13 +108,7 @@ const GoalPlanningPage = () => {
   const inputStyles = "w-full px-[12px] py-[10px] border border-white/15 rounded-[8px] text-[14px] font-sans text-white bg-white/5 outline-none focus:border-gold focus:bg-white/10 placeholder-white/35 transition-colors";
   const formLabelStyles = "block text-[12px] text-white/60 uppercase tracking-[0.04em] font-medium mb-[4px]";
 
-  const steps = [
-    { num: '01', icon: '🗣️', title: 'List Every Goal', desc: 'We sit with you and list every financial goal — big and small, near and far.' },
-    { num: '02', icon: '🎯', title: 'Put a Number On It', desc: 'We put a realistic rupee figure and timeline on each one, adjusted for inflation.' },
-    { num: '03', icon: '🪣', title: 'Separate Buckets', desc: 'We create dedicated investment buckets for each goal — nothing gets mixed up.' },
-    { num: '04', icon: '🔄', title: 'Track & Correct', desc: 'We track progress every year and course-correct if needed due to life changes.' },
-    { num: '05', icon: '✅', title: 'Goal Achieved', desc: 'When the goal arrives — the money is ready. No scrambling, no shortfall.' },
-  ];
+
 
   const commonGoals = [
     { icon: '🎓', title: "Child's Higher Education", detail: 'Plan for college fees 10–15 years out, inflation-adjusted' },
@@ -94,15 +142,14 @@ const GoalPlanningPage = () => {
               Whether it's your child's education in 10 years, a home in 7 years, or your own business in 5 — every goal needs a dedicated plan. Ad-hoc investing rarely gets you there.
             </p>
             <div className="flex flex-wrap gap-4 mt-[2rem]">
+              <a href="tel:+919664977576"
+                className="bg-white/10 text-white border border-white/20 px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-white/20 transition-colors flex items-center gap-2">
+                <span className="text-[18px]">📞</span> Call Us
+              </a>
               <button onClick={handleScrollToContact}
                 className="bg-gold text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-goldLight transition-colors shadow-lg shadow-gold/20">
                 📅 Book a Goal Planning Session
               </button>
-              <button onClick={handleWhatsApp}
-                className="bg-[#25D366] text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-[#22c35e] transition-colors flex items-center gap-2 shadow-lg shadow-[#25D366]/20">
-                <span className="text-[18px]">💬</span> WhatsApp Us
-              </button>
-
             </div>
           </div>
         </FadeIn>
@@ -233,31 +280,147 @@ const GoalPlanningPage = () => {
               </div>
             </div>
 
-            {/* Original Steps Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-[4rem]">
-              {steps.map((step) => (
-                <div key={step.num} className={cardStyles}>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="text-[32px]">{step.icon}</div>
-                    <div className="font-serif text-[32px] text-navy/15 font-bold leading-none">{step.num}</div>
-                  </div>
-                  <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">{step.title}</h3>
-                  <p className="text-muted text-[14px] leading-[1.6]">{step.desc}</p>
-                </div>
-              ))}
-              {/* CTA card */}
-              <div className="bg-navy rounded-[12px] p-[1.5rem] flex flex-col justify-between relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gold rounded-full blur-[60px] opacity-20 pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
-                <div className="relative z-10">
-                  <div className="text-[32px] mb-3">🗺️</div>
-                  <h3 className="font-serif text-[18px] text-white font-semibold mb-2">Ready to Map Your Goals?</h3>
-                  <p className="text-white/60 text-[14px] leading-[1.6] mb-6">Book a free session and we'll build your personalised goal map together.</p>
-                </div>
-                <button onClick={handleScrollToContact}
-                  className="bg-gold text-white py-[10px] px-[20px] rounded-[8px] text-[14px] font-medium hover:bg-goldLight transition-colors w-full relative z-10">
-                  Book Free Session →
-                </button>
-              </div>
+            {/* Interactive Steps Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-[4rem] relative">
+              {STEPS.map((step, index) => {
+                const isHovered = hoveredIndex === index;
+                const isAnyHovered = hoveredIndex !== null;
+                
+                // Calculate slide translations based on relative position in a 3-column layout
+                let xTranslate = 0;
+                let yTranslate = 0;
+                
+                if (isAnyHovered && !isHovered) {
+                  const columns = 3;
+                  const r = Math.floor(index / columns);
+                  const c = index % columns;
+                  const hr = Math.floor(hoveredIndex / columns);
+                  const hc = hoveredIndex % columns;
+                  
+                  const dr = r - hr;
+                  const dc = c - hc;
+                  
+                  // Translate outwards away from the hovered card
+                  xTranslate = Math.sign(dc) * 60;
+                  yTranslate = Math.sign(dr) * 60;
+                }
+                
+                if (step.isCta) {
+                  return (
+                    <motion.div
+                      key={step.id}
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                      style={{
+                        originX: 0.5,
+                        originY: 0.5,
+                      }}
+                      animate={{
+                        scale: isHovered ? 1.06 : isAnyHovered ? 0.92 : 1,
+                        x: xTranslate,
+                        y: yTranslate,
+                        opacity: isHovered ? 1 : isAnyHovered ? 0.2 : 1,
+                        zIndex: isHovered ? 50 : 1,
+                        boxShadow: isHovered 
+                          ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
+                          : '0 4px 6px rgba(13, 37, 69, 0.02)',
+                        borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(201, 146, 42, 0.15)',
+                      }}
+                      transition={{
+                        type: 'spring',
+                        stiffness: 260,
+                        damping: 24,
+                      }}
+                      className="bg-navy rounded-[12px] p-[1.5rem] h-full flex flex-col justify-between relative overflow-hidden cursor-pointer"
+                    >
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gold rounded-full blur-[60px] opacity-20 pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
+                      <div className="relative z-10">
+                        <div className="text-[32px] mb-3 select-none">🗺️</div>
+                        <h3 className="font-serif text-[18px] text-white font-semibold mb-2">{step.title}</h3>
+                        <p className="text-white/60 text-[14px] leading-[1.6]">{step.description}</p>
+                      </div>
+
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ 
+                          height: isHovered ? 'auto' : 0, 
+                          opacity: isHovered ? 1 : 0,
+                          marginTop: isHovered ? 16 : 0
+                        }}
+                        transition={{ 
+                          duration: 0.35, 
+                          ease: [0.16, 1, 0.3, 1] 
+                        }}
+                        className="overflow-hidden relative z-10 w-full"
+                      >
+                        <p className="text-white/50 text-[13.5px] leading-[1.6] border-t border-white/10 pt-3 mb-4">
+                          {step.detailedDescription}
+                        </p>
+                        <button onClick={handleScrollToContact}
+                          className="bg-gold text-white py-[10px] px-[20px] rounded-[8px] text-[14px] font-medium hover:bg-goldLight transition-colors w-full relative z-10">
+                          Book Free Session →
+                        </button>
+                      </motion.div>
+                    </motion.div>
+                  );
+                }
+
+                return (
+                  <motion.div
+                    key={step.id}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    style={{
+                      originX: 0.5,
+                      originY: 0.5,
+                    }}
+                    animate={{
+                      scale: isHovered ? 1.06 : isAnyHovered ? 0.92 : 1,
+                      x: xTranslate,
+                      y: yTranslate,
+                      opacity: isHovered ? 1 : isAnyHovered ? 0.2 : 1,
+                      zIndex: isHovered ? 50 : 1,
+                      boxShadow: isHovered 
+                        ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
+                        : '0 4px 6px rgba(13, 37, 69, 0.02)',
+                      borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
+                    }}
+                    transition={{
+                      type: 'spring',
+                      stiffness: 260,
+                      damping: 24,
+                    }}
+                    className="bg-white border rounded-[12px] p-[1.5rem] h-full flex flex-col justify-between cursor-pointer transition-colors duration-300"
+                  >
+                    <div>
+                      <div className="flex items-center gap-3 mb-4 select-none">
+                        <div className="text-[32px]">{step.icon}</div>
+                        <div className="font-serif text-[32px] text-navy/15 font-bold leading-none">{step.num}</div>
+                      </div>
+                      <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">{step.title}</h3>
+                      <p className="text-muted text-[14px] leading-[1.6]">{step.description}</p>
+                    </div>
+
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ 
+                        height: isHovered ? 'auto' : 0, 
+                        opacity: isHovered ? 1 : 0,
+                        marginTop: isHovered ? 16 : 0
+                      }}
+                      transition={{ 
+                        duration: 0.35, 
+                        ease: [0.16, 1, 0.3, 1] 
+                      }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-muted text-[13.5px] leading-[1.6] border-t border-navy/5 pt-3">
+                        {step.detailedDescription}
+                      </p>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </FadeIn>

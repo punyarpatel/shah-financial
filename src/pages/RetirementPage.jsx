@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
@@ -7,6 +8,58 @@ import { submitLead } from '../lib/leads';
 import FadeIn from '../components/animations/FadeIn';
 import SliderRow from '../components/calculators/SliderRow';
 import RetirementGrowthChart from '../components/calculators/RetirementGrowthChart';
+
+const RETIREMENT_STEPS = [
+  {
+    id: 'step1',
+    icon: '💬',
+    num: '01',
+    title: 'Understand Your Lifestyle',
+    description: 'We start by understanding your current income, expenses, and the lifestyle you want to maintain in retirement.',
+    detailedDescription: 'We talk about your dreams, post-retirement travel plans, daily spending habits, and regular obligations to map your financial baseline.'
+  },
+  {
+    id: 'step2',
+    icon: '🧮',
+    num: '02',
+    title: 'Calculate Your Corpus',
+    description: 'We calculate exactly how much corpus you\'ll actually need — factoring in real inflation, not just rough estimates.',
+    detailedDescription: 'We apply realistic inflation metrics to healthcare and food, calculating your target corpus to ensure you never outlive your accumulated savings.'
+  },
+  {
+    id: 'step3',
+    icon: '📊',
+    num: '03',
+    title: 'Build Your Investment Plan',
+    description: 'A dedicated, personalized plan combining mutual funds, insurance, and other instruments to hit your number.',
+    detailedDescription: 'We select a high-performance mix of debt and equity funds, along with annuity options, tailored to compound wealth while preserving principal.'
+  },
+  {
+    id: 'step4',
+    icon: '🔄',
+    num: '04',
+    title: 'Annual Reviews',
+    description: 'Life changes. We review your plan annually and make adjustments so you stay perfectly on track.',
+    detailedDescription: 'Whether you get a salary raise, change jobs, or experience major life events, we update your goals and portfolios yearly to stay aligned.'
+  },
+  {
+    id: 'step5',
+    icon: '🏥',
+    num: '05',
+    title: 'Plan for Healthcare',
+    description: 'Healthcare costs are the biggest retirement wildcard. We build this in from day one so you\'re never caught off guard.',
+    detailedDescription: 'We secure comprehensive super-top-up health covers and dedicated medical emergency pools so medical bills never eat into your corpus.'
+  },
+  {
+    id: 'cta',
+    icon: '🏖️',
+    num: 'CTA',
+    title: 'Ready to Start?',
+    description: 'Get a free, no-obligation retirement corpus estimate tailored specifically to your situation.',
+    detailedDescription: 'Let\'s build a secure, worry-free future. Click below to request a detailed retirement estimate with our specialists.',
+    isCta: true
+  }
+];
 
 const RetirementPage = () => {
   const [name, setName] = useState('');
@@ -16,6 +69,7 @@ const RetirementPage = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const [hovered, setHovered] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const handleScrollToContact = () => {
     const contactSection = document.getElementById('ret-contact');
@@ -132,38 +186,7 @@ const RetirementPage = () => {
 
 
 
-  const steps = [
-    {
-      icon: '💬',
-      step: '01',
-      title: 'Understand Your Lifestyle',
-      description: 'We start by understanding your current income, expenses, and the lifestyle you want to maintain in retirement.',
-    },
-    {
-      icon: '🧮',
-      step: '02',
-      title: 'Calculate Your Corpus',
-      description: 'We calculate exactly how much corpus you\'ll actually need — factoring in real inflation, not just rough estimates.',
-    },
-    {
-      icon: '📊',
-      step: '03',
-      title: 'Build Your Investment Plan',
-      description: 'A dedicated, personalized plan combining mutual funds, insurance, and other instruments to hit your number.',
-    },
-    {
-      icon: '🔄',
-      step: '04',
-      title: 'Annual Reviews',
-      description: 'Life changes. We review your plan annually and make adjustments so you stay perfectly on track.',
-    },
-    {
-      icon: '🏥',
-      step: '05',
-      title: 'Plan for Healthcare',
-      description: 'Healthcare costs are the biggest retirement wildcard. We build this in from day one so you\'re never caught off guard.',
-    },
-  ];
+
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col relative">
@@ -199,12 +222,6 @@ const RetirementPage = () => {
                 className="bg-gold text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-goldLight transition-colors shadow-lg shadow-gold/20"
               >
                 📅 Book a Free Retirement Planning Call
-              </button>
-              <button
-                onClick={handleWhatsApp}
-                className="bg-[#25D366] text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-[#22c35e] transition-colors flex items-center gap-2 shadow-lg shadow-[#25D366]/20"
-              >
-                <span className="text-[18px]">💬</span> WhatsApp Us
               </button>
               <button
                 onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' })}
@@ -354,36 +371,147 @@ const RetirementPage = () => {
               </div>
             </div>
 
-            {/* Original Process Steps Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-[4rem]">
-              {steps.map((step) => (
-                <div key={step.step} className={cardStyles}>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="text-[32px]">{step.icon}</div>
-                    <div className="font-serif text-[32px] text-navy/15 font-bold leading-none">{step.step}</div>
-                  </div>
-                  <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">{step.title}</h3>
-                  <p className="text-muted text-[14px] leading-[1.6]">{step.description}</p>
-                </div>
-              ))}
- 
-              {/* CTA Card in the grid */}
-              <div className="bg-navy rounded-[12px] p-[1.5rem] flex flex-col justify-between relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gold rounded-full blur-[60px] opacity-20 pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
-                <div className="relative z-10">
-                  <div className="text-[32px] mb-3">🏖️</div>
-                  <h3 className="font-serif text-[18px] text-white font-semibold mb-2">Ready to Start?</h3>
-                  <p className="text-white/60 text-[14px] leading-[1.6] mb-6">
-                    Get a free, no-obligation retirement corpus estimate tailored specifically to your situation.
-                  </p>
-                </div>
-                <button
-                  onClick={handleScrollToContact}
-                  className="bg-gold text-white py-[10px] px-[20px] rounded-[8px] text-[14px] font-medium hover:bg-goldLight transition-colors w-full relative z-10"
-                >
-                  Get My Free Plan →
-                </button>
-              </div>
+            {/* Interactive Process Steps Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-[4rem] relative">
+              {RETIREMENT_STEPS.map((step, index) => {
+                const isHovered = hoveredIndex === index;
+                const isAnyHovered = hoveredIndex !== null;
+                
+                // Calculate slide translations based on relative position in a 3-column layout
+                let xTranslate = 0;
+                let yTranslate = 0;
+                
+                if (isAnyHovered && !isHovered) {
+                  const columns = 3;
+                  const r = Math.floor(index / columns);
+                  const c = index % columns;
+                  const hr = Math.floor(hoveredIndex / columns);
+                  const hc = hoveredIndex % columns;
+                  
+                  const dr = r - hr;
+                  const dc = c - hc;
+                  
+                  // Translate outwards away from the hovered card
+                  xTranslate = Math.sign(dc) * 60;
+                  yTranslate = Math.sign(dr) * 60;
+                }
+                
+                if (step.isCta) {
+                  return (
+                    <motion.div
+                      key={step.id}
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                      style={{
+                        originX: 0.5,
+                        originY: 0.5,
+                      }}
+                      animate={{
+                        scale: isHovered ? 1.06 : isAnyHovered ? 0.92 : 1,
+                        x: xTranslate,
+                        y: yTranslate,
+                        opacity: isHovered ? 1 : isAnyHovered ? 0.2 : 1,
+                        zIndex: isHovered ? 50 : 1,
+                        boxShadow: isHovered 
+                          ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
+                          : '0 4px 6px rgba(13, 37, 69, 0.02)',
+                        borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(201, 146, 42, 0.15)',
+                      }}
+                      transition={{
+                        type: 'spring',
+                        stiffness: 260,
+                        damping: 24,
+                      }}
+                      className="bg-navy rounded-[12px] p-[1.5rem] h-full flex flex-col justify-between relative overflow-hidden cursor-pointer"
+                    >
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gold rounded-full blur-[60px] opacity-20 pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
+                      <div className="relative z-10">
+                        <div className="text-[32px] mb-3 select-none">🏖️</div>
+                        <h3 className="font-serif text-[18px] text-white font-semibold mb-2">{step.title}</h3>
+                        <p className="text-white/60 text-[14px] leading-[1.6]">{step.description}</p>
+                      </div>
+
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ 
+                          height: isHovered ? 'auto' : 0, 
+                          opacity: isHovered ? 1 : 0,
+                          marginTop: isHovered ? 16 : 0
+                        }}
+                        transition={{ 
+                          duration: 0.35, 
+                          ease: [0.16, 1, 0.3, 1] 
+                        }}
+                        className="overflow-hidden relative z-10 w-full"
+                      >
+                        <p className="text-white/50 text-[13.5px] leading-[1.6] border-t border-white/10 pt-3 mb-4">
+                          {step.detailedDescription}
+                        </p>
+                        <button onClick={handleScrollToContact}
+                          className="bg-gold text-white py-[10px] px-[20px] rounded-[8px] text-[14px] font-medium hover:bg-goldLight transition-colors w-full relative z-10">
+                          Get My Free Plan →
+                        </button>
+                      </motion.div>
+                    </motion.div>
+                  );
+                }
+
+                return (
+                  <motion.div
+                    key={step.id}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    style={{
+                      originX: 0.5,
+                      originY: 0.5,
+                    }}
+                    animate={{
+                      scale: isHovered ? 1.06 : isAnyHovered ? 0.92 : 1,
+                      x: xTranslate,
+                      y: yTranslate,
+                      opacity: isHovered ? 1 : isAnyHovered ? 0.2 : 1,
+                      zIndex: isHovered ? 50 : 1,
+                      boxShadow: isHovered 
+                        ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
+                        : '0 4px 6px rgba(13, 37, 69, 0.02)',
+                      borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
+                    }}
+                    transition={{
+                      type: 'spring',
+                      stiffness: 260,
+                      damping: 24,
+                    }}
+                    className="bg-white border rounded-[12px] p-[1.5rem] h-full flex flex-col justify-between cursor-pointer transition-colors duration-300"
+                  >
+                    <div>
+                      <div className="flex items-center gap-3 mb-4 select-none">
+                        <div className="text-[32px]">{step.icon}</div>
+                        <div className="font-serif text-[32px] text-navy/15 font-bold leading-none">{step.num}</div>
+                      </div>
+                      <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">{step.title}</h3>
+                      <p className="text-muted text-[14px] leading-[1.6]">{step.description}</p>
+                    </div>
+
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ 
+                        height: isHovered ? 'auto' : 0, 
+                        opacity: isHovered ? 1 : 0,
+                        marginTop: isHovered ? 16 : 0
+                      }}
+                      transition={{ 
+                        duration: 0.35, 
+                        ease: [0.16, 1, 0.3, 1] 
+                      }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-muted text-[13.5px] leading-[1.6] border-t border-navy/5 pt-3">
+                        {step.detailedDescription}
+                      </p>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </FadeIn>

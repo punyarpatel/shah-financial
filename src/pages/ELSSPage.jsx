@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
@@ -7,6 +8,37 @@ import { submitLead } from '../lib/leads';
 import FadeIn from '../components/animations/FadeIn';
 import SliderRow from '../components/calculators/SliderRow';
 import ELSSGrowthChart from '../components/calculators/ELSSGrowthChart';
+
+const BENEFITS = [
+  { 
+    id: 'start-year',
+    icon: '📅', 
+    title: 'Start-of-Year SIPs', 
+    description: 'We set up your SIPs at the start of the financial year — no last-minute March panic or rushed decisions.',
+    detailedDescription: 'By planning in April rather than scrambling in March, we help you distribute your tax savings systematically, avoiding rash investment decisions and securing better average buy prices.'
+  },
+  { 
+    id: 'spread',
+    icon: '💸', 
+    title: 'Spread Across 12 Months', 
+    description: '₹1.5L spread across 12 months means smaller, manageable amounts — ₹12,500/month instead of one lump sum.',
+    detailedDescription: 'A monthly SIP of ₹12,500 keeps your cash flow healthy and leverages Rupee Cost Averaging, buying more units when the market is low and fewer when it is high.'
+  },
+  { 
+    id: 'selection',
+    icon: '🔍', 
+    title: 'Consistent Fund Selection', 
+    description: 'We pick funds with consistent long-term track records, not just last year\'s top performers.',
+    detailedDescription: 'We analyze 3-year and 5-year rolling returns, downside capture ratios, and fund manager histories to select ELSS funds that perform reliably across market cycles.'
+  },
+  { 
+    id: 'growth',
+    icon: '📈', 
+    title: 'Money That Grows', 
+    description: 'Your tax-saving money doesn\'t sit idle — it actively grows in equity markets, beating inflation over the long term.',
+    detailedDescription: 'Unlike traditional tax savers (PPF/FDs) yielding 6-7%, ELSS funds expose your capital to high-growth Indian equities, helping you outpace inflation and compound your wealth.'
+  },
+];
 
 const ELSSPage = () => {
   const [name, setName] = useState('');
@@ -16,6 +48,7 @@ const ELSSPage = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const [hovered, setHovered] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   // Calculator state
   const [monthlyInvest, setMonthlyInvest] = useState(12500);
@@ -88,12 +121,7 @@ const ELSSPage = () => {
 
 
 
-  const benefits = [
-    { icon: '📅', title: 'Start-of-Year SIPs', description: 'We set up your SIPs at the start of the financial year — no last-minute March panic or rushed decisions.' },
-    { icon: '💸', title: 'Spread Across 12 Months', description: '₹1.5L spread across 12 months means smaller, manageable amounts — ₹12,500/month instead of one lump sum.' },
-    { icon: '🔍', title: 'Consistent Fund Selection', description: 'We pick funds with consistent long-term track records, not just last year\'s top performers.' },
-    { icon: '📈', title: 'Money That Grows', description: 'Your tax-saving money doesn\'t sit idle — it actively grows in equity markets, beating inflation over the long term.' },
-  ];
+
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col relative">
@@ -125,10 +153,6 @@ const ELSSPage = () => {
                 className="bg-white/10 text-white border border-white/20 px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-white/20 transition-colors flex items-center gap-2">
                 <span className="text-[18px]">📞</span> Call Us
               </a>
-              <button onClick={handleWhatsApp}
-                className="bg-[#25D366] text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-[#22c35e] transition-colors flex items-center gap-2 shadow-lg shadow-[#25D366]/20">
-                <span className="text-[18px]">💬</span> Start My ELSS SIP on WhatsApp
-              </button>
               <button onClick={handleScrollToContact}
                 className="bg-gold text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-goldLight transition-colors shadow-lg shadow-gold/20">
                 Invest Now
@@ -282,15 +306,84 @@ const ELSSPage = () => {
               </div>
             </div>
 
-            {/* Original Benefits Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-[4rem]">
-              {benefits.map((b) => (
-                <div key={b.title} className={cardStyles}>
-                  <div className="text-[32px] mb-3">{b.icon}</div>
-                  <h3 className="font-serif text-[17px] text-navy font-semibold mb-2">{b.title}</h3>
-                  <p className="text-muted text-[13px] leading-[1.6]">{b.description}</p>
-                </div>
-              ))}
+            {/* Interactive Benefits Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-[4rem] relative">
+              {BENEFITS.map((b, index) => {
+                const isHovered = hoveredIndex === index;
+                const isAnyHovered = hoveredIndex !== null;
+                
+                // Calculate slide translations based on relative position in a 4-column layout
+                let xTranslate = 0;
+                let yTranslate = 0;
+                
+                if (isAnyHovered && !isHovered) {
+                  const columns = 4;
+                  const r = Math.floor(index / columns);
+                  const c = index % columns;
+                  const hr = Math.floor(hoveredIndex / columns);
+                  const hc = hoveredIndex % columns;
+                  
+                  const dr = r - hr;
+                  const dc = c - hc;
+                  
+                  // Translate outwards away from the hovered card
+                  xTranslate = Math.sign(dc) * 60;
+                  yTranslate = Math.sign(dr) * 60;
+                }
+                
+                return (
+                  <motion.div
+                    key={b.id}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    style={{
+                      originX: 0.5,
+                      originY: 0.5,
+                    }}
+                    animate={{
+                      scale: isHovered ? 1.06 : isAnyHovered ? 0.92 : 1,
+                      x: xTranslate,
+                      y: yTranslate,
+                      opacity: isHovered ? 1 : isAnyHovered ? 0.2 : 1,
+                      zIndex: isHovered ? 50 : 1,
+                      boxShadow: isHovered 
+                        ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
+                        : '0 4px 6px rgba(13, 37, 69, 0.02)',
+                      borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
+                    }}
+                    transition={{
+                      type: 'spring',
+                      stiffness: 260,
+                      damping: 24,
+                    }}
+                    className="bg-white border rounded-[12px] p-[1.5rem] h-full flex flex-col justify-between cursor-pointer transition-colors duration-300"
+                  >
+                    <div>
+                      <div className="text-[32px] mb-3 select-none">{b.icon}</div>
+                      <h3 className="font-serif text-[17px] text-navy font-semibold mb-2">{b.title}</h3>
+                      <p className="text-muted text-[13px] leading-[1.6]">{b.description}</p>
+                    </div>
+
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ 
+                        height: isHovered ? 'auto' : 0, 
+                        opacity: isHovered ? 1 : 0,
+                        marginTop: isHovered ? 16 : 0
+                      }}
+                      transition={{ 
+                        duration: 0.35, 
+                        ease: [0.16, 1, 0.3, 1] 
+                      }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-muted text-[12.5px] leading-[1.6] border-t border-navy/5 pt-3">
+                        {b.detailedDescription}
+                      </p>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </FadeIn>

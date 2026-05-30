@@ -1,10 +1,49 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import { submitLead } from '../lib/leads';
 import FadeIn from '../components/animations/FadeIn';
+
+const POLICY_CHECKS = [
+  {
+    id: 'waiting',
+    icon: '⏳',
+    title: 'Waiting Period Clauses',
+    description: "So you're covered when you actually need it — not after a long wait.",
+    detailedDescription: 'We verify that any waiting periods for pre-existing diseases align perfectly with your planned travel schedules to India.'
+  },
+  {
+    id: 'pre-existing',
+    icon: '🏥',
+    title: 'Pre-existing Disease Terms',
+    description: 'We review coverage for pre-existing conditions so there are no surprises at claim time.',
+    detailedDescription: 'We help declare medical histories transparently and check loading charges to prevent claim disputes during hospitalization.'
+  },
+  {
+    id: 'cashless',
+    icon: '🗺️',
+    title: 'Cashless Hospital Network',
+    description: 'We verify the cashless network covers the hospitals in your home city in India.',
+    detailedDescription: 'We verify that the insurer has active cashless agreements with leading super-specialty hospitals in your specific home town.'
+  },
+  {
+    id: 'fit',
+    icon: '📋',
+    title: 'Age & Sum Insured Fit',
+    description: 'We ensure the policy covers your age bracket and provides adequate sum insured.',
+    detailedDescription: 'We match your age profile with premium rates and calculate an optimal sum insured (e.g., ₹10L–25L) that covers modern medical inflation.'
+  },
+  {
+    id: 'portability',
+    icon: '🔄',
+    title: 'Portability Options',
+    description: 'Options to port the policy if you return to India permanently later.',
+    detailedDescription: 'If you relocate back to India in the future, we ensure your accumulated waiting period credits are fully transferable to standard domestic policies.'
+  },
+];
 
 const NRIPage = () => {
   const [name, setName] = useState('');
@@ -16,6 +55,7 @@ const NRIPage = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const [hovered, setHovered] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const handleScrollToContact = () => {
     document.getElementById('nri-contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -88,13 +128,7 @@ const NRIPage = () => {
 
   const insurerPartners = ['HDFC Ergo', 'ICICI Lombard', 'Go Digit', 'Tata AIG', 'Bajaj Allianz', 'Edelweiss Zuno'];
 
-  const policyChecks = [
-    { icon: '⏳', title: 'Waiting Period Clauses', desc: "So you're covered when you actually need it — not after a long wait." },
-    { icon: '🏥', title: 'Pre-existing Disease Terms', desc: 'We review coverage for pre-existing conditions so there are no surprises at claim time.' },
-    { icon: '🗺️', title: 'Cashless Hospital Network', desc: 'We verify the cashless network covers the hospitals in your home city in India.' },
-    { icon: '📋', title: 'Age & Sum Insured Fit', desc: 'We ensure the policy covers your age bracket and provides adequate sum insured.' },
-    { icon: '🔄', title: 'Portability Options', desc: 'Options to port the policy if you return to India permanently later.' },
-  ];
+
 
   const countries = ['🇺🇸 USA', '🇬🇧 UK', '🇦🇪 UAE', '🇦🇺 Australia', '🇨🇦 Canada', '🇸🇬 Singapore', '🇩🇪 Germany', '🇳🇿 New Zealand'];
 
@@ -124,10 +158,6 @@ const NRIPage = () => {
               <button onClick={handleScrollToContact}
                 className="bg-gold text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-goldLight transition-colors shadow-lg shadow-gold/20">
                 📅 Schedule a Call
-              </button>
-              <button onClick={handleWhatsApp}
-                className="bg-[#25D366] text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-[#22c35e] transition-colors flex items-center gap-2 shadow-lg shadow-[#25D366]/20">
-                <span className="text-[18px]">💬</span> WhatsApp Us
               </button>
               <button onClick={handleEmail}
                 className="bg-white/10 text-white border border-white/20 px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-white/20 transition-colors flex items-center gap-2">
@@ -394,14 +424,83 @@ const NRIPage = () => {
             {/* Policy Checks */}
             <div className="mb-10">
               <h3 className="font-serif text-[22px] text-navy font-semibold mb-6">Important things we check for you</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {policyChecks.map((c) => (
-                  <div key={c.title} className={cardStyles}>
-                    <div className="text-[28px] mb-3">{c.icon}</div>
-                    <h4 className="font-serif text-[16px] text-navy font-semibold mb-2">{c.title}</h4>
-                    <p className="text-muted text-[13px] leading-[1.6]">{c.desc}</p>
-                  </div>
-                ))}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative">
+                {POLICY_CHECKS.map((c, index) => {
+                  const isHovered = hoveredIndex === index;
+                  const isAnyHovered = hoveredIndex !== null;
+                  
+                  // Calculate slide translations based on relative position in a 3-column layout
+                  let xTranslate = 0;
+                  let yTranslate = 0;
+                  
+                  if (isAnyHovered && !isHovered) {
+                    const columns = 3;
+                    const r = Math.floor(index / columns);
+                    const c = index % columns;
+                    const hr = Math.floor(hoveredIndex / columns);
+                    const hc = hoveredIndex % columns;
+                    
+                    const dr = r - hr;
+                    const dc = c - hc;
+                    
+                    // Translate outwards away from the hovered card
+                    xTranslate = Math.sign(dc) * 60;
+                    yTranslate = Math.sign(dr) * 60;
+                  }
+                  
+                  return (
+                    <motion.div
+                      key={c.id}
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                      style={{
+                        originX: 0.5,
+                        originY: 0.5,
+                      }}
+                      animate={{
+                        scale: isHovered ? 1.06 : isAnyHovered ? 0.92 : 1,
+                        x: xTranslate,
+                        y: yTranslate,
+                        opacity: isHovered ? 1 : isAnyHovered ? 0.2 : 1,
+                        zIndex: isHovered ? 50 : 1,
+                        boxShadow: isHovered 
+                          ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
+                          : '0 4px 6px rgba(13, 37, 69, 0.02)',
+                        borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
+                      }}
+                      transition={{
+                        type: 'spring',
+                        stiffness: 260,
+                        damping: 24,
+                      }}
+                      className="bg-white border rounded-[12px] p-[1.5rem] h-full flex flex-col justify-between cursor-pointer transition-colors duration-300"
+                    >
+                      <div>
+                        <div className="text-[28px] mb-3 select-none">{c.icon}</div>
+                        <h4 className="font-serif text-[16px] text-navy font-semibold mb-2">{c.title}</h4>
+                        <p className="text-muted text-[13px] leading-[1.6]">{c.description}</p>
+                      </div>
+
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ 
+                          height: isHovered ? 'auto' : 0, 
+                          opacity: isHovered ? 1 : 0,
+                          marginTop: isHovered ? 16 : 0
+                        }}
+                        transition={{ 
+                          duration: 0.35, 
+                          ease: [0.16, 1, 0.3, 1] 
+                        }}
+                        className="overflow-hidden"
+                      >
+                        <p className="text-muted text-[12.5px] leading-[1.6] border-t border-navy/5 pt-3">
+                          {c.detailedDescription}
+                        </p>
+                      </motion.div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
  

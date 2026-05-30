@@ -1,10 +1,63 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import { submitLead } from '../lib/leads';
 import FadeIn from '../components/animations/FadeIn';
+
+const SUB_SERVICES = [
+  {
+    id: 'kyc',
+    icon: '📝',
+    title: 'Paperwork & KYC',
+    description: "Complete KYC and PAN-Aadhaar linking — we sort all paperwork so you don't have to.",
+    detailedDescription: "We handle the entire onboarding process, including digital signatures, document verification, FATCA compliance for NRI accounts, and seamless linkage of bank mandates for direct auto-debit of SIPs."
+  },
+  {
+    id: 'risk',
+    icon: '🎯',
+    title: 'Risk Profiling',
+    description: 'In-depth analysis to understand exactly what kind of investor you are and your tolerance for risk.',
+    detailedDescription: 'We assess your investment horizon, financial goals, and emotional tolerance for market volatility. This ensures we never place you in funds that make you anxious or mismatch your timelines.'
+  },
+  {
+    id: 'selection',
+    icon: '📊',
+    title: 'Fund Selection',
+    description: 'Strategic fund selection tailored perfectly to your specific goals, timeline, and risk appetite.',
+    detailedDescription: 'Out of 2,500+ active schemes, we filter and choose the top 5-6 funds across various categories (Large, Mid, Small, Flexi, Debt) using rigorous historical and risk-adjusted return metrics.'
+  },
+  {
+    id: 'execution',
+    icon: '📈',
+    title: 'Investment Execution',
+    description: 'Seamless SIP setup, strategic lumpsum investments, and timely top-ups to maximize returns.',
+    detailedDescription: 'We configure your monthly SIPs on chosen dates, process bulk lump-sum deployments during market dips, and execute automated top-ups to accelerate your wealth accumulation path.'
+  },
+  {
+    id: 'reviews',
+    icon: '🔄',
+    title: 'Portfolio Reviews',
+    description: 'Regular portfolio reviews — conducted quarterly or whenever market movements demand action.',
+    detailedDescription: 'We monitor fund performance against benchmarks and peer groups. If a fund underperforms consistently for two quarters, or if your asset allocation drifts, we prepare rebalancing recommendations.'
+  },
+  {
+    id: 'switches',
+    icon: '🔀',
+    title: 'Fund Switches',
+    description: 'Proactive fund switches deployed automatically whenever a better, more efficient option exists.',
+    detailedDescription: 'We execute switches between scheme categories (e.g., from small-cap to debt during market highs) or move out of underperforming schemes to high-performing ones seamlessly to preserve gains.'
+  },
+  {
+    id: 'redemption',
+    icon: '💰',
+    title: 'Redemption Guidance',
+    description: 'Tax-efficient redemption guidance designed for when you actually need to access your money.',
+    detailedDescription: 'When you reach your goals, we structure your withdrawals to minimize Capital Gains Tax (LTCG/STCG) and avoid Exit Loads, ensuring you pocket the absolute maximum possible returns.'
+  }
+];
 
 const MutualFundPage = () => {
   const [name, setName] = useState('');
@@ -14,6 +67,7 @@ const MutualFundPage = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const [hovered, setHovered] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const handleScrollToContact = () => {
     const contactSection = document.getElementById('mf-contact');
@@ -91,12 +145,6 @@ const MutualFundPage = () => {
               >
                 <span className="text-[18px]">📞</span> Call Us
               </a>
-              <button 
-                onClick={handleWhatsApp}
-                className="bg-[#25D366] text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-[#22c35e] transition-colors flex items-center gap-2 shadow-lg shadow-[#25D366]/20"
-              >
-                <span className="text-[18px]">💬</span> WhatsApp Us
-              </button>
               <button 
                 onClick={handleScrollToContact}
                 className="bg-gold text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-goldLight transition-colors shadow-lg shadow-gold/20"
@@ -239,49 +287,83 @@ const MutualFundPage = () => {
               </div>
             </div>
 
-            {/* Original 7 sub-services cards grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-[4rem]">
-              <div className={cardStyles}>
-                <div className="text-[32px] mb-3">📝</div>
-                <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Paperwork & KYC</h3>
-                <p className="text-muted text-[14px] leading-[1.6]">Complete KYC and PAN-Aadhaar linking — we sort all paperwork so you don't have to.</p>
-              </div>
-              
-              <div className={cardStyles}>
-                <div className="text-[32px] mb-3">🎯</div>
-                <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Risk Profiling</h3>
-                <p className="text-muted text-[14px] leading-[1.6]">In-depth analysis to understand exactly what kind of investor you are and your tolerance for risk.</p>
-              </div>
+            {/* Interactive sub-services cards grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-[4rem] relative">
+              {SUB_SERVICES.map((item, index) => {
+                const isHovered = hoveredIndex === index;
+                const isAnyHovered = hoveredIndex !== null;
+                
+                // Calculate slide translations based on relative position in a 3-column layout
+                let xTranslate = 0;
+                let yTranslate = 0;
+                
+                if (isAnyHovered && !isHovered) {
+                  const r = Math.floor(index / 3);
+                  const c = index % 3;
+                  const hr = Math.floor(hoveredIndex / 3);
+                  const hc = hoveredIndex % 3;
+                  
+                  const dr = r - hr;
+                  const dc = c - hc;
+                  
+                  // Translate outwards away from the hovered card
+                  xTranslate = Math.sign(dc) * 60;
+                  yTranslate = Math.sign(dr) * 60;
+                }
+                
+                return (
+                  <motion.div
+                    key={item.id}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    style={{
+                      originX: 0.5,
+                      originY: 0.5,
+                    }}
+                    animate={{
+                      scale: isHovered ? 1.06 : isAnyHovered ? 0.92 : 1,
+                      x: xTranslate,
+                      y: yTranslate,
+                      opacity: isHovered ? 1 : isAnyHovered ? 0.2 : 1,
+                      zIndex: isHovered ? 50 : 1,
+                      boxShadow: isHovered 
+                        ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
+                        : '0 4px 6px rgba(13, 37, 69, 0.02)',
+                      borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
+                    }}
+                    transition={{
+                      type: 'spring',
+                      stiffness: 260,
+                      damping: 24,
+                    }}
+                    className="bg-white border rounded-[12px] p-[1.5rem] h-full flex flex-col justify-between cursor-pointer transition-colors duration-300"
+                  >
+                    <div>
+                      <div className="text-[32px] mb-3 select-none">{item.icon}</div>
+                      <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">{item.title}</h3>
+                      <p className="text-muted text-[14px] leading-[1.6]">{item.description}</p>
+                    </div>
 
-              <div className={cardStyles}>
-                <div className="text-[32px] mb-3">📊</div>
-                <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Fund Selection</h3>
-                <p className="text-muted text-[14px] leading-[1.6]">Strategic fund selection tailored perfectly to your specific goals, timeline, and risk appetite.</p>
-              </div>
-
-              <div className={cardStyles}>
-                <div className="text-[32px] mb-3">📈</div>
-                <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Investment Execution</h3>
-                <p className="text-muted text-[14px] leading-[1.6]">Seamless SIP setup, strategic lumpsum investments, and timely top-ups to maximize returns.</p>
-              </div>
-
-              <div className={cardStyles}>
-                <div className="text-[32px] mb-3">🔄</div>
-                <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Portfolio Reviews</h3>
-                <p className="text-muted text-[14px] leading-[1.6]">Regular portfolio reviews — conducted quarterly or whenever market movements demand action.</p>
-              </div>
-
-              <div className={cardStyles}>
-                <div className="text-[32px] mb-3">🔀</div>
-                <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Fund Switches</h3>
-                <p className="text-muted text-[14px] leading-[1.6]">Proactive fund switches deployed automatically whenever a better, more efficient option exists.</p>
-              </div>
-
-              <div className={cardStyles}>
-                <div className="text-[32px] mb-3">💰</div>
-                <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Redemption Guidance</h3>
-                <p className="text-muted text-[14px] leading-[1.6]">Tax-efficient redemption guidance designed for when you actually need to access your money.</p>
-              </div>
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ 
+                        height: isHovered ? 'auto' : 0, 
+                        opacity: isHovered ? 1 : 0,
+                        marginTop: isHovered ? 16 : 0
+                      }}
+                      transition={{ 
+                        duration: 0.35, 
+                        ease: [0.16, 1, 0.3, 1] 
+                      }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-muted text-[13.5px] leading-[1.6] border-t border-navy/5 pt-3">
+                        {item.detailedDescription}
+                      </p>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </FadeIn>
