@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -71,7 +72,7 @@ const NRIPage = () => {
   };
 
   const handleEmail = () => {
-    window.location.href = 'mailto:officeinsurance2017@gmail.com?subject=NRI%20Investment%20%26%20Insurance%20Enquiry';
+    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=officeinsurance2017@gmail.com&su=NRI%20Investment%20%26%20Insurance%20Enquiry', '_blank');
   };
 
   const handleSubmit = async (e) => {
@@ -145,6 +146,11 @@ const NRIPage = () => {
       <section className="bg-navy py-[4rem] w-full">
         <FadeIn delay={0.1}>
           <div className="max-w-7xl mx-auto px-4">
+            <div className="mb-6">
+              <Link to="/services" className="text-gold/85 hover:text-gold font-medium text-[14px] inline-flex items-center gap-1.5 transition-colors">
+                &larr; Back to Services
+              </Link>
+            </div>
             <div className="inline-flex items-center gap-[6px] bg-gold/15 border border-gold/30 rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]">
               <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">NRI Investment Services</span>
             </div>

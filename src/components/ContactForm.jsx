@@ -163,7 +163,7 @@ const ContactForm = () => {
           <div className="flex flex-row gap-[1.5rem] flex-wrap mt-[1.25rem] pt-[1.25rem] border-t border-white/10">
             <div>
               <strong className="block text-white/70 font-medium mb-[2px] text-[13px]">Email</strong>
-              <a href="mailto:officeinsurance2017@gmail.com" className="text-white/45 text-[12px] hover:text-[#c9922a] transition-colors">officeinsurance2017@gmail.com</a>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=officeinsurance2017@gmail.com" target="_blank" rel="noopener noreferrer" className="text-white/45 text-[12px] hover:text-[#c9922a] transition-colors">officeinsurance2017@gmail.com</a>
             </div>
             <div>
               <strong className="block text-white/70 font-medium mb-[2px] text-[13px]">Phone</strong>

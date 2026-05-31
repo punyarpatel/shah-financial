@@ -8,6 +8,8 @@ import CoinCarousel from '../components/animations/CoinCarousel';
 import AnimatedCounter from '../components/animations/AnimatedCounter';
 import StaggerGroup from '../components/animations/StaggerGroup';
 import StaggerItem from '../components/animations/StaggerItem';
+import JourneyTimeline from '../components/JourneyTimeline';
+import CredentialsShowcase from '../components/CredentialsShowcase';
 
 const AboutPage = () => {
   const labelStyles = "text-gold text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]";
@@ -115,50 +117,9 @@ const AboutPage = () => {
         </FadeIn>
       </section>
 
-      {/* Section 4: Registrations */}
-      <section id="credentials" className="bg-cream py-[3.5rem] w-full">
-        <FadeIn>
-          <div className="max-w-7xl mx-auto px-4">
-            <div className={labelStyles}>Registrations</div>
-            <h2 className={titleStyles}>Our Credentials</h2>
-            
-            <div className={`${cardStyles} max-w-3xl`}>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <span className="text-gold mt-0.5">✅</span>
-                  <span className="text-muted text-[15px]"><strong className="text-navy">AMFI Registration No:</strong> ARN-XXXXX</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-gold mt-0.5">✅</span>
-                  <span className="text-muted text-[15px]"><strong className="text-navy">IRDAI License No:</strong> XXXXXXXXX</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-gold mt-0.5">✅</span>
-                  <span className="text-muted text-[15px]"><strong className="text-navy">NJ Wealth Empanelled Partner:</strong> since 2010</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-gold mt-0.5">✅</span>
-                  <span className="text-muted text-[15px]"><strong className="text-navy">Prudent Corporate FundzBazar:</strong> Partner</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </FadeIn>
-      </section>
+      {/* Section 3.5: Our Journey Timeline */}
+      <JourneyTimeline />
 
-      {/* Section 4.5: Partners Carousel */}
-      <section className="py-[4rem] w-full bg-navy overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 text-center mb-[2rem]">
-           <h2 className="font-serif text-[28px] md:text-[36px] text-white font-semibold mb-2">
-              Explore 5,000+ Mutual Funds & ETFs
-           </h2>
-           <p className="text-white/60 text-[15px] max-w-2xl mx-auto">
-             Unrestricted access to every major Asset Management Company in India.
-           </p>
-        </div>
-
-        <CoinCarousel />
-      </section>
 
       {/* Section 5: Our Team */}
       <section id="team" className="bg-white py-[3.5rem] w-full">
@@ -200,6 +161,23 @@ const AboutPage = () => {
           </div>
         </FadeIn>
       </section>
+
+      {/* Section 4.5: Partners Carousel */}
+      <section className="py-[4rem] w-full bg-navy overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 text-center mb-[2rem]">
+           <h2 className="font-serif text-[28px] md:text-[36px] text-white font-semibold mb-2">
+              Explore 5,000+ Mutual Funds & ETFs
+           </h2>
+           <p className="text-white/60 text-[15px] max-w-2xl mx-auto">
+             Unrestricted access to every major Asset Management Company in India.
+           </p>
+        </div>
+
+        <CoinCarousel />
+      </section>
+
+      {/* Section 4: Registrations (Interactive Showcase) */}
+      <CredentialsShowcase />
 
       <Footer />
       <WhatsAppFloat />

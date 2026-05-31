@@ -30,8 +30,8 @@ const navData = {
     { icon: '🎯', title: 'Goal-Based Planning', desc: 'Align your investments with life goals.', link: '/blog/goal-based-wealth-planning' },
   ],
   client: [
-    { icon: '🏦', title: 'NJ Wealth Portal', desc: 'Login for NJ Wealth managed portfolios.', link: '/client-portal' },
-    { icon: '📊', title: 'Prudent FundzBazar', desc: 'Login for Prudent FundzBazar platform.', link: '/client-portal' },
+    { icon: '🏦', title: 'NJ Client Desk', desc: 'Login for NJ Client Desk managed portfolios.', link: '/client-portal' },
+    { icon: '📊', title: 'Prudent Client Desk', desc: 'Login for Prudent Client Desk platform.', link: '/client-portal' },
     { icon: '💬', title: 'Need Help?', desc: 'WhatsApp us if you are unsure which platform to use.', link: '/client-portal' },
   ]
 };

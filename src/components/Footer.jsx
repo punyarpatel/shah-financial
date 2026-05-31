@@ -1,7 +1,37 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Footer = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLinkClick = (e, link) => {
+    e.preventDefault();
+    if (link === '/') {
+      if (location.pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        navigate('/');
+        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
+      }
+    } else if (link.includes('#')) {
+      const [path, hash] = link.split('#');
+      if (location.pathname !== path) {
+        navigate(link);
+        setTimeout(() => {
+          const section = document.getElementById(hash);
+          if (section) section.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      } else {
+        const section = document.getElementById(hash);
+        if (section) section.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate(link);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const headingStyles = "text-white font-medium text-[14px] mb-4";
   const linkStyles = "block text-white/40 text-[13px] hover:text-[#c9922a] transition-colors mb-3 cursor-pointer";
   const textStyles = "block text-white/40 text-[13px] mb-3";
@@ -18,27 +48,34 @@ const Footer = () => {
             {/* Column 1 */}
             <div>
               <h3 className={headingStyles}>Company</h3>
-              <Link to="/" className={linkStyles}>Home</Link>
-              <Link to="/about" className={linkStyles}>About</Link>
-              <a href="#services" className={linkStyles}>Services</a>
-              <Link to="/blog" className={linkStyles}>Blog</Link>
+              <a href="/" onClick={(e) => handleLinkClick(e, '/')} className={linkStyles}>Home</a>
+              <a href="/about" onClick={(e) => handleLinkClick(e, '/about')} className={linkStyles}>About</a>
+              <a href="/services" onClick={(e) => handleLinkClick(e, '/services')} className={linkStyles}>Services</a>
+              <a href="/blog" onClick={(e) => handleLinkClick(e, '/blog')} className={linkStyles}>Blog</a>
             </div>
             
             {/* Column 2 */}
             <div>
               <h3 className={headingStyles}>Services</h3>
-              <a href="#services" className={linkStyles}>Mutual Funds</a>
-              <Link to="/nri" className={linkStyles}>NRI Investment</Link>
-              <a href="#services" className={linkStyles}>Insurance</a>
-              <a href="#services" className={linkStyles}>Portfolio Review</a>
+              <a href="/services/mutual-funds" onClick={(e) => handleLinkClick(e, '/services/mutual-funds')} className={linkStyles}>Mutual Funds</a>
+              <a href="/nri" onClick={(e) => handleLinkClick(e, '/nri')} className={linkStyles}>NRI Investment</a>
+              <a href="/services/insurance" onClick={(e) => handleLinkClick(e, '/services/insurance')} className={linkStyles}>Insurance</a>
+              <a href="/#contact" onClick={(e) => handleLinkClick(e, '/#contact')} className={linkStyles}>Portfolio Review</a>
             </div>
 
             {/* Column 3 */}
             <div>
               <h3 className={headingStyles}>Contact</h3>
-              <a href="#contact" className={linkStyles}>Get in Touch</a>
+              <a href="/#contact" onClick={(e) => handleLinkClick(e, '/#contact')} className={linkStyles}>Get in Touch</a>
               <a href="tel:+919664977576" className={linkStyles}>+91 96649 77576</a>
-              <a href="mailto:officeinsurance2017@gmail.com" className={linkStyles}>officeinsurance2017@gmail.com</a>
+              <a 
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=officeinsurance2017@gmail.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={linkStyles}
+              >
+                officeinsurance2017@gmail.com
+              </a>
               <span className={textStyles}>Ahmedabad, Gujarat</span>
             </div>
 
