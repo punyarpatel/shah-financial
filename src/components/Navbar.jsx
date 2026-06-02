@@ -38,7 +38,7 @@ const navData = {
 
 const DesktopNavItem = ({ title, mainLink, items, handleLinkClick }) => (
   <div className="relative group h-full flex items-center">
-    <button 
+    <button
       onClick={(e) => handleLinkClick(e, mainLink)}
       className="text-white/75 group-hover:text-white text-[13px] transition-colors flex items-center gap-1 cursor-pointer"
     >
@@ -47,13 +47,13 @@ const DesktopNavItem = ({ title, mainLink, items, handleLinkClick }) => (
         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
       </svg>
     </button>
-    
+
     <div className="absolute top-[64px] left-1/2 -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-out z-[100]">
       <div className="h-4 w-full absolute -top-4"></div>
       <div className={`bg-white rounded-[12px] shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 p-4 mt-2 ${items.length > 4 ? 'w-[650px]' : 'w-[500px]'}`}>
         <div className={`grid gap-2 ${items.length > 3 ? 'grid-cols-2' : 'grid-cols-1'}`}>
           {items.map((item, idx) => (
-            <a 
+            <a
               key={idx}
               href={item.link}
               onClick={(e) => handleLinkClick(e, item.link)}
@@ -75,13 +75,13 @@ const DesktopNavItem = ({ title, mainLink, items, handleLinkClick }) => (
 const MobileNavItem = ({ title, mainLink, items, isOpen, toggleOpen, handleLinkClick }) => (
   <div className="flex flex-col">
     <div className="flex items-center justify-between py-2">
-      <button 
+      <button
         onClick={(e) => handleLinkClick(e, mainLink)}
         className="text-white/75 hover:text-white text-[14px] transition-colors text-left flex-grow"
       >
         {title}
       </button>
-      <button 
+      <button
         onClick={toggleOpen}
         className="p-1 -mr-1 text-white/75 hover:text-white"
       >
@@ -90,11 +90,11 @@ const MobileNavItem = ({ title, mainLink, items, isOpen, toggleOpen, handleLinkC
         </svg>
       </button>
     </div>
-    
+
     {isOpen && (
       <div className="flex flex-col pl-4 mt-3 space-y-4 border-l border-white/10 ml-2">
         {items.map((item, idx) => (
-          <a 
+          <a
             key={idx}
             href={item.link}
             onClick={(e) => handleLinkClick(e, item.link)}
@@ -122,14 +122,14 @@ const Navbar = () => {
     blog: false,
     client: false
   });
-  
+
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       // If mobile menu is open, don't hide the navbar
       if (isOpen) {
         setLastScrollY(currentScrollY);
@@ -143,7 +143,7 @@ const Navbar = () => {
         // Scrolling up
         setIsVisible(true);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
@@ -169,7 +169,7 @@ const Navbar = () => {
   const handleLinkClick = (e, link) => {
     e.preventDefault();
     closeMenu();
-    
+
     if (link === '/') {
       if (location.pathname === '/') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -220,7 +220,7 @@ const Navbar = () => {
     <>
       {/* Invisible hover zone to reveal navbar when hovering at top edge */}
       {!isVisible && (
-        <div 
+        <div
           className="fixed top-0 left-0 w-full h-[20px] z-[150]"
           onMouseEnter={() => setIsVisible(true)}
         />
@@ -228,71 +228,71 @@ const Navbar = () => {
 
       <nav className={`sticky top-0 bg-navy h-[64px] z-[100] w-full shadow-md transition-transform duration-300 ease-in-out ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
-        {/* Left Side: Logo */}
-        <Link to="/" className="flex flex-col justify-center" onClick={handleLogoClick}>
-          <span className="font-serif text-white text-[17px] font-semibold leading-tight">
-            Shah Financial Services
-          </span>
-          <span className="text-goldLight text-[10px] uppercase tracking-[0.15em] leading-tight mt-0.5">
-            AMFI Registered &middot; Est. 2009
-          </span>
-        </Link>
+          {/* Left Side: Logo */}
+          <Link to="/" className="flex flex-col justify-center" onClick={handleLogoClick}>
+            <span className="font-serif text-white text-[17px] font-semibold leading-tight">
+              Shah Financial Services
+            </span>
+            <span className="text-goldLight text-[10px] uppercase tracking-[0.15em] leading-tight mt-0.5">
+              AMFI Registered &middot; Est. 2009
+            </span>
+          </Link>
 
-        {/* Right Side: Desktop Nav */}
-        <div className="hidden md:flex items-center gap-6 h-full">
-          <DesktopNavItem title="Home" mainLink="/" items={navData.home} handleLinkClick={handleLinkClick} />
-          <DesktopNavItem title="Services" mainLink="/services" items={navData.services} handleLinkClick={handleLinkClick} />
-          <DesktopNavItem title="About" mainLink="/about" items={navData.about} handleLinkClick={handleLinkClick} />
-          <DesktopNavItem title="Blog" mainLink="/blog" items={navData.blog} handleLinkClick={handleLinkClick} />
-          <DesktopNavItem title="Client Login" mainLink="/client-portal" items={navData.client} handleLinkClick={handleLinkClick} />
-          
-          {/* CTA Button */}
-          <button 
-            onClick={handleScrollToContact}
-            className="bg-gold text-white px-[18px] py-[8px] rounded-[6px] text-[13px] font-medium hover:bg-goldLight transition-colors ml-2"
-          >
-            Get Free Review
-          </button>
-        </div>
+          {/* Right Side: Desktop Nav */}
+          <div className="hidden md:flex items-center gap-6 h-full">
+            <DesktopNavItem title="Home" mainLink="/" items={navData.home} handleLinkClick={handleLinkClick} />
+            <DesktopNavItem title="Services" mainLink="/services" items={navData.services} handleLinkClick={handleLinkClick} />
+            <DesktopNavItem title="About Us" mainLink="/about" items={navData.about} handleLinkClick={handleLinkClick} />
+            <DesktopNavItem title="Blog" mainLink="/blog" items={navData.blog} handleLinkClick={handleLinkClick} />
+            <DesktopNavItem title="Client Login" mainLink="/client-portal" items={navData.client} handleLinkClick={handleLinkClick} />
 
-        {/* Mobile Hamburger Icon */}
-        <button 
-          className="md:hidden text-white p-2" 
-          onClick={() => setIsOpen(!isOpen)} 
-          aria-label="Toggle menu"
-        >
-          {isOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 12h18M3 6h18M3 18h18" />
-            </svg>
-          )}
-        </button>
-      </div>
-
-      {/* Mobile Dropdown Menu */}
-      {isOpen && (
-        <div className="md:hidden absolute top-[64px] left-0 w-full bg-navy border-t border-white/10 shadow-lg max-h-[calc(100vh-64px)] overflow-y-auto">
-          <div className="flex flex-col px-4 py-4 space-y-4">
-            <MobileNavItem title="Home" mainLink="/" items={navData.home} isOpen={mobileMenus.home} toggleOpen={() => toggleMobileMenu('home')} handleLinkClick={handleLinkClick} />
-            <MobileNavItem title="Services" mainLink="/services" items={navData.services} isOpen={mobileMenus.services} toggleOpen={() => toggleMobileMenu('services')} handleLinkClick={handleLinkClick} />
-            <MobileNavItem title="About" mainLink="/about" items={navData.about} isOpen={mobileMenus.about} toggleOpen={() => toggleMobileMenu('about')} handleLinkClick={handleLinkClick} />
-            <MobileNavItem title="Blog" mainLink="/blog" items={navData.blog} isOpen={mobileMenus.blog} toggleOpen={() => toggleMobileMenu('blog')} handleLinkClick={handleLinkClick} />
-            <MobileNavItem title="Client Login" mainLink="/client-portal" items={navData.client} isOpen={mobileMenus.client} toggleOpen={() => toggleMobileMenu('client')} handleLinkClick={handleLinkClick} />
-            
-            <button 
+            {/* CTA Button */}
+            <button
               onClick={handleScrollToContact}
-              className="bg-gold text-white px-[18px] py-[10px] rounded-[6px] text-[14px] font-medium hover:bg-goldLight transition-colors w-full text-center mt-2"
+              className="bg-gold text-white px-[18px] py-[8px] rounded-[6px] text-[13px] font-medium hover:bg-goldLight transition-colors ml-2"
             >
               Get Free Review
             </button>
           </div>
+
+          {/* Mobile Hamburger Icon */}
+          <button
+            className="md:hidden text-white p-2"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? (
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 12h18M3 6h18M3 18h18" />
+              </svg>
+            )}
+          </button>
         </div>
-      )}
-    </nav>
+
+        {/* Mobile Dropdown Menu */}
+        {isOpen && (
+          <div className="md:hidden absolute top-[64px] left-0 w-full bg-navy border-t border-white/10 shadow-lg max-h-[calc(100vh-64px)] overflow-y-auto">
+            <div className="flex flex-col px-4 py-4 space-y-4">
+              <MobileNavItem title="Home" mainLink="/" items={navData.home} isOpen={mobileMenus.home} toggleOpen={() => toggleMobileMenu('home')} handleLinkClick={handleLinkClick} />
+              <MobileNavItem title="Services" mainLink="/services" items={navData.services} isOpen={mobileMenus.services} toggleOpen={() => toggleMobileMenu('services')} handleLinkClick={handleLinkClick} />
+              <MobileNavItem title="About Us" mainLink="/about" items={navData.about} isOpen={mobileMenus.about} toggleOpen={() => toggleMobileMenu('about')} handleLinkClick={handleLinkClick} />
+              <MobileNavItem title="Blog" mainLink="/blog" items={navData.blog} isOpen={mobileMenus.blog} toggleOpen={() => toggleMobileMenu('blog')} handleLinkClick={handleLinkClick} />
+              <MobileNavItem title="Client Login" mainLink="/client-portal" items={navData.client} isOpen={mobileMenus.client} toggleOpen={() => toggleMobileMenu('client')} handleLinkClick={handleLinkClick} />
+
+              <button
+                onClick={handleScrollToContact}
+                className="bg-gold text-white px-[18px] py-[10px] rounded-[6px] text-[14px] font-medium hover:bg-goldLight transition-colors w-full text-center mt-2"
+              >
+                Get Free Review
+              </button>
+            </div>
+          </div>
+        )}
+      </nav>
     </>
   );
 };

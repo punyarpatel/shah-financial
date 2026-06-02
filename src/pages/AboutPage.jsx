@@ -15,12 +15,22 @@ const AboutPage = () => {
   const labelStyles = "text-gold text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]";
   const titleStyles = "font-serif text-[28px] md:text-[36px] text-textDark font-semibold mb-[2rem] leading-tight";
   const cardStyles = "premium-card";
+  const ogImage = `${window.location.origin}/why_choose_us_mockup.png`;
 
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
         <title>About Us — Shah Financial Services Ahmedabad</title>
         <meta name="description" content="Shah Financial Services — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 3,000+ families and 100+ NRI clients across India and abroad." />
+        <meta property="og:title" content="About Us — Shah Financial Services Ahmedabad" />
+        <meta property="og:description" content="Shah Financial Services — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 3,000+ families and 100+ NRI clients across India and abroad." />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Us — Shah Financial Services Ahmedabad" />
+        <meta name="twitter:description" content="Shah Financial Services — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 3,000+ families and 100+ NRI clients across India and abroad." />
+        <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
       <Navbar />

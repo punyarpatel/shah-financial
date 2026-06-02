@@ -75,10 +75,22 @@ const ClientPortalPage = () => {
   const cardStyles = "bg-white border-[1.5px] border-[#0d2545]/12 rounded-[14px] p-[2rem] text-center hover:border-[#c9922a] transition-colors cursor-pointer";
   const btnStyles = "inline-block bg-[#c9922a] text-white px-[20px] py-[10px] rounded-[6px] text-[14px] font-medium hover:bg-[#f0c96a] transition-colors";
 
+  const ogImage = `${window.location.origin}/why_choose_us_mockup.png`;
+
   return (
     <div className="min-h-screen bg-[#faf8f4] flex flex-col relative">
       <Helmet>
-        <title>Client Portfolio Login — Shah Financial Services.</title>
+        <title>Client Portfolio Login — Shah Financial Services</title>
+        <meta name="description" content="Access your NJ Client Desk and FundzBazar Prudent Client Desk portfolios to monitor your mutual fund holdings and transactions." />
+        <meta property="og:title" content="Client Portfolio Login — Shah Financial Services" />
+        <meta property="og:description" content="Access your NJ Client Desk and FundzBazar Prudent Client Desk portfolios to monitor your mutual fund holdings and transactions." />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Client Portfolio Login — Shah Financial Services" />
+        <meta name="twitter:description" content="Access your NJ Client Desk and FundzBazar Prudent Client Desk portfolios to monitor your mutual fund holdings and transactions." />
+        <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
       <Navbar />

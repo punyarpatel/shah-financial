@@ -60,11 +60,22 @@ const servicesList = [
 ];
 
 const ServicesPage = () => {
+  const ogImage = `${window.location.origin}/why_choose_us_mockup.png`;
+
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
         <title>Our Services — Shah Financial Services Ahmedabad</title>
         <meta name="description" content="Explore comprehensive wealth management, mutual fund advisory, life and health insurance, NRI investment planning, retirement setups, and tax-saving ELSS." />
+        <meta property="og:title" content="Our Services — Shah Financial Services Ahmedabad" />
+        <meta property="og:description" content="Explore comprehensive wealth management, mutual fund advisory, life and health insurance, NRI investment planning, retirement setups, and tax-saving ELSS." />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Our Services — Shah Financial Services Ahmedabad" />
+        <meta name="twitter:description" content="Explore comprehensive wealth management, mutual fund advisory, life and health insurance, NRI investment planning, retirement setups, and tax-saving ELSS." />
+        <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
       <Navbar />

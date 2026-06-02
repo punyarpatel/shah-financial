@@ -114,11 +114,22 @@ const MutualFundPage = () => {
   const inputStyles = "w-full px-[12px] py-[10px] border border-white/15 rounded-[8px] text-[14px] font-sans text-white bg-white/5 outline-none focus:border-gold focus:bg-white/10 placeholder-white/35 transition-colors";
   const formLabelStyles = "block text-[12px] text-white/60 uppercase tracking-[0.04em] font-medium mb-[4px]";
 
+  const ogImage = `${window.location.origin}/mutual_funds_preview.png`;
+
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
         <title>Mutual Fund Advisory — Shah Financial Services</title>
         <meta name="description" content="Expert mutual fund advisory, SIP setups, portfolio reviews, and goal-based investing." />
+        <meta property="og:title" content="Mutual Fund Advisory — Shah Financial Services" />
+        <meta property="og:description" content="Expert mutual fund advisory, SIP setups, portfolio reviews, and goal-based investing." />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Mutual Fund Advisory — Shah Financial Services" />
+        <meta name="twitter:description" content="Expert mutual fund advisory, SIP setups, portfolio reviews, and goal-based investing." />
+        <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
       <Navbar />

@@ -126,11 +126,22 @@ const InsurancePage = () => {
 
   const partners = ['HDFC Ergo', 'ICICI Lombard', 'Go Digit', 'Tata AIG', 'Bajaj Allianz', 'Reliance General', 'Edelweiss Zuno'];
 
+  const ogImage = `${window.location.origin}/insurance_preview.png`;
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col relative">
       <Helmet>
         <title>Life & General Insurance — Shah Financial Services</title>
         <meta name="description" content="Term life, health, motor, fire, marine, and group insurance from India's most trusted insurers. Compare and get covered today." />
+        <meta property="og:title" content="Life & General Insurance — Shah Financial Services" />
+        <meta property="og:description" content="Term life, health, motor, fire, marine, and group insurance from India's most trusted insurers. Compare and get covered today." />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Life & General Insurance — Shah Financial Services" />
+        <meta name="twitter:description" content="Term life, health, motor, fire, marine, and group insurance from India's most trusted insurers. Compare and get covered today." />
+        <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
       <Navbar />

@@ -133,11 +133,22 @@ const NRIPage = () => {
 
   const countries = ['🇺🇸 USA', '🇬🇧 UK', '🇦🇪 UAE', '🇦🇺 Australia', '🇨🇦 Canada', '🇸🇬 Singapore', '🇩🇪 Germany', '🇳🇿 New Zealand'];
 
+  const ogImage = `${window.location.origin}/nri_services_preview.png`;
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col relative">
       <Helmet>
         <title>NRI Investment Services India — Shah Financial Services</title>
         <meta name="description" content="NRI mutual fund investments, NRI health insurance in India, DTAA guidance, KYC, repatriation planning. Serving NRIs across USA, UK, UAE, Canada, Australia, Singapore." />
+        <meta property="og:title" content="NRI Investment Services India — Shah Financial Services" />
+        <meta property="og:description" content="NRI mutual fund investments, NRI health insurance in India, DTAA guidance, KYC, repatriation planning. Serving NRIs across USA, UK, UAE, Canada, Australia, Singapore." />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="NRI Investment Services India — Shah Financial Services" />
+        <meta name="twitter:description" content="NRI mutual fund investments, NRI health insurance in India, DTAA guidance, KYC, repatriation planning. Serving NRIs across USA, UK, UAE, Canada, Australia, Singapore." />
+        <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
       <Navbar />

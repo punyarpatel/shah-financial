@@ -189,11 +189,22 @@ const RetirementPage = () => {
 
 
 
+  const ogImage = `${window.location.origin}/retirement_preview.png`;
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col relative">
       <Helmet>
         <title>Retirement Planning — Shah Financial Services</title>
         <meta name="description" content="Build a realistic, inflation-adjusted retirement corpus plan. Start at 28 or 52 — it's never too early or too late." />
+        <meta property="og:title" content="Retirement Planning — Shah Financial Services" />
+        <meta property="og:description" content="Build a realistic, inflation-adjusted retirement corpus plan. Start at 28 or 52 — it's never too early or too late." />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Retirement Planning — Shah Financial Services" />
+        <meta name="twitter:description" content="Build a realistic, inflation-adjusted retirement corpus plan. Start at 28 or 52 — it's never too early or too late." />
+        <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
       <Navbar />

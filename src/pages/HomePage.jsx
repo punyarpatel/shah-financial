@@ -14,6 +14,8 @@ import FadeIn from '../components/animations/FadeIn';
 import BlogSection from '../components/BlogSection';
 
 const HomePage = () => {
+  const ogImage = `${window.location.origin}/why_choose_us_mockup.png`;
+
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
@@ -22,6 +24,15 @@ const HomePage = () => {
           name="description" 
           content="Trusted mutual fund distributor and insurance advisor in Ahmedabad serving 3000 plus families and NRI clients since 2009." 
         />
+        <meta property="og:title" content="Shah Financial Services — AMFI Registered MFD Ahmedabad" />
+        <meta property="og:description" content="Trusted mutual fund distributor and insurance advisor in Ahmedabad serving 3000 plus families and NRI clients since 2009." />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Shah Financial Services — AMFI Registered MFD Ahmedabad" />
+        <meta name="twitter:description" content="Trusted mutual fund distributor and insurance advisor in Ahmedabad serving 3000 plus families and NRI clients since 2009." />
+        <meta name="twitter:image" content={ogImage} />
       </Helmet>
       
       <Navbar />

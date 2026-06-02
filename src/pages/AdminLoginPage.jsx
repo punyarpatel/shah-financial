@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import supabase from '../lib/supabase';
 
 const AdminLoginPage = () => {
@@ -33,6 +34,10 @@ const AdminLoginPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#faf8f4]">
+      <Helmet>
+        <title>Admin Login — Shah Financial Services</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       
       <div className="bg-white border border-[#0d2545]/12 rounded-[14px] p-[2.5rem] max-w-[400px] w-[90%] shadow-[0_4px_24px_rgba(0,0,0,0.07)]">
         

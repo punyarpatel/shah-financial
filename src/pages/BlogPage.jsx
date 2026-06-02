@@ -11,11 +11,22 @@ import StaggerItem from '../components/animations/StaggerItem';
 import { blogs } from './SingleBlogPage';
 
 const BlogPage = () => {
+  const ogImage = `${window.location.origin}/why_choose_us_mockup.png`;
+
   return (
     <div className="min-h-screen bg-[#faf8f4] flex flex-col relative">
       <Helmet>
         <title>Financial Insights & Education — Shah Financial Services</title>
         <meta name="description" content="Expert articles on mutual funds, SIP investing, tax-saving ELSS, insurance planning, NRI investments, and personal finance from Shah Financial Services, Ahmedabad." />
+        <meta property="og:title" content="Financial Insights & Education — Shah Financial Services" />
+        <meta property="og:description" content="Expert articles on mutual funds, SIP investing, tax-saving ELSS, insurance planning, NRI investments, and personal finance from Shah Financial Services, Ahmedabad." />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Financial Insights & Education — Shah Financial Services" />
+        <meta name="twitter:description" content="Expert articles on mutual funds, SIP investing, tax-saving ELSS, insurance planning, NRI investments, and personal finance from Shah Financial Services, Ahmedabad." />
+        <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
       <Navbar />

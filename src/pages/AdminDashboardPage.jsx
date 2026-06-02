@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import supabase from '../lib/supabase';
 import api from '../lib/api';
 
@@ -111,6 +112,10 @@ const AdminDashboardPage = () => {
 
   return (
     <div className="min-h-screen bg-white font-sans text-[#1a1a2e]">
+      <Helmet>
+        <title>Admin Dashboard — Shah Financial Services</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       
       {/* Top Nav */}
       <nav className="bg-[#0d2545] h-[56px] flex items-center justify-between px-[2rem]">
