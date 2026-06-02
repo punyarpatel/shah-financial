@@ -45,3 +45,115 @@ html {
   }
 }
 
+/* Premium SVG Graphic Keyframe Animations */
+@keyframes svg-pulse {
+  0%, 100% { transform: scale(1); transform-origin: center; }
+  50% { transform: scale(1.08); transform-origin: center; }
+}
+
+@keyframes svg-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes svg-sway {
+  0%, 100% { transform: rotate(-3deg); transform-origin: center; }
+  50% { transform: rotate(3deg); transform-origin: center; }
+}
+
+@keyframes svg-spin {
+  from { transform: rotate(0deg); transform-origin: center; }
+  to { transform: rotate(360deg); transform-origin: center; }
+}
+
+@keyframes svg-wave {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-3px); }
+}
+
+@keyframes svg-flicker {
+  0%, 100% { transform: scaleY(1); opacity: 0.95; transform-origin: bottom; }
+  50% { transform: scaleY(1.15); opacity: 1; transform-origin: bottom; }
+}
+
+@keyframes svg-ekg {
+  0% { stroke-dashoffset: 200; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes svg-steam {
+  0% { transform: translateY(0) scaleX(1); opacity: 0; }
+  50% { opacity: 0.7; }
+  100% { transform: translateY(-6px) scaleX(1.2); opacity: 0; }
+}
+
+@keyframes svg-clock-spin {
+  from { transform: rotate(0deg); transform-origin: 62px 62px; }
+  to { transform: rotate(360deg); transform-origin: 62px 62px; }
+}
+
+/* SVG Animation Utility Classes */
+.animate-svg-pulse {
+  animation: svg-pulse 2s ease-in-out infinite;
+}
+
+.animate-svg-float {
+  animation: svg-float 3s ease-in-out infinite;
+}
+
+.animate-svg-float-delayed {
+  animation: svg-float 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.animate-svg-sway {
+  animation: svg-sway 4s ease-in-out infinite;
+}
+
+.animate-svg-spin {
+  animation: svg-spin 10s linear infinite;
+}
+
+.animate-svg-spin-fast {
+  animation: svg-spin 3s linear infinite;
+}
+
+.animate-svg-wave {
+  animation: svg-wave 3s ease-in-out infinite;
+}
+
+.animate-svg-flicker {
+  animation: svg-flicker 0.15s ease-in-out infinite alternate;
+}
+
+.animate-svg-ekg {
+  animation: svg-ekg 2.5s linear infinite;
+}
+
+.animate-svg-steam {
+  animation: svg-steam 2.5s ease-in-out infinite;
+}
+
+.animate-svg-clock {
+  animation: svg-clock-spin 15s linear infinite;
+}
+
+/* Custom Interactive Effects for Home Overview Image */
+@keyframes shine {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(100%) skewX(-15deg); }
+}
+
+.animate-shine {
+  animation: shine 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes shadow-pulse {
+  0%, 100% { transform: scaleX(1); opacity: 0.75; filter: blur(16px); }
+  50% { transform: scaleX(0.9); opacity: 0.55; filter: blur(20px); }
+}
+
+.animate-shadow-pulse {
+  animation: shadow-pulse 6s ease-in-out infinite;
+}
+

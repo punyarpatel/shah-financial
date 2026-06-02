@@ -7,6 +7,8 @@ import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import { submitLead } from '../lib/leads';
 import FadeIn from '../components/animations/FadeIn';
+import InsurerLogo from '../components/InsurerLogo';
+import ServiceCardGraphic from '../components/ServiceCardGraphic';
 
 const POLICY_CHECKS = [
   {
@@ -428,12 +430,16 @@ const NRIPage = () => {
               </div>
             </div>
  
-            {/* Insurer Partners (trust badges — no links) */}
             <div className="mb-10">
               <p className="text-muted text-[12px] uppercase tracking-[0.15em] font-medium mb-3">Our Insurer Partners for NRI Health Covers</p>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-4 items-center">
                 {insurerPartners.map((p) => (
-                  <div key={p} className="bg-cream border border-navy/10 rounded-[8px] px-[16px] py-[8px] text-navy text-[13px] font-semibold shadow-sm select-none">{p}</div>
+                  <div 
+                    key={p} 
+                    className="bg-white border border-navy/10 hover:border-gold/50 rounded-[12px] p-3 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 select-none w-[170px] h-[56px] min-w-[150px]"
+                  >
+                    <InsurerLogo name={p} />
+                  </div>
                 ))}
               </div>
             </div>
@@ -487,34 +493,41 @@ const NRIPage = () => {
                       }}
                       transition={{
                         type: 'spring',
-                        stiffness: 260,
-                        damping: 24,
+                        stiffness: 150,
+                        damping: 25,
+                        mass: 0.8,
                       }}
-                      className="bg-white border rounded-[12px] p-[1.5rem] h-full flex flex-col justify-between cursor-pointer transition-colors duration-300"
+                      className="relative bg-white border border-navy/10 hover:border-gold/50 rounded-[16px] p-6 h-full flex flex-col justify-between cursor-pointer overflow-hidden group min-h-[220px]"
                     >
-                      <div>
-                        <div className="text-[28px] mb-3 select-none">{c.icon}</div>
-                        <h4 className="font-serif text-[16px] text-navy font-semibold mb-2">{c.title}</h4>
+                      <div className="relative pr-16">
+                        <h4 className="font-serif text-[16px] text-navy font-bold mb-2 group-hover:text-gold transition-colors">{c.title}</h4>
                         <p className="text-muted text-[13px] leading-[1.6]">{c.description}</p>
+                        
+                        {/* Image Graphic in top right */}
+                        <div className="absolute -top-1 -right-2 w-14 h-14 md:w-16 md:h-16 pointer-events-none transform group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 ease-out">
+                          <ServiceCardGraphic id={c.id} />
+                        </div>
                       </div>
 
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ 
-                          height: isHovered ? 'auto' : 0, 
-                          opacity: isHovered ? 1 : 0,
-                          marginTop: isHovered ? 16 : 0
-                        }}
-                        transition={{ 
-                          duration: 0.35, 
-                          ease: [0.16, 1, 0.3, 1] 
-                        }}
-                        className="overflow-hidden"
-                      >
-                        <p className="text-muted text-[12.5px] leading-[1.6] border-t border-navy/5 pt-3">
-                          {c.detailedDescription}
-                        </p>
-                      </motion.div>
+                      <div>
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ 
+                            height: isHovered ? 'auto' : 0, 
+                            opacity: isHovered ? 1 : 0,
+                            marginTop: isHovered ? 16 : 0
+                          }}
+                          transition={{ 
+                            duration: 0.35, 
+                            ease: [0.16, 1, 0.3, 1] 
+                          }}
+                          className="overflow-hidden"
+                        >
+                          <p className="text-muted text-[12.5px] leading-[1.6] border-t border-navy/5 pt-3">
+                            {c.detailedDescription}
+                          </p>
+                        </motion.div>
+                      </div>
                     </motion.div>
                   );
                 })}

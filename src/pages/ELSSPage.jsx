@@ -8,6 +8,7 @@ import WhatsAppFloat from '../components/WhatsAppFloat';
 import { submitLead } from '../lib/leads';
 import FadeIn from '../components/animations/FadeIn';
 import SliderRow from '../components/calculators/SliderRow';
+import ServiceCardGraphic from '../components/ServiceCardGraphic';
 import ELSSGrowthChart from '../components/calculators/ELSSGrowthChart';
 
 const BENEFITS = [
@@ -370,34 +371,41 @@ const ELSSPage = () => {
                     }}
                     transition={{
                       type: 'spring',
-                      stiffness: 260,
-                      damping: 24,
+                      stiffness: 150,
+                      damping: 25,
+                      mass: 0.8,
                     }}
-                    className="bg-white border rounded-[12px] p-[1.5rem] h-full flex flex-col justify-between cursor-pointer transition-colors duration-300"
+                    className="relative bg-white border border-navy/10 hover:border-gold/50 rounded-[16px] p-6 h-full flex flex-col justify-between cursor-pointer overflow-hidden group min-h-[220px]"
                   >
-                    <div>
-                      <div className="text-[32px] mb-3 select-none">{b.icon}</div>
-                      <h3 className="font-serif text-[17px] text-navy font-semibold mb-2">{b.title}</h3>
+                    <div className="relative pr-16">
+                      <h3 className="font-serif text-[17px] text-navy font-bold mb-2 group-hover:text-gold transition-colors">{b.title}</h3>
                       <p className="text-muted text-[13px] leading-[1.6]">{b.description}</p>
+                      
+                      {/* Image Graphic in top right */}
+                      <div className="absolute -top-1 -right-2 w-14 h-14 md:w-16 md:h-16 pointer-events-none transform group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 ease-out">
+                        <ServiceCardGraphic id={b.id === 'selection' ? 'selection-elss' : b.id} />
+                      </div>
                     </div>
 
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ 
-                        height: isHovered ? 'auto' : 0, 
-                        opacity: isHovered ? 1 : 0,
-                        marginTop: isHovered ? 16 : 0
-                      }}
-                      transition={{ 
-                        duration: 0.35, 
-                        ease: [0.16, 1, 0.3, 1] 
-                      }}
-                      className="overflow-hidden"
-                    >
-                      <p className="text-muted text-[12.5px] leading-[1.6] border-t border-navy/5 pt-3">
-                        {b.detailedDescription}
-                      </p>
-                    </motion.div>
+                    <div>
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ 
+                          height: isHovered ? 'auto' : 0, 
+                          opacity: isHovered ? 1 : 0,
+                          marginTop: isHovered ? 16 : 0
+                        }}
+                        transition={{ 
+                          duration: 0.35, 
+                          ease: [0.16, 1, 0.3, 1] 
+                        }}
+                        className="overflow-hidden"
+                      >
+                        <p className="text-muted text-[12.5px] leading-[1.6] border-t border-navy/5 pt-3">
+                          {b.detailedDescription}
+                        </p>
+                      </motion.div>
+                    </div>
                   </motion.div>
                 );
               })}

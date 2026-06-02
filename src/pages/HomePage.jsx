@@ -12,6 +12,7 @@ import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import FadeIn from '../components/animations/FadeIn';
 import BlogSection from '../components/BlogSection';
+import FAQSection from '../components/FAQSection';
 
 const HomePage = () => {
   const ogImage = `${window.location.origin}/why_choose_us_mockup.png`;
@@ -64,6 +65,12 @@ const HomePage = () => {
       <FadeIn>
         <div id="testimonials">
           <Testimonials />
+        </div>
+      </FadeIn>
+
+      <FadeIn>
+        <div id="faq">
+          <FAQSection />
         </div>
       </FadeIn>
 

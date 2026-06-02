@@ -392,13 +392,13 @@ const ServicesGrid = () => {
             {/* Left Column (Overview Text) */}
             <div className="flex flex-col justify-center">
               <h2 className="font-serif text-[28px] md:text-[38px] text-textDark font-bold leading-[1.2] mb-6">
-                Experience Personalized Wealth Management Designed for Your Future
+                Wealth Creation is Only Half the Story. Discover the Power of Balanced Planning.
               </h2>
               <p className="text-[15.5px] leading-relaxed text-muted mb-4">
-                At Shah Financial Services, we centralize your entire investment and protection planning into one seamless, research-backed journey. By combining certified expertise with real-time portfolio management and digital ease, we empower you to focus on your long-term life milestones with confidence.
+                At Shah Financial Services, we integrate wealth creation and risk protection into a single, comprehensive strategy. Whether building growth through personalized mutual fund portfolios and tax-saving ELSS investments, or safeguarding your family with robust life, health, and general insurance policies, we cover your entire financial landscape under one roof.
               </p>
               <p className="text-[15.5px] leading-relaxed text-muted mb-6">
-                Designed for families and NRI clients alike, our bespoke wealth architecture ensures your money works as hard as you do. Join a growing community of over 3,000 forward-thinking clients who trust us to navigate the market's complexities and deliver clear, consistent pathways to financial freedom.
+                Our bespoke services are tailored for families, retirement planners, and NRI clients globally. By combining certified expert advisory with seamless digital execution, we make navigating the market's complexities simple, guiding you step-by-step toward clear and lasting financial freedom.
               </p>
               
               <div>
@@ -418,35 +418,77 @@ const ServicesGrid = () => {
             </div>
 
             {/* Right Column (Platform Creative Graphic) */}
-            <div className="flex justify-center">
-              {/* Outer soft box background wrapper */}
-              <div className="relative w-full max-w-[460px] aspect-[16/11] bg-[#f8fafc]/50 rounded-[20px] p-6 border border-slate-100 flex items-center justify-center shadow-inner">
-                {/* Dashboard mock card */}
-                <div className="relative w-full h-full bg-white rounded-xl shadow-[0_15px_35px_rgba(13,37,69,0.04),0_5px_15px_rgba(0,0,0,0.02)] border border-navy/[0.02] p-8 flex flex-col justify-between overflow-hidden group/graphic hover:scale-[1.02] transition-transform duration-500">
-                  {/* Glowing background circles */}
-                  <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#0d2545 1px, transparent 1px)', backgroundSize: '16px 16px' }}></div>
-                  
-                  {/* Gold target center & concentric waves */}
-                  <div className="relative mx-auto my-auto w-full flex flex-col items-center">
-                    <div className="relative w-16 h-16 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center mb-6">
-                      <div className="w-4 h-4 rounded-full bg-gold animate-pulse"></div>
-                      {/* Decorative outer waves */}
-                      <div className="absolute inset-0 rounded-full border border-gold/10 scale-150 animate-ping opacity-25" style={{ animationDuration: '4s' }}></div>
-                      <div className="absolute inset-0 rounded-full border border-gold/10 scale-[2.2] opacity-15"></div>
+            <div className="flex justify-center" style={{ perspective: '1200px' }}>
+              <div className="relative w-full max-w-[460px] aspect-[16/11] flex flex-col items-center justify-center group/card-container overflow-visible select-none">
+                {/* Soft shadow under the floating card */}
+                <div 
+                  className="absolute bottom-[-4%] w-[85%] h-6 bg-navy/15 rounded-full blur-xl transition-all duration-500 group-hover/card-container:scale-x-105 group-hover/card-container:blur-2xl group-hover/card-container:opacity-90 animate-shadow-pulse"
+                ></div>
+
+                {/* 1. Outer Entrance Motion Wrapper: Slides out from the left (text side) */}
+                <motion.div
+                  className="w-full h-full"
+                  initial={{ 
+                    opacity: 0, 
+                    x: isDesktop ? -260 : -60, 
+                    scale: 0.8, 
+                    rotateY: -20
+                  }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    x: 0, 
+                    scale: 1, 
+                    rotateY: 0
+                  }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 55,
+                    damping: 14,
+                    delay: 0.35
+                  }}
+                >
+                  {/* 2. Inner Floating & Hover Card */}
+                  <motion.div
+                    className="relative w-full h-full bg-[#f8fafc]/40 rounded-[24px] p-4 border border-slate-100/80 shadow-[0_15px_45px_rgba(13,37,69,0.03)] flex items-center justify-center backdrop-blur-sm"
+                    style={{ transformStyle: 'preserve-3d' }}
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 6,
+                      ease: "easeInOut"
+                    }}
+                    whileHover={{
+                      rotateX: 8,
+                      rotateY: -8,
+                      scale: 1.04,
+                      boxShadow: "0 30px 60px rgba(13,37,69,0.08)"
+                    }}
+                  >
+                    {/* Subtle soft shadow glow background behind card */}
+                    <div className="absolute -inset-4 bg-gradient-to-r from-gold/10 to-navy/5 rounded-[28px] blur-2xl opacity-60 pointer-events-none"></div>
+
+                    {/* Inner white card with the new balanced service overview image */}
+                    <div 
+                      className="relative w-full h-full bg-white rounded-xl border border-navy/[0.02] overflow-hidden shadow-[0_5px_15px_rgba(13,37,69,0.02)]"
+                      style={{ transform: 'translateZ(10px)' }}
+                    >
+                      {/* Dot grid background */}
+                      <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#0d2545 1px, transparent 1px)', backgroundSize: '16px 16px' }}></div>
+                      <img
+                        src="/services_overview.png"
+                        alt="Shah Financial Balanced Services Overview"
+                        className="w-full h-full object-cover"
+                      />
+                      
+                      {/* Metallic sweep shine effect */}
+                      <div className="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/35 to-transparent -translate-x-full group-hover/card-container:animate-shine pointer-events-none"></div>
+                      
+                      {/* Dark gradient overlay bottom */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-navy/5 to-transparent pointer-events-none"></div>
                     </div>
-
-                    {/* Skeletons */}
-                    <div className="w-3/5 h-3 bg-slate-100 rounded-full mb-3.5 group-hover/graphic:w-[65%] transition-all duration-500"></div>
-                    <div className="w-2/5 h-2 bg-slate-50 rounded-full mb-6 group-hover/graphic:w-[45%] transition-all duration-500"></div>
-                  </div>
-
-                  {/* 3 cards at the bottom */}
-                  <div className="grid grid-cols-3 gap-3 w-full mt-auto">
-                    <div className="h-14 bg-[#f8fafc] border border-slate-100/50 rounded-lg flex items-center justify-center text-lg hover:shadow-md transition-shadow duration-300">📈</div>
-                    <div className="h-14 bg-[#f8fafc] border border-slate-100/50 rounded-lg flex items-center justify-center text-lg hover:shadow-md transition-shadow duration-300">🛡️</div>
-                    <div className="h-14 bg-[#f8fafc] border border-slate-100/50 rounded-lg flex items-center justify-center text-lg hover:shadow-md transition-shadow duration-300">🌍</div>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               </div>
             </div>
           </div>

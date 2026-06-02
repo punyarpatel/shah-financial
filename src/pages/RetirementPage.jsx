@@ -8,6 +8,7 @@ import WhatsAppFloat from '../components/WhatsAppFloat';
 import { submitLead } from '../lib/leads';
 import FadeIn from '../components/animations/FadeIn';
 import SliderRow from '../components/calculators/SliderRow';
+import ServiceCardGraphic from '../components/ServiceCardGraphic';
 import RetirementGrowthChart from '../components/calculators/RetirementGrowthChart';
 
 const RETIREMENT_STEPS = [
@@ -436,39 +437,45 @@ const RetirementPage = () => {
                       }}
                       transition={{
                         type: 'spring',
-                        stiffness: 260,
-                        damping: 24,
+                        stiffness: 150,
+                        damping: 25,
+                        mass: 0.8,
                       }}
-                      className="bg-navy rounded-[12px] p-[1.5rem] h-full flex flex-col justify-between relative overflow-hidden cursor-pointer"
+                      className="relative bg-navy rounded-[16px] p-6 h-full flex flex-col justify-between overflow-hidden cursor-pointer group min-h-[220px]"
                     >
                       <div className="absolute top-0 right-0 w-32 h-32 bg-gold rounded-full blur-[60px] opacity-20 pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
-                      <div className="relative z-10">
-                        <div className="text-[32px] mb-3 select-none">🏖️</div>
+                      <div className="relative pr-16">
                         <h3 className="font-serif text-[18px] text-white font-semibold mb-2">{step.title}</h3>
                         <p className="text-white/60 text-[14px] leading-[1.6]">{step.description}</p>
+                        {/* Image Graphic in top right */}
+                        <div className="absolute -top-1 -right-2 w-14 h-14 md:w-16 md:h-16 pointer-events-none transform group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 ease-out">
+                          <ServiceCardGraphic id={step.id} />
+                        </div>
                       </div>
 
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ 
-                          height: isHovered ? 'auto' : 0, 
-                          opacity: isHovered ? 1 : 0,
-                          marginTop: isHovered ? 16 : 0
-                        }}
-                        transition={{ 
-                          duration: 0.35, 
-                          ease: [0.16, 1, 0.3, 1] 
-                        }}
-                        className="overflow-hidden relative z-10 w-full"
-                      >
-                        <p className="text-white/50 text-[13.5px] leading-[1.6] border-t border-white/10 pt-3 mb-4">
-                          {step.detailedDescription}
-                        </p>
-                        <button onClick={handleScrollToContact}
-                          className="bg-gold text-white py-[10px] px-[20px] rounded-[8px] text-[14px] font-medium hover:bg-goldLight transition-colors w-full relative z-10">
-                          Get My Free Plan →
-                        </button>
-                      </motion.div>
+                      <div>
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ 
+                            height: isHovered ? 'auto' : 0, 
+                            opacity: isHovered ? 1 : 0,
+                            marginTop: isHovered ? 16 : 0
+                          }}
+                          transition={{ 
+                            duration: 0.35, 
+                            ease: [0.16, 1, 0.3, 1] 
+                          }}
+                          className="overflow-hidden relative z-10 w-full"
+                        >
+                          <p className="text-white/50 text-[13.5px] leading-[1.6] border-t border-white/10 pt-3 mb-4">
+                            {step.detailedDescription}
+                          </p>
+                          <button onClick={handleScrollToContact}
+                            className="bg-gold text-white py-[10px] px-[20px] rounded-[8px] text-[14px] font-medium hover:bg-goldLight transition-colors w-full relative z-10">
+                            Get My Free Plan →
+                          </button>
+                        </motion.div>
+                      </div>
                     </motion.div>
                   );
                 }
@@ -495,37 +502,42 @@ const RetirementPage = () => {
                     }}
                     transition={{
                       type: 'spring',
-                      stiffness: 260,
-                      damping: 24,
+                      stiffness: 150,
+                      damping: 25,
+                      mass: 0.8,
                     }}
-                    className="bg-white border rounded-[12px] p-[1.5rem] h-full flex flex-col justify-between cursor-pointer transition-colors duration-300"
+                    className="relative bg-white border border-navy/10 hover:border-gold/50 rounded-[16px] p-6 h-full flex flex-col justify-between cursor-pointer overflow-hidden group min-h-[220px]"
                   >
-                    <div>
-                      <div className="flex items-center gap-3 mb-4 select-none">
-                        <div className="text-[32px]">{step.icon}</div>
-                        <div className="font-serif text-[32px] text-navy/15 font-bold leading-none">{step.num}</div>
-                      </div>
-                      <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">{step.title}</h3>
+                    <div className="relative pr-16">
+                      <div className="font-serif text-[32px] text-navy/15 font-bold leading-none mb-3 select-none">{step.num}</div>
+                      <h3 className="font-serif text-[18px] text-navy font-bold mb-2 group-hover:text-gold transition-colors">{step.title}</h3>
                       <p className="text-muted text-[14px] leading-[1.6]">{step.description}</p>
+                      
+                      {/* Image Graphic in top right */}
+                      <div className="absolute -top-1 -right-2 w-14 h-14 md:w-16 md:h-16 pointer-events-none transform group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 ease-out">
+                        <ServiceCardGraphic id={step.id} />
+                      </div>
                     </div>
 
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ 
-                        height: isHovered ? 'auto' : 0, 
-                        opacity: isHovered ? 1 : 0,
-                        marginTop: isHovered ? 16 : 0
-                      }}
-                      transition={{ 
-                        duration: 0.35, 
-                        ease: [0.16, 1, 0.3, 1] 
-                      }}
-                      className="overflow-hidden"
-                    >
-                      <p className="text-muted text-[13.5px] leading-[1.6] border-t border-navy/5 pt-3">
-                        {step.detailedDescription}
-                      </p>
-                    </motion.div>
+                    <div>
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ 
+                          height: isHovered ? 'auto' : 0, 
+                          opacity: isHovered ? 1 : 0,
+                          marginTop: isHovered ? 16 : 0
+                        }}
+                        transition={{ 
+                          duration: 0.35, 
+                          ease: [0.16, 1, 0.3, 1] 
+                        }}
+                        className="overflow-hidden"
+                      >
+                        <p className="text-muted text-[13.5px] leading-[1.6] border-t border-navy/5 pt-3">
+                          {step.detailedDescription}
+                        </p>
+                      </motion.div>
+                    </div>
                   </motion.div>
                 );
               })}
