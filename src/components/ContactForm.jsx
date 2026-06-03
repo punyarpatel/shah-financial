@@ -41,6 +41,18 @@ const ContactForm = () => {
     setLoading(false);
   };
 
+  const handleReset = () => {
+    setName('');
+    setPhone('');
+    setCity('');
+    setInterest('');
+    setIsNri('No — I am based in India');
+    setMessage('');
+    setError('');
+    setSuccess(false);
+  };
+
+
   const inputStyles = "w-full px-[12px] py-[10px] border border-white/15 rounded-[8px] text-[14px] font-sans text-white bg-white/5 outline-none focus:border-gold focus:bg-white/10 placeholder-white/35 transition-colors";
   const labelStyles = "block text-[12px] text-white/60 uppercase tracking-[0.04em] font-medium mb-[4px]";
 
@@ -62,8 +74,15 @@ const ContactForm = () => {
         {/* Card */}
         <div className="bg-white/5 border border-white/10 rounded-[14px] p-[1.5rem]">
           {success ? (
-            <div className="bg-green-500/15 border border-green-500/30 rounded-[10px] p-[1rem] text-center text-[#4ade80]">
-              Thank you! We will call you within 24 hours.
+            <div className="flex flex-col items-center gap-[1rem] bg-green-500/15 border border-green-500/30 rounded-[10px] p-[1.5rem] text-center text-[#4ade80]">
+              <div>Thank you! We will call you within 24 hours.</div>
+              <button
+                type="button"
+                onClick={handleReset}
+                className="bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/30 py-[8px] px-[16px] rounded-[6px] text-[13px] font-medium cursor-pointer transition-all"
+              >
+                Back to form
+              </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-[1rem]">

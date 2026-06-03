@@ -391,12 +391,20 @@ const Navbar = () => {
                   <div className="text-[32px] mb-2">✅</div>
                   <h4 className="font-serif text-[18px] font-bold mb-1">Request Submitted!</h4>
                   <p className="text-[13px]">Thank you for reaching out. Our team will contact you within 24 hours.</p>
-                  <button 
-                    onClick={() => setIsModalOpen(false)}
-                    className="mt-5 bg-[#0d2545] text-white px-6 py-2 rounded-lg text-[13.5px] font-medium hover:bg-[#0d2545]/95 transition-colors cursor-pointer border-none"
-                  >
-                    Close Window
-                  </button>
+                  <div className="flex gap-3 justify-center mt-5">
+                    <button 
+                      onClick={resetForm}
+                      className="bg-[#0d2545]/10 hover:bg-[#0d2545]/20 text-[#0d2545] border border-[#0d2545]/20 px-4 py-2 rounded-lg text-[13.5px] font-medium transition-colors cursor-pointer"
+                    >
+                      Back to form
+                    </button>
+                    <button 
+                      onClick={() => setIsModalOpen(false)}
+                      className="bg-[#0d2545] text-white px-6 py-2 rounded-lg text-[13.5px] font-medium hover:bg-[#0d2545]/95 transition-colors cursor-pointer border-none"
+                    >
+                      Close Window
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-left">

@@ -25,6 +25,25 @@ const writeLeads = (leads) => {
   fs.writeFileSync(DB_PATH, JSON.stringify(leads, null, 2));
 };
 
+const NOTES_PATH = path.join(__dirname, 'notes.json');
+
+const readNotes = () => {
+  try {
+    if (!fs.existsSync(NOTES_PATH)) {
+      fs.writeFileSync(NOTES_PATH, JSON.stringify({}, null, 2));
+      return {};
+    }
+    const data = fs.readFileSync(NOTES_PATH, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    return {};
+  }
+};
+
+const writeNotes = (notes) => {
+  fs.writeFileSync(NOTES_PATH, JSON.stringify(notes, null, 2));
+};
+
 app.post('/api/leads', (req, res) => {
   const { name, phone, city, interest, isNri, nriCountry, message } = req.body;
   
@@ -74,6 +93,56 @@ app.patch('/api/leads/:id', (req, res) => {
 
   res.json(leads[index]);
 });
+
+app.get('/api/leads/:id/notes', (req, res) => {
+  const { id } = req.params;
+  const notesMap = readNotes();
+  const leadNotes = notesMap[id] || [];
+  leadNotes.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+  res.json(leadNotes);
+});
+
+app.post('/api/leads/:id/notes', (req, res) => {
+  const { id } = req.params;
+  const { text } = req.body;
+
+  if (!text || !text.trim()) {
+    return res.status(400).json({ error: 'Note text is required' });
+  }
+
+  const notesMap = readNotes();
+  if (!notesMap[id]) {
+    notesMap[id] = [];
+  }
+
+  const newNote = {
+    id: uuidv4(),
+    text: text.trim(),
+    created_at: new Date().toISOString()
+  };
+
+  notesMap[id].push(newNote);
+  writeNotes(notesMap);
+
+  const leadNotes = notesMap[id];
+  leadNotes.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+  res.status(201).json(leadNotes);
+});app.delete('/api/leads/:id', (req, res) => {
+  const { id } = req.params;
+
+  const leads = readLeads();
+  const updatedLeads = leads.filter((lead) => lead.id !== id);
+  writeLeads(updatedLeads);
+
+  const notesMap = readNotes();
+  if (notesMap[id]) {
+    delete notesMap[id];
+    writeNotes(notesMap);
+  }
+
+  res.json({ success: true });
+});
+
 
 app.listen(3001, () => {
   console.log('Server running on port 3001');

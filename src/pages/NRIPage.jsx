@@ -104,6 +104,16 @@ const NRIPage = () => {
     setLoading(false);
   };
 
+  const handleReset = () => {
+    setName('');
+    setPhone('');
+    setInterest('');
+    setNriCountry('');
+    setTimezone('');
+    setError('');
+    setSuccess(false);
+  };
+
   const labelStyles = "text-gold text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]";
   const titleStyles = "font-serif text-[28px] text-textDark font-semibold mb-[2rem] leading-tight";
   const cardStyles = "premium-card-interactive";
@@ -594,10 +604,17 @@ const NRIPage = () => {
 
             <div className="bg-white/5 border border-white/10 rounded-[16px] p-[2rem] md:p-[2.5rem] shadow-2xl backdrop-blur-sm">
               {success ? (
-                <div className="bg-green-500/15 border border-green-500/30 rounded-[10px] p-[2rem] text-center text-[#4ade80]">
+                <div className="bg-green-500/15 border border-green-500/30 rounded-[10px] p-[2rem] text-center text-[#4ade80] flex flex-col items-center gap-4">
                   <div className="text-[32px] mb-2">✅</div>
                   <h3 className="font-serif text-[24px] mb-2">Request Received</h3>
                   <p>Thank you! Our NRI investment specialist will contact you at your preferred time.</p>
+                  <button
+                    type="button"
+                    onClick={handleReset}
+                    className="bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/30 py-[8px] px-[16px] rounded-[6px] text-[13px] font-medium cursor-pointer transition-all"
+                  >
+                    Back to form
+                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
