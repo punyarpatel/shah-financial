@@ -2,18 +2,29 @@ import React from 'react';
 
 const TrustBar = () => {
   const trustItems = [
-    'AMFI Reg: ARN',
     'SBI Mutual Fund',
     'HDFC Mutual Fund',
     'ICICI Prudential',
     'Nippon India',
     'NJ Wealth Partner',
-    'Prudent Partner'
+    'Prudent Partner',
+    'HDFC Ergo',
+    'Go Digit',
+    'Tata AIG',
+    'IndusInd',
+    'Motilal Oswal',
+    'Axis',
+    'Bajaj Allianz',
+    'Oriental Insurance',
+    'National Insurance',
+    'LIC',
+    'ICICI Lombard',
+    'Bajaj Allianz General'
   ];
 
   // Repeat the core items to ensure they fill the screen, then duplicate exactly once 
   // to create the two identical halves needed for the -50% translation loop.
-  const baseItems = [...trustItems, ...trustItems, ...trustItems];
+  const baseItems = [...trustItems, ...trustItems];
   const marqueeContent = [...baseItems, ...baseItems];
 
   return (

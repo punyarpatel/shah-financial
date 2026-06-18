@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import FadeIn from './animations/FadeIn';
 
 const HeroSection = () => {
@@ -11,18 +12,18 @@ const HeroSection = () => {
       navigate(`/#${sectionId}`);
       setTimeout(() => {
         const section = document.getElementById(sectionId);
-        if (section) section.scrollIntoView({ behavior: 'smooth' });
+        if (section) section.scrollIntoView({ behavior: 'auto' });
       }, 100);
     } else {
       const section = document.getElementById(sectionId);
-      if (section) section.scrollIntoView({ behavior: 'smooth' });
+      if (section) section.scrollIntoView({ behavior: 'auto' });
     }
   };
 
   const stats = [
-    { value: '3,000+', label: 'Clients' },
-    { value: '₹500Cr+', label: 'AUM' },
-    { value: '15+', label: 'Years' },
+    { value: '4,000+', label: 'Clients' },
+    { value: '₹750Cr+', label: 'AUM' },
+    { value: '20+', label: 'Years' },
     { value: '100+', label: 'NRI Clients' }
   ];
 
@@ -53,26 +54,68 @@ const HeroSection = () => {
         <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
 
-      {/* Dark Overlay to ensure text readability against the video */}
-      <div 
-        className="absolute inset-0 pointer-events-none" 
-        style={{ 
-          zIndex: 1,
-          background: 'linear-gradient(135deg, rgba(10, 22, 40, 0.85) 0%, rgba(13, 31, 60, 0.75) 50%, rgba(10, 22, 40, 0.85) 100%)'
-        }}
-      />
+      {/* Base Dark Overlay */}
+      <div className="absolute inset-0 z-[1] bg-navy/80 mix-blend-multiply pointer-events-none" />
 
-      {/* Decorative Circles (Optional, kept for subtle texture) */}
-      <div 
-        className="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full border border-[#c9922a]/15 pointer-events-none"
-        style={{ zIndex: 2 }}
-        aria-hidden="true"
-      />
-      <div 
-        className="absolute top-[10%] right-[5%] w-[220px] h-[220px] rounded-full border border-[#c9922a]/10 pointer-events-none"
-        style={{ zIndex: 2 }}
-        aria-hidden="true"
-      />
+      {/* Elegant Aurora Effect */}
+      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none opacity-60 mix-blend-screen">
+        {/* Golden Aurora */}
+        <motion.div
+          className="absolute top-[-20%] left-[-20%] w-[140%] h-[140%] rounded-full opacity-30"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(201, 146, 42, 0.5) 0%, transparent 60%)',
+            filter: 'blur(80px)'
+          }}
+          animate={{
+            x: ['-10%', '10%', '-10%'],
+            y: ['0%', '10%', '0%'],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        
+        {/* Deep Navy/Teal Aurora */}
+        <motion.div
+          className="absolute top-[-30%] right-[-20%] w-[150%] h-[150%] rounded-full opacity-40"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(13, 37, 69, 0.8) 0%, transparent 60%)',
+            filter: 'blur(100px)'
+          }}
+          animate={{
+            x: ['10%', '-10%', '10%'],
+            y: ['-5%', '15%', '-5%'],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+
+        {/* Soft Center Glow */}
+        <motion.div
+          className="absolute top-[20%] left-[20%] w-[60%] h-[60%] rounded-full opacity-20"
+          style={{
+            background: 'radial-gradient(circle at center, rgba(240, 201, 106, 0.4) 0%, transparent 70%)',
+            filter: 'blur(60px)'
+          }}
+          animate={{
+            x: ['0%', '5%', '0%'],
+            y: ['5%', '-5%', '5%'],
+            opacity: [0.1, 0.4, 0.1]
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
 
       {/* Inner Content */}
       <div className="max-w-7xl mx-auto pt-[4rem] md:pt-[6rem] pb-[4rem] px-4 relative z-10">

@@ -243,11 +243,11 @@ const SIPCalculator = () => {
       navigate('/#contact');
       setTimeout(() => {
         const contactSection = document.getElementById('contact');
-        if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+        if (contactSection) contactSection.scrollIntoView({ behavior: 'auto' });
       }, 100);
     } else {
       const contactSection = document.getElementById('contact');
-      if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+      if (contactSection) contactSection.scrollIntoView({ behavior: 'auto' });
     }
   };
 
@@ -399,12 +399,6 @@ const SIPCalculator = () => {
             <div className="text-textDark/80 text-[14px]">
               <span className="font-semibold text-navy">{activeGoal.icon} {activeGoal.label}</span> — {activeGoal.desc}
             </div>
-            <button
-              onClick={applySuggestedValues}
-              className="text-gold hover:text-goldLight text-[14px] font-medium mt-2 sm:mt-0 whitespace-nowrap"
-            >
-              Apply suggested values &rarr;
-            </button>
           </div>
         )}
 

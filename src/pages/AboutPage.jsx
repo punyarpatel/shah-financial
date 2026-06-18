@@ -21,15 +21,15 @@ const AboutPage = () => {
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
         <title>About Us — Shah Financial Services Ahmedabad</title>
-        <meta name="description" content="Shah Financial Services — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 3,000+ families and 100+ NRI clients across India and abroad." />
+        <meta name="description" content="Shah Financial Services — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 4,000+ families and 100+ NRI clients across India and abroad." />
         <meta property="og:title" content="About Us — Shah Financial Services Ahmedabad" />
-        <meta property="og:description" content="Shah Financial Services — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 3,000+ families and 100+ NRI clients across India and abroad." />
+        <meta property="og:description" content="Shah Financial Services — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 4,000+ families and 100+ NRI clients across India and abroad." />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="About Us — Shah Financial Services Ahmedabad" />
-        <meta name="twitter:description" content="Shah Financial Services — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 3,000+ families and 100+ NRI clients across India and abroad." />
+        <meta name="twitter:description" content="Shah Financial Services — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 4,000+ families and 100+ NRI clients across India and abroad." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
@@ -46,7 +46,7 @@ const AboutPage = () => {
               A Family Built on Trust
             </h1>
             <p className="text-white/65 text-[16px] leading-[1.6] max-w-2xl">
-              Shah Financial Services was founded in 2009 in Ahmedabad by a family with a simple belief — every Indian family deserves access to honest, personalized financial guidance. What started as a small advisory practice has grown into a trusted firm serving 3,000 plus families across India and abroad.
+              Shah Financial Services was founded in 2009 in Ahmedabad by a family with a simple belief — every Indian family deserves access to honest, personalized financial guidance. What started as a small advisory practice has grown into a trusted firm serving 4,000 plus families across India and abroad.
             </p>
           </div>
         </FadeIn>
@@ -93,7 +93,7 @@ const AboutPage = () => {
               <StaggerItem>
                 <div>
                   <div className="font-serif text-[36px] text-navy font-semibold leading-none mb-2">
-                    <AnimatedCounter value="3,000" suffix="+" />
+                    <AnimatedCounter value="4,000" suffix="+" />
                   </div>
                   <div className="text-muted text-[13px] uppercase tracking-wider">Clients</div>
                 </div>
@@ -101,7 +101,7 @@ const AboutPage = () => {
               <StaggerItem>
                 <div>
                   <div className="font-serif text-[36px] text-navy font-semibold leading-none mb-2">
-                    <AnimatedCounter value="500" prefix="₹" suffix="Cr+" />
+                    <AnimatedCounter value="750" prefix="₹" suffix="Cr+" />
                   </div>
                   <div className="text-muted text-[13px] uppercase tracking-wider">AUM</div>
                 </div>
@@ -109,7 +109,7 @@ const AboutPage = () => {
               <StaggerItem>
                 <div>
                   <div className="font-serif text-[36px] text-navy font-semibold leading-none mb-2">
-                    <AnimatedCounter value="15" suffix="+" />
+                    <AnimatedCounter value="20" suffix="+" />
                   </div>
                   <div className="text-muted text-[13px] uppercase tracking-wider">Years</div>
                 </div>
@@ -146,7 +146,7 @@ const AboutPage = () => {
                 </div>
                 <h3 className="font-serif text-[16px] text-navy font-semibold mb-1">Rajesh Shah</h3>
                 <div className="text-gold text-[12px] font-medium uppercase tracking-wider mb-3">Founder and Principal Advisor</div>
-                <p className="text-muted text-[13px] leading-[1.6]">15 plus years in mutual funds and insurance advisory.</p>
+                <p className="text-muted text-[13px] leading-[1.6]">20 plus years in mutual funds and insurance advisory.</p>
               </div>
 
               <div className={`${cardStyles} text-center flex flex-col items-center`}>

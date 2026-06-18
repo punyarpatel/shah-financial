@@ -50,10 +50,10 @@ const BlogPage = () => {
           </FadeIn>
 
           {/* Grid */}
-          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
-            {blogs.map((blog) => (
+          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px]">
+            {[...blogs].reverse().map((blog) => (
               <StaggerItem key={blog.id}>
-                <div className="bg-white border border-[#0d2545]/10 rounded-[14px] p-[2rem] hover:-translate-y-1 hover:border-[#c9922a]/50 transition-all duration-300 h-full flex flex-col">
+                <div className="bg-white border border-[#0d2545]/10 rounded-[14px] p-[2rem] hover:-translate-y-1 hover:shadow-lg hover:border-[#c9922a]/50 transition-all duration-300 h-full flex flex-col group">
                   <div className="flex items-center gap-[12px] mb-[1.25rem]">
                     <span className="text-[#c9922a] text-[11px] uppercase tracking-wider font-semibold bg-[#c9922a]/10 px-[8px] py-[3px] rounded-[4px]">
                       {blog.category}
@@ -63,7 +63,7 @@ const BlogPage = () => {
                     </span>
                   </div>
                   
-                  <h2 className="font-serif text-[#0d2545] text-[22px] font-semibold mb-[1rem] leading-tight">
+                  <h2 className="font-serif text-[#0d2545] text-[22px] font-semibold mb-[1rem] leading-tight group-hover:text-[#c9922a] transition-colors">
                     {blog.title}
                   </h2>
                   

@@ -42,8 +42,28 @@ const servicesData = [
     ),
     highlights: [
       '11,000+ network hospitals across India',
-      'Raise a claim, track and settle: all digital',
+      'Hassle free process --> intimation to settlement',
       'Benefits beyond the basics – wellness & health benefits'
+    ]
+  },
+  {
+    id: 'travel-insurance',
+    icon: '✈️',
+    title: 'Overseas Travel Insurance',
+    description: 'Travel the world with peace of mind. We provide comprehensive coverage for medical emergencies, flight delays, and lost baggage.',
+    link: '/services/travel-insurance',
+    isSpecial: false,
+    cardGradient: 'from-sky-500 via-blue-500 to-indigo-500',
+    cardText: 'TRAVEL',
+    cardIcon: (
+      <svg className="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0112 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5" />
+      </svg>
+    ),
+    highlights: [
+      'Cashless medical hospitalization abroad',
+      'Trip cancellation & flight delay covers',
+      'Loss of passport and baggage protection'
     ]
   },
   {
@@ -62,8 +82,8 @@ const servicesData = [
     ),
     highlights: [
       'Seamless NRE & NRO account integration',
-      'Remote KYC compliance & repatriation assistance',
-      'Dedicated Indian tax & investment advisory'
+      'End to end KYC, complianace & repatriation support',
+      'personalised india focused investment guidance'
     ]
   },
   {
@@ -83,7 +103,7 @@ const servicesData = [
     ),
     highlights: [
       'Inflation-adjusted retirement income planning',
-      'Optimal asset allocation for regular monthly yields',
+      'Structured SWP solutions for regular monthly incomes',
       'Tax-efficient withdrawal strategies & estate setup'
     ]
   },
@@ -134,13 +154,13 @@ const servicesData = [
 
 const Service3DGraphic = ({ title, cardGradient, cardText, cardIcon }) => {
   return (
-    <div 
+    <div
       className="relative w-full max-w-[320px] aspect-[4/3] flex items-center justify-center select-none overflow-visible"
       style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}
     >
       {/* Soft shadow under the pedestal */}
       <div className="absolute bottom-[6%] w-[75%] h-6 bg-navy/10 rounded-full blur-xl transform scale-x-110"></div>
-      
+
       {/* 3D Pedestal Platform */}
       <svg viewBox="0 0 300 150" className="absolute bottom-[4%] w-full h-[65%] drop-shadow-[0_12px_24px_rgba(13,37,69,0.06)] overflow-visible">
         {/* Top Face */}
@@ -153,7 +173,7 @@ const Service3DGraphic = ({ title, cardGradient, cardText, cardIcon }) => {
 
       {/* Floating 3D Card Wrapper */}
       <div className="absolute top-[2%] w-[125px] h-[180px] animate-float z-10" style={{ transformStyle: 'preserve-3d' }}>
-        <div 
+        <div
           className={`w-full h-full rounded-2xl bg-gradient-to-br ${cardGradient} p-4 text-white shadow-[0_15px_35px_rgba(0,0,0,0.22)] border border-white/20 flex flex-col justify-between overflow-hidden relative`}
           style={{
             transform: 'rotateX(52deg) rotateY(-10deg) rotateZ(-30deg)',
@@ -162,7 +182,7 @@ const Service3DGraphic = ({ title, cardGradient, cardText, cardIcon }) => {
         >
           {/* Card Gloss Effect */}
           <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/20 pointer-events-none"></div>
-          
+
           {/* Logo & Brand text on the card */}
           <div className="flex justify-between items-center z-10">
             <span className="text-[7.5px] font-bold tracking-widest text-white/90 font-sans">
@@ -187,7 +207,7 @@ const Service3DGraphic = ({ title, cardGradient, cardText, cardIcon }) => {
                 <div className="border border-white/10"></div>
               </div>
             </div>
-            
+
             {/* Brand text */}
             <div className="flex items-center gap-0.5">
               <span className="text-[10px] font-extrabold tracking-wider text-white font-sans">SHAH</span>
@@ -235,18 +255,24 @@ const ServiceCard = ({ service, index, totalCards, onRef }) => {
   const stickyTop = isDesktop ? 120 + (index * 24) : 0;
 
   return (
-    <motion.div
-      ref={localRef}
-      style={{
-        scale,
-        opacity,
-        top: isDesktop ? `${stickyTop}px` : 'auto',
-        zIndex: index + 10,
+    <div 
+      ref={(el) => {
+        localRef.current = el;
+        if (onRef) onRef(el);
       }}
-      className="lg:sticky relative w-full bg-white rounded-[32px] p-8 md:p-10 lg:p-12 shadow-[0_20px_50px_rgba(13,37,69,0.03)] border border-slate-100/90 hover:shadow-[0_30px_70px_rgba(13,37,69,0.06)] hover:border-slate-200/50 transition-all duration-500 flex flex-col md:flex-row items-center justify-between gap-10 group/card mb-16 lg:mb-24 last:mb-0 origin-top"
+      className="relative w-full h-full"
     >
-      {/* Left Side Content */}
-      <div className="flex-1 text-left w-full md:pr-4">
+      <motion.div
+        style={{
+          scale,
+          opacity,
+          top: isDesktop ? `${stickyTop}px` : 'auto',
+          zIndex: index + 10,
+        }}
+        className="lg:sticky relative w-full bg-white rounded-[32px] p-8 md:p-10 lg:p-12 shadow-[0_20px_50px_rgba(13,37,69,0.03)] border border-slate-100/90 hover:shadow-[0_30px_70px_rgba(13,37,69,0.06)] hover:border-slate-200/50 transition-all duration-500 flex flex-col md:flex-row items-center justify-between gap-10 group/card mb-16 lg:mb-24 last:mb-0 origin-top"
+      >
+        {/* Left Side Content */}
+        <div className="flex-1 text-left w-full md:pr-4">
         <h3 className="font-serif text-[28px] md:text-[34px] font-bold text-navy mb-6 leading-tight">
           {service.title}
         </h3>
@@ -295,6 +321,7 @@ const ServiceCard = ({ service, index, totalCards, onRef }) => {
         />
       </div>
     </motion.div>
+    </div>
   );
 };
 
@@ -313,41 +340,47 @@ const ServicesGrid = () => {
     return () => window.removeEventListener('resize', checkSize);
   }, []);
 
-  // Setup Intersection Observer to monitor active card scroll position
+  // Scroll spy to update active tab based on wrapper positions
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: "-30% 0px -40% 0px", // Trigger active state when card occupies viewport vertical center
-      threshold: 0.1
-    };
-
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const index = cardRefs.current.findIndex(ref => ref === entry.target);
-          if (index !== -1) {
-            setActiveTab(index);
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          let newActiveIndex = activeTab;
+          
+          // Find the last card whose top is above the middle of the screen
+          const triggerPoint = window.innerHeight * 0.4; // 40% from top
+          
+          for (let i = 0; i < cardRefs.current.length; i++) {
+            const ref = cardRefs.current[i];
+            if (ref) {
+              const rect = ref.getBoundingClientRect();
+              if (rect.top <= triggerPoint) {
+                newActiveIndex = i;
+              }
+            }
           }
-        }
-      });
+          
+          if (newActiveIndex !== activeTab) {
+            setActiveTab(newActiveIndex);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
 
-    cardRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [activeTab]);
 
   // Scroll active tab trigger into view on mobile
   useEffect(() => {
     if (!isDesktop && mobileTabRefs.current[activeTab]) {
       mobileTabRefs.current[activeTab].scrollIntoView({
-        behavior: 'smooth',
+        behavior: 'auto',
         block: 'nearest',
         inline: 'center'
       });
@@ -360,13 +393,13 @@ const ServicesGrid = () => {
     if (targetCard) {
       const elementRect = targetCard.getBoundingClientRect();
       const absoluteElementTop = elementRect.top + window.scrollY;
-      
+
       // Offset values based on sticky headers
       const stickyOffset = isDesktop ? (120 + (index * 24)) : 130;
-      
+
       window.scrollTo({
         top: absoluteElementTop - stickyOffset - 16,
-        behavior: 'smooth'
+        behavior: 'auto'
       });
       setActiveTab(index);
     }
@@ -395,15 +428,16 @@ const ServicesGrid = () => {
                 Wealth Creation is Only Half the Story. Discover the Power of Balanced Planning.
               </h2>
               <p className="text-[15.5px] leading-relaxed text-muted mb-4">
-                At Shah Financial Services, we integrate wealth creation and risk protection into a single, comprehensive strategy. Whether building growth through personalized mutual fund portfolios and tax-saving ELSS investments, or safeguarding your family with robust life, health, and general insurance policies, we cover your entire financial landscape under one roof.
+                At Shah Financial Services, we integrate wealth creation and risk protection into a single, comprehensive strategy. Whether building growth through personalized mutual fund portfolios, or safeguarding your family with robust life, health, and general insurance policies, we cover your entire financial landscape under one roof.
               </p>
               <p className="text-[15.5px] leading-relaxed text-muted mb-6">
-                Our bespoke services are tailored for families, retirement planners, and NRI clients globally. By combining certified expert advisory with seamless digital execution, we make navigating the market's complexities simple, guiding you step-by-step toward clear and lasting financial freedom.
+                Your financial journey is unique. Whether you're securing your family's future, planning for retirement, or investing as an NRI, we pair certified advisory with the right insurance and mutual fund solutions, so every decision feels confident, not complicated.
+
               </p>
-              
+
               <div>
-                <Link 
-                  to="/about" 
+                <Link
+                  to="/about"
                   className="inline-flex items-center text-[14px] font-bold text-gold hover:text-goldLight group/readmore transition-colors duration-300"
                 >
                   <span className="relative py-1">
@@ -421,23 +455,23 @@ const ServicesGrid = () => {
             <div className="flex justify-center" style={{ perspective: '1200px' }}>
               <div className="relative w-full max-w-[460px] aspect-[16/11] flex flex-col items-center justify-center group/card-container overflow-visible select-none">
                 {/* Soft shadow under the floating card */}
-                <div 
+                <div
                   className="absolute bottom-[-4%] w-[85%] h-6 bg-navy/15 rounded-full blur-xl transition-all duration-500 group-hover/card-container:scale-x-105 group-hover/card-container:blur-2xl group-hover/card-container:opacity-90 animate-shadow-pulse"
                 ></div>
 
                 {/* 1. Outer Entrance Motion Wrapper: Slides out from the left (text side) */}
                 <motion.div
                   className="w-full h-full"
-                  initial={{ 
-                    opacity: 0, 
-                    x: isDesktop ? -260 : -60, 
-                    scale: 0.8, 
+                  initial={{
+                    opacity: 0,
+                    x: isDesktop ? -260 : -60,
+                    scale: 0.8,
                     rotateY: -20
                   }}
-                  whileInView={{ 
-                    opacity: 1, 
-                    x: 0, 
-                    scale: 1, 
+                  whileInView={{
+                    opacity: 1,
+                    x: 0,
+                    scale: 1,
                     rotateY: 0
                   }}
                   viewport={{ once: true, margin: "-80px" }}
@@ -469,7 +503,7 @@ const ServicesGrid = () => {
                     <div className="absolute -inset-4 bg-gradient-to-r from-gold/10 to-navy/5 rounded-[28px] blur-2xl opacity-60 pointer-events-none"></div>
 
                     {/* Inner white card with the new balanced service overview image */}
-                    <div 
+                    <div
                       className="relative w-full h-full bg-white rounded-xl border border-navy/[0.02] overflow-hidden shadow-[0_5px_15px_rgba(13,37,69,0.02)]"
                       style={{ transform: 'translateZ(10px)' }}
                     >
@@ -480,10 +514,10 @@ const ServicesGrid = () => {
                         alt="Shah Financial Balanced Services Overview"
                         className="w-full h-full object-cover"
                       />
-                      
+
                       {/* Metallic sweep shine effect */}
                       <div className="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/35 to-transparent -translate-x-full group-hover/card-container:animate-shine pointer-events-none"></div>
-                      
+
                       {/* Dark gradient overlay bottom */}
                       <div className="absolute inset-0 bg-gradient-to-t from-navy/5 to-transparent pointer-events-none"></div>
                     </div>
@@ -505,8 +539,7 @@ const ServicesGrid = () => {
                 Comprehensive Financial Solutions
               </h2>
               <p className="text-[15px] text-muted leading-[1.7]">
-                We provide holistic wealth management services tailored to your unique goals. From mutual fund advisory and dedicated goal planning to tax saving strategies and comprehensive insurance coverage, our certified experts guide you at every step. Our focus is on transparent, research-backed strategies to ensure your financial future is secure and your wealth grows steadily.{' '}
-                <Link to="/blog" className="text-gold hover:text-goldLight font-medium inline-flex items-center group transition-colors">
+                We build personalised investment portfolios from scratch, designed around your goals, risk appetite, and timeline. From mutual funds and tax-saving strategies to life, health, motor, general, and SME insurance, our certified experts have everything you need under one roof.                <Link to="/blog" className="text-gold hover:text-goldLight font-medium inline-flex items-center group transition-colors">
                   Explore more
                   <span className="ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">...</span>
                 </Link>
@@ -517,7 +550,7 @@ const ServicesGrid = () => {
               <div className="relative group/header-img animate-float">
                 {/* Subtle soft shadow glow background */}
                 <div className="absolute -inset-4 bg-gradient-to-r from-gold/10 to-navy/5 rounded-full blur-2xl opacity-60"></div>
-                
+
                 {/* Matching shape from About section — soft outer box + inner white card */}
                 <div className="relative w-[280px] sm:w-[320px] md:w-[350px] aspect-[16/11] bg-[#f8fafc]/50 rounded-[20px] p-6 border border-slate-100 flex items-center justify-center shadow-inner">
                   <div className="relative w-full h-full bg-white rounded-xl shadow-[0_15px_35px_rgba(13,37,69,0.04),0_5px_15px_rgba(0,0,0,0.02)] border border-navy/[0.02] overflow-hidden group/graphic hover:scale-[1.02] transition-transform duration-500">
@@ -543,11 +576,10 @@ const ServicesGrid = () => {
               key={service.id}
               ref={(el) => (mobileTabRefs.current[idx] = el)}
               onClick={() => scrollToCard(idx)}
-              className={`whitespace-nowrap px-4 py-2 rounded-full text-[13px] font-bold transition-all duration-300 ${
-                activeTab === idx
-                  ? 'bg-gold text-white shadow-md shadow-gold/20'
-                  : 'bg-white text-muted border border-slate-100 hover:border-slate-200 font-sans'
-              }`}
+              className={`whitespace-nowrap px-4 py-2 rounded-full text-[13px] font-bold transition-all duration-300 ${activeTab === idx
+                ? 'bg-gold text-white shadow-md shadow-gold/20'
+                : 'bg-white text-muted border border-slate-100 hover:border-slate-200 font-sans'
+                }`}
             >
               {service.icon} {service.title}
             </button>
@@ -556,20 +588,19 @@ const ServicesGrid = () => {
 
         {/* 2-Column Showcase Layout (Sticky Left Sidebar + Stacking Right Cards) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start overflow-visible relative">
-          
+
           {/* Left Column (Sticky Sidebar on Desktop) */}
           <div className="hidden lg:block lg:col-span-4 sticky top-[150px] self-start text-left overflow-visible">
-            
+
             <div className="relative border-l-2 border-slate-100 flex flex-col gap-6">
               {servicesData.map((service, idx) => (
                 <button
                   key={service.id}
                   onClick={() => scrollToCard(idx)}
-                  className={`text-left pl-6 border-l-2 -ml-[2px] transition-all duration-300 py-1 ${
-                    activeTab === idx 
-                      ? 'border-gold text-gold font-bold opacity-100 scale-105' 
-                      : 'border-transparent text-muted font-medium opacity-65 hover:opacity-100'
-                  }`}
+                  className={`text-left pl-6 border-l-2 -ml-[2px] transition-all duration-300 py-1 ${activeTab === idx
+                    ? 'border-gold text-gold font-bold opacity-100 scale-105'
+                    : 'border-transparent text-muted font-medium opacity-65 hover:opacity-100'
+                    }`}
                 >
                   <span className="text-[11px] tracking-[0.1em] uppercase block font-bold mb-1 opacity-70 font-sans">
                     {service.icon} {service.cardText}
@@ -587,7 +618,7 @@ const ServicesGrid = () => {
             <StaggerGroup staggerDelay={0.15} className="flex flex-col gap-0 overflow-visible relative">
               {servicesData.map((service, index) => (
                 <StaggerItem key={service.id} className="w-full overflow-visible">
-                  <ServiceCard 
+                  <ServiceCard
                     service={service}
                     index={index}
                     totalCards={servicesData.length}
@@ -597,7 +628,7 @@ const ServicesGrid = () => {
               ))}
             </StaggerGroup>
           </div>
-          
+
         </div>
 
       </div>

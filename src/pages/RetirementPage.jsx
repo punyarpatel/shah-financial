@@ -250,7 +250,7 @@ const RetirementPage = () => {
                 📅 Book a Free Retirement Planning Call
               </button>
               <button
-                onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'auto' })}
                 className="bg-white/10 text-white border border-white/20 px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-white/20 transition-colors flex items-center gap-2"
               >
                 🧮 Calculate My Retirement Corpus

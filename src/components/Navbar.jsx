@@ -14,6 +14,7 @@ const navData = {
   services: [
     { icon: '📊', title: 'Mutual Fund Advisory', desc: 'End-to-end management of your mutual fund journey from KYC to portfolio reviews.', link: '/services/mutual-funds' },
     { icon: '🛡️', title: 'Life & General Insurance', desc: 'Comprehensive coverage from trusted partners to protect your family and assets.', link: '/services/insurance' },
+    { icon: '✈️', title: 'Overseas Travel Insurance', desc: 'Travel the world with absolute peace of mind.', link: '/services/travel-insurance' },
     { icon: '🌍', title: 'NRI Investment Services', desc: 'Specialized advisory for NRIs including NRE/NRO investing, health insurance, and repatriation.', link: '/nri' },
     { icon: '🎯', title: 'Retirement Planning', desc: 'Build a realistic, inflation-adjusted retirement corpus with dedicated plans and annual reviews.', link: '/services/retirement' },
     { icon: '💰', title: 'Tax Saving — ELSS', desc: 'Save tax under Section 80C while building wealth with equity-level returns.', link: '/services/elss' },
@@ -226,10 +227,9 @@ const Navbar = () => {
 
     if (link === '/') {
       if (location.pathname === '/') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'auto' });
       } else {
         navigate('/');
-        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
       }
     } else if (link.includes('#')) {
       const [path, hash] = link.split('#');
@@ -237,14 +237,18 @@ const Navbar = () => {
         navigate(link);
         setTimeout(() => {
           const section = document.getElementById(hash);
-          if (section) section.scrollIntoView({ behavior: 'smooth' });
+          if (section) section.scrollIntoView({ behavior: 'auto' });
         }, 100);
       } else {
         const section = document.getElementById(hash);
-        if (section) section.scrollIntoView({ behavior: 'smooth' });
+        if (section) section.scrollIntoView({ behavior: 'auto' });
       }
     } else {
-      navigate(link);
+      if (location.pathname === link) {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      } else {
+        navigate(link);
+      }
     }
   };
 
@@ -255,18 +259,18 @@ const Navbar = () => {
       navigate('/#contact');
       setTimeout(() => {
         const contactSection = document.getElementById('contact');
-        if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+        if (contactSection) contactSection.scrollIntoView({ behavior: 'auto' });
       }, 100);
     } else {
       const contactSection = document.getElementById('contact');
-      if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+      if (contactSection) contactSection.scrollIntoView({ behavior: 'auto' });
     }
   };
 
   const handleLogoClick = () => {
     closeMenu();
     if (location.pathname === '/') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }
   };
 

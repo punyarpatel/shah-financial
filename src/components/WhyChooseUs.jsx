@@ -4,13 +4,13 @@ import FadeIn from './animations/FadeIn';
 const whyChooseUsData = [
   {
     id: 1,
-    title: '15+ Years of Proven Track Record',
+    title: '20+ Years of Proven Track Record',
     description: 'Founded in 2009 by Rajesh Shah, we have guided families and businesses through diverse market cycles with research-backed, stable advice.'
   },
   {
     id: 2,
-    title: '₹500+ Crore AUM & 3,000+ Families',
-    description: 'Trusted by over 3,000 families in India and 100+ NRI clients globally to safeguard and steadily compound their hard-earned wealth.'
+    title: '₹750+ Crore AUM & 4,000+ Families',
+    description: 'Trusted by over 4,000 families in India and 100+ NRI clients globally to safeguard and steadily compound their hard-earned wealth.'
   },
   {
     id: 3,

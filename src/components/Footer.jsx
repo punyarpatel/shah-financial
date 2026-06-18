@@ -9,10 +9,9 @@ const Footer = () => {
     e.preventDefault();
     if (link === '/') {
       if (location.pathname === '/') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'auto' });
       } else {
         navigate('/');
-        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
       }
     } else if (link.includes('#')) {
       const [path, hash] = link.split('#');
@@ -20,15 +19,18 @@ const Footer = () => {
         navigate(link);
         setTimeout(() => {
           const section = document.getElementById(hash);
-          if (section) section.scrollIntoView({ behavior: 'smooth' });
+          if (section) section.scrollIntoView({ behavior: 'auto' });
         }, 100);
       } else {
         const section = document.getElementById(hash);
-        if (section) section.scrollIntoView({ behavior: 'smooth' });
+        if (section) section.scrollIntoView({ behavior: 'auto' });
       }
     } else {
-      navigate(link);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (location.pathname === link) {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      } else {
+        navigate(link);
+      }
     }
   };
 

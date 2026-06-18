@@ -82,7 +82,7 @@ const ServicesPage = () => {
 
       <section className="flex-grow py-[4rem] w-full">
         <div className="max-w-7xl mx-auto px-4">
-          
+
           {/* Header */}
           <FadeIn>
             <div className="text-center mb-[3.5rem]">
@@ -111,17 +111,17 @@ const ServicesPage = () => {
                       {service.icon}
                     </span>
                   </div>
-                  
+
                   <h2 className="font-serif text-navy text-[22px] font-semibold mb-[1rem] leading-tight group-hover:text-gold transition-colors duration-300">
                     {service.title}
                   </h2>
-                  
+
                   <p className="text-muted text-[14px] leading-[1.6] mb-[2rem] flex-grow">
                     {service.description}
                   </p>
-                  
-                  <Link 
-                    to={service.link} 
+
+                  <Link
+                    to={service.link}
                     className="inline-flex items-center text-gold text-[13px] font-semibold tracking-wide hover:text-navy transition-colors mt-auto"
                   >
                     Explore Service &rarr;
@@ -130,7 +130,7 @@ const ServicesPage = () => {
               </StaggerItem>
             ))}
           </StaggerGroup>
-          
+
         </div>
       </section>
 

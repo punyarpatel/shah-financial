@@ -91,7 +91,7 @@ const milestones = [
   {
     year: '2026',
     title: 'The Trusted Destination',
-    description: 'Now serving 3,000+ families globally with over ₹500 Crores in AUM. Combining personal family values with institutional-grade technology to secure generational wealth.',
+    description: 'Now serving 4,000+ families globally with over ₹750 Crores in AUM. Combining personal family values with institutional-grade technology to secure generational wealth.',
     icon: (
       <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M3 22h18" />
@@ -102,7 +102,7 @@ const milestones = [
         <path d="M3 11h18L12 3z" />
       </svg>
     ),
-    stat: '₹500 Cr+ AUM',
+    stat: '₹750 Cr+ AUM',
     tag: 'Present Day'
   }
 ];
@@ -153,7 +153,7 @@ const JourneyTimeline = () => {
     
     window.scrollTo({
       top: targetScroll,
-      behavior: 'smooth'
+      behavior: 'auto'
     });
   };
 
@@ -181,7 +181,7 @@ const JourneyTimeline = () => {
             </h2>
           </div>
           <p className="text-white/40 text-[13px] md:text-[14px] mt-2 md:mt-0 max-w-sm hidden sm:block">
-            Scroll down to explore how we built a legacy of trust and financial security over 15+ years.
+            Scroll down to explore how we built a legacy of trust and financial security over 20+ years.
           </p>
         </div>
 

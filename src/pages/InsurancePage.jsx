@@ -80,7 +80,7 @@ const InsurancePage = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const handleScrollToContact = () => {
-    document.getElementById('ins-contact')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('ins-contact')?.scrollIntoView({ behavior: 'auto' });
   };
 
   const handleWhatsApp = () => {
@@ -504,6 +504,7 @@ const InsurancePage = () => {
                       <option value="Workmen's Compensation" className="bg-navy">Workmen's Compensation</option>
                       <option value="Group Health Insurance" className="bg-navy">Group Health Insurance</option>
                       <option value="NRI Health Insurance" className="bg-navy">NRI Health Insurance</option>
+                      <option value="Overseas Travel Insurance" className="bg-navy">Overseas Travel Insurance</option>
                       <option value="Not Sure" className="bg-navy">Not Sure — Help Me Decide</option>
                     </select>
                   </div>

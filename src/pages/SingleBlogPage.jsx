@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import FadeIn from '../components/animations/FadeIn';
+import SipCompoundingVisualizer from '../components/SipCompoundingVisualizer';
 
 export const blogs = [
   { id: 1, category: 'Mutual Funds', title: 'What is a SIP and How Does it Work?', excerpt: 'A Systematic Investment Plan allows you to invest a fixed amount every month in mutual funds. Learn how it builds wealth over time through compounding.', date: 'January 15, 2026', slug: 'what-is-sip', content: 'A Systematic Investment Plan (SIP) is a disciplined way of investing in mutual funds. It allows an investor to invest a fixed amount of money at pre-defined intervals (such as monthly, quarterly, etc.) in a mutual fund scheme. SIPs are a great way to average out the cost of investment and benefit from the power of compounding.' },
@@ -58,7 +59,7 @@ const SingleBlogPage = () => {
       <Navbar />
 
       <section className="flex-grow py-[4rem] w-full">
-        <div className="max-w-3xl mx-auto px-4">
+        <div className="max-w-5xl mx-auto px-4">
           <FadeIn>
             <Link to="/blog" className="text-gold hover:text-navy font-semibold text-[14px] mb-6 inline-flex items-center transition-colors">
               &larr; Back to all blogs
@@ -86,6 +87,12 @@ const SingleBlogPage = () => {
                 <p className="text-[16px] leading-relaxed mb-8">
                   {blog.content}
                 </p>
+
+                {blog.slug === 'what-is-sip' && (
+                  <div className="my-10 not-prose">
+                    <SipCompoundingVisualizer />
+                  </div>
+                )}
                 
                 <h3 className="text-navy text-[22px] font-serif font-semibold mt-8 mb-4">Key Takeaways</h3>
                 <ul className="list-disc pl-5 mb-6 text-[16px] leading-relaxed space-y-2">

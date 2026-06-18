@@ -5,7 +5,6 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
 }
 
 @keyframes spin-y {
