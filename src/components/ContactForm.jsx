@@ -1,22 +1,83 @@
 import React, { useState } from 'react';
 import { submitLead } from '../lib/leads';
 
+const countriesList = [
+  "United States", "United Kingdom", "United Arab Emirates", "Canada", "Australia", 
+  "Singapore", "New Zealand", "Saudi Arabia", "Qatar", "Oman", "Bahrain", "Kuwait", 
+  "Germany", "France", "Ireland", "Netherlands", "Switzerland", "Japan", "Hong Kong", 
+  "Malaysia", "South Africa", "Kenya", "Afghanistan", "Albania", "Algeria", "Andorra", 
+  "Angola", "Argentina", "Armenia", "Austria", "Azerbaijan", "Bahamas", "Bangladesh", 
+  "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", 
+  "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", 
+  "Burundi", "Cambodia", "Cameroon", "Cape Verde", "Central African Republic", "Chad", 
+  "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", 
+  "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", 
+  "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", 
+  "Estonia", "Ethiopia", "Fiji", "Finland", "Gabon", "Gambia", "Georgia", "Ghana", 
+  "Greece", "Grenada", "Guatemala", "Guinea", "Guyana", "Haiti", "Honduras", "Hungary", 
+  "Iceland", "Indonesia", "Iran", "Iraq", "Israel", "Italy", "Ivory Coast", "Jamaica", 
+  "Jordan", "Kazakhstan", "Kiribati", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", 
+  "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", 
+  "Madagascar", "Malawi", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", 
+  "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", 
+  "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Nicaragua", "Niger", 
+  "Nigeria", "North Korea", "Norway", "Pakistan", "Palau", "Panama", "Papua New Guinea", 
+  "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Romania", "Russia", "Rwanda", 
+  "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent", "Samoa", "San Marino", 
+  "Sao Tome", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Slovakia", "Slovenia", 
+  "Solomon Islands", "Somalia", "South Korea", "South Sudan", "Spain", "Sri Lanka", 
+  "Sudan", "Suriname", "Swaziland", "Sweden", "Syria", "Taiwan", "Tajikistan", 
+  "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", 
+  "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "Uruguay", "Uzbekistan", "Vanuatu", 
+  "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe", "Other"
+];
+
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [city, setCity] = useState('');
   const [interest, setInterest] = useState('');
-  const [isNri, setIsNri] = useState('No — I am based in India');
+  const [isNri, setIsNri] = useState('No'); // 'No' or 'Yes'
+  const [nriCountry, setNriCountry] = useState('');
   const [message, setMessage] = useState('');
   
+  const [countrySearch, setCountrySearch] = useState('');
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
 
+  const filteredCountries = countriesList.filter(country =>
+    country.toLowerCase().includes(countrySearch.toLowerCase())
+  );
+
+  const handleCountryChange = (e) => {
+    const val = e.target.value;
+    setCountrySearch(val);
+    setShowCountryDropdown(true);
+    
+    // Check if the typed value matches a country exactly
+    const match = countriesList.find(c => c.toLowerCase() === val.trim().toLowerCase());
+    if (match) {
+      setNriCountry(match);
+    } else {
+      setNriCountry('');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !phone || !city || !interest || !isNri) {
+    if (!name || !phone || !interest || !isNri) {
       setError('Please fill out all required fields');
+      return;
+    }
+    if (isNri === 'No' && !city) {
+      setError('Please enter your city');
+      return;
+    }
+    if (isNri === 'Yes' && !nriCountry) {
+      setError('Please select your country of residence');
       return;
     }
     setError('');
@@ -26,8 +87,9 @@ const ContactForm = () => {
       name,
       phone,
       interest,
-      city,
-      is_nri: isNri,
+      city: isNri === 'No' ? city : '',
+      is_nri: isNri === 'Yes' ? 'Yes' : 'No',
+      nri_country: isNri === 'Yes' ? nriCountry : '',
       message
     });
 
@@ -46,7 +108,10 @@ const ContactForm = () => {
     setPhone('');
     setCity('');
     setInterest('');
-    setIsNri('No — I am based in India');
+    setIsNri('No');
+    setNriCountry('');
+    setCountrySearch('');
+    setShowCountryDropdown(false);
     setMessage('');
     setError('');
     setSuccess(false);
@@ -87,68 +152,123 @@ const ContactForm = () => {
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-[1rem]">
               <div>
-                <label className={labelStyles}>Full Name</label>
+                <label className={labelStyles}>Full Name *</label>
                 <input 
                   type="text" 
                   placeholder="Your name" 
                   value={name} 
                   onChange={(e) => setName(e.target.value)}
                   className={inputStyles}
+                  required
                 />
               </div>
 
               <div>
-                <label className={labelStyles}>Phone / WhatsApp</label>
+                <label className={labelStyles}>Phone / WhatsApp *</label>
                 <input 
                   type="tel" 
                   placeholder="+91 XXXXX XXXXX" 
                   value={phone} 
                   onChange={(e) => setPhone(e.target.value)}
                   className={inputStyles}
+                  required
                 />
               </div>
 
               <div>
-                <label className={labelStyles}>City</label>
-                <input 
-                  type="text" 
-                  placeholder="Ahmedabad" 
-                  value={city} 
-                  onChange={(e) => setCity(e.target.value)}
-                  className={inputStyles}
-                />
+                <label className={labelStyles}>Are you an NRI? *</label>
+                <select 
+                  value={isNri} 
+                  onChange={(e) => {
+                    setIsNri(e.target.value);
+                    if (e.target.value === 'Yes') {
+                      setCity('');
+                    } else {
+                      setNriCountry('');
+                    }
+                  }}
+                  className={`${inputStyles} appearance-none cursor-pointer`}
+                >
+                  <option value="No" className="bg-navy text-white">No — Based in India</option>
+                  <option value="Yes" className="bg-navy text-white">Yes</option>
+                </select>
               </div>
 
+              {isNri === 'No' ? (
+                <div>
+                  <label className={labelStyles}>City (only if you reside in India) *</label>
+                  <input 
+                    type="text" 
+                    placeholder="Ahmedabad" 
+                    value={city} 
+                    onChange={(e) => setCity(e.target.value)}
+                    className={inputStyles}
+                  />
+                </div>
+              ) : (
+                <div className="relative">
+                  <label className={labelStyles}>Country of Residence *</label>
+                  <input 
+                    type="text" 
+                    placeholder="Search and select country..." 
+                    value={countrySearch}
+                    onFocus={() => setShowCountryDropdown(true)}
+                    onBlur={() => {
+                      // Check if current search matches a country exactly; if not, clear it
+                      const match = countriesList.find(c => c.toLowerCase() === countrySearch.trim().toLowerCase());
+                      if (match) {
+                        setNriCountry(match);
+                        setCountrySearch(match);
+                      } else if (!nriCountry) {
+                        setCountrySearch('');
+                      } else {
+                        setCountrySearch(nriCountry);
+                      }
+                      setShowCountryDropdown(false);
+                    }}
+                    onChange={handleCountryChange}
+                    className={inputStyles}
+                  />
+                  {showCountryDropdown && (
+                    <div className="absolute z-20 left-0 right-0 mt-1 max-h-[180px] overflow-y-auto bg-[#0d2545] border border-white/15 rounded-[8px] shadow-2xl py-1 scrollbar-thin scrollbar-thumb-white/10">
+                      {filteredCountries.length > 0 ? (
+                        filteredCountries.map((country) => (
+                          <div
+                            key={country}
+                            onMouseDown={() => {
+                              setNriCountry(country);
+                              setCountrySearch(country);
+                              setShowCountryDropdown(false);
+                            }}
+                            className="px-3 py-2 text-[13.5px] text-white hover:bg-gold/25 cursor-pointer transition-colors"
+                          >
+                            {country}
+                          </div>
+                        ))
+                      ) : (
+                        <div className="px-3 py-2 text-[12.5px] text-white/50 italic text-center">
+                          No countries found
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+
               <div>
-                <label className={labelStyles}>I am interested in</label>
+                <label className={labelStyles}>I am interested in *</label>
                 <select 
                   value={interest} 
                   onChange={(e) => setInterest(e.target.value)}
                   className={`${inputStyles} appearance-none cursor-pointer`}
+                  required
                 >
                   <option value="" className="bg-navy text-white">Select an option</option>
                   <option value="Mutual Fund SIP" className="bg-navy text-white">Mutual Fund SIP</option>
                   <option value="Insurance Planning" className="bg-navy text-white">Insurance Planning</option>
                   <option value="NRI Investment Services" className="bg-navy text-white">NRI Investment Services</option>
-                  <option value="Tax Saving ELSS" className="bg-navy text-white">Tax Saving ELSS</option>
                   <option value="Portfolio Review" className="bg-navy text-white">Portfolio Review</option>
                   <option value="General Enquiry" className="bg-navy text-white">General Enquiry</option>
-                </select>
-              </div>
-
-              <div>
-                <label className={labelStyles}>Are you an NRI</label>
-                <select 
-                  value={isNri} 
-                  onChange={(e) => setIsNri(e.target.value)}
-                  className={`${inputStyles} appearance-none cursor-pointer`}
-                >
-                  <option value="No — I am based in India" className="bg-navy text-white">No — I am based in India</option>
-                  <option value="Yes — USA or Canada" className="bg-navy text-white">Yes — USA or Canada</option>
-                  <option value="Yes — UAE or Middle East" className="bg-navy text-white">Yes — UAE or Middle East</option>
-                  <option value="Yes — UK or Europe" className="bg-navy text-white">Yes — UK or Europe</option>
-                  <option value="Yes — Australia or New Zealand" className="bg-navy text-white">Yes — Australia or New Zealand</option>
-                  <option value="Yes — Singapore or SE Asia" className="bg-navy text-white">Yes — Singapore or SE Asia</option>
                 </select>
               </div>
 

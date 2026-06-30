@@ -46,7 +46,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
 
           {/* Left Side: Columns (Spans 8 cols on large screens) */}
-          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-[1fr_1.2fr_1.8fr_1.2fr] gap-x-6 gap-y-8">
             {/* Column 1 */}
             <div>
               <h3 className={headingStyles}>Company</h3>
@@ -69,16 +69,26 @@ const Footer = () => {
             <div>
               <h3 className={headingStyles}>Contact</h3>
               <a href="/#contact" onClick={(e) => handleLinkClick(e, '/#contact')} className={linkStyles}>Get in Touch</a>
-              <a href="tel:+919664977576" className={linkStyles}>+91 96649 77576</a>
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=officeinsurance2017@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={linkStyles}
-              >
-                officeinsurance2017@gmail.com
+              <a href="tel:+919664977576" className={`${linkStyles} flex items-center gap-2`}>
+                <span className="text-gold shrink-0">📞</span>
+                <span>+91 96649 77576</span>
               </a>
-              <span className={textStyles}>Ahmedabad, Gujarat</span>
+              <a 
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=officeinsurance2017@gmail.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={`${linkStyles} flex items-center gap-2`}
+              >
+                <span className="text-gold shrink-0">📧</span>
+                <span>officeinsurance2017@gmail.com</span>
+              </a>
+              <div className={`${textStyles} flex items-start gap-2`}>
+                <span className="text-gold shrink-0 mt-[3px]">📍</span>
+                <span>
+                  305, Abhishilp Complex,<br />
+                  Satellite, Ahmedabad – 380015
+                </span>
+              </div>
             </div>
 
             {/* Column 4 */}

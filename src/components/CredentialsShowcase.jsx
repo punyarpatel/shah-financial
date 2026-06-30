@@ -155,6 +155,32 @@ const credentialsData = [
         </svg>
       </div>
     )
+  },
+  {
+    index: 6,
+    title: 'NJ Partner',
+    subtext: 'Comprehensive Wealth Platform',
+    icon: (
+      <svg className="w-5 h-5 text-gold" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    ),
+    screenTitle: 'NJ Partner Platform',
+    screenSubtitle: 'NJ Wealth Partner Desk',
+    screenDetails: [
+      { label: 'Empanelled Partner', value: 'Active Distributor' },
+      { label: 'Asset Classes', value: 'Mutual Funds & NCDs' },
+      { label: 'Integration', value: 'Direct Transaction API' },
+      { label: 'System Access', value: 'NJ Partner Gateway' }
+    ],
+    screenBadge: 'DISTRIBUTION HUB',
+    screenIcon: (
+      <div className="w-16 h-16 rounded-full bg-gold/15 flex items-center justify-center border border-gold/30 shadow-[0_0_15px_rgba(201,146,42,0.2)]">
+        <svg className="w-8 h-8 text-gold" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 7.5h1.5m-1.5 3h1.5m-1.5 3h1.5m3.75-6H15m-1.5 3H15m-1.5 3H15" />
+        </svg>
+      </div>
+    )
   }
 ];
 const renderPhoneScreen = (index) => {
@@ -202,13 +228,23 @@ const renderPhoneScreen = (index) => {
         </div>
       </div>
     );
-  } else { // Prudent
+  } else if (index === 5) { // Prudent
     return (
       <div className="border border-gold/80 p-1.5 rounded-lg w-[185px] h-[185px] flex items-center justify-center bg-white/[0.01] select-none">
         <div className="border border-white/20 h-full w-full flex flex-col items-center justify-center p-4 rounded-md">
           <span className="font-serif italic text-goldLight text-[14px] md:text-[15px] tracking-wide mb-1.5">Partner</span>
           <span className="text-white font-sans font-extrabold text-[18px] md:text-[20px] tracking-[0.05em] leading-tight text-center mb-3">PRUDENT</span>
           <div className="bg-gold text-[#071324] font-sans font-bold px-4 py-1 text-[11px] md:text-[12px] tracking-wider rounded-sm uppercase">MULTI-ASSET</div>
+        </div>
+      </div>
+    );
+  } else { // NJ Partner
+    return (
+      <div className="border border-gold/80 p-1.5 rounded-lg w-[185px] h-[185px] flex items-center justify-center bg-white/[0.01] select-none">
+        <div className="border border-white/20 h-full w-full flex flex-col items-center justify-center p-4 rounded-md">
+          <span className="font-serif italic text-goldLight text-[14px] md:text-[15px] tracking-wide mb-1.5">Partner</span>
+          <span className="text-white font-sans font-extrabold text-[18px] md:text-[20px] tracking-[0.05em] leading-tight text-center mb-3">NJ WEALTH</span>
+          <div className="bg-gold text-[#071324] font-sans font-bold px-4 py-1 text-[11px] md:text-[12px] tracking-wider rounded-sm uppercase">MUTUAL FUNDS</div>
         </div>
       </div>
     );
@@ -415,7 +451,7 @@ const CredentialsShowcase = () => {
               </div>
 
               <div className="flex flex-col gap-3">
-                {credentialsData.slice(3, 6).map((item) => {
+                {credentialsData.slice(3, 7).map((item) => {
                   const isActive = activeIndex === item.index;
                   return (
                     <div
