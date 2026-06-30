@@ -3,20 +3,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const faqData = [
   {
-    question: "What financial services does Shah Financial Services provide?",
-    answer: "We offer a fully integrated financial planning ecosystem. This includes Mutual Fund Advisory (KYC setup, risk profiling, SIP registration, portfolio management), Life & General Insurance (Health, Term Life, Motor, and Corporate policies), specialized Retirement Planning, Tax-Saving ELSS investments, and Goal-Based wealth architecture (for educational funds, property purchase, etc.)."
+    question: "What financial services does Drishti Wealth provide?",
+    answer: "We offer a fully integrated financial planning ecosystem. This includes Mutual Fund planning (Investor onboarding, KYC setup, risk profiling, SIP registration, portfolio management, compliance resolution), Life & General Insurance (Health, Personal Accident, Term Plans, Motor, and Corporate policies), specialized Retirement Planning, Tax-Saving ELSS investments, and Goal-Based wealth architecture (for educational funds, property purchase, etc.)."
   },
   {
-    question: "Are there any upfront fees or hidden charges for your advisory services?",
-    answer: "No. At Shah Financial Services, we prioritize absolute transparency. As an AMFI-registered Mutual Fund Distributor, our compensation is received through standard distribution commissions directly from fund houses. There are no hidden charges or hourly advisory fees for your consultations or portfolio checkups."
+    question: "Are there any upfront fees or hidden charges for your services?",
+    answer: "No. At Drishti Wealth, we prioritize absolute transparency. There are no hidden charges or hourly advisory fees for your consultations or portfolio checkups."
   },
   {
     question: "How do I sign up for a free portfolio and insurance review?",
-    answer: "Getting started is simple. Click the 'Get Free Review' button in the navigation bar from any page on our site. Enter your basic contact information in the pop-up modal, and one of our experts will call you within 24 hours to schedule a detailed online or in-person review."
+    answer: "Getting started is simple. Click the 'Get Free Review' button in the navigation bar from any page on our site. Enter your basic contact information in the pop-up modal, and one of our experts will call you within 24 hours to schedule a detailed online or in-person review OR look us up online to reach us via WhatApp or Email. "
   },
   {
     question: "Do you offer remote KYC onboarding and account setups for NRI clients?",
-    answer: "Yes, we specialize in NRI Investment Services. We provide a completely digital, paperless remote KYC compliance service for NRIs residing in the USA, Canada, UAE, UK, Europe, Australia, and Singapore. We also guide you on NRE/NRO account integration, tax compliance under DTAA, and repatriation planning."
+    answer: "Yes, we specialize in NRI Investment Services. We provide a complete, paperless KYC compliance service for NRIs residing across the globe. We also guide you on NRE/NRO account integration, tax compliance, and smooth repatriation planning."
   },
   {
     question: "How can I monitor my mutual funds and insurance holdings?",
@@ -44,7 +44,7 @@ const FAQItem = ({ question, answer, isOpen, onToggle }) => {
           </svg>
         </span>
       </button>
-      
+
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
@@ -73,7 +73,7 @@ const FAQSection = () => {
   return (
     <section className="w-full bg-cream py-[4.5rem] px-4 overflow-visible relative">
       <div className="max-w-4xl mx-auto overflow-visible">
-        
+
         {/* Subheading decorative line */}
         <div className="w-full flex items-center justify-center gap-4 mb-6">
           <div className="h-[1px] flex-grow bg-navy/10 max-w-[100px] md:max-w-xs"></div>

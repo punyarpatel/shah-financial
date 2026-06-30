@@ -128,15 +128,15 @@ const MutualFundPage = () => {
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
-        <title>Mutual Fund Advisory — Shah Financial Services</title>
+        <title>Mutual Fund Advisory — Drishti Wealth</title>
         <meta name="description" content="Expert mutual fund advisory, SIP setups, portfolio reviews, and goal-based investing." />
-        <meta property="og:title" content="Mutual Fund Advisory — Shah Financial Services" />
+        <meta property="og:title" content="Mutual Fund Advisory — Drishti Wealth" />
         <meta property="og:description" content="Expert mutual fund advisory, SIP setups, portfolio reviews, and goal-based investing." />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Mutual Fund Advisory — Shah Financial Services" />
+        <meta name="twitter:title" content="Mutual Fund Advisory — Drishti Wealth" />
         <meta name="twitter:description" content="Expert mutual fund advisory, SIP setups, portfolio reviews, and goal-based investing." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>

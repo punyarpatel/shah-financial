@@ -20,16 +20,16 @@ const AboutPage = () => {
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
-        <title>About Us — Shah Financial Services Ahmedabad</title>
-        <meta name="description" content="Shah Financial Services — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 4,000+ families and 100+ NRI clients across India and abroad." />
-        <meta property="og:title" content="About Us — Shah Financial Services Ahmedabad" />
-        <meta property="og:description" content="Shah Financial Services — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 4,000+ families and 100+ NRI clients across India and abroad." />
+        <title>About Us — Drishti Wealth Ahmedabad</title>
+        <meta name="description" content="Drishti Wealth — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 4,000+ families and 100+ NRI clients across India and abroad." />
+        <meta property="og:title" content="About Us — Drishti Wealth Ahmedabad" />
+        <meta property="og:description" content="Drishti Wealth — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 4,000+ families and 100+ NRI clients across India and abroad." />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="About Us — Shah Financial Services Ahmedabad" />
-        <meta name="twitter:description" content="Shah Financial Services — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 4,000+ families and 100+ NRI clients across India and abroad." />
+        <meta name="twitter:title" content="About Us — Drishti Wealth Ahmedabad" />
+        <meta name="twitter:description" content="Drishti Wealth — trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2009. Serving 4,000+ families and 100+ NRI clients across India and abroad." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
@@ -46,7 +46,7 @@ const AboutPage = () => {
               A Family Built on Trust
             </h1>
             <p className="text-white/65 text-[16px] leading-[1.6] max-w-2xl">
-              Shah Financial Services was founded in 2009 in Ahmedabad by a family with a simple belief — every Indian family deserves access to honest, personalized financial guidance. What started as a small advisory practice has grown into a trusted firm serving 4,000 plus families across India and abroad.
+              Drishti Wealth was founded in 2009 in Ahmedabad by a family with a simple belief — every Indian family deserves access to honest, personalized financial guidance. What started as a small advisory practice has grown into a trusted firm serving 4,000 plus families across India and abroad.
             </p>
           </div>
         </FadeIn>

@@ -346,7 +346,7 @@ const SIPCalculator = () => {
       doc.setTextColor(255, 255, 255);
       doc.setFont("Helvetica", "bold");
       doc.setFontSize(20);
-      doc.text("SHAH FINANCIAL SERVICES", 15, 20);
+      doc.text("DRISHTI WEALTH", 15, 20);
       
       doc.setFont("Helvetica", "normal");
       doc.setFontSize(10);
@@ -510,7 +510,7 @@ const SIPCalculator = () => {
         "Disclaimer: The projections provided in this report are for illustrative purposes only based on the expected annual return input.",
         "They do not guarantee or represent actual future returns. Mutual fund investments are subject to market risks.",
         "Please read all scheme-related documents carefully before investing or seek professional financial advice.",
-        "Shah Financial Services © 2026. All rights reserved."
+        "Drishti Wealth © 2026. All rights reserved."
       ];
       
       let discY = 263.5;
@@ -520,7 +520,7 @@ const SIPCalculator = () => {
       });
       
       // Save the PDF
-      doc.save(`Shah_Financial_SIP_Report_${years}Y.pdf`);
+      doc.save(`Drishti_Wealth_SIP_Report_${years}Y.pdf`);
     } catch (e) {
       console.error(e);
     }
@@ -542,7 +542,7 @@ const SIPCalculator = () => {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.setAttribute("href", url);
-      link.setAttribute("download", `Shah_Financial_SIP_Export_${years}Y.csv`);
+      link.setAttribute("download", `Drishti_Wealth_SIP_Export_${years}Y.csv`);
       link.style.visibility = 'hidden';
       document.body.appendChild(link);
       link.click();
@@ -918,7 +918,7 @@ const SIPCalculator = () => {
               <div className="text-[11px] uppercase tracking-wider text-white/40 font-semibold mb-3">Or share via</div>
               <div className="grid grid-cols-3 gap-3">
                 <a
-                  href={`https://api.whatsapp.com/send?text=I projected my SIP growth with Shah Financial Services! I estimated a corpus of ${encodeURIComponent(fmt(corpus))} in ${years} years. Calculate yours here: ${encodeURIComponent(window.location.href)}`}
+                  href={`https://api.whatsapp.com/send?text=I projected my SIP growth with Drishti Wealth! I estimated a corpus of ${encodeURIComponent(fmt(corpus))} in ${years} years. Calculate yours here: ${encodeURIComponent(window.location.href)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex flex-col items-center justify-center gap-1.5 p-3 rounded-[10px] bg-white/5 border border-white/5 hover:border-[#25D366]/30 hover:bg-[#25D366]/5 transition-all text-center text-white/85 hover:text-white"
@@ -929,7 +929,7 @@ const SIPCalculator = () => {
                   <span className="text-[11px] font-medium">WhatsApp</span>
                 </a>
                 <a
-                  href={`https://twitter.com/intent/tweet?text=I projected my SIP growth with Shah Financial Services! I estimated a corpus of ${encodeURIComponent(fmt(corpus))} in ${years} years. Calculate yours:&url=${encodeURIComponent(window.location.href)}`}
+                  href={`https://twitter.com/intent/tweet?text=I projected my SIP growth with Drishti Wealth! I estimated a corpus of ${encodeURIComponent(fmt(corpus))} in ${years} years. Calculate yours:&url=${encodeURIComponent(window.location.href)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex flex-col items-center justify-center gap-1.5 p-3 rounded-[10px] bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/5 transition-all text-center text-white/85 hover:text-white"
@@ -940,7 +940,7 @@ const SIPCalculator = () => {
                   <span className="text-[11px] font-medium">Twitter / X</span>
                 </a>
                 <a
-                  href={`mailto:?subject=Projected SIP Growth Estimate&body=I calculated my projected SIP corpus with Shah Financial Services. With a monthly investment of ${fmt(sip)} at ${rate}% expected returns, the estimated corpus is ${fmt(corpus)} in ${years} years. View details here: ${window.location.href}`}
+                  href={`mailto:?subject=Projected SIP Growth Estimate&body=I calculated my projected SIP corpus with Drishti Wealth. With a monthly investment of ${fmt(sip)} at ${rate}% expected returns, the estimated corpus is ${fmt(corpus)} in ${years} years. View details here: ${window.location.href}`}
                   className="flex flex-col items-center justify-center gap-1.5 p-3 rounded-[10px] bg-white/5 border border-white/5 hover:border-gold/30 hover:bg-gold/5 transition-all text-center text-white/85 hover:text-white"
                 >
                   <svg className="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">

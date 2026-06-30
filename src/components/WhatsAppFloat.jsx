@@ -2,7 +2,7 @@ import React from 'react';
 
 const WhatsAppFloat = () => {
   const handleClick = () => {
-    window.open('https://wa.me/919664977576?text=Hi%20Shah%20Financial%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services', '_blank');
+    window.open('https://wa.me/919664977576?text=Hi%20Drishti%20Wealth%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services', '_blank');
   };
 
   return (

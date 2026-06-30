@@ -108,26 +108,6 @@ const servicesData = [
     ]
   },
   {
-    id: 'elss',
-    icon: '💰',
-    title: 'Tax Saving — ELSS',
-    description: 'Save up to ₹46,800 in tax every year under Section 80C while building wealth with equity-level returns and a short 3-year lock-in.',
-    link: '/services/elss',
-    isSpecial: false,
-    cardGradient: 'from-rose-600 via-pink-600 to-purple-600',
-    cardText: 'TAX SAVER',
-    cardIcon: (
-      <svg className="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    highlights: [
-      'Save up to ₹46,800 in taxes under Sec 80C',
-      'Shortest lock-in among tax savers (3 years)',
-      'High-potential equity growth exposure'
-    ]
-  },
-  {
     id: 'goals',
     icon: '🎯',
     title: 'Goal-Based Wealth Planning',
@@ -210,7 +190,7 @@ const Service3DGraphic = ({ title, cardGradient, cardText, cardIcon }) => {
 
             {/* Brand text */}
             <div className="flex items-center gap-0.5">
-              <span className="text-[10px] font-extrabold tracking-wider text-white font-sans">SHAH</span>
+              <span className="text-[10px] font-extrabold tracking-wider text-white font-sans">DRISHTI</span>
             </div>
           </div>
         </div>
@@ -255,7 +235,7 @@ const ServiceCard = ({ service, index, totalCards, onRef }) => {
   const stickyTop = isDesktop ? 120 + (index * 24) : 0;
 
   return (
-    <div 
+    <div
       ref={(el) => {
         localRef.current = el;
         if (onRef) onRef(el);
@@ -273,54 +253,54 @@ const ServiceCard = ({ service, index, totalCards, onRef }) => {
       >
         {/* Left Side Content */}
         <div className="flex-1 text-left w-full md:pr-4">
-        <h3 className="font-serif text-[28px] md:text-[34px] font-bold text-navy mb-6 leading-tight">
-          {service.title}
-        </h3>
+          <h3 className="font-serif text-[28px] md:text-[34px] font-bold text-navy mb-6 leading-tight">
+            {service.title}
+          </h3>
 
-        <ul className="space-y-4 mb-8">
-          {service.highlights.map((highlight, idx) => (
-            <li key={idx} className="flex items-start gap-3">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-gold text-white flex items-center justify-center mt-0.5 shadow-sm shadow-gold/20">
-                <svg className="w-3.5 h-3.5 stroke-[3.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </span>
-              <span className="text-[15.5px] font-sans font-medium text-muted leading-relaxed">
-                {highlight}
-              </span>
-            </li>
-          ))}
-        </ul>
+          <ul className="space-y-4 mb-8">
+            {service.highlights.map((highlight, idx) => (
+              <li key={idx} className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-gold text-white flex items-center justify-center mt-0.5 shadow-sm shadow-gold/20">
+                  <svg className="w-3.5 h-3.5 stroke-[3.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </span>
+                <span className="text-[15.5px] font-sans font-medium text-muted leading-relaxed">
+                  {highlight}
+                </span>
+              </li>
+            ))}
+          </ul>
 
-        <div>
-          {service.link.startsWith('/') ? (
-            <Link
-              to={service.link}
-              className="inline-flex items-center justify-center px-8 py-2.5 bg-[#111111] hover:bg-black text-white text-[14px] font-bold rounded-[12px] shadow-md hover:shadow-black/15 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
-            >
-              Explore
-            </Link>
-          ) : (
-            <a
-              href={service.link}
-              className="inline-flex items-center justify-center px-8 py-2.5 bg-[#111111] hover:bg-black text-white text-[14px] font-bold rounded-[12px] shadow-md hover:shadow-black/15 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
-            >
-              Explore
-            </a>
-          )}
+          <div>
+            {service.link.startsWith('/') ? (
+              <Link
+                to={service.link}
+                className="inline-flex items-center justify-center px-8 py-2.5 bg-[#111111] hover:bg-black text-white text-[14px] font-bold rounded-[12px] shadow-md hover:shadow-black/15 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+              >
+                Explore
+              </Link>
+            ) : (
+              <a
+                href={service.link}
+                className="inline-flex items-center justify-center px-8 py-2.5 bg-[#111111] hover:bg-black text-white text-[14px] font-bold rounded-[12px] shadow-md hover:shadow-black/15 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+              >
+                Explore
+              </a>
+            )}
+          </div>
         </div>
-      </div>
 
-      {/* Right Side Illustration */}
-      <div className="w-full md:w-[320px] flex justify-center shrink-0">
-        <Service3DGraphic
-          title={service.title}
-          cardGradient={service.cardGradient}
-          cardText={service.cardText}
-          cardIcon={service.cardIcon}
-        />
-      </div>
-    </motion.div>
+        {/* Right Side Illustration */}
+        <div className="w-full md:w-[320px] flex justify-center shrink-0">
+          <Service3DGraphic
+            title={service.title}
+            cardGradient={service.cardGradient}
+            cardText={service.cardText}
+            cardIcon={service.cardIcon}
+          />
+        </div>
+      </motion.div>
     </div>
   );
 };
@@ -347,10 +327,10 @@ const ServicesGrid = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           let newActiveIndex = activeTab;
-          
+
           // Find the last card whose top is above the middle of the screen
           const triggerPoint = window.innerHeight * 0.4; // 40% from top
-          
+
           for (let i = 0; i < cardRefs.current.length; i++) {
             const ref = cardRefs.current[i];
             if (ref) {
@@ -360,7 +340,7 @@ const ServicesGrid = () => {
               }
             }
           }
-          
+
           if (newActiveIndex !== activeTab) {
             setActiveTab(newActiveIndex);
           }
@@ -415,7 +395,7 @@ const ServicesGrid = () => {
           <div className="w-full flex items-center justify-center gap-4 mb-12">
             <div className="h-[1px] flex-grow bg-navy/10 max-w-[200px] md:max-w-xs lg:max-w-sm"></div>
             <span className="text-gold text-[12px] tracking-[0.2em] uppercase font-bold text-center shrink-0">
-              About Shah Financial
+              About Drishti Wealth
             </span>
             <div className="h-[1px] flex-grow bg-navy/10 max-w-[200px] md:max-w-xs lg:max-w-sm"></div>
           </div>
@@ -428,10 +408,10 @@ const ServicesGrid = () => {
                 Wealth Creation is Only Half the Story. Discover the Power of Balanced Planning.
               </h2>
               <p className="text-[15.5px] leading-relaxed text-muted mb-4">
-                At Shah Financial Services, we integrate wealth creation and risk protection into a single, comprehensive strategy. Whether building growth through personalized mutual fund portfolios, or safeguarding your family with robust life, health, and general insurance policies, we cover your entire financial landscape under one roof.
+                At Drishti Wealth, we integrate wealth creation and risk protection into a single, comprehensive strategy. Whether building growth through personalized mutual fund portfolios, or safeguarding your family with robust life, health, and general insurance policies, we cover your entire financial landscape under one roof.
               </p>
               <p className="text-[15.5px] leading-relaxed text-muted mb-6">
-                Your financial journey is unique. Whether you're securing your family's future, planning for retirement, or investing as an NRI, we pair certified advisory with the right insurance and mutual fund solutions, so every decision feels confident, not complicated.
+                Your financial journey is unique. Whether you're securing your family's future, planning for retirement, or investing as an NRI, we pair certified guidance with the right insurance and mutual fund solutions, so every decision feels confident, not complicated.
 
               </p>
 
@@ -511,7 +491,7 @@ const ServicesGrid = () => {
                       <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#0d2545 1px, transparent 1px)', backgroundSize: '16px 16px' }}></div>
                       <img
                         src="/services_overview.png"
-                        alt="Shah Financial Balanced Services Overview"
+                        alt="Drishti Wealth Balanced Services Overview"
                         className="w-full h-full object-cover"
                       />
 
@@ -539,7 +519,7 @@ const ServicesGrid = () => {
                 Comprehensive Financial Solutions
               </h2>
               <p className="text-[15px] text-muted leading-[1.7]">
-                We build personalised investment portfolios from scratch, designed around your goals, risk appetite, and timeline. From mutual funds and tax-saving strategies to life, health, motor, general, and SME insurance, our certified experts have everything you need under one roof.                <Link to="/blog" className="text-gold hover:text-goldLight font-medium inline-flex items-center group transition-colors">
+                We build personalised investment portfolios from scratch, designed around your goals, risk appetite, and timeline. From mutual funds and tax-saving strategies to life, health, motor, general, and SME insurance, we have everything you need under one roof.                <Link to="/blog" className="text-gold hover:text-goldLight font-medium inline-flex items-center group transition-colors">
                   Explore more
                   <span className="ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">...</span>
                 </Link>

@@ -66,7 +66,7 @@ const ClientPortalPage = () => {
   };
 
   const handleWhatsAppHelp = () => {
-    const text = encodeURIComponent('Hi Shah Financial, I need help logging into my portfolio.');
+    const text = encodeURIComponent('Hi Drishti Wealth, I need help logging into my portfolio.');
     window.open(`https://wa.me/919664977576?text=${text}`, '_blank');
   };
 
@@ -80,15 +80,15 @@ const ClientPortalPage = () => {
   return (
     <div className="min-h-screen bg-[#faf8f4] flex flex-col relative">
       <Helmet>
-        <title>Client Portfolio Login — Shah Financial Services</title>
+        <title>Client Portfolio Login — Drishti Wealth</title>
         <meta name="description" content="Access your NJ Client Desk and FundzBazar Prudent Client Desk portfolios to monitor your mutual fund holdings and transactions." />
-        <meta property="og:title" content="Client Portfolio Login — Shah Financial Services" />
+        <meta property="og:title" content="Client Portfolio Login — Drishti Wealth" />
         <meta property="og:description" content="Access your NJ Client Desk and FundzBazar Prudent Client Desk portfolios to monitor your mutual fund holdings and transactions." />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Client Portfolio Login — Shah Financial Services" />
+        <meta name="twitter:title" content="Client Portfolio Login — Drishti Wealth" />
         <meta name="twitter:description" content="Access your NJ Client Desk and FundzBazar Prudent Client Desk portfolios to monitor your mutual fund holdings and transactions." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
@@ -278,7 +278,6 @@ const ClientPortalPage = () => {
                         <option value="Mutual Fund SIP">Mutual Fund SIP</option>
                         <option value="Insurance Planning">Insurance Planning</option>
                         <option value="NRI Investment Services">NRI Investment Services</option>
-                        <option value="Tax Saving ELSS">Tax Saving ELSS</option>
                         <option value="Portfolio Review">Portfolio Review</option>
                         <option value="General Enquiry">General Enquiry</option>
                       </select>

@@ -5,7 +5,7 @@ const milestones = [
   {
     year: '2009',
     title: 'Sowing the Seeds',
-    description: 'Shah Financial Services was founded in Ahmedabad by Rajesh Shah with a simple vision — helping local families achieve financial freedom with transparent and honest advice.',
+    description: 'Drishti Wealth was founded in Ahmedabad by Rajesh Shah with a simple vision — helping local families achieve financial freedom with transparent and honest advice.',
     icon: (
       <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22V12" />

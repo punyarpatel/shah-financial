@@ -43,15 +43,15 @@ const SingleBlogPage = () => {
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
-        <title>{blog.title} — Shah Financial Services</title>
+        <title>{blog.title} — Drishti Wealth</title>
         <meta name="description" content={blog.excerpt} />
-        <meta property="og:title" content={`${blog.title} — Shah Financial Services`} />
+        <meta property="og:title" content={`${blog.title} — Drishti Wealth`} />
         <meta property="og:description" content={blog.excerpt} />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${blog.title} — Shah Financial Services`} />
+        <meta name="twitter:title" content={`${blog.title} — Drishti Wealth`} />
         <meta name="twitter:description" content={blog.excerpt} />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>

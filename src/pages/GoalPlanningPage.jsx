@@ -134,15 +134,15 @@ const GoalPlanningPage = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col relative">
       <Helmet>
-        <title>Goal-Based Wealth Planning — Shah Financial Services</title>
+        <title>Goal-Based Wealth Planning — Drishti Wealth</title>
         <meta name="description" content="Plan for every financial goal — education, home, business, retirement. Dedicated investment buckets, tracked annually." />
-        <meta property="og:title" content="Goal-Based Wealth Planning — Shah Financial Services" />
+        <meta property="og:title" content="Goal-Based Wealth Planning — Drishti Wealth" />
         <meta property="og:description" content="Plan for every financial goal — education, home, business, retirement. Dedicated investment buckets, tracked annually." />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Goal-Based Wealth Planning — Shah Financial Services" />
+        <meta name="twitter:title" content="Goal-Based Wealth Planning — Drishti Wealth" />
         <meta name="twitter:description" content="Plan for every financial goal — education, home, business, retirement. Dedicated investment buckets, tracked annually." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>

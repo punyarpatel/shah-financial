@@ -35,7 +35,7 @@ const AdminLoginPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#faf8f4]">
       <Helmet>
-        <title>Admin Login — Shah Financial Services</title>
+        <title>Admin Login — Drishti Wealth</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       
@@ -43,7 +43,7 @@ const AdminLoginPage = () => {
         
         {/* Branding */}
         <div className="font-serif text-[#0d2545] text-[18px] font-semibold text-center mb-[4px]">
-          Shah Financial Services
+          Drishti Wealth
         </div>
         <div className="text-[#5c6478] text-[11px] uppercase text-center mb-[2rem] tracking-widest">
           AMFI Registered &middot; Est. 2009
@@ -54,7 +54,7 @@ const AdminLoginPage = () => {
           Admin Login
         </h1>
         <p className="text-[#5c6478] text-[13px] text-center mb-[1.5rem]">
-          This area is for Shah Financial staff only.
+          This area is for Drishti Wealth staff only.
         </p>
 
         {/* Error Message */}

@@ -17,7 +17,6 @@ const navData = {
     { icon: '✈️', title: 'Overseas Travel Insurance', desc: 'Travel the world with absolute peace of mind.', link: '/services/travel-insurance' },
     { icon: '🌍', title: 'NRI Investment Services', desc: 'Specialized advisory for NRIs including NRE/NRO investing, health insurance, and repatriation.', link: '/nri' },
     { icon: '🎯', title: 'Retirement Planning', desc: 'Build a realistic, inflation-adjusted retirement corpus with dedicated plans and annual reviews.', link: '/services/retirement' },
-    { icon: '💰', title: 'Tax Saving — ELSS', desc: 'Save tax under Section 80C while building wealth with equity-level returns.', link: '/services/elss' },
     { icon: '🎯', title: 'Goal-Based Wealth Planning', desc: 'Create dedicated investment buckets for education, home, business, and vacations.', link: '/services/goal-planning' },
   ],
   about: [
@@ -289,7 +288,7 @@ const Navbar = () => {
           {/* Left Side: Logo */}
           <Link to="/" className="flex flex-col justify-center" onClick={handleLogoClick}>
             <span className="font-serif text-white text-[17px] font-semibold leading-tight">
-              Shah Financial Services
+              Drishti Wealth
             </span>
             <span className="text-goldLight text-[10px] uppercase tracking-[0.15em] leading-tight mt-0.5">
               AMFI Registered &middot; Est. 2009

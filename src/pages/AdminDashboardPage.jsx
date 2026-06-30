@@ -465,13 +465,13 @@ const AdminDashboardPage = () => {
   return (
     <div className="min-h-screen bg-white font-sans text-[#1a1a2e]">
       <Helmet>
-        <title>Admin Dashboard — Shah Financial Services</title>
+        <title>Admin Dashboard — Drishti Wealth</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       
       {/* Top Nav */}
       <nav className="bg-[#0d2545] h-[56px] flex items-center justify-between px-[2rem]">
-        <div className="text-white font-serif text-[16px]">Shah Financial Services</div>
+        <div className="text-white font-serif text-[16px]">Drishti Wealth</div>
         <div className="text-white/60 text-[14px]">Admin Dashboard</div>
         <button 
           onClick={handleLogout}
@@ -759,7 +759,6 @@ const AdminDashboardPage = () => {
               <option value="Mutual Fund SIP">Mutual Fund SIP</option>
               <option value="Insurance Planning">Insurance Planning</option>
               <option value="NRI Investment Services">NRI Investment Services</option>
-              <option value="Tax Saving ELSS">Tax Saving ELSS</option>
               <option value="Portfolio Review">Portfolio Review</option>
               <option value="General Enquiry">General Enquiry</option>
             </select>

@@ -13,7 +13,6 @@ import MutualFundPage from './pages/MutualFundPage';
 import InsurancePage from './pages/InsurancePage';
 import TravelInsurancePage from './pages/TravelInsurancePage';
 import RetirementPage from './pages/RetirementPage';
-import ELSSPage from './pages/ELSSPage';
 import GoalPlanningPage from './pages/GoalPlanningPage';
 import BlogPage from './pages/BlogPage';
 import SingleBlogPage from './pages/SingleBlogPage';
@@ -81,7 +80,6 @@ export default function App() {
             <Route path="/services/insurance" element={<InsurancePage />} />
             <Route path="/services/travel-insurance" element={<TravelInsurancePage />} />
             <Route path="/services/retirement" element={<RetirementPage />} />
-            <Route path="/services/elss" element={<ELSSPage />} />
             <Route path="/services/goal-planning" element={<GoalPlanningPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/blog" element={<BlogPage />} />

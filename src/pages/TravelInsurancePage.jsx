@@ -110,9 +110,9 @@ const TravelInsurancePage = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col relative">
       <Helmet>
-        <title>Overseas Travel Insurance — Shah Financial Services</title>
+        <title>Overseas Travel Insurance — Drishti Wealth</title>
         <meta name="description" content="Comprehensive overseas travel insurance covering medical emergencies, trip cancellations, lost baggage, and flight delays." />
-        <meta property="og:title" content="Overseas Travel Insurance — Shah Financial Services" />
+        <meta property="og:title" content="Overseas Travel Insurance — Drishti Wealth" />
         <meta property="og:description" content="Comprehensive overseas travel insurance covering medical emergencies, trip cancellations, lost baggage, and flight delays." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />

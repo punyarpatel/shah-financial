@@ -39,7 +39,7 @@ const WhyChooseUs = () => {
               Our Advantages
             </span>
             <h2 className="font-serif text-[32px] md:text-[42px] text-textDark font-bold leading-[1.2] mb-4">
-              Why Choose Shah Financial
+              Why Choose Drishti Wealth
             </h2>
             <p className="text-[15px] text-muted leading-relaxed">
               We combine professional expertise, robust technologies, and deep market insights to protect and compound your wealth over generations.

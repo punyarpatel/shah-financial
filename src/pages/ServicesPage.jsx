@@ -42,14 +42,6 @@ const servicesList = [
     link: '/services/retirement'
   },
   {
-    id: 'elss',
-    icon: '💰',
-    category: 'Tax Optimization',
-    title: 'Tax Saving — ELSS',
-    description: 'Save up to ₹46,800 in tax every year under Section 80C while building wealth with equity-level returns and a short 3-year lock-in.',
-    link: '/services/elss'
-  },
-  {
     id: 'goals',
     icon: '🎯',
     category: 'Goal Tracking',
@@ -65,16 +57,16 @@ const ServicesPage = () => {
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
-        <title>Our Services — Shah Financial Services Ahmedabad</title>
-        <meta name="description" content="Explore comprehensive wealth management, mutual fund advisory, life and health insurance, NRI investment planning, retirement setups, and tax-saving ELSS." />
-        <meta property="og:title" content="Our Services — Shah Financial Services Ahmedabad" />
-        <meta property="og:description" content="Explore comprehensive wealth management, mutual fund advisory, life and health insurance, NRI investment planning, retirement setups, and tax-saving ELSS." />
+        <title>Our Services — Drishti Wealth Ahmedabad</title>
+        <meta name="description" content="Explore comprehensive wealth management, mutual fund advisory, life and health insurance, NRI investment planning, and retirement setups." />
+        <meta property="og:title" content="Our Services — Drishti Wealth Ahmedabad" />
+        <meta property="og:description" content="Explore comprehensive wealth management, mutual fund advisory, life and health insurance, NRI investment planning, and retirement setups." />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Our Services — Shah Financial Services Ahmedabad" />
-        <meta name="twitter:description" content="Explore comprehensive wealth management, mutual fund advisory, life and health insurance, NRI investment planning, retirement setups, and tax-saving ELSS." />
+        <meta name="twitter:title" content="Our Services — Drishti Wealth Ahmedabad" />
+        <meta name="twitter:description" content="Explore comprehensive wealth management, mutual fund advisory, life and health insurance, NRI investment planning, and retirement setups." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
