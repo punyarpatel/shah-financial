@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import { submitLead } from '../lib/leads';
+import { countriesList } from '../lib/countries';
 import FadeIn from '../components/animations/FadeIn';
 import InsurerLogo from '../components/InsurerLogo';
 import ServiceCardGraphic from '../components/ServiceCardGraphic';
@@ -15,7 +16,7 @@ const POLICY_CHECKS = [
     id: 'waiting',
     icon: '⏳',
     title: 'Waiting Period Clauses',
-    description: "So you're covered when you actually need it — not after a long wait.",
+    description: "So you're covered when you actually need it, not after a long wait.",
     detailedDescription: 'We verify that any waiting periods for pre-existing diseases align perfectly with your planned travel schedules to India.'
   },
   {
@@ -53,12 +54,32 @@ const NRIPage = () => {
   const [phone, setPhone] = useState('');
   const [interest, setInterest] = useState('');
   const [nriCountry, setNriCountry] = useState('');
+  const [countrySearch, setCountrySearch] = useState('');
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [timezone, setTimezone] = useState('');
+
+  const filteredCountries = countriesList.filter(country =>
+    country.toLowerCase().includes(countrySearch.toLowerCase())
+  );
+
+  const handleCountryChange = (e) => {
+    const val = e.target.value;
+    setCountrySearch(val);
+    setShowCountryDropdown(true);
+    
+    // Check if the typed value matches a country exactly
+    const match = countriesList.find(c => c.toLowerCase() === val.trim().toLowerCase());
+    if (match) {
+      setNriCountry(match);
+    } else {
+      setNriCountry('');
+    }
+  };
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const [hovered, setHovered] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   const handleScrollToContact = () => {
     document.getElementById('nri-contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -109,6 +130,8 @@ const NRIPage = () => {
     setPhone('');
     setInterest('');
     setNriCountry('');
+    setCountrySearch('');
+    setShowCountryDropdown(false);
     setTimezone('');
     setError('');
     setSuccess(false);
@@ -125,7 +148,7 @@ const NRIPage = () => {
     'DTAA (Double Tax Avoidance Agreement) guidance',
     'KYC and re-KYC for NRIs',
     'PAN card application and Aadhaar linking support',
-    'Repatriation planning — moving money back abroad smoothly',
+    'Repatriation planning: moving money back abroad smoothly',
     'SIP setup and portfolio management remotely',
   ];
 
@@ -139,27 +162,31 @@ const NRIPage = () => {
     { icon: '🩺', label: 'General health checkups and diagnostics' },
   ];
 
-  const insurerPartners = ['HDFC Ergo', 'ICICI Lombard', 'Go Digit', 'Tata AIG', 'Bajaj Allianz', 'Edelweiss Zuno'];
+  const insurerPartners = ['HDFC Ergo', 'ICICI Lombard', 'Tata AIG', 'Bajaj Allianz', 'Edelweiss Zuno'];
 
 
 
-  const countries = ['🇺🇸 USA', '🇬🇧 UK', '🇦🇪 UAE', '🇦🇺 Australia', '🇨🇦 Canada', '🇸🇬 Singapore', '🇩🇪 Germany', '🇳🇿 New Zealand'];
+  const countries = [
+    '🇺🇸 USA', '🇬🇧 UK', '🇦🇪 UAE', '🇦🇺 Australia', '🇨🇦 Canada', '🇸🇬 Singapore', '🇩🇪 Germany', '🇳🇿 New Zealand',
+    '🇸🇦 Saudi Arabia', '🇶🇦 Qatar', '🇴🇲 Oman', '🇧🇭 Bahrain', '🇰🇼 Kuwait', '🇮🇪 Ireland', '🇳🇱 Netherlands',
+    '& More'
+  ];
 
   const ogImage = `${window.location.origin}/nri_services_preview.png`;
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col relative">
       <Helmet>
-        <title>NRI Investment Services India — Drishti Wealth</title>
-        <meta name="description" content="NRI mutual fund investments, NRI health insurance in India, DTAA guidance, KYC, repatriation planning. Serving NRIs across USA, UK, UAE, Canada, Australia, Singapore." />
-        <meta property="og:title" content="NRI Investment Services India — Drishti Wealth" />
-        <meta property="og:description" content="NRI mutual fund investments, NRI health insurance in India, DTAA guidance, KYC, repatriation planning. Serving NRIs across USA, UK, UAE, Canada, Australia, Singapore." />
+        <title>NRI Investment Services India | Drishti Wealth</title>
+        <meta name="description" content="NRI mutual fund investments, NRI health insurance in India, DTAA guidance, KYC, repatriation planning. Serving NRIs across USA, UK, UAE, Canada, Australia, Singapore, GCC, and Europe." />
+        <meta property="og:title" content="NRI Investment Services India | Drishti Wealth" />
+        <meta property="og:description" content="NRI mutual fund investments, NRI health insurance in India, DTAA guidance, KYC, repatriation planning. Serving NRIs across USA, UK, UAE, Canada, Australia, Singapore, GCC, and Europe." />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="NRI Investment Services India — Drishti Wealth" />
-        <meta name="twitter:description" content="NRI mutual fund investments, NRI health insurance in India, DTAA guidance, KYC, repatriation planning. Serving NRIs across USA, UK, UAE, Canada, Australia, Singapore." />
+        <meta name="twitter:title" content="NRI Investment Services India | Drishti Wealth" />
+        <meta name="twitter:description" content="NRI mutual fund investments, NRI health insurance in India, DTAA guidance, KYC, repatriation planning. Serving NRIs across USA, UK, UAE, Canada, Australia, Singapore, GCC, and Europe." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
@@ -178,10 +205,10 @@ const NRIPage = () => {
               <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">NRI Investment Services</span>
             </div>
             <h1 className="font-serif text-[34px] md:text-[46px] text-white font-semibold leading-[1.2] mb-[1.25rem] max-w-4xl">
-              Your India Investments & Insurance — Managed Professionally, Even From Abroad
+              Your India Investments & Insurance: Managed Professionally, Even From Abroad
             </h1>
             <p className="text-white/65 text-[16px] leading-[1.6] mb-[2rem] max-w-2xl">
-              You've built a life abroad. Your India investments and insurance deserve the same attention. We specialise in helping NRIs invest, stay compliant, grow their wealth back home — and stay protected every time they visit India.
+              You've built a life abroad. Your India investments and insurance deserve the same attention. We specialise in helping NRIs invest, stay compliant, grow their wealth back home, and stay protected every time they visit India.
             </p>
             <div className="flex flex-wrap gap-4">
               <button onClick={handleScrollToContact}
@@ -267,7 +294,7 @@ const NRIPage = () => {
                       className="inline-flex items-center text-[14px] font-bold text-gold hover:text-goldLight group/link transition-colors duration-300"
                     >
                       <span className="relative py-1">
-                        Learn more
+                        Start with us
                         <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gold group-hover/link:w-full transition-all duration-300"></span>
                       </span>
                       <svg className="w-4 h-4 ml-1.5 transform group-hover/link:translate-x-1.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
@@ -365,7 +392,7 @@ const NRIPage = () => {
                 <div className="sm:col-span-2 bg-navy rounded-[12px] p-5 relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-gold rounded-full blur-[50px] opacity-20 pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
                   <p className="text-white/60 text-[11px] uppercase tracking-wider mb-1">DTAA Coverage</p>
-                  <p className="text-white font-serif text-[16px] font-semibold leading-snug">India has active DTAA treaties with 90+ countries — so you don't pay tax twice.</p>
+                  <p className="text-white font-serif text-[16px] font-semibold leading-snug">India has active DTAA treaties with 90+ countries, so you don't pay tax twice.</p>
                   <button onClick={handleScrollToContact} className="mt-3 text-goldLight text-[13px] font-medium hover:text-white transition-colors">
                     Ask us about your country →
                   </button>
@@ -376,7 +403,7 @@ const NRIPage = () => {
         </FadeIn>
       </section>
 
-      {/* NRI Health Insurance — Full Section */}
+      {/* NRI Health Insurance: Full Section */}
       <section className="bg-white py-[4.5rem] w-full">
         <FadeIn>
           <div className="max-w-7xl mx-auto px-4">
@@ -384,28 +411,19 @@ const NRIPage = () => {
             <h2 className="font-serif text-[28px] text-textDark font-semibold mb-4 leading-tight max-w-3xl">
               Get World-Class Treatment in India, at a Fraction of the Cost
             </h2>
-            <p className="text-muted text-[15px] leading-[1.7] max-w-3xl mb-10">
-              Healthcare abroad is expensive. A surgery that costs ₹3–5 lakhs in India can cost 10–20× more in the US, UK, or Gulf countries. Many NRIs now fly back to India for planned procedures — and the smart ones are covered with an Indian health insurance policy before they land.
+            <p className="text-muted text-[15px] leading-[1.7] max-w-3xl mb-6">
+              Healthcare abroad is expensive. A surgery that costs ₹3–5 lakhs in India can cost 10–20× more in the US, UK, or Gulf countries. Many NRIs now fly back to India for planned procedures, and the smart ones are covered with an Indian health insurance policy before they land.
             </p>
- 
-            {/* Cost Comparison Banner */}
-            <div className="bg-navy rounded-[20px] p-6 md:p-8 mb-10 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gold rounded-full blur-[100px] opacity-10 pointer-events-none transform translate-x-1/3 -translate-y-1/3"></div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-                <div className="text-center md:text-left">
-                  <p className="text-white/50 text-[12px] uppercase tracking-wider mb-1">Knee Replacement in India</p>
-                  <p className="font-serif text-[36px] text-goldLight font-bold">₹3–5L</p>
-                </div>
-                <div className="text-center flex items-center justify-center">
-                  <div className="text-white/30 text-[40px] font-serif">vs</div>
-                </div>
-                <div className="text-center md:text-right">
-                  <p className="text-white/50 text-[12px] uppercase tracking-wider mb-1">Same Procedure Abroad</p>
-                  <p className="font-serif text-[36px] text-white/70 font-bold line-through">₹30–60L</p>
-                </div>
-              </div>
-              <p className="text-white/50 text-[13px] text-center mt-4 relative z-10">With Indian health insurance, your ₹3–5L surgery is fully covered.</p>
+
+            {/* Special NRI Discount Banner */}
+            <div className="flex items-center gap-3 bg-gold/10 border border-gold/30 rounded-[12px] p-4 max-w-3xl mb-10">
+              <span className="text-[20px] flex-shrink-0">🏷️</span>
+              <p className="text-navy text-[14px] font-sans font-medium">
+                <strong>Special NRI Discount Available:</strong> NRIs are eligible for exclusive premium discounts on select Indian health insurance plans. Ask our advisor for details.
+              </p>
             </div>
+ 
+
             
             {/* What's covered */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
@@ -415,8 +433,9 @@ const NRIPage = () => {
                   {[
                     'Planned surgeries, procedures, and hospitalisation in India are fully covered',
                     "You're not paying out of pocket when you visit family and need medical care",
-                    "You get access to India's best hospitals — Apollo, Fortis, AIIMS, Kokilaben — at insured rates",
+                    "You get access to India's best hospitals (including Apollo, Fortis, AIIMS, and Kokilaben) at insured rates",
                     'Premium costs a fraction of what international health cover charges',
+                    'Special NRI discounts are available for health insurance policies',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <span className="text-gold font-bold mt-0.5 flex-shrink-0">✓</span>
@@ -458,25 +477,37 @@ const NRIPage = () => {
             <div className="mb-10">
               <h3 className="font-serif text-[22px] text-navy font-semibold mb-6">Important things we check for you</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative">
+                {expandedIndex !== null && (
+                  <div 
+                    className="fixed inset-0 z-40 bg-transparent cursor-default" 
+                    onClick={() => setExpandedIndex(null)}
+                  />
+                )}
+                {expandedIndex !== null && (
+                  <div 
+                    className="fixed inset-0 z-40 bg-transparent cursor-default" 
+                    onClick={() => setExpandedIndex(null)}
+                  />
+                )}
                 {POLICY_CHECKS.map((c, index) => {
-                  const isHovered = hoveredIndex === index;
-                  const isAnyHovered = hoveredIndex !== null;
+                  const isExpanded = expandedIndex === index;
+                  const isAnyExpanded = expandedIndex !== null;
                   
                   // Calculate slide translations based on relative position in a 3-column layout
                   let xTranslate = 0;
                   let yTranslate = 0;
                   
-                  if (isAnyHovered && !isHovered) {
+                  if (isAnyExpanded && !isExpanded) {
                     const columns = 3;
                     const r = Math.floor(index / columns);
-                    const c = index % columns;
-                    const hr = Math.floor(hoveredIndex / columns);
-                    const hc = hoveredIndex % columns;
+                    const cVal = index % columns;
+                    const hr = Math.floor(expandedIndex / columns);
+                    const hc = expandedIndex % columns;
                     
                     const dr = r - hr;
-                    const dc = c - hc;
+                    const dc = cVal - hc;
                     
-                    // Translate outwards away from the hovered card
+                    // Translate outwards away from the expanded card
                     xTranslate = Math.sign(dc) * 60;
                     yTranslate = Math.sign(dr) * 60;
                   }
@@ -484,22 +515,21 @@ const NRIPage = () => {
                   return (
                     <motion.div
                       key={c.id}
-                      onMouseEnter={() => setHoveredIndex(index)}
-                      onMouseLeave={() => setHoveredIndex(null)}
+                      onClick={() => setExpandedIndex(isExpanded ? null : index)}
                       style={{
                         originX: 0.5,
                         originY: 0.5,
                       }}
                       animate={{
-                        scale: isHovered ? 1.06 : isAnyHovered ? 0.92 : 1,
+                        scale: isExpanded ? 1.06 : isAnyExpanded ? 0.92 : 1,
                         x: xTranslate,
                         y: yTranslate,
-                        opacity: isHovered ? 1 : isAnyHovered ? 0.2 : 1,
-                        zIndex: isHovered ? 50 : 1,
-                        boxShadow: isHovered 
+                        opacity: isExpanded ? 1 : isAnyExpanded ? 0.2 : 1,
+                        zIndex: isExpanded ? 50 : 1,
+                        boxShadow: isExpanded 
                           ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
                           : '0 4px 6px rgba(13, 37, 69, 0.02)',
-                        borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
+                        borderColor: isExpanded ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
                       }}
                       transition={{
                         type: 'spring',
@@ -523,9 +553,9 @@ const NRIPage = () => {
                         <motion.div
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ 
-                            height: isHovered ? 'auto' : 0, 
-                            opacity: isHovered ? 1 : 0,
-                            marginTop: isHovered ? 16 : 0
+                            height: isExpanded ? 'auto' : 0, 
+                            opacity: isExpanded ? 1 : 0,
+                            marginTop: isExpanded ? 16 : 0
                           }}
                           transition={{ 
                             duration: 0.35, 
@@ -537,6 +567,22 @@ const NRIPage = () => {
                             {c.detailedDescription}
                           </p>
                         </motion.div>
+                      </div>
+
+                      {/* Expand/Collapse Indicator */}
+                      <div className="absolute bottom-4 right-4 flex items-center justify-center w-6 h-6 rounded-full border border-gold/20 bg-gold/5 group-hover:border-gold/50 group-hover:bg-gold/10 transition-colors">
+                        <motion.svg
+                          animate={{ rotate: isExpanded ? 45 : 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="w-3 h-3 text-gold"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={3}
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5 -7.5h -15" />
+                        </motion.svg>
                       </div>
                     </motion.div>
                   );
@@ -587,7 +633,7 @@ const NRIPage = () => {
           <div className="max-w-3xl mx-auto px-4">
             <div className="text-center mb-10">
               <h2 className="font-serif text-[32px] text-white font-semibold mb-3">Book Your Free NRI Consultation</h2>
-              <p className="text-goldLight text-[18px] font-serif italic">"Leave your details and mention your time zone — we'll call you at a time that works."</p>
+              <p className="text-goldLight text-[18px] font-serif italic">"Leave your details and mention your time zone; we'll call you at a time that works."</p>
             </div>
 
             {/* CTA Buttons */}
@@ -626,9 +672,51 @@ const NRIPage = () => {
                     <label className={formLabelStyles}>Phone / WhatsApp</label>
                     <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="+1 (XXX) XXX-XXXX" className={inputStyles} />
                   </div>
-                  <div className="md:col-span-1">
+                  <div className="md:col-span-1 relative">
                     <label className={formLabelStyles}>Country of Residence</label>
-                    <input type="text" value={nriCountry} onChange={e => setNriCountry(e.target.value)} placeholder="e.g. USA, UAE, UK" className={inputStyles} />
+                    <input 
+                      type="text" 
+                      placeholder="Search and select country..." 
+                      value={countrySearch}
+                      onFocus={() => setShowCountryDropdown(true)}
+                      onBlur={() => {
+                        const match = countriesList.find(c => c.toLowerCase() === countrySearch.trim().toLowerCase());
+                        if (match) {
+                          setNriCountry(match);
+                          setCountrySearch(match);
+                        } else if (!nriCountry) {
+                          setCountrySearch('');
+                        } else {
+                          setCountrySearch(nriCountry);
+                        }
+                        setShowCountryDropdown(false);
+                      }}
+                      onChange={handleCountryChange}
+                      className={inputStyles}
+                    />
+                    {showCountryDropdown && (
+                      <div className="absolute z-20 left-0 right-0 mt-1 max-h-[180px] overflow-y-auto bg-navy border border-white/15 rounded-[8px] shadow-2xl py-1 scrollbar-thin scrollbar-thumb-white/10">
+                        {filteredCountries.length > 0 ? (
+                          filteredCountries.map((country) => (
+                            <div
+                              key={country}
+                              onMouseDown={() => {
+                                setNriCountry(country);
+                                setCountrySearch(country);
+                                setShowCountryDropdown(false);
+                              }}
+                              className="px-3 py-2 text-[13.5px] text-white hover:bg-gold/25 cursor-pointer transition-colors"
+                            >
+                              {country}
+                            </div>
+                          ))
+                        ) : (
+                          <div className="px-3 py-2 text-[12.5px] text-white/50 italic text-center">
+                            No countries found
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                   <div className="md:col-span-1">
                     <label className={formLabelStyles}>Your Time Zone</label>

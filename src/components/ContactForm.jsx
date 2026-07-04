@@ -1,36 +1,6 @@
 import React, { useState } from 'react';
 import { submitLead } from '../lib/leads';
-
-const countriesList = [
-  "United States", "United Kingdom", "United Arab Emirates", "Canada", "Australia", 
-  "Singapore", "New Zealand", "Saudi Arabia", "Qatar", "Oman", "Bahrain", "Kuwait", 
-  "Germany", "France", "Ireland", "Netherlands", "Switzerland", "Japan", "Hong Kong", 
-  "Malaysia", "South Africa", "Kenya", "Afghanistan", "Albania", "Algeria", "Andorra", 
-  "Angola", "Argentina", "Armenia", "Austria", "Azerbaijan", "Bahamas", "Bangladesh", 
-  "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", 
-  "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", 
-  "Burundi", "Cambodia", "Cameroon", "Cape Verde", "Central African Republic", "Chad", 
-  "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", 
-  "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", 
-  "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", 
-  "Estonia", "Ethiopia", "Fiji", "Finland", "Gabon", "Gambia", "Georgia", "Ghana", 
-  "Greece", "Grenada", "Guatemala", "Guinea", "Guyana", "Haiti", "Honduras", "Hungary", 
-  "Iceland", "Indonesia", "Iran", "Iraq", "Israel", "Italy", "Ivory Coast", "Jamaica", 
-  "Jordan", "Kazakhstan", "Kiribati", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", 
-  "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", 
-  "Madagascar", "Malawi", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", 
-  "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", 
-  "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Nicaragua", "Niger", 
-  "Nigeria", "North Korea", "Norway", "Pakistan", "Palau", "Panama", "Papua New Guinea", 
-  "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Romania", "Russia", "Rwanda", 
-  "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent", "Samoa", "San Marino", 
-  "Sao Tome", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Slovakia", "Slovenia", 
-  "Solomon Islands", "Somalia", "South Korea", "South Sudan", "Spain", "Sri Lanka", 
-  "Sudan", "Suriname", "Swaziland", "Sweden", "Syria", "Taiwan", "Tajikistan", 
-  "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", 
-  "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "Uruguay", "Uzbekistan", "Vanuatu", 
-  "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe", "Other"
-];
+import { countriesList } from '../lib/countries';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
@@ -189,7 +159,7 @@ const ContactForm = () => {
                   }}
                   className={`${inputStyles} appearance-none cursor-pointer`}
                 >
-                  <option value="No" className="bg-navy text-white">No — Based in India</option>
+                  <option value="No" className="bg-navy text-white">No: Based in India</option>
                   <option value="Yes" className="bg-navy text-white">Yes</option>
                 </select>
               </div>

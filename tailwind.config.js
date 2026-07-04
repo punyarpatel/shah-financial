@@ -7,12 +7,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        navy: '#0d2545',
-        gold: '#c9922a',
-        goldLight: '#f0c96a',
-        cream: '#faf8f4',
-        textDark: '#1a1a2e',
-        muted: '#5c6478',
+        navy: 'rgb(var(--color-navy) / <alpha-value>)',
+        gold: 'rgb(var(--color-gold) / <alpha-value>)',
+        goldLight: 'rgb(var(--color-gold-light) / <alpha-value>)',
+        cream: 'rgb(var(--color-cream) / <alpha-value>)',
+        textDark: 'rgb(var(--color-text-dark) / <alpha-value>)',
+        muted: 'rgb(var(--color-muted) / <alpha-value>)',
       },
       fontFamily: {
         serif: ['"Playfair Display"', 'serif'],

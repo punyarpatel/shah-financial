@@ -3,9 +3,9 @@ import { motion, useScroll, useSpring, useTransform, useMotionValueEvent, Animat
 
 const milestones = [
   {
-    year: '2009',
+    year: '2001',
     title: 'Sowing the Seeds',
-    description: 'Drishti Wealth was founded in Ahmedabad by Rajesh Shah with a simple vision — helping local families achieve financial freedom with transparent and honest advice.',
+    description: 'Drishti Wealth was founded in Ahmedabad by Rajesh Shah with a simple vision: helping local families achieve financial freedom with transparent and honest advice.',
     icon: (
       <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22V12" />
@@ -91,7 +91,7 @@ const milestones = [
   {
     year: '2026',
     title: 'The Trusted Destination',
-    description: 'Now serving 4,000+ families globally with over ₹750 Crores in AUM. Combining personal family values with institutional-grade technology to secure generational wealth.',
+    description: 'Now serving 6,000+ clients globally with over ₹750 Crores in AUM. Combining personal family values with institutional-grade technology to secure generational wealth.',
     icon: (
       <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M3 22h18" />
@@ -181,7 +181,7 @@ const JourneyTimeline = () => {
             </h2>
           </div>
           <p className="text-white/40 text-[13px] md:text-[14px] mt-2 md:mt-0 max-w-sm hidden sm:block">
-            Scroll down to explore how we built a legacy of trust and financial security over 20+ years.
+            Scroll down to explore how we built a legacy of trust and financial security over 25+ years.
           </p>
         </div>
 

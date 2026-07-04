@@ -21,14 +21,14 @@ const HeroSection = () => {
   };
 
   const stats = [
-    { value: '4,000+', label: 'Clients' },
+    { value: '6,000+', label: 'Clients' },
     { value: '₹750Cr+', label: 'AUM' },
-    { value: '20+', label: 'Years' },
+    { value: '25+', label: 'Years' },
     { value: '100+', label: 'NRI Clients' }
   ];
 
   return (
-    <section 
+    <section
       className="w-full relative overflow-hidden"
     >
       {/* Background Video */}
@@ -77,7 +77,7 @@ const HeroSection = () => {
             ease: "easeInOut"
           }}
         />
-        
+
         {/* Deep Navy/Teal Aurora */}
         <motion.div
           className="absolute top-[-30%] right-[-20%] w-[150%] h-[150%] rounded-full opacity-40"
@@ -122,18 +122,18 @@ const HeroSection = () => {
         <div className="max-w-[680px] mx-auto text-center">
           {/* Badge */}
           <FadeIn delay={0.2}>
-            <div 
+            <div
               className="inline-flex items-center gap-[6px] rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]"
               style={{
                 border: '1px solid #c9a84c',
                 background: 'rgba(201, 168, 76, 0.1)'
               }}
             >
-              <div 
-                className="w-[6px] h-[6px] rounded-full" 
+              <div
+                className="w-[6px] h-[6px] rounded-full"
                 style={{ backgroundColor: '#c9a84c' }}
               />
-              <span 
+              <span
                 className="text-[11px] uppercase tracking-[0.12em]"
                 style={{ color: '#c9a84c' }}
               >
@@ -152,20 +152,19 @@ const HeroSection = () => {
           {/* Description */}
           <FadeIn delay={0.5}>
             <p className="text-white/65 text-[16px] font-light leading-[1.6] mb-[2.5rem]">
-              We provide personalized wealth management, mutual fund advisory, and comprehensive financial planning for individuals, families, and NRIs globally.
-            </p>
+              Our focus is on building long-term relationships by offering personalized investment solutions, comprehensive insurance protection, and goal-based financial planning tailored to every stage of life.            </p>
           </FadeIn>
 
           {/* Buttons */}
           <FadeIn delay={0.65}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-[4rem]">
-              <button 
+              <button
                 onClick={() => handleScrollToSection('contact')}
                 className="w-full sm:w-auto bg-[#c9922a] text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-[#f0c96a] transition-colors"
               >
                 Start a SIP Today
               </button>
-              <button 
+              <button
                 onClick={() => handleScrollToSection('calculator')}
                 className="w-full sm:w-auto bg-transparent border border-white/20 text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-white/5 transition-colors"
               >
@@ -173,7 +172,7 @@ const HeroSection = () => {
               </button>
             </div>
           </FadeIn>
-          
+
           {/* Stats */}
           <FadeIn delay={0.8}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-[2rem] border-t border-white/10">

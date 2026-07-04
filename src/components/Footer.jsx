@@ -84,19 +84,24 @@ const Footer = () => {
               </a>
               <div className={`${textStyles} flex items-start gap-2`}>
                 <span className="text-gold shrink-0 mt-[3px]">📍</span>
-                <span>
+                <a 
+                  href="https://maps.google.com/?q=305,+Abhishilp+Complex,+Satellite,+Ahmedabad,+380015" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-gold hover:underline transition-colors text-left"
+                >
                   305, Abhishilp Complex,<br />
-                  Satellite, Ahmedabad – 380015
-                </span>
+                  Satellite, Ahmedabad, 380015
+                </a>
               </div>
             </div>
 
             {/* Column 4 */}
             <div>
               <h3 className={headingStyles}>Legal</h3>
-              <span className={linkStyles}>Privacy Policy</span>
-              <span className={linkStyles}>Terms of Service</span>
-              <span className={linkStyles}>Disclosures</span>
+              <a href="/privacy-policy" onClick={(e) => handleLinkClick(e, '/privacy-policy')} className={linkStyles}>Privacy Policy</a>
+              <a href="/terms-of-service" onClick={(e) => handleLinkClick(e, '/terms-of-service')} className={linkStyles}>Terms of Service</a>
+              <a href="/disclosures" onClick={(e) => handleLinkClick(e, '/disclosures')} className={linkStyles}>Disclosures</a>
             </div>
           </div>
 
@@ -119,14 +124,6 @@ const Footer = () => {
                 <span className="text-[#f0c96a] font-bold text-[10px] leading-tight">IRDAI</span>
                 <span className="text-white font-bold text-[11px] leading-tight mt-1">LICENSE</span>
                 <span className="text-white/60 text-[9px] mt-1">INSURANCE</span>
-              </div>
-
-              {/* Badge 3 (Square - matching Forbes style) */}
-              <div className="w-24 h-24 border border-[#c9922a] flex flex-col items-center justify-center text-center p-2 bg-navy relative">
-                <div className="absolute inset-1 border border-white/10"></div>
-                <span className="text-white/80 font-serif italic text-[10px] leading-tight z-10">Partner</span>
-                <span className="text-white font-bold text-[14px] leading-tight mt-1 z-10">NJ WEALTH</span>
-                <span className="bg-[#c9922a] text-navy font-bold text-[10px] px-2 py-0.5 mt-2 z-10">2026</span>
               </div>
             </div>
           </div>

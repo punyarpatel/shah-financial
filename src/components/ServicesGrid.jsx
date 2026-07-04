@@ -9,7 +9,7 @@ const servicesData = [
   {
     id: 'mutual-funds',
     icon: '📈',
-    title: 'Mutual Fund Advisory',
+    title: 'Mutual Fund Services',
     description: 'End-to-end management of your mutual fund journey, including KYC, risk profiling, fund selection, SIP setup, and regular portfolio reviews.',
     link: '/services/mutual-funds',
     isSpecial: false,
@@ -41,9 +41,9 @@ const servicesData = [
       </svg>
     ),
     highlights: [
-      '11,000+ network hospitals across India',
-      'Hassle free process --> intimation to settlement',
-      'Benefits beyond the basics – wellness & health benefits'
+      'Network hospitals pan India for cashless',
+      'Hassle free process :  intimation to settlement',
+      'Benefits beyond the basics  to  wellness & health benefits'
     ]
   },
   {
@@ -531,7 +531,7 @@ const ServicesGrid = () => {
                 {/* Subtle soft shadow glow background */}
                 <div className="absolute -inset-4 bg-gradient-to-r from-gold/10 to-navy/5 rounded-full blur-2xl opacity-60"></div>
 
-                {/* Matching shape from About section — soft outer box + inner white card */}
+                {/* Matching shape from About section: soft outer box + inner white card */}
                 <div className="relative w-[280px] sm:w-[320px] md:w-[350px] aspect-[16/11] bg-[#f8fafc]/50 rounded-[20px] p-6 border border-slate-100 flex items-center justify-center shadow-inner">
                   <div className="relative w-full h-full bg-white rounded-xl shadow-[0_15px_35px_rgba(13,37,69,0.04),0_5px_15px_rgba(0,0,0,0.02)] border border-navy/[0.02] overflow-hidden group/graphic hover:scale-[1.02] transition-transform duration-500">
                     {/* Dot grid background */}

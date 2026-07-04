@@ -1,0 +1,279 @@
+import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import WhatsAppFloat from '../components/WhatsAppFloat';
+import FadeIn from '../components/animations/FadeIn';
+
+const DisclosuresPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const sections = [
+    { id: 'regulatory-status', label: '1. Regulatory Status' },
+    { id: 'commission-structure', label: '2. Commission Structure' },
+    { id: 'non-advisory', label: '3. Non-Advisory Disclosure' },
+    { id: 'redressal', label: '4. Grievance Redressal' },
+    { id: 'external-links', label: '5. Regulatory Portals' }
+  ];
+
+  const commissions = [
+    { category: 'Equity Schemes (Large/Mid/Small Cap)', amcRange: '0.75%  to  1.25% p.a.', trailRate: '0.75%  to  1.25% p.a.' },
+    { category: 'Hybrid Schemes (Balanced Advantage/Aggressive)', amcRange: '0.70%  to  1.10% p.a.', trailRate: '0.70%  to  1.10% p.a.' },
+    { category: 'Debt Schemes (Short/Medium/Long Term)', amcRange: '0.30%  to  0.75% p.a.', trailRate: '0.30%  to  0.75% p.a.' },
+    { category: 'Liquid / Overnight Schemes', amcRange: '0.05%  to  0.15% p.a.', trailRate: '0.05%  to  0.15% p.a.' },
+    { category: 'ELSS (Tax Saving Schemes)', amcRange: '0.80%  to  1.20% p.a.', trailRate: '0.80%  to  1.20% p.a.' }
+  ];
+
+  const handleScroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 100;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-cream flex flex-col relative">
+      <Helmet>
+        <title>Regulatory Disclosures & Commissions | Drishti Wealth</title>
+        <meta 
+          name="description" 
+          content="Official regulatory disclosures and mutual fund commission structures for Drishti Wealth in compliance with SEBI, AMFI, and IRDAI regulations." 
+        />
+      </Helmet>
+
+      <Navbar />
+
+      {/* Hero Header */}
+      <section className="bg-navy py-[4rem] w-full text-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="inline-flex items-center gap-[6px] bg-gold/15 border border-gold/30 rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]">
+            <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">Compliance Desk</span>
+          </div>
+          <h1 className="font-serif text-[36px] md:text-[48px] text-white font-semibold leading-tight mb-[0.75rem]">
+            Regulatory Disclosures
+          </h1>
+          <p className="text-white/65 text-[15px] max-w-xl">
+            Transparency is our core value. In compliance with SEBI, AMFI, and IRDAI regulations, we disclose our regulatory credentials and commission structures.
+          </p>
+        </div>
+      </section>
+
+      {/* Main Body */}
+      <section className="flex-grow py-[4rem] w-full">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            {/* Sticky Sidebar Navigation (Desktop) */}
+            <aside className="lg:col-span-4 lg:sticky lg:top-28 bg-white border border-navy/5 p-6 rounded-[12px] shadow-sm hidden lg:block">
+              <h2 className="font-serif text-navy text-[16px] font-semibold mb-4 border-b border-navy/10 pb-2">
+                Table of Contents
+              </h2>
+              <nav className="flex flex-col gap-3">
+                {sections.map((sec) => (
+                  <button
+                    key={sec.id}
+                    onClick={() => handleScroll(sec.id)}
+                    className="text-left text-muted text-[13.5px] hover:text-gold transition-colors font-medium cursor-pointer"
+                  >
+                    {sec.label}
+                  </button>
+                ))}
+              </nav>
+            </aside>
+
+            {/* Content Column */}
+            <div className="lg:col-span-8 bg-white border border-navy/10 rounded-[16px] p-8 md:p-12 shadow-sm">
+              <FadeIn>
+                
+                <div id="regulatory-status" className="mb-10 scroll-mt-28">
+                  <h2 className="font-serif text-navy text-[22px] font-semibold mb-4 border-b border-gold/20 pb-2">
+                    1. Regulatory Status & Credentials
+                  </h2>
+                  <p className="text-muted text-[14.5px] leading-relaxed mb-4">
+                    Drishti Wealth is fully registered and compliant with the regulatory bodies governing financial services in India. Our registration credentials are as follows:
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div className="p-5 border border-navy/10 rounded-[10px] bg-cream/30">
+                      <p className="text-gold text-[11px] uppercase tracking-wider font-semibold mb-1">Mutual Fund Distribution</p>
+                      <h4 className="font-serif text-navy text-[16px] font-bold mb-2">AMFI Registered MFD</h4>
+                      <p className="text-muted text-[13px] mb-1"><strong>ARN Code:</strong> ARN-XXXXX</p>
+                      <p className="text-muted text-[13px] mb-1"><strong>Status:</strong> Active & Fully Registered</p>
+                      <p className="text-muted text-[13px]"><strong>Incidental Services:</strong> Mutual Fund Distribution</p>
+                    </div>
+
+                    <div className="p-5 border border-navy/10 rounded-[10px] bg-cream/30">
+                      <p className="text-gold text-[11px] uppercase tracking-wider font-semibold mb-1">Insurance Solicitations</p>
+                      <h4 className="font-serif text-navy text-[16px] font-bold mb-2">IRDAI Licensed Advisor</h4>
+                      <p className="text-muted text-[13px] mb-1"><strong>License Code:</strong> IRDAI / XXXXXXXXX</p>
+                      <p className="text-muted text-[13px] mb-1"><strong>Role:</strong> Life, Health, and General Insurance Solicitor</p>
+                      <p className="text-muted text-[13px]"><strong>Partners:</strong> Empanelled with leading Indian Insurers</p>
+                    </div>
+                  </div>
+
+                  <p className="text-muted text-[14.5px] leading-relaxed">
+                    Drishti Wealth is also an empanelled partner with **NJ India Invest Private Limited** (NJ Wealth Partners desk, ARN-0155), allowing us to leverage their high-performance backend systems for digital order execution and client tracking.
+                  </p>
+                </div>
+
+                <div id="commission-structure" className="mb-10 scroll-mt-28">
+                  <h2 className="font-serif text-navy text-[22px] font-semibold mb-4 border-b border-gold/20 pb-2">
+                    2. Scheme-Wise Commission Structure
+                  </h2>
+                  <p className="text-muted text-[14.5px] leading-relaxed mb-4">
+                    In accordance with SEBI Circular No. SEBI/IMD/CIR No. 4/168230/09, the details of trail commissions receivable by Drishti Wealth from various Asset Management Companies (AMCs) for mutual fund distributions are disclosed below. These rates represent the standard commission ranges across different asset classes:
+                  </p>
+
+                  <div className="overflow-x-auto mb-6">
+                    <table className="min-w-full bg-white border border-navy/10 rounded-[8px] overflow-hidden">
+                      <thead className="bg-navy text-white text-[13px] font-medium text-left">
+                        <tr>
+                          <th className="py-3 px-4 font-semibold uppercase tracking-wider">Asset Category</th>
+                          <th className="py-3 px-4 font-semibold uppercase tracking-wider">AMC Trail Commission Range</th>
+                          <th className="py-3 px-4 font-semibold uppercase tracking-wider">Trail Rate structure</th>
+                        </tr>
+                      </thead>
+                      <tbody className="text-[13.5px] text-muted divide-y divide-navy/5">
+                        {commissions.map((c, i) => (
+                          <tr key={i} className="hover:bg-cream/10 transition-colors">
+                            <td className="py-3 px-4 font-medium text-textDark">{c.category}</td>
+                            <td className="py-3 px-4">{c.amcRange}</td>
+                            <td className="py-3 px-4">{c.trailRate}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <p className="text-muted text-[13.5px] leading-relaxed italic bg-navy/5 p-4 rounded-[6px]">
+                    *Note: The commission rates specified are subject to change by respective AMCs based on regulatory limits, geography (T30 vs B30 cities), and individual scheme structures. The commissions received by Drishti Wealth do not impact the Net Asset Value (NAV) of the scheme directly beyond the standard Expense Ratio charged by the AMC for Regular Plans.
+                  </p>
+                </div>
+
+                <div id="non-advisory" className="mb-10 scroll-mt-28">
+                  <h2 className="font-serif text-navy text-[22px] font-semibold mb-4 border-b border-gold/20 pb-2">
+                    3. Non-Advisory / Distributor Disclosure
+                  </h2>
+                  <p className="text-muted text-[14.5px] leading-relaxed mb-4">
+                    Under the SEBI (Investment Advisers) Regulations, 2013, we make the following mandatory declaration to all our prospective clients and investors:
+                  </p>
+                  <div className="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-[8px] mb-4">
+                    <p className="text-navy text-[14.5px] font-semibold mb-2">Notice to Investors:</p>
+                    <p className="text-muted text-[13.5px] leading-relaxed">
+                      Drishti Wealth and its representatives act strictly as **Mutual Fund Distributors (MFDs)**. We do **not** provide SEBI-registered fee-based Investment Advisory services. Any product reviews, asset classifications, SIP calculators, and incidental suggestions provided on this website or in discussion are provided free-of-cost as distributor support and are incidental to our primary distribution activities. Investors are requested to make independent evaluations before taking investment decisions.
+                    </p>
+                  </div>
+                </div>
+
+                <div id="redressal" className="mb-10 scroll-mt-28">
+                  <h2 className="font-serif text-navy text-[22px] font-semibold mb-4 border-b border-gold/20 pb-2">
+                    4. Grievance Redressal Mechanism
+                  </h2>
+                  <p className="text-muted text-[14.5px] leading-relaxed mb-4">
+                    We are dedicated to maintaining the highest service standards. If you have any complaint or dispute regarding a mutual fund investment transaction or insurance solicitation, please follow our grievance channel:
+                  </p>
+                  
+                  <ol className="list-decimal pl-5 space-y-4 text-muted text-[14.5px] leading-relaxed mb-6">
+                    <li>
+                      <strong>Level 1: Grievance Desk</strong><br />
+                      Submit your concern to our support desk via email at <a href="mailto:officeinsurance2017@gmail.com" className="text-gold hover:underline">officeinsurance2017@gmail.com</a> or phone at <strong>+91 96649 77576</strong>. Most operational issues are resolved within 3 business days.
+                    </li>
+                    <li>
+                      <strong>Level 2: Compliance Officer</strong><br />
+                      If you are not satisfied with the Level 1 resolution, you can escalate the matter to our Principal Compliance Officer, Rajesh Shah, at <a href="https://maps.google.com/?q=305,+Abhishilp+Complex,+Satellite,+Ahmedabad,+380015" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">305, Abhishilp Complex, Satellite, Ahmedabad, 380015</a>.
+                    </li>
+                    <li>
+                      <strong>Level 3: Regulatory Redressal (SEBI/IRDAI)</strong><br />
+                      If your query remains unresolved after 15 days, you may lodge a complaint on the official SEBI SCORES portal, AMFI Grievance desk, or contact the IRDAI grievance call centre.
+                    </li>
+                  </ol>
+                </div>
+
+                <div id="external-links" className="scroll-mt-28">
+                  <h2 className="font-serif text-navy text-[22px] font-semibold mb-4 border-b border-gold/20 pb-2">
+                    5. Regulatory & Investor Portals
+                  </h2>
+                  <p className="text-muted text-[14.5px] leading-relaxed mb-4">
+                    For investor education and to submit online grievances, please refer to the following official government and regulatory platforms:
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a 
+                      href="https://scores.sebi.gov.in/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-4 border border-navy/10 rounded-[8px] hover:border-gold hover:bg-cream/10 transition-colors flex items-center justify-between group"
+                    >
+                      <div>
+                        <h4 className="font-serif text-navy text-[14.5px] font-bold group-hover:text-gold transition-colors">SEBI SCORES Portal</h4>
+                        <p className="text-muted text-[12px] mt-1">Lodge grievances online with SEBI</p>
+                      </div>
+                      <span className="text-gold text-[16px] group-hover:translate-x-1 transition-transform">&rarr;</span>
+                    </a>
+
+                    <a 
+                      href="https://www.amfiindia.com/investor-corner" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-4 border border-navy/10 rounded-[8px] hover:border-gold hover:bg-cream/10 transition-colors flex items-center justify-between group"
+                    >
+                      <div>
+                        <h4 className="font-serif text-navy text-[14.5px] font-bold group-hover:text-gold transition-colors">AMFI Investor Corner</h4>
+                        <p className="text-muted text-[12px] mt-1">Mutual Fund resources & educational guidelines</p>
+                      </div>
+                      <span className="text-gold text-[16px] group-hover:translate-x-1 transition-transform">&rarr;</span>
+                    </a>
+
+                    <a 
+                      href="https://www.irdai.gov.in" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-4 border border-navy/10 rounded-[8px] hover:border-gold hover:bg-cream/10 transition-colors flex items-center justify-between group"
+                    >
+                      <div>
+                        <h4 className="font-serif text-navy text-[14.5px] font-bold group-hover:text-gold transition-colors">IRDAI Portal</h4>
+                        <p className="text-muted text-[12px] mt-1">Insurance Regulatory and Development Authority</p>
+                      </div>
+                      <span className="text-gold text-[16px] group-hover:translate-x-1 transition-transform">&rarr;</span>
+                    </a>
+
+                    <a 
+                      href="https://scores.sebi.gov.in/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-4 border border-navy/10 rounded-[8px] hover:border-gold hover:bg-cream/10 transition-colors flex items-center justify-between group"
+                    >
+                      <div>
+                        <h4 className="font-serif text-navy text-[14.5px] font-bold group-hover:text-gold transition-colors">SEBI Saa₹thi App</h4>
+                        <p className="text-muted text-[12px] mt-1">Download the official mobile app for investor awareness</p>
+                      </div>
+                      <span className="text-gold text-[16px] group-hover:translate-x-1 transition-transform">&rarr;</span>
+                    </a>
+                  </div>
+                </div>
+
+              </FadeIn>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+      <WhatsAppFloat />
+    </div>
+  );
+};
+
+export default DisclosuresPage;

@@ -64,7 +64,7 @@ const GOALS = [
   { id: 'vacation', label: 'Dream Vacation', icon: '✈️', target: 2000000, desc: 'Save ₹20L for that round-the-world trip.', defaultSip: 10000, defaultRate: 12, defaultYears: 10 },
 ];
 
-// ─── 3D Pie Chart — solid wedges, thick extrusion, exploded slices, % labels ───
+// ─── 3D Pie Chart: solid wedges, thick extrusion, exploded slices, % labels ───
 const ThreeDPieChart = ({ invested, gain }) => {
   const total = invested + gain;
   if (!total) return null;
@@ -92,8 +92,8 @@ const ThreeDPieChart = ({ invested, gain }) => {
     return [EXPL * Math.cos(a), EXPL * Math.sin(a)];
   };
 
-  const s1 = GAP / 2,           e1 = invFrac - GAP / 2;   // navy — invested
-  const s2 = invFrac + GAP / 2, e2 = 1 - GAP / 2;         // gold  — gain
+  const s1 = GAP / 2,           e1 = invFrac - GAP / 2;   // navy: invested
+  const s2 = invFrac + GAP / 2, e2 = 1 - GAP / 2;         // gold : gain
 
   const [bx1, by1] = bOff(s1, e1);
   const [bx2, by2] = bOff(s2, e2);
@@ -133,7 +133,7 @@ const ThreeDPieChart = ({ invested, gain }) => {
   return (
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ overflow: 'visible' }}>
       <defs>
-        {/* Front-half clip — only front-facing walls rendered */}
+        {/* Front-half clip: only front-facing walls rendered */}
         <clipPath id="fwPie">
           <rect x={-60} y={cy - 1} width={W + 120} height={H + 120} />
         </clipPath>
@@ -174,15 +174,15 @@ const ThreeDPieChart = ({ invested, gain }) => {
         </filter>
       </defs>
 
-      {/* ── Layer 1 — Outer side walls (front half only) ── */}
+      {/* ── Layer 1: Outer side walls (front half only) ── */}
       <path d={sideWall(s1, e1, rx, ry, bx1, by1)} fill="url(#nvySide)" clipPath="url(#fwPie)" />
       <path d={sideWall(s2, e2, rx, ry, bx2, by2)} fill="url(#gldSide)" clipPath="url(#fwPie)" />
 
-      {/* ── Layer 2 — Radial cut-faces at slice seams ── */}
+      {/* ── Layer 2: Radial cut-faces at slice seams ── */}
       {cutFace(e1, rx, ry, bx1, by1, '#091a30')}
       {cutFace(s2, rx, ry, bx2, by2, '#4a3206')}
 
-      {/* ── Layer 3 — Top faces (with drop shadow underneath entire pie) ── */}
+      {/* ── Layer 3: Top faces (with drop shadow underneath entire pie) ── */}
       <g filter="url(#drp)">
         <path d={wedge(s1, e1, rx, ry, bx1, by1)} fill="url(#nvyG)" />
         <path d={wedge(s2, e2, rx, ry, bx2, by2)} fill="url(#gldG)" />
@@ -196,7 +196,7 @@ const ThreeDPieChart = ({ invested, gain }) => {
       <path d={wedge(s1, e1, rx, ry, bx1, by1)} fill="none" stroke="rgba(255,255,255,0.13)" strokeWidth="1.2" />
       <path d={wedge(s2, e2, rx, ry, bx2, by2)} fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth="1.2" />
 
-      {/* ── Layer 4 — Bold % labels on top face ── */}
+      {/* ── Layer 4: Bold % labels on top face ── */}
       <text
         x={lx1} y={ly1 + 7}
         textAnchor="middle" dominantBaseline="middle"
@@ -653,7 +653,7 @@ const SIPCalculator = () => {
         {activeGoal && activeGoal.id !== 'custom' && (
           <div className="bg-navy/[0.05] rounded-lg p-4 mb-[2rem] flex flex-col sm:flex-row items-start sm:items-center justify-between border border-navy/10">
             <div className="text-textDark/80 text-[14px]">
-              <span className="font-semibold text-navy">{activeGoal.icon} {activeGoal.label}</span> — {activeGoal.desc}
+              <span className="font-semibold text-navy">{activeGoal.icon} {activeGoal.label}</span>: {activeGoal.desc}
             </div>
           </div>
         )}
@@ -661,7 +661,7 @@ const SIPCalculator = () => {
         {/* ── Two-column layout: Calculator Left | Donut Right ── */}
         <div className="flex flex-col lg:flex-row gap-8 items-start">
 
-          {/* LEFT — Calculator Card */}
+          {/* LEFT: Calculator Card */}
           <div className="flex-1 min-w-0">
             <div className="bg-navy rounded-[12px] p-[1.5rem] sm:p-[2rem] shadow-xl">
               <div className="flex flex-col gap-[2rem]">
@@ -822,7 +822,7 @@ const SIPCalculator = () => {
             </div>
           </div>
 
-          {/* RIGHT — Standalone Donut Chart (no card bg) */}
+          {/* RIGHT: Standalone Donut Chart (no card bg) */}
           <div className="lg:w-[300px] shrink-0 flex flex-col items-center pt-2 lg:pt-[1rem] select-none">
 
             {/* Total corpus label up top */}
@@ -838,7 +838,7 @@ const SIPCalculator = () => {
 
             {/* Legend */}
             <div className="mt-6 w-full space-y-5 pl-1">
-              {/* Amount Invested — navy */}
+              {/* Amount Invested: navy */}
               <div className="flex items-start gap-3">
                 <span className="mt-[3px] w-[14px] h-[14px] rounded-sm shrink-0" style={{ background: 'linear-gradient(135deg,#2a5298,#0d2545)' }} />
                 <div>
@@ -847,7 +847,7 @@ const SIPCalculator = () => {
                 </div>
               </div>
 
-              {/* Estimated Returns — gold */}
+              {/* Estimated Returns: gold */}
               <div className="flex items-start gap-3">
                 <span className="mt-[3px] w-[14px] h-[14px] rounded-sm shrink-0" style={{ background: 'linear-gradient(135deg,#f0c96a,#c9922a)' }} />
                 <div>

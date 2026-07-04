@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { submitLead } from '../lib/leads';
+import { countriesList } from '../lib/countries';
 
 const navData = {
   home: [
@@ -12,15 +13,15 @@ const navData = {
     { icon: '💬', title: 'Contact Us', desc: 'Jump straight to the enquiry form.', link: '/#contact' },
   ],
   services: [
-    { icon: '📊', title: 'Mutual Fund Advisory', desc: 'End-to-end management of your mutual fund journey from KYC to portfolio reviews.', link: '/services/mutual-funds' },
+    { icon: '📊', title: 'Mutual Fund Services', desc: 'End-to-end management of your mutual fund journey from KYC to portfolio reviews.', link: '/services/mutual-funds' },
     { icon: '🛡️', title: 'Life & General Insurance', desc: 'Comprehensive coverage from trusted partners to protect your family and assets.', link: '/services/insurance' },
-    { icon: '✈️', title: 'Overseas Travel Insurance', desc: 'Travel the world with absolute peace of mind.', link: '/services/travel-insurance' },
+    { icon: '✈️', title: 'Overseas Travel Insurance', desc: 'Comprehensive coverage for medical emergencies, trip cancellations, and lost baggage while traveling abroad.', link: '/services/travel-insurance' },
     { icon: '🌍', title: 'NRI Investment Services', desc: 'Specialized advisory for NRIs including NRE/NRO investing, health insurance, and repatriation.', link: '/nri' },
     { icon: '🎯', title: 'Retirement Planning', desc: 'Build a realistic, inflation-adjusted retirement corpus with dedicated plans and annual reviews.', link: '/services/retirement' },
     { icon: '🎯', title: 'Goal-Based Wealth Planning', desc: 'Create dedicated investment buckets for education, home, business, and vacations.', link: '/services/goal-planning' },
   ],
   about: [
-    { icon: '📖', title: 'Our Story', desc: 'A family built on trust since 2009.', link: '/about#story' },
+    { icon: '📖', title: 'Our Story', desc: 'A family built on trust since 2001.', link: '/about#story' },
     { icon: '🎯', title: 'Why Choose Us', desc: 'Personalized advisory and compliance.', link: '/about#why-choose-us' },
     { icon: '📜', title: 'Credentials', desc: 'AMFI, IRDAI, and partner registrations.', link: '/about#credentials' },
     { icon: '👥', title: 'Our Team', desc: 'Meet the people behind your wealth.', link: '/about#team' },
@@ -31,11 +32,6 @@ const navData = {
     { icon: '🌍', title: 'NRI Investing Guide', desc: 'DTAA benefits and NRE account setup.', link: '/blog/nri-guide-investing' },
     { icon: '💰', title: 'Save Tax with ELSS', desc: 'Maximize Section 80C deductions.', link: '/blog/elss-tax-saving' },
     { icon: '🎯', title: 'Goal-Based Planning', desc: 'Align your investments with life goals.', link: '/blog/goal-based-wealth-planning' },
-  ],
-  client: [
-    { icon: '🏦', title: 'NJ Client Desk', desc: 'Login for NJ Client Desk managed portfolios.', link: '/client-portal' },
-    { icon: '📊', title: 'Prudent Client Desk', desc: 'Login for Prudent Client Desk platform.', link: '/client-portal' },
-    { icon: '💬', title: 'Need Help?', desc: 'WhatsApp us if you are unsure which platform to use.', link: '/client-portal' },
   ]
 };
 
@@ -122,8 +118,7 @@ const Navbar = () => {
     home: false,
     services: false,
     about: false,
-    blog: false,
-    client: false
+    blog: false
   });
 
   const location = useLocation();
@@ -135,18 +130,42 @@ const Navbar = () => {
   const [phone, setPhone] = useState('');
   const [city, setCity] = useState('');
   const [interest, setInterest] = useState('Portfolio Review');
-  const [isNri, setIsNri] = useState('No — I am based in India');
+  const [isNri, setIsNri] = useState('No');
+  const [nriCountry, setNriCountry] = useState('');
+  const [countrySearch, setCountrySearch] = useState('');
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
+
+  const filteredCountries = countriesList.filter(country =>
+    country.toLowerCase().includes(countrySearch.toLowerCase())
+  );
+
+  const handleCountryChange = (e) => {
+    const val = e.target.value;
+    setCountrySearch(val);
+    setShowCountryDropdown(true);
+    
+    // Check if the typed value matches a country exactly
+    const match = countriesList.find(c => c.toLowerCase() === val.trim().toLowerCase());
+    if (match) {
+      setNriCountry(match);
+    } else {
+      setNriCountry('');
+    }
+  };
 
   const resetForm = () => {
     setName('');
     setPhone('');
     setCity('');
     setInterest('Portfolio Review');
-    setIsNri('No — I am based in India');
+    setIsNri('No');
+    setNriCountry('');
+    setCountrySearch('');
+    setShowCountryDropdown(false);
     setMessage('');
     setError('');
     setSuccess(false);
@@ -154,8 +173,16 @@ const Navbar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !phone || !city || !interest || !isNri) {
+    if (!name || !phone || !interest || !isNri) {
       setError('Please fill out all required fields');
+      return;
+    }
+    if (isNri === 'No' && !city) {
+      setError('Please enter your city');
+      return;
+    }
+    if (isNri === 'Yes' && !nriCountry) {
+      setError('Please select your country of residence');
       return;
     }
     setError('');
@@ -165,8 +192,9 @@ const Navbar = () => {
       name,
       phone,
       interest,
-      city,
-      is_nri: isNri,
+      city: isNri === 'No' ? city : '',
+      is_nri: isNri === 'Yes' ? 'Yes' : 'No',
+      nri_country: isNri === 'Yes' ? nriCountry : '',
       message
     });
 
@@ -215,8 +243,7 @@ const Navbar = () => {
       home: false,
       services: false,
       about: false,
-      blog: false,
-      client: false
+      blog: false
     });
   };
 
@@ -291,7 +318,7 @@ const Navbar = () => {
               Drishti Wealth
             </span>
             <span className="text-goldLight text-[10px] uppercase tracking-[0.15em] leading-tight mt-0.5">
-              AMFI Registered &middot; Est. 2009
+              AMFI Registered &middot; Est. 2001
             </span>
           </Link>
 
@@ -301,7 +328,6 @@ const Navbar = () => {
             <DesktopNavItem title="Services" mainLink="/services" items={navData.services} handleLinkClick={handleLinkClick} />
             <DesktopNavItem title="About Us" mainLink="/about" items={navData.about} handleLinkClick={handleLinkClick} />
             <DesktopNavItem title="Blog" mainLink="/blog" items={navData.blog} handleLinkClick={handleLinkClick} />
-            <DesktopNavItem title="Client Login" mainLink="/client-portal" items={navData.client} handleLinkClick={handleLinkClick} />
 
             {/* CTA Button */}
             <button
@@ -338,7 +364,6 @@ const Navbar = () => {
               <MobileNavItem title="Services" mainLink="/services" items={navData.services} isOpen={mobileMenus.services} toggleOpen={() => toggleMobileMenu('services')} handleLinkClick={handleLinkClick} />
               <MobileNavItem title="About Us" mainLink="/about" items={navData.about} isOpen={mobileMenus.about} toggleOpen={() => toggleMobileMenu('about')} handleLinkClick={handleLinkClick} />
               <MobileNavItem title="Blog" mainLink="/blog" items={navData.blog} isOpen={mobileMenus.blog} toggleOpen={() => toggleMobileMenu('blog')} handleLinkClick={handleLinkClick} />
-              <MobileNavItem title="Client Login" mainLink="/client-portal" items={navData.client} isOpen={mobileMenus.client} toggleOpen={() => toggleMobileMenu('client')} handleLinkClick={handleLinkClick} />
 
               <button
                 onClick={() => { closeMenu(); resetForm(); setIsModalOpen(true); }}
@@ -433,16 +458,65 @@ const Navbar = () => {
                         className="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-[13.5px] font-sans text-navy bg-slate-50/50 outline-none focus:border-[#c9922a] focus:bg-white transition-colors placeholder-slate-400"
                       />
                     </div>
-                    <div>
-                      <label className="block text-[11px] text-[#0d2545]/70 uppercase tracking-[0.05em] font-medium mb-1">City</label>
-                      <input 
-                        type="text" 
-                        placeholder="Ahmedabad" 
-                        value={city} 
-                        onChange={(e) => setCity(e.target.value)}
-                        className="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-[13.5px] font-sans text-navy bg-slate-50/50 outline-none focus:border-[#c9922a] focus:bg-white transition-colors placeholder-slate-400"
-                      />
-                    </div>
+                    {isNri === 'No' ? (
+                      <div>
+                        <label className="block text-[11px] text-[#0d2545]/70 uppercase tracking-[0.05em] font-medium mb-1">City</label>
+                        <input 
+                          type="text" 
+                          placeholder="Ahmedabad" 
+                          value={city} 
+                          onChange={(e) => setCity(e.target.value)}
+                          className="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-[13.5px] font-sans text-navy bg-slate-50/50 outline-none focus:border-[#c9922a] focus:bg-white transition-colors placeholder-slate-400"
+                        />
+                      </div>
+                    ) : (
+                      <div className="relative">
+                        <label className="block text-[11px] text-[#0d2545]/70 uppercase tracking-[0.05em] font-medium mb-1">Country of Residence *</label>
+                        <input 
+                          type="text" 
+                          placeholder="Search and select country..." 
+                          value={countrySearch}
+                          onFocus={() => setShowCountryDropdown(true)}
+                          onBlur={() => {
+                            const match = countriesList.find(c => c.toLowerCase() === countrySearch.trim().toLowerCase());
+                            if (match) {
+                              setNriCountry(match);
+                              setCountrySearch(match);
+                            } else if (!nriCountry) {
+                              setCountrySearch('');
+                            } else {
+                              setCountrySearch(nriCountry);
+                            }
+                            setShowCountryDropdown(false);
+                          }}
+                          onChange={handleCountryChange}
+                          className="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-[13.5px] font-sans text-navy bg-slate-50/50 outline-none focus:border-[#c9922a] focus:bg-white transition-colors placeholder-slate-400"
+                        />
+                        {showCountryDropdown && (
+                          <div className="absolute z-20 left-0 right-0 mt-1 max-h-[150px] overflow-y-auto bg-white border border-slate-200 rounded-lg shadow-xl py-1 scrollbar-thin scrollbar-thumb-slate-200">
+                            {filteredCountries.length > 0 ? (
+                              filteredCountries.map((country) => (
+                                <div
+                                  key={country}
+                                  onMouseDown={() => {
+                                    setNriCountry(country);
+                                    setCountrySearch(country);
+                                    setShowCountryDropdown(false);
+                                  }}
+                                  className="px-3 py-2 text-[13px] text-[#0d2545] hover:bg-[#c9922a]/10 cursor-pointer transition-colors"
+                                >
+                                  {country}
+                                </div>
+                              ))
+                            ) : (
+                              <div className="px-3 py-2 text-[12px] text-slate-400 italic text-center">
+                                No countries found
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -465,15 +539,19 @@ const Navbar = () => {
                       <label className="block text-[11px] text-[#0d2545]/70 uppercase tracking-[0.05em] font-medium mb-1">Are you an NRI?</label>
                       <select 
                         value={isNri} 
-                        onChange={(e) => setIsNri(e.target.value)}
+                        onChange={(e) => {
+                          setIsNri(e.target.value);
+                          if (e.target.value === 'Yes') {
+                            setCity('');
+                          } else {
+                            setNriCountry('');
+                            setCountrySearch('');
+                          }
+                        }}
                         className="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-[13.5px] font-sans text-navy bg-slate-50/50 outline-none focus:border-[#c9922a] focus:bg-white transition-colors cursor-pointer"
                       >
-                        <option value="No — I am based in India">No — I am based in India</option>
-                        <option value="Yes — USA or Canada">Yes — USA or Canada</option>
-                        <option value="Yes — UAE or Middle East">Yes — UAE or Middle East</option>
-                        <option value="Yes — UK or Europe">Yes — UK or Europe</option>
-                        <option value="Yes — Australia or New Zealand">Yes — Australia or New Zealand</option>
-                        <option value="Yes — Singapore or SE Asia">Yes — Singapore or SE Asia</option>
+                        <option value="No">No, I am based in India</option>
+                        <option value="Yes">Yes, I am an NRI</option>
                       </select>
                     </div>
                   </div>

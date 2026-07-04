@@ -1,24 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
 import supabase from './lib/supabase';
 import { HelmetProvider } from 'react-helmet-async';
 import ScrollToTop from './components/ScrollToTop';
 
-// Pages
-import HomePage from './pages/HomePage';
-import NRIPage from './pages/NRIPage';
-import AboutPage from './pages/AboutPage';
-import ServicesPage from './pages/ServicesPage';
-import MutualFundPage from './pages/MutualFundPage';
-import InsurancePage from './pages/InsurancePage';
-import TravelInsurancePage from './pages/TravelInsurancePage';
-import RetirementPage from './pages/RetirementPage';
-import GoalPlanningPage from './pages/GoalPlanningPage';
-import BlogPage from './pages/BlogPage';
-import SingleBlogPage from './pages/SingleBlogPage';
-import ClientPortalPage from './pages/ClientPortalPage';
-import AdminLoginPage from './pages/AdminLoginPage';
-import AdminDashboardPage from './pages/AdminDashboardPage';
+// Lazy Loaded Pages
+const HomePage = lazy(() => import('./pages/HomePage'));
+const NRIPage = lazy(() => import('./pages/NRIPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ServicesPage = lazy(() => import('./pages/ServicesPage'));
+const MutualFundPage = lazy(() => import('./pages/MutualFundPage'));
+const InsurancePage = lazy(() => import('./pages/InsurancePage'));
+const TravelInsurancePage = lazy(() => import('./pages/TravelInsurancePage'));
+const RetirementPage = lazy(() => import('./pages/RetirementPage'));
+const GoalPlanningPage = lazy(() => import('./pages/GoalPlanningPage'));
+const BlogPage = lazy(() => import('./pages/BlogPage'));
+const SingleBlogPage = lazy(() => import('./pages/SingleBlogPage'));
+const AdminLoginPage = lazy(() => import('./pages/AdminLoginPage'));
+const AdminDashboardPage = lazy(() => import('./pages/AdminDashboardPage'));
+const LogoShowcasePage = lazy(() => import('./pages/LogoShowcasePage'));
+const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
+const TermsOfServicePage = lazy(() => import('./pages/TermsOfServicePage'));
+const DisclosuresPage = lazy(() => import('./pages/DisclosuresPage'));
+
+// Dynamic Loading Fallback Screen
+const LoadingFallback = () => (
+  <div className="flex flex-col items-center justify-center min-h-screen bg-[#faf8f4]">
+    <div className="w-12 h-12 border-4 border-[#c9922a] border-t-transparent rounded-full animate-spin"></div>
+    <p className="mt-4 text-[#0d2545] font-sans font-medium text-xs tracking-wider uppercase animate-pulse">
+      Loading Drishti Wealth...
+    </p>
+  </div>
+);
 
 // ProtectedRoute Component
 function ProtectedRoute({ children }) {
@@ -72,30 +85,35 @@ export default function App() {
       <BrowserRouter>
         <div className="min-h-screen bg-gray-100 flex flex-col relative">
           <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/nri" element={<NRIPage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/services/mutual-funds" element={<MutualFundPage />} />
-            <Route path="/services/insurance" element={<InsurancePage />} />
-            <Route path="/services/travel-insurance" element={<TravelInsurancePage />} />
-            <Route path="/services/retirement" element={<RetirementPage />} />
-            <Route path="/services/goal-planning" element={<GoalPlanningPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog/:slug" element={<SingleBlogPage />} />
-            <Route path="/client-portal" element={<ClientPortalPage />} />
-            <Route path="/admin/login" element={<AdminLoginPage />} />
-            <Route 
-              path="/admin/dashboard" 
-              element={
-                <ProtectedRoute>
-                  <AdminDashboardPage />
-                </ProtectedRoute>
-              } 
-            />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/nri" element={<NRIPage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/services/mutual-funds" element={<MutualFundPage />} />
+              <Route path="/services/insurance" element={<InsurancePage />} />
+              <Route path="/services/travel-insurance" element={<TravelInsurancePage />} />
+              <Route path="/services/retirement" element={<RetirementPage />} />
+              <Route path="/services/goal-planning" element={<GoalPlanningPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/blog/:slug" element={<SingleBlogPage />} />
+              <Route path="/admin/login" element={<AdminLoginPage />} />
+              <Route 
+                path="/admin/dashboard" 
+                element={
+                  <ProtectedRoute>
+                    <AdminDashboardPage />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route path="/logo-showcase" element={<LogoShowcasePage />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+              <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+              <Route path="/disclosures" element={<DisclosuresPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Suspense>
         </div>
       </BrowserRouter>
     </HelmetProvider>

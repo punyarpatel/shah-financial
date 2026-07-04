@@ -35,7 +35,7 @@ const AdminDashboardPage = () => {
     phone: '',
     city: '',
     interest: '',
-    isNri: 'No — I am based in India',
+    isNri: 'No: I am based in India',
     message: ''
   });
   const [creatingLead, setCreatingLead] = useState(false);
@@ -156,7 +156,7 @@ const AdminDashboardPage = () => {
         city: city.trim(),
         interest,
         is_nri: isNri,
-        nri_country: isNri.startsWith('Yes') ? isNri.replace('Yes — ', '') : '',
+        nri_country: isNri.startsWith('Yes') ? isNri.replace('Yes: ', '') : '',
         message: message.trim(),
         status: 'new',
         created_at: new Date().toISOString()
@@ -185,7 +185,7 @@ const AdminDashboardPage = () => {
         phone: '',
         city: '',
         interest: '',
-        isNri: 'No — I am based in India',
+        isNri: 'No: I am based in India',
         message: ''
       });
       
@@ -465,7 +465,7 @@ const AdminDashboardPage = () => {
   return (
     <div className="min-h-screen bg-white font-sans text-[#1a1a2e]">
       <Helmet>
-        <title>Admin Dashboard — Drishti Wealth</title>
+        <title>Admin Dashboard | Drishti Wealth</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       
@@ -1248,12 +1248,12 @@ const AdminDashboardPage = () => {
                     onChange={(e) => setCreateFormData(prev => ({ ...prev, isNri: e.target.value }))}
                     className="w-full px-[12px] py-[8px] border border-[#0d2545]/15 rounded-[8px] text-[13px] outline-none focus:border-[#c9922a] bg-white transition-colors cursor-pointer appearance-none"
                   >
-                    <option value="No — I am based in India">No — I am based in India</option>
-                    <option value="Yes — USA or Canada">Yes — USA or Canada</option>
-                    <option value="Yes — UAE or Middle East">Yes — UAE or Middle East</option>
-                    <option value="Yes — UK or Europe">Yes — UK or Europe</option>
-                    <option value="Yes — Australia or New Zealand">Yes — Australia or New Zealand</option>
-                    <option value="Yes — Singapore or SE Asia">Yes — Singapore or SE Asia</option>
+                    <option value="No: I am based in India">No: I am based in India</option>
+                    <option value="Yes: USA or Canada">Yes: USA or Canada</option>
+                    <option value="Yes: UAE or Middle East">Yes: UAE or Middle East</option>
+                    <option value="Yes: UK or Europe">Yes: UK or Europe</option>
+                    <option value="Yes: Australia or New Zealand">Yes: Australia or New Zealand</option>
+                    <option value="Yes: Singapore or SE Asia">Yes: Singapore or SE Asia</option>
                   </select>
                 </div>
 

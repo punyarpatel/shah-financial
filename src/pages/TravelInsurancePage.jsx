@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import { submitLead } from '../lib/leads';
+import { countriesList } from '../lib/countries';
 import FadeIn from '../components/animations/FadeIn';
 
 const TRAVEL_INSURANCE_FEATURES = [
@@ -13,42 +14,42 @@ const TRAVEL_INSURANCE_FEATURES = [
     id: 'medical',
     icon: '🏥',
     title: 'Medical Emergencies',
-    description: 'Cashless hospitalization and coverage for accidents, illness, or emergency surgeries abroad.',
+    description: 'Coverage for emergency medical treatment, hospitalization, accidents, and medical evacuation while travelling abroad.',
     detailedDescription: 'Healthcare overseas can cost millions of rupees. We ensure you get up to $500,000 in medical coverage with zero deductibles and seamless cashless claims in top international hospitals.'
   },
   {
     id: 'cancellation',
     icon: '❌',
     title: 'Trip Cancellation',
-    description: 'Get reimbursed for non-refundable flights and hotels if you have to cancel your trip due to emergencies.',
+    description: 'Reimbursement of eligible non-refundable trip expenses if your journey is cancelled due to covered unforeseen events as per the policy terms.',
     detailedDescription: 'If a sudden illness or family emergency forces you to cancel or cut your trip short, your prepaid bookings are fully covered so you don\'t lose your money.'
   },
   {
     id: 'baggage',
     icon: '🧳',
     title: 'Lost or Delayed Baggage',
-    description: 'Compensation for lost check-in luggage or emergency funds if your bags are delayed by the airline.',
+    description: 'Compensation for checked-in baggage that is lost, delayed, or damaged, subject to policy limits and conditions.',
     detailedDescription: 'Arriving in a foreign country without your luggage is a nightmare. Our plans provide immediate emergency cash for essentials and full compensation for permanently lost bags.'
   },
   {
     id: 'flight',
     icon: '⏱️',
     title: 'Flight Delays & Missed Connections',
-    description: 'Coverage for meals, accommodations, and rebooking costs if your flights are delayed or missed.',
+    description: 'Coverage for eligible additional expenses arising from flight delays or missed connections, subject to policy terms.',
     detailedDescription: 'Don\'t sleep on the airport floor. If weather or airline issues cause significant delays, we cover your hotel stays, meals, and alternative transport arrangements.'
   },
   {
     id: 'passport',
     icon: '🛂',
     title: 'Loss of Passport',
-    description: 'Financial assistance and support to obtain a duplicate passport or emergency travel documents.',
+    description: 'Assistance and reimbursement for expenses incurred in obtaining a duplicate or emergency passport while abroad.',
     detailedDescription: 'Losing your passport abroad is terrifying. We cover the fees for emergency certificates, new passports, and even extend your hotel stay while you wait.'
   },
   {
     id: 'liability',
     icon: '⚖️',
     title: 'Personal Liability',
-    description: 'Protection against third-party property damage or injuries caused by you during your travel.',
+    description: 'Protection against legal liability for accidental third-party bodily injury or property damage during your overseas trip.',
     detailedDescription: 'Accidents happen. If you accidentally damage property or injure someone abroad, you are protected from massive foreign legal and medical liabilities.'
   }
 ];
@@ -57,10 +58,30 @@ const TravelInsurancePage = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [destination, setDestination] = useState('');
+  const [countrySearch, setCountrySearch] = useState('');
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const filteredCountries = countriesList.filter(country =>
+    country.toLowerCase().includes(countrySearch.toLowerCase())
+  );
+
+  const handleCountryChange = (e) => {
+    const val = e.target.value;
+    setCountrySearch(val);
+    setShowCountryDropdown(true);
+    
+    // Check if the typed value matches a country exactly
+    const match = countriesList.find(c => c.toLowerCase() === val.trim().toLowerCase());
+    if (match) {
+      setDestination(match);
+    } else {
+      setDestination('');
+    }
+  };
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   const handleScrollToContact = () => {
     document.getElementById('travel-contact')?.scrollIntoView({ behavior: 'auto' });
@@ -96,6 +117,8 @@ const TravelInsurancePage = () => {
     setName('');
     setPhone('');
     setDestination('');
+    setCountrySearch('');
+    setShowCountryDropdown(false);
     setError('');
     setSuccess(false);
   };
@@ -110,9 +133,9 @@ const TravelInsurancePage = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col relative">
       <Helmet>
-        <title>Overseas Travel Insurance — Drishti Wealth</title>
+        <title>Overseas Travel Insurance | Drishti Wealth</title>
         <meta name="description" content="Comprehensive overseas travel insurance covering medical emergencies, trip cancellations, lost baggage, and flight delays." />
-        <meta property="og:title" content="Overseas Travel Insurance — Drishti Wealth" />
+        <meta property="og:title" content="Overseas Travel Insurance | Drishti Wealth" />
         <meta property="og:description" content="Comprehensive overseas travel insurance covering medical emergencies, trip cancellations, lost baggage, and flight delays." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
@@ -162,19 +185,25 @@ const TravelInsurancePage = () => {
             <h2 className={titleStyles}>Comprehensive Protection Abroad</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-[3rem] relative">
+              {expandedIndex !== null && (
+                <div 
+                  className="fixed inset-0 z-40 bg-transparent cursor-default" 
+                  onClick={() => setExpandedIndex(null)}
+                />
+              )}
               {TRAVEL_INSURANCE_FEATURES.map((feature, index) => {
-                const isHovered = hoveredIndex === index;
-                const isAnyHovered = hoveredIndex !== null;
+                const isExpanded = expandedIndex === index;
+                const isAnyExpanded = expandedIndex !== null;
                 
                 let xTranslate = 0;
                 let yTranslate = 0;
                 
-                if (isAnyHovered && !isHovered) {
+                if (isAnyExpanded && !isExpanded) {
                   const columns = 3;
                   const r = Math.floor(index / columns);
                   const c = index % columns;
-                  const hr = Math.floor(hoveredIndex / columns);
-                  const hc = hoveredIndex % columns;
+                  const hr = Math.floor(expandedIndex / columns);
+                  const hc = expandedIndex % columns;
                   
                   const dr = r - hr;
                   const dc = c - hc;
@@ -186,19 +215,19 @@ const TravelInsurancePage = () => {
                 return (
                   <motion.div
                     key={feature.id}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
+                    onClick={() => setExpandedIndex(isExpanded ? null : index)}
+                    
                     animate={{
-                      scale: isHovered ? 1.04 : isAnyHovered ? 0.95 : 1,
+                      scale: isExpanded ? 1.04 : isAnyExpanded ? 0.95 : 1,
                       x: xTranslate,
                       y: yTranslate,
-                      opacity: isHovered ? 1 : isAnyHovered ? 0.3 : 1,
-                      zIndex: isHovered ? 50 : 1,
-                      borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.1)',
-                      boxShadow: isHovered ? '0 20px 40px rgba(13, 37, 69, 0.08)' : '0 2px 4px rgba(0,0,0,0)'
+                      opacity: isExpanded ? 1 : isAnyExpanded ? 0.3 : 1,
+                      zIndex: isExpanded ? 50 : 1,
+                      borderColor: isExpanded ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.1)',
+                      boxShadow: isExpanded ? '0 20px 40px rgba(13, 37, 69, 0.08)' : '0 2px 4px rgba(0,0,0,0)'
                     }}
                     transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-                    className="bg-white border border-navy/10 rounded-[16px] p-6 h-full flex flex-col cursor-pointer group"
+                    className="bg-white border border-navy/10 rounded-[16px] p-6 h-full flex flex-col cursor-pointer group relative"
                   >
                     <div className="text-[32px] mb-4">{feature.icon}</div>
                     <h3 className="font-serif text-[18px] text-navy font-bold mb-2 group-hover:text-gold transition-colors">{feature.title}</h3>
@@ -207,9 +236,9 @@ const TravelInsurancePage = () => {
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ 
-                        height: isHovered ? 'auto' : 0, 
-                        opacity: isHovered ? 1 : 0,
-                        marginTop: isHovered ? 12 : 0
+                        height: isExpanded ? 'auto' : 0, 
+                        opacity: isExpanded ? 1 : 0,
+                        marginTop: isExpanded ? 12 : 0
                       }}
                       className="overflow-hidden"
                     >
@@ -217,6 +246,22 @@ const TravelInsurancePage = () => {
                         {feature.detailedDescription}
                       </p>
                     </motion.div>
+
+                    {/* Expand/Collapse Indicator */}
+                    <div className="absolute bottom-4 right-4 flex items-center justify-center w-6 h-6 rounded-full border border-gold/20 bg-gold/5 group-hover:border-gold/50 group-hover:bg-gold/10 transition-colors">
+                      <motion.svg
+                        animate={{ rotate: isExpanded ? 45 : 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="w-3 h-3 text-gold"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={3}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5 -7.5h -15" />
+                      </motion.svg>
+                    </div>
                   </motion.div>
                 );
               })}
@@ -264,18 +309,51 @@ const TravelInsurancePage = () => {
                     <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="+91 XXXXX XXXXX" className={inputStyles} />
                   </div>
 
-                  <div className="md:col-span-1">
+                  <div className="md:col-span-1 relative">
                     <label className={formLabelStyles}>Destination Country</label>
-                    <select value={destination} onChange={e => setDestination(e.target.value)} className={`${inputStyles} appearance-none cursor-pointer`}>
-                      <option value="" className="bg-navy">Select Destination</option>
-                      <option value="USA / Canada" className="bg-navy">USA / Canada</option>
-                      <option value="Europe / Schengen" className="bg-navy">Europe / Schengen Area</option>
-                      <option value="UK" className="bg-navy">United Kingdom</option>
-                      <option value="Australia / New Zealand" className="bg-navy">Australia / New Zealand</option>
-                      <option value="Asia" className="bg-navy">Asia</option>
-                      <option value="Middle East" className="bg-navy">Middle East</option>
-                      <option value="Worldwide" className="bg-navy">Worldwide Multi-Trip</option>
-                    </select>
+                    <input 
+                      type="text" 
+                      placeholder="Search and select country..." 
+                      value={countrySearch}
+                      onFocus={() => setShowCountryDropdown(true)}
+                      onBlur={() => {
+                        const match = countriesList.find(c => c.toLowerCase() === countrySearch.trim().toLowerCase());
+                        if (match) {
+                          setDestination(match);
+                          setCountrySearch(match);
+                        } else if (!destination) {
+                          setCountrySearch('');
+                        } else {
+                          setCountrySearch(destination);
+                        }
+                        setShowCountryDropdown(false);
+                      }}
+                      onChange={handleCountryChange}
+                      className={inputStyles}
+                    />
+                    {showCountryDropdown && (
+                      <div className="absolute z-20 left-0 right-0 mt-1 max-h-[180px] overflow-y-auto bg-navy border border-white/15 rounded-[8px] shadow-2xl py-1 scrollbar-thin scrollbar-thumb-white/10">
+                        {filteredCountries.length > 0 ? (
+                          filteredCountries.map((country) => (
+                            <div
+                              key={country}
+                              onMouseDown={() => {
+                                setDestination(country);
+                                setCountrySearch(country);
+                                setShowCountryDropdown(false);
+                              }}
+                              className="px-3 py-2 text-[13.5px] text-white hover:bg-gold/25 cursor-pointer transition-colors"
+                            >
+                              {country}
+                            </div>
+                          ))
+                        ) : (
+                          <div className="px-3 py-2 text-[12.5px] text-white/50 italic text-center">
+                            No countries found
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   {error && (

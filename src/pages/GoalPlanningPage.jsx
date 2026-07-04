@@ -15,7 +15,7 @@ const STEPS = [
     num: '01', 
     icon: '🗣️', 
     title: 'List Every Goal', 
-    description: 'We sit with you and list every financial goal — big and small, near and far.',
+    description: 'We sit with you and list every financial goal: big and small, near and far.',
     detailedDescription: 'We detail all your aspirations, from purchasing a home to funding higher education, categorizing them by priority and time horizon.'
   },
   { 
@@ -31,7 +31,7 @@ const STEPS = [
     num: '03', 
     icon: '🪣', 
     title: 'Separate Buckets', 
-    description: 'We create dedicated investment buckets for each goal — nothing gets mixed up.',
+    description: 'We create dedicated investment buckets for each goal so nothing gets mixed up.',
     detailedDescription: 'Each goal gets a specific portfolio of mutual funds matching its timeline. You\'ll know exactly which investment is for which dream.'
   },
   { 
@@ -47,7 +47,7 @@ const STEPS = [
     num: '05', 
     icon: '✅', 
     title: 'Goal Achieved', 
-    description: 'When the goal arrives — the money is ready. No scrambling, no shortfall.',
+    description: 'When the goal arrives, the money is ready: no scrambling, no shortfall.',
     detailedDescription: 'We gradually shift your money to safer, liquid funds as your target date approaches, protecting your profits from sudden market drops.'
   },
   {
@@ -69,7 +69,7 @@ const GoalPlanningPage = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const [hovered, setHovered] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   const handleScrollToContact = () => {
     document.getElementById('goal-contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -124,7 +124,7 @@ const GoalPlanningPage = () => {
     { icon: '🎓', title: "Child's Higher Education", detail: 'Plan for college fees 10–15 years out, inflation-adjusted' },
     { icon: '💍', title: "Child's Marriage", detail: 'Build a dedicated corpus well in advance' },
     { icon: '🏠', title: 'Down Payment for a Home', detail: 'Hit your target without disturbing other savings' },
-    { icon: '🚀', title: 'Business Startup Capital', detail: 'Accumulate capital systematically over 3–7 years' },
+    { icon: '⚡', title: 'Wealth Creation', detail: 'Invest in high-risk, high-reward equity for aggressive compounding' },
     { icon: '✈️', title: 'Dream Vacation or Sabbatical', detail: 'Short-term goal with liquid instruments' },
     { icon: '🏖️', title: 'Early Retirement', detail: 'Retire at 45 or 50 with a properly sized corpus' },
   ];
@@ -134,16 +134,16 @@ const GoalPlanningPage = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col relative">
       <Helmet>
-        <title>Goal-Based Wealth Planning — Drishti Wealth</title>
-        <meta name="description" content="Plan for every financial goal — education, home, business, retirement. Dedicated investment buckets, tracked annually." />
-        <meta property="og:title" content="Goal-Based Wealth Planning — Drishti Wealth" />
-        <meta property="og:description" content="Plan for every financial goal — education, home, business, retirement. Dedicated investment buckets, tracked annually." />
+        <title>Goal-Based Wealth Planning | Drishti Wealth</title>
+        <meta name="description" content="Plan for every financial goal (education, home, business, retirement) with dedicated investment buckets, tracked annually." />
+        <meta property="og:title" content="Goal-Based Wealth Planning | Drishti Wealth" />
+        <meta property="og:description" content="Plan for every financial goal (education, home, business, retirement) with dedicated investment buckets, tracked annually." />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Goal-Based Wealth Planning — Drishti Wealth" />
-        <meta name="twitter:description" content="Plan for every financial goal — education, home, business, retirement. Dedicated investment buckets, tracked annually." />
+        <meta name="twitter:title" content="Goal-Based Wealth Planning | Drishti Wealth" />
+        <meta name="twitter:description" content="Plan for every financial goal (education, home, business, retirement) with dedicated investment buckets, tracked annually." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
@@ -165,7 +165,7 @@ const GoalPlanningPage = () => {
               Every Dream Has a Price Tag. Let's Make Sure You Can Afford It.
             </h1>
             <p className="text-white/65 text-[16px] leading-[1.6] mb-[2rem] max-w-2xl">
-              Whether it's your child's education in 10 years, a home in 7 years, or your own business in 5 — every goal needs a dedicated plan. Ad-hoc investing rarely gets you there.
+              Whether it's your child's education in 10 years, a home in 7 years, or your own business in 5, every goal needs a dedicated plan. Ad-hoc investing rarely gets you there.
             </p>
             <div className="flex flex-wrap gap-4 mt-[2rem]">
               <a href="tel:+919664977576"
@@ -186,13 +186,13 @@ const GoalPlanningPage = () => {
         <FadeIn>
           <div className="max-w-7xl mx-auto px-4">
             <p className="text-muted text-[15px] leading-[1.7] italic border-l-4 border-gold pl-5 max-w-3xl">
-              "Your goals are personal. Your plan should be too." — Ad-hoc investing rarely gets you where you want to go. A dedicated bucket for each goal does.
+              "Your goals are personal. Your plan should be too." Ad-hoc investing rarely gets you where you want to go, but a dedicated bucket for each goal does.
             </p>
           </div>
         </FadeIn>
       </section>
 
-      {/* How It Works — 5 Steps */}
+      {/* How It Works: Our 5-Step Process */}
       <section className="bg-cream py-[4.5rem] w-full">
         <FadeIn>
           <div className="max-w-7xl mx-auto px-4">
@@ -248,7 +248,7 @@ const GoalPlanningPage = () => {
                       className="inline-flex items-center text-[14px] font-bold text-gold hover:text-goldLight group/link transition-colors duration-300"
                     >
                       <span className="relative py-1">
-                        Learn more
+                        Start with us
                         <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gold group-hover/link:w-full transition-all duration-300"></span>
                       </span>
                       <svg className="w-4 h-4 ml-1.5 transform group-hover/link:translate-x-1.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
@@ -308,25 +308,31 @@ const GoalPlanningPage = () => {
 
             {/* Interactive Steps Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-[4rem] relative">
+              {expandedIndex !== null && (
+                <div 
+                  className="fixed inset-0 z-40 bg-transparent cursor-default" 
+                  onClick={() => setExpandedIndex(null)}
+                />
+              )}
               {STEPS.map((step, index) => {
-                const isHovered = hoveredIndex === index;
-                const isAnyHovered = hoveredIndex !== null;
+                const isExpanded = expandedIndex === index;
+                const isAnyExpanded = expandedIndex !== null;
                 
                 // Calculate slide translations based on relative position in a 3-column layout
                 let xTranslate = 0;
                 let yTranslate = 0;
                 
-                if (isAnyHovered && !isHovered) {
+                if (isAnyExpanded && !isExpanded) {
                   const columns = 3;
                   const r = Math.floor(index / columns);
                   const c = index % columns;
-                  const hr = Math.floor(hoveredIndex / columns);
-                  const hc = hoveredIndex % columns;
+                  const hr = Math.floor(expandedIndex / columns);
+                  const hc = expandedIndex % columns;
                   
                   const dr = r - hr;
                   const dc = c - hc;
                   
-                  // Translate outwards away from the hovered card
+                  // Translate outwards away from the expanded card
                   xTranslate = Math.sign(dc) * 60;
                   yTranslate = Math.sign(dr) * 60;
                 }
@@ -335,22 +341,21 @@ const GoalPlanningPage = () => {
                   return (
                     <motion.div
                       key={step.id}
-                      onMouseEnter={() => setHoveredIndex(index)}
-                      onMouseLeave={() => setHoveredIndex(null)}
+                      onClick={() => setExpandedIndex(isExpanded ? null : index)}
                       style={{
                         originX: 0.5,
                         originY: 0.5,
                       }}
                       animate={{
-                        scale: isHovered ? 1.06 : isAnyHovered ? 0.92 : 1,
+                        scale: isExpanded ? 1.06 : isAnyExpanded ? 0.92 : 1,
                         x: xTranslate,
                         y: yTranslate,
-                        opacity: isHovered ? 1 : isAnyHovered ? 0.2 : 1,
-                        zIndex: isHovered ? 50 : 1,
-                        boxShadow: isHovered 
+                        opacity: isExpanded ? 1 : isAnyExpanded ? 0.2 : 1,
+                        zIndex: isExpanded ? 50 : 1,
+                        boxShadow: isExpanded 
                           ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
                           : '0 4px 6px rgba(13, 37, 69, 0.02)',
-                        borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(201, 146, 42, 0.15)',
+                        borderColor: isExpanded ? 'rgba(201, 146, 42, 0.4)' : 'rgba(201, 146, 42, 0.15)',
                       }}
                       transition={{
                         type: 'spring',
@@ -374,9 +379,9 @@ const GoalPlanningPage = () => {
                         <motion.div
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ 
-                            height: isHovered ? 'auto' : 0, 
-                            opacity: isHovered ? 1 : 0,
-                            marginTop: isHovered ? 16 : 0
+                            height: isExpanded ? 'auto' : 0, 
+                            opacity: isExpanded ? 1 : 0,
+                            marginTop: isExpanded ? 16 : 0
                           }}
                           transition={{ 
                             duration: 0.35, 
@@ -400,22 +405,21 @@ const GoalPlanningPage = () => {
                 return (
                   <motion.div
                     key={step.id}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
+                    onClick={() => setExpandedIndex(isExpanded ? null : index)}
                     style={{
                       originX: 0.5,
                       originY: 0.5,
                     }}
                     animate={{
-                      scale: isHovered ? 1.06 : isAnyHovered ? 0.92 : 1,
+                      scale: isExpanded ? 1.06 : isAnyExpanded ? 0.92 : 1,
                       x: xTranslate,
                       y: yTranslate,
-                      opacity: isHovered ? 1 : isAnyHovered ? 0.2 : 1,
-                      zIndex: isHovered ? 50 : 1,
-                      boxShadow: isHovered 
+                      opacity: isExpanded ? 1 : isAnyExpanded ? 0.2 : 1,
+                      zIndex: isExpanded ? 50 : 1,
+                      boxShadow: isExpanded 
                         ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
                         : '0 4px 6px rgba(13, 37, 69, 0.02)',
-                      borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
+                      borderColor: isExpanded ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
                     }}
                     transition={{
                       type: 'spring',
@@ -440,9 +444,9 @@ const GoalPlanningPage = () => {
                       <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ 
-                          height: isHovered ? 'auto' : 0, 
-                          opacity: isHovered ? 1 : 0,
-                          marginTop: isHovered ? 16 : 0
+                          height: isExpanded ? 'auto' : 0, 
+                          opacity: isExpanded ? 1 : 0,
+                          marginTop: isExpanded ? 16 : 0
                         }}
                         transition={{ 
                           duration: 0.35, 
@@ -454,6 +458,22 @@ const GoalPlanningPage = () => {
                           {step.detailedDescription}
                         </p>
                       </motion.div>
+                    </div>
+
+                    {/* Expand/Collapse Indicator */}
+                    <div className="absolute bottom-4 right-4 flex items-center justify-center w-6 h-6 rounded-full border border-gold/20 bg-gold/5 group-hover:border-gold/50 group-hover:bg-gold/10 transition-colors">
+                      <motion.svg
+                        animate={{ rotate: isExpanded ? 45 : 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="w-3 h-3 text-gold"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={3}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5 -7.5h -15" />
+                      </motion.svg>
                     </div>
                   </motion.div>
                 );
@@ -524,7 +544,7 @@ const GoalPlanningPage = () => {
                       <option value="Child's Education" className="bg-navy">Child's Education</option>
                       <option value="Child's Marriage" className="bg-navy">Child's Marriage</option>
                       <option value="Home Down Payment" className="bg-navy">Home Down Payment</option>
-                      <option value="Business Capital" className="bg-navy">Business Startup Capital</option>
+                      <option value="Wealth Creation" className="bg-navy">Wealth Creation (Equity)</option>
                       <option value="Dream Vacation" className="bg-navy">Dream Vacation / Sabbatical</option>
                       <option value="Early Retirement" className="bg-navy">Early Retirement</option>
                       <option value="Multiple Goals" className="bg-navy">Multiple Goals</option>

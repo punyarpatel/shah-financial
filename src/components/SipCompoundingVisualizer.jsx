@@ -105,37 +105,37 @@ const SipCompoundingVisualizer = () => {
     const y = animYear;
     if (y <= 5) {
       return {
-        title: "Phase 1: The Seed Phase (Years 1-5)",
+        title: "Phase 1: The Seed Phase (Years 1–5)",
         text: "Your compounding journey begins. At this early stage, your own contributions make up over 80% of your total balance. Compounding is active, but working quietly beneath the surface. Stay patient and consistent!",
         color: "border-sky-500/20 text-sky-300 bg-sky-950/25"
       };
     } else if (y <= 12) {
       return {
-        title: "Phase 2: Gathering Momentum (Years 6-12)",
+        title: "Phase 2: Gathering Momentum (Years 6–12)",
         text: "The wealth snowball is starting to roll! The interest earned on your savings is beginning to compound significantly. Your earnings are starting to make their own earnings.",
         color: "border-emerald-500/20 text-emerald-300 bg-emerald-950/25"
       };
     } else if (y <= 20) {
       return {
-        title: "Phase 3: The Inflection Point (Years 13-20)",
+        title: "Phase 3: The Inflection Point (Years 13–20)",
         text: "The magic becomes visible! The wealth generated purely from compound interest now exceeds your total invested principal. Your money is doing more work than your pocket.",
         color: "border-amber-500/20 text-amber-300 bg-amber-950/25"
       };
     } else {
       return {
-        title: "Phase 4: Exponential Rocket (Years 21-30)",
+        title: "Phase 4: Exponential Rocket (Years 21–30)",
         text: "Pure Compounding Magic! Your returns are exploding. Over 75% of your final wealth is generated purely by interest-on-interest, not your contributions. A massive wealth generator!",
         color: "border-gold/30 text-gold bg-gold/5"
       };
     }
   }, [animYear]);
 
-  // Wave y-axis level (from 0 to 100, where 100 is empty, 0 is full)
+  // Wave y-axis level (from 0–100, where 100 is empty, 0 is full)
   // We want to fill it with gold up to the gainRatio percentage
   const goldWaveLevel = 100 - (calculations.gainRatio * 100);
 
   // Snowball scale (grows as corpus grows relative to final corpus)
-  // Scale dynamically from 0.5 to 1.0
+  // Scale dynamically from 0.5–1.0
   const finalCorpusRef = calculations.corpusFinal || 1;
   const currentRatio = calculations.corpusCurrent / finalCorpusRef;
   const snowballScale = 0.55 + (currentRatio * 0.45);

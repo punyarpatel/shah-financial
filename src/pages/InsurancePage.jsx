@@ -15,7 +15,7 @@ const INSURANCE_TYPES = [
     id: 'life',
     icon: '🛡️',
     title: 'Life Insurance',
-    description: 'Term plans, ULIPs, endowment — we compare and recommend what genuinely suits you, not what pays the highest commission.',
+    description: 'Term plans, ULIPs, and endowment: we compare and recommend what genuinely suits you, not what pays the highest commission.',
     detailedDescription: 'We help you calculate your Human Life Value (HLV) to ensure your family\'s lifestyle, loans, and child education are fully covered with a high-claim-ratio term plan.'
   },
   {
@@ -28,15 +28,15 @@ const INSURANCE_TYPES = [
   {
     id: 'motor',
     icon: '🚗',
-    title: 'Motor Insurance',
-    description: 'Car and two-wheeler — comprehensive and third party. Quick renewals, claim support included.',
-    detailedDescription: 'We guide you through choosing Nil Depreciation, Engine Protection, and Return to Invoice add-ons, ensuring speedy claims and hassle-free cashless garage access.'
+    title: 'Motor & Fleet Insurance',
+    description: 'Car, two-wheeler, commercial vehicle, and business fleet insurance with comprehensive coverage, quick renewals, and claims support.',
+    detailedDescription: 'We guide you through choosing Nil Depreciation, Engine Protection, and Return to Invoice add-ons, along with customized multi-vehicle commercial fleet covers. Enjoy speedy claims and hassle-free cashless garage access.'
   },
   {
     id: 'fire',
     icon: '🏠',
     title: 'Fire & Burglary',
-    description: 'Protect your home, shop, or office against fire, theft, and natural calamities.',
+    description: 'Protect your home, shop, office, industry, or factory against fire, theft, and natural calamities.',
     detailedDescription: 'Custom risk protection for buildings, machinery, and inventory. We design coverage limits that secure your commercial or personal properties against unforeseen disasters.'
   },
   {
@@ -50,7 +50,7 @@ const INSURANCE_TYPES = [
     id: 'workmen',
     icon: '👷',
     title: 'Workmen\'s Compensation (WC)',
-    description: 'Mandatory coverage for businesses with workers — we handle compliance too.',
+    description: 'Mandatory coverage for businesses with workers, including full compliance support.',
     detailedDescription: 'Protect your business against legal liabilities arising from employee injuries or accidents at the workplace, maintaining full compliance with labor laws.'
   },
   {
@@ -61,11 +61,11 @@ const INSURANCE_TYPES = [
     detailedDescription: 'Boost employee retention with customized corporate plans featuring day-one cover for families, maternity benefits, and highly competitive premiums.'
   },
   {
-    id: 'more',
-    icon: '➕',
-    title: 'And More',
-    description: 'Liability, shop owner policies, professional indemnity, and whatever your specific situation needs.',
-    detailedDescription: 'From professional indemnity for doctors to cyber liability insurance for startups, we construct customized risk management structures for all domains.'
+    id: 'accident',
+    icon: '🩹',
+    title: 'Personal Accident',
+    description: 'Financial protection against accidental death, disability, and medical expenses due to accidents.',
+    detailedDescription: 'Accidents are unpredictable. Personal accident policies secure your family\'s financial stability by offering a lump sum payout for accidental death or permanent/temporary disability, plus hospitalization coverage.'
   },
 ];
 
@@ -77,7 +77,7 @@ const InsurancePage = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const [hovered, setHovered] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   const handleScrollToContact = () => {
     document.getElementById('ins-contact')?.scrollIntoView({ behavior: 'auto' });
@@ -134,22 +134,37 @@ const InsurancePage = () => {
 
 
 
-  const partners = ['HDFC Ergo', 'ICICI Lombard', 'Go Digit', 'Tata AIG', 'Bajaj Allianz', 'Reliance General', 'Edelweiss Zuno'];
+  const partners = [
+    'LIC of India',
+    'HDFC Life',
+    'SBI Life',
+    'ICICI Prudential Life',
+    'HDFC Ergo',
+    'ICICI Lombard',
+    'Tata AIG',
+    'Bajaj Allianz',
+    'Niva Bupa',
+    'Care Health',
+    'Star Health',
+    'Go Digit',
+    'Reliance General',
+    'Edelweiss Zuno'
+  ];
 
   const ogImage = `${window.location.origin}/insurance_preview.png`;
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col relative">
       <Helmet>
-        <title>Life & General Insurance — Drishti Wealth</title>
+        <title>Life & General Insurance | Drishti Wealth</title>
         <meta name="description" content="Term life, health, motor, fire, marine, and group insurance from India's most trusted insurers. Compare and get covered today." />
-        <meta property="og:title" content="Life & General Insurance — Drishti Wealth" />
+        <meta property="og:title" content="Life & General Insurance | Drishti Wealth" />
         <meta property="og:description" content="Term life, health, motor, fire, marine, and group insurance from India's most trusted insurers. Compare and get covered today." />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Life & General Insurance — Drishti Wealth" />
+        <meta name="twitter:title" content="Life & General Insurance | Drishti Wealth" />
         <meta name="twitter:description" content="Term life, health, motor, fire, marine, and group insurance from India's most trusted insurers. Compare and get covered today." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
@@ -170,11 +185,11 @@ const InsurancePage = () => {
             </div>
 
             <h1 className="font-serif text-[36px] md:text-[48px] text-white font-semibold leading-[1.2] mb-[1.25rem] max-w-4xl">
-              Every Insurance You'll Ever Need — Under One Roof
+              Every Insurance You'll Ever Need Under One Roof
             </h1>
 
             <p className="text-white/65 text-[16px] leading-[1.6] mb-[2rem] max-w-2xl">
-              Insurance is not a product — it's a promise to your family. We work with India's most trusted insurers so you always get the right cover at the right price.
+              Insurance is not a product; it's a promise to your family. We work with India's most trusted insurers so you always get the right cover at the right price.
             </p>
 
             <div className="flex flex-wrap gap-4 mt-[2rem]">
@@ -270,7 +285,7 @@ const InsurancePage = () => {
                       className="inline-flex items-center text-[14px] font-bold text-gold hover:text-goldLight group/link transition-colors duration-300"
                     >
                       <span className="relative py-1">
-                        Learn more
+                        Start with us
                         <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gold group-hover/link:w-full transition-all duration-300"></span>
                       </span>
                       <svg className="w-4 h-4 ml-1.5 transform group-hover/link:translate-x-1.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
@@ -330,25 +345,31 @@ const InsurancePage = () => {
 
             {/* Interactive Grid of Insurance types */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-[4rem] relative">
+              {expandedIndex !== null && (
+                <div 
+                  className="fixed inset-0 z-40 bg-transparent cursor-default" 
+                  onClick={() => setExpandedIndex(null)}
+                />
+              )}
               {INSURANCE_TYPES.map((type, index) => {
-                const isHovered = hoveredIndex === index;
-                const isAnyHovered = hoveredIndex !== null;
+                const isExpanded = expandedIndex === index;
+                const isAnyExpanded = expandedIndex !== null;
                 
                 // Calculate slide translations based on relative position in a 4-column layout
                 let xTranslate = 0;
                 let yTranslate = 0;
                 
-                if (isAnyHovered && !isHovered) {
+                if (isAnyExpanded && !isExpanded) {
                   const columns = 4;
                   const r = Math.floor(index / columns);
                   const c = index % columns;
-                  const hr = Math.floor(hoveredIndex / columns);
-                  const hc = hoveredIndex % columns;
+                  const hr = Math.floor(expandedIndex / columns);
+                  const hc = expandedIndex % columns;
                   
                   const dr = r - hr;
                   const dc = c - hc;
                   
-                  // Translate outwards away from the hovered card
+                  // Translate outwards away from the expanded card
                   xTranslate = Math.sign(dc) * 60;
                   yTranslate = Math.sign(dr) * 60;
                 }
@@ -356,22 +377,21 @@ const InsurancePage = () => {
                 return (
                   <motion.div
                     key={type.id}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
+                    onClick={() => setExpandedIndex(isExpanded ? null : index)}
                     style={{
                       originX: 0.5,
                       originY: 0.5,
                     }}
                     animate={{
-                      scale: isHovered ? 1.06 : isAnyHovered ? 0.92 : 1,
+                      scale: isExpanded ? 1.06 : isAnyExpanded ? 0.92 : 1,
                       x: xTranslate,
                       y: yTranslate,
-                      opacity: isHovered ? 1 : isAnyHovered ? 0.2 : 1,
-                      zIndex: isHovered ? 50 : 1,
-                      boxShadow: isHovered 
+                      opacity: isExpanded ? 1 : isAnyExpanded ? 0.2 : 1,
+                      zIndex: isExpanded ? 50 : 1,
+                      boxShadow: isExpanded 
                         ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
                         : '0 4px 6px rgba(13, 37, 69, 0.02)',
-                      borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
+                      borderColor: isExpanded ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
                     }}
                     transition={{
                       type: 'spring',
@@ -395,9 +415,9 @@ const InsurancePage = () => {
                       <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ 
-                          height: isHovered ? 'auto' : 0, 
-                          opacity: isHovered ? 1 : 0,
-                          marginTop: isHovered ? 16 : 0
+                          height: isExpanded ? 'auto' : 0, 
+                          opacity: isExpanded ? 1 : 0,
+                          marginTop: isExpanded ? 16 : 0
                         }}
                         transition={{ 
                           duration: 0.35, 
@@ -409,6 +429,22 @@ const InsurancePage = () => {
                           {type.detailedDescription}
                         </p>
                       </motion.div>
+                    </div>
+
+                    {/* Expand/Collapse Indicator */}
+                    <div className="absolute bottom-4 right-4 flex items-center justify-center w-6 h-6 rounded-full border border-gold/20 bg-gold/5 group-hover:border-gold/50 group-hover:bg-gold/10 transition-colors">
+                      <motion.svg
+                        animate={{ rotate: isExpanded ? 45 : 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="w-3 h-3 text-gold"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={3}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5 -7.5h -15" />
+                      </motion.svg>
                     </div>
                   </motion.div>
                 );
@@ -435,7 +471,7 @@ const InsurancePage = () => {
                     NRI Health Insurance in India
                   </h3>
                   <p className="text-white/70 text-[15px] leading-[1.7]">
-                    Visiting India for medical treatment or procedures? We help NRIs get the right health insurance coverage in India — so you can access world-class care without worrying about costs.
+                    Visiting India for medical treatment or procedures? We help NRIs get the right health insurance coverage in India, so you can access world-class care without worrying about costs. Special NRI discounts are available for NRI health insurance policies.
                   </p>
                 </div>
                 <div className="flex-shrink-0">
@@ -498,14 +534,15 @@ const InsurancePage = () => {
                       <option value="" className="bg-navy">Select an option</option>
                       <option value="Life Insurance" className="bg-navy">Life Insurance</option>
                       <option value="Health Insurance" className="bg-navy">Health Insurance</option>
-                      <option value="Motor Insurance" className="bg-navy">Motor Insurance</option>
+                      <option value="Motor & Fleet Insurance" className="bg-navy">Motor & Fleet Insurance</option>
                       <option value="Fire & Burglary" className="bg-navy">Fire & Burglary</option>
                       <option value="Marine Insurance" className="bg-navy">Marine Insurance</option>
                       <option value="Workmen's Compensation" className="bg-navy">Workmen's Compensation</option>
                       <option value="Group Health Insurance" className="bg-navy">Group Health Insurance</option>
                       <option value="NRI Health Insurance" className="bg-navy">NRI Health Insurance</option>
                       <option value="Overseas Travel Insurance" className="bg-navy">Overseas Travel Insurance</option>
-                      <option value="Not Sure" className="bg-navy">Not Sure — Help Me Decide</option>
+                      <option value="Personal Accident" className="bg-navy">Personal Accident</option>
+                      <option value="Not Sure" className="bg-navy">Not Sure: Help Me Decide</option>
                     </select>
                   </div>
 

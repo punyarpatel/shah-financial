@@ -13,7 +13,7 @@ const servicesList = [
     id: 'mutual-funds',
     icon: '📈',
     category: 'Wealth Management',
-    title: 'Mutual Fund Advisory',
+    title: 'Mutual Fund Services',
     description: 'End-to-end management of your mutual fund journey, including KYC, risk profiling, fund selection, SIP setup, and regular portfolio reviews.',
     link: '/services/mutual-funds'
   },
@@ -57,15 +57,15 @@ const ServicesPage = () => {
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
-        <title>Our Services — Drishti Wealth Ahmedabad</title>
+        <title>Our Services | Drishti Wealth Ahmedabad</title>
         <meta name="description" content="Explore comprehensive wealth management, mutual fund advisory, life and health insurance, NRI investment planning, and retirement setups." />
-        <meta property="og:title" content="Our Services — Drishti Wealth Ahmedabad" />
+        <meta property="og:title" content="Our Services | Drishti Wealth Ahmedabad" />
         <meta property="og:description" content="Explore comprehensive wealth management, mutual fund advisory, life and health insurance, NRI investment planning, and retirement setups." />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Our Services — Drishti Wealth Ahmedabad" />
+        <meta name="twitter:title" content="Our Services | Drishti Wealth Ahmedabad" />
         <meta name="twitter:description" content="Explore comprehensive wealth management, mutual fund advisory, life and health insurance, NRI investment planning, and retirement setups." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>

@@ -35,7 +35,7 @@ const AdminLoginPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#faf8f4]">
       <Helmet>
-        <title>Admin Login — Drishti Wealth</title>
+        <title>Admin Login | Drishti Wealth</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       
@@ -46,7 +46,7 @@ const AdminLoginPage = () => {
           Drishti Wealth
         </div>
         <div className="text-[#5c6478] text-[11px] uppercase text-center mb-[2rem] tracking-widest">
-          AMFI Registered &middot; Est. 2009
+          AMFI Registered &middot; Est. 2001
         </div>
 
         {/* Heading */}

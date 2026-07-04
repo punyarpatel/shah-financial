@@ -4,7 +4,42 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+@layer base {
+  :root {
+    --color-navy: 13 37 69;
+    --color-gold: 201 146 42;
+    --color-gold-light: 240 201 106;
+    --color-cream: 250 248 244;
+    --color-text-dark: 26 26 46;
+    --color-muted: 92 100 120;
+  }
+
+  [data-theme='emerald'] {
+    --color-navy: 8 36 28;
+    --color-gold: 16 185 129;
+    --color-gold-light: 110 231 183;
+    --color-cream: 244 248 246;
+    --color-text-dark: 15 23 42;
+    --color-muted: 71 85 105;
+  }
+
+  [data-theme='burgundy'] {
+    --color-navy: 46 12 22;
+    --color-gold: 197 168 128;
+    --color-gold-light: 224 169 109;
+    --color-cream: 252 250 247;
+    --color-text-dark: 29 10 15;
+    --color-muted: 120 90 98;
+  }
+
+  [data-theme='charcoal'] {
+    --color-navy: 30 41 59;
+    --color-gold: 217 119 6;
+    --color-gold-light: 251 191 36;
+    --color-cream: 248 250 252;
+    --color-text-dark: 15 23 42;
+    --color-muted: 100 116 139;
+  }
 }
 
 @keyframes spin-y {

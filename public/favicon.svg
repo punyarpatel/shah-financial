@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Premium Navy Blue Circle Background -->
+  <circle cx="256" cy="256" r="240" fill="#0d2545" />
+  
+  <!-- Stylized Drishti (Vision Eye) Gold Outline -->
+  <path d="M100,256 C170,140 342,140 412,256 C342,372 170,372 100,256 Z" fill="none" stroke="#c9922a" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Central Gold Coin/Pupil -->
+  <circle cx="256" cy="256" r="50" fill="#f0c96a" />
+  
+  <!-- Upward Compounding Wealth Line -->
+  <path d="M150,290 L220,240 L290,265 L360,190" fill="none" stroke="#faf8f4" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Arrow Head -->
+  <polygon points="360,190 345,220 375,220" fill="#faf8f4" transform="rotate(40 360 190)" />
+</svg>

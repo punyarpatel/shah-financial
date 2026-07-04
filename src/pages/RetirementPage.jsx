@@ -9,11 +9,11 @@ import { submitLead } from '../lib/leads';
 import FadeIn from '../components/animations/FadeIn';
 import SliderRow from '../components/calculators/SliderRow';
 import ServiceCardGraphic from '../components/ServiceCardGraphic';
-import RetirementGrowthChart from '../components/calculators/RetirementGrowthChart';
+
 
 const RETIREMENT_STEPS = [
   {
-    id: 'step1',
+    id: 'ret-step1',
     icon: '💬',
     num: '01',
     title: 'Understand Your Lifestyle',
@@ -21,15 +21,15 @@ const RETIREMENT_STEPS = [
     detailedDescription: 'We talk about your dreams, post-retirement travel plans, daily spending habits, and regular obligations to map your financial baseline.'
   },
   {
-    id: 'step2',
+    id: 'ret-step2',
     icon: '🧮',
     num: '02',
     title: 'Calculate Your Corpus',
-    description: 'We calculate exactly how much corpus you\'ll actually need — factoring in real inflation, not just rough estimates.',
+    description: 'We calculate exactly how much corpus you\'ll actually need by factoring in real inflation, not just rough estimates.',
     detailedDescription: 'We apply realistic inflation metrics to healthcare and food, calculating your target corpus to ensure you never outlive your accumulated savings.'
   },
   {
-    id: 'step3',
+    id: 'ret-step3',
     icon: '📊',
     num: '03',
     title: 'Build Your Investment Plan',
@@ -37,20 +37,28 @@ const RETIREMENT_STEPS = [
     detailedDescription: 'We select a high-performance mix of debt and equity funds, along with annuity options, tailored to compound wealth while preserving principal.'
   },
   {
-    id: 'step4',
-    icon: '🔄',
+    id: 'ret-step4',
+    icon: '📈',
     num: '04',
-    title: 'Annual Reviews',
-    description: 'Life changes. We review your plan annually and make adjustments so you stay perfectly on track.',
-    detailedDescription: 'Whether you get a salary raise, change jobs, or experience major life events, we update your goals and portfolios yearly to stay aligned.'
+    title: 'Grow Your Retirement Corpus',
+    description: 'Through disciplined SIP allocations and target monitoring, we help you systematically accumulate your target corpus.',
+    detailedDescription: 'We monitor your portfolio asset allocation, taking care of market volatility and compounding interest to maximize growth potential leading up to retirement.'
   },
   {
-    id: 'step5',
-    icon: '🏥',
+    id: 'ret-step5',
+    icon: '💰',
     num: '05',
-    title: 'Plan for Healthcare',
-    description: 'Healthcare costs are the biggest retirement wildcard. We build this in from day one so you\'re never caught off guard.',
-    detailedDescription: 'We secure comprehensive super-top-up health covers and dedicated medical emergency pools so medical bills never eat into your corpus.'
+    title: 'Create a Retirement Income using SWP',
+    description: 'Post-retirement, we help restructure your portfolio to set up a Systematic Withdrawal Plan (SWP) for regular cash flows.',
+    detailedDescription: 'An SWP is a mutual fund facility that allows you to withdraw a fixed amount regularly from your accumulated corpus, while the rest remains invested.'
+  },
+  {
+    id: 'ret-step6',
+    icon: '🔄',
+    num: '06',
+    title: 'Annual Reviews',
+    description: 'We review your plan and cash flow requirements annually, adjusting for changing inflation and life events.',
+    detailedDescription: 'Whether your expenses change, or you need to adjust withdrawal rates, we update your goals and portfolio allocations yearly to ensure sustainability.'
   },
   {
     id: 'cta',
@@ -71,7 +79,7 @@ const RetirementPage = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const [hovered, setHovered] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   const handleScrollToContact = () => {
     const contactSection = document.getElementById('ret-contact');
@@ -203,16 +211,16 @@ const RetirementPage = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col relative">
       <Helmet>
-        <title>Retirement Planning — Drishti Wealth</title>
-        <meta name="description" content="Build a realistic, inflation-adjusted retirement corpus plan. Start at 28 or 52 — it's never too early or too late." />
-        <meta property="og:title" content="Retirement Planning — Drishti Wealth" />
-        <meta property="og:description" content="Build a realistic, inflation-adjusted retirement corpus plan. Start at 28 or 52 — it's never too early or too late." />
+        <title>Retirement Planning | Drishti Wealth</title>
+        <meta name="description" content="Build a realistic, inflation-adjusted retirement corpus plan. Start at 28 or 52; it's never too early or too late." />
+        <meta property="og:title" content="Retirement Planning | Drishti Wealth" />
+        <meta property="og:description" content="Build a realistic, inflation-adjusted retirement corpus plan. Start at 28 or 52; it's never too early or too late." />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Retirement Planning — Drishti Wealth" />
-        <meta name="twitter:description" content="Build a realistic, inflation-adjusted retirement corpus plan. Start at 28 or 52 — it's never too early or too late." />
+        <meta name="twitter:title" content="Retirement Planning | Drishti Wealth" />
+        <meta name="twitter:description" content="Build a realistic, inflation-adjusted retirement corpus plan. Start at 28 or 52; it's never too early or too late." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
@@ -232,7 +240,7 @@ const RetirementPage = () => {
             </div>
 
             <h1 className="font-serif text-[36px] md:text-[48px] text-white font-semibold leading-[1.2] mb-[1.25rem] max-w-4xl">
-              Retire Comfortably. Not Just Survive — Actually Live Well.
+              Retire Comfortably. Don't Just Survive: Actually Live Well.
             </h1>
 
             <p className="text-white/65 text-[16px] leading-[1.6] mb-[0.75rem] max-w-2xl">
@@ -276,7 +284,7 @@ const RetirementPage = () => {
             ))}
             <div className="md:ml-auto max-w-md">
               <p className="text-muted text-[15px] leading-[1.7] italic border-l-4 border-gold pl-4">
-                "Whether you're 28 or 52 — it's not too early and it's not too late."
+                "Whether you're 28 or 52, it's not too early and it's not too late."
               </p>
             </div>
           </div>
@@ -339,7 +347,7 @@ const RetirementPage = () => {
                       className="inline-flex items-center text-[14px] font-bold text-gold hover:text-goldLight group/link transition-colors duration-300"
                     >
                       <span className="relative py-1">
-                        Learn more
+                        Start with us
                         <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gold group-hover/link:w-full transition-all duration-300"></span>
                       </span>
                       <svg className="w-4 h-4 ml-1.5 transform group-hover/link:translate-x-1.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
@@ -399,25 +407,31 @@ const RetirementPage = () => {
 
             {/* Interactive Process Steps Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-[4rem] relative">
+              {expandedIndex !== null && (
+                <div 
+                  className="fixed inset-0 z-40 bg-transparent cursor-default" 
+                  onClick={() => setExpandedIndex(null)}
+                />
+              )}
               {RETIREMENT_STEPS.map((step, index) => {
-                const isHovered = hoveredIndex === index;
-                const isAnyHovered = hoveredIndex !== null;
+                const isExpanded = expandedIndex === index;
+                const isAnyExpanded = expandedIndex !== null;
                 
                 // Calculate slide translations based on relative position in a 3-column layout
                 let xTranslate = 0;
                 let yTranslate = 0;
                 
-                if (isAnyHovered && !isHovered) {
+                if (isAnyExpanded && !isExpanded) {
                   const columns = 3;
                   const r = Math.floor(index / columns);
                   const c = index % columns;
-                  const hr = Math.floor(hoveredIndex / columns);
-                  const hc = hoveredIndex % columns;
+                  const hr = Math.floor(expandedIndex / columns);
+                  const hc = expandedIndex % columns;
                   
                   const dr = r - hr;
                   const dc = c - hc;
                   
-                  // Translate outwards away from the hovered card
+                  // Translate outwards away from the expanded card
                   xTranslate = Math.sign(dc) * 60;
                   yTranslate = Math.sign(dr) * 60;
                 }
@@ -426,22 +440,21 @@ const RetirementPage = () => {
                   return (
                     <motion.div
                       key={step.id}
-                      onMouseEnter={() => setHoveredIndex(index)}
-                      onMouseLeave={() => setHoveredIndex(null)}
+                      onClick={() => setExpandedIndex(isExpanded ? null : index)}
                       style={{
                         originX: 0.5,
                         originY: 0.5,
                       }}
                       animate={{
-                        scale: isHovered ? 1.06 : isAnyHovered ? 0.92 : 1,
+                        scale: isExpanded ? 1.06 : isAnyExpanded ? 0.92 : 1,
                         x: xTranslate,
                         y: yTranslate,
-                        opacity: isHovered ? 1 : isAnyHovered ? 0.2 : 1,
-                        zIndex: isHovered ? 50 : 1,
-                        boxShadow: isHovered 
+                        opacity: isExpanded ? 1 : isAnyExpanded ? 0.2 : 1,
+                        zIndex: isExpanded ? 50 : 1,
+                        boxShadow: isExpanded 
                           ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
                           : '0 4px 6px rgba(13, 37, 69, 0.02)',
-                        borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(201, 146, 42, 0.15)',
+                        borderColor: isExpanded ? 'rgba(201, 146, 42, 0.4)' : 'rgba(201, 146, 42, 0.15)',
                       }}
                       transition={{
                         type: 'spring',
@@ -465,9 +478,9 @@ const RetirementPage = () => {
                         <motion.div
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ 
-                            height: isHovered ? 'auto' : 0, 
-                            opacity: isHovered ? 1 : 0,
-                            marginTop: isHovered ? 16 : 0
+                            height: isExpanded ? 'auto' : 0, 
+                            opacity: isExpanded ? 1 : 0,
+                            marginTop: isExpanded ? 16 : 0
                           }}
                           transition={{ 
                             duration: 0.35, 
@@ -491,22 +504,21 @@ const RetirementPage = () => {
                 return (
                   <motion.div
                     key={step.id}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
+                    onClick={() => setExpandedIndex(isExpanded ? null : index)}
                     style={{
                       originX: 0.5,
                       originY: 0.5,
                     }}
                     animate={{
-                      scale: isHovered ? 1.06 : isAnyHovered ? 0.92 : 1,
+                      scale: isExpanded ? 1.06 : isAnyExpanded ? 0.92 : 1,
                       x: xTranslate,
                       y: yTranslate,
-                      opacity: isHovered ? 1 : isAnyHovered ? 0.2 : 1,
-                      zIndex: isHovered ? 50 : 1,
-                      boxShadow: isHovered 
+                      opacity: isExpanded ? 1 : isAnyExpanded ? 0.2 : 1,
+                      zIndex: isExpanded ? 50 : 1,
+                      boxShadow: isExpanded 
                         ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
                         : '0 4px 6px rgba(13, 37, 69, 0.02)',
-                      borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
+                      borderColor: isExpanded ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
                     }}
                     transition={{
                       type: 'spring',
@@ -531,9 +543,9 @@ const RetirementPage = () => {
                       <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ 
-                          height: isHovered ? 'auto' : 0, 
-                          opacity: isHovered ? 1 : 0,
-                          marginTop: isHovered ? 16 : 0
+                          height: isExpanded ? 'auto' : 0, 
+                          opacity: isExpanded ? 1 : 0,
+                          marginTop: isExpanded ? 16 : 0
                         }}
                         transition={{ 
                           duration: 0.35, 
@@ -545,6 +557,22 @@ const RetirementPage = () => {
                           {step.detailedDescription}
                         </p>
                       </motion.div>
+                    </div>
+
+                    {/* Expand/Collapse Indicator */}
+                    <div className="absolute bottom-4 right-4 flex items-center justify-center w-6 h-6 rounded-full border border-gold/20 bg-gold/5 group-hover:border-gold/50 group-hover:bg-gold/10 transition-colors">
+                      <motion.svg
+                        animate={{ rotate: isExpanded ? 45 : 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="w-3 h-3 text-gold"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={3}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5 -7.5h -15" />
+                      </motion.svg>
                     </div>
                   </motion.div>
                 );
@@ -560,7 +588,7 @@ const RetirementPage = () => {
           <div className="max-w-5xl mx-auto px-4">
             <div className={labelStyles}>Retirement Planning</div>
             <h2 className={titleStyles}>Calculate your retirement corpus</h2>
-            <p className="text-muted text-[15px] mb-8 -mt-4">How much do you need — and what SIP gets you there?</p>
+            <p className="text-muted text-[15px] mb-8 -mt-4">How much do you need, and what SIP gets you there?</p>
  
             {/* Sliders Card */}
             <div className="bg-navy rounded-[16px] p-6 md:p-8 mb-4 space-y-5">
@@ -618,14 +646,10 @@ const RetirementPage = () => {
             {/* Delay Insight */}
             {calc.delaySip > 0 && calc.delayPct > 0 && (
               <div className="bg-gold/10 border border-gold/30 rounded-[10px] px-5 py-4 mb-6 text-[#7a5520] text-[13px] leading-[1.6]">
-                Starting now at {currentAge}, you need <strong>{fmt(calc.sipNeeded)}/month</strong>. Waiting just 5 more years would require <strong>{fmt(calc.delaySip)}/month</strong> — <strong>{calc.delayPct}% more</strong> for the same goal.
+                Starting now at {currentAge}, you need <strong>{fmt(calc.sipNeeded)}/month</strong>. Waiting just 5 more years would require <strong>{fmt(calc.delaySip)}/month</strong>, which is <strong>{calc.delayPct}% more</strong> for the same goal.
               </div>
             )}
  
-            {/* Chart */}
-            <div className="bg-navy rounded-[16px] p-5 mb-6">
-              <RetirementGrowthChart chartData={calc.chartData} corpusNeeded={calc.corpusNeeded} fmt={fmt} />
-            </div>
  
             {/* CTA under calculator */}
             <div className="flex flex-wrap gap-3 justify-center">
@@ -660,7 +684,7 @@ const RetirementPage = () => {
               <div className={cardStyles}>
                 <div className="text-[32px] mb-3">🔁</div>
                 <h3 className="font-serif text-[17px] text-navy font-semibold mb-2">Ongoing Partnership</h3>
-                <p className="text-muted text-[14px] leading-[1.6]">Annual reviews mean your plan evolves with you — promotions, lifestyle changes, and life events all get accounted for.</p>
+                <p className="text-muted text-[14px] leading-[1.6]">Annual reviews mean your plan evolves with you: promotions, lifestyle changes, and life events all get accounted for.</p>
               </div>
             </div>
           </div>

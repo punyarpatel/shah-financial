@@ -257,6 +257,29 @@ const ExecutionGraphic = () => (
   </svg>
 );
 
+// Accident Insurance: Shield with medical cross and bandages/splint
+const AccidentGraphic = () => (
+  <svg viewBox="0 0 100 100" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="accidentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#FBBF24" />
+        <stop offset="100%" stopColor="#EF4444" />
+      </linearGradient>
+    </defs>
+    <circle cx="50" cy="50" r="45" fill="#EF4444" fillOpacity="0.05" />
+    {/* Shield */}
+    <path className="animate-svg-sway" d="M 24 25 L 50 15 L 76 25 V 48 C 76 66, 60 80, 50 84 C 40 80, 24 66, 24 48 V 25 Z" fill="url(#accidentGrad)" fillOpacity="0.15" stroke="url(#accidentGrad)" strokeWidth="3" />
+    {/* Bandage Cross */}
+    <g className="animate-svg-pulse">
+      {/* Diagonally crossing bandages */}
+      <rect x="44" y="24" width="12" height="40" rx="4" transform="rotate(45 50 44)" fill="#EF4444" stroke="#FEE2E2" strokeWidth="1" />
+      <rect x="44" y="24" width="12" height="40" rx="4" transform="rotate(-45 50 44)" fill="#EF4444" stroke="#FEE2E2" strokeWidth="1" />
+      {/* Center dot/cross */}
+      <circle cx="50" cy="44" r="3" fill="white" />
+    </g>
+  </svg>
+);
+
 // 13. Portfolio Reviews: Sync Circle and Chart
 const ReviewsGraphic = () => (
   <svg viewBox="0 0 100 100" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -598,19 +621,24 @@ const ServiceCardGraphic = ({ id }) => {
     case 'kyc':
       return <KycGraphic />;
     case 'step1':
+    case 'ret-step1':
       return <Step1Graphic />;
     case 'risk':
       return <RiskGraphic />;
     case 'step2':
+    case 'ret-step2':
       return <Step2Graphic />;
     case 'selection':
     case 'selection-elss':
+    case 'ret-step3':
       return <SelectionGraphic />;
     case 'execution':
       return <ExecutionGraphic />;
     case 'growth':
+    case 'ret-step4':
       return <GrowthGraphic />;
     case 'reviews':
+    case 'ret-step6':
       return <ReviewsGraphic />;
     case 'step4':
       return <Step4Graphic />;
@@ -618,6 +646,8 @@ const ServiceCardGraphic = ({ id }) => {
       return <SwitchesGraphic />;
     case 'redemption':
       return <RedemptionGraphic />;
+    case 'ret-step5':
+      return <SpreadGraphic />;
     case 'waiting':
       return <WaitingGraphic />;
     case 'cashless':
@@ -634,6 +664,8 @@ const ServiceCardGraphic = ({ id }) => {
       return <StartYearGraphic />;
     case 'spread':
       return <SpreadGraphic />;
+    case 'accident':
+      return <AccidentGraphic />;
     default:
       return <MoreGraphic />;
   }

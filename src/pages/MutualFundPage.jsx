@@ -14,7 +14,7 @@ const SUB_SERVICES = [
     id: 'kyc',
     icon: '📝',
     title: 'Paperwork & KYC',
-    description: "Complete KYC and PAN-Aadhaar linking — we sort all paperwork so you don't have to.",
+    description: "Complete KYC and PAN-Aadhaar linking: we sort all paperwork so you don't have to.",
     detailedDescription: "We handle the entire onboarding process, including digital signatures, document verification, FATCA compliance for NRI accounts, and seamless linkage of bank mandates for direct auto-debit of SIPs."
   },
   {
@@ -29,7 +29,7 @@ const SUB_SERVICES = [
     icon: '📊',
     title: 'Fund Selection',
     description: 'Strategic fund selection tailored perfectly to your specific goals, timeline, and risk appetite.',
-    detailedDescription: 'Out of 2,500+ active schemes, we filter and choose the top 5-6 funds across various categories (Large, Mid, Small, Flexi, Debt) using rigorous historical and risk-adjusted return metrics.'
+    detailedDescription: 'Out of 2,500+ active schemes, we filter and choose the top 5–6 funds across various categories (Large, Mid, Small, Flexi, Debt) using rigorous historical and risk-adjusted return metrics.'
   },
   {
     id: 'execution',
@@ -42,7 +42,7 @@ const SUB_SERVICES = [
     id: 'reviews',
     icon: '🔄',
     title: 'Portfolio Reviews',
-    description: 'Regular portfolio reviews — conducted quarterly or whenever market movements demand action.',
+    description: 'Regular portfolio reviews: conducted quarterly or whenever market movements demand action.',
     detailedDescription: 'We monitor fund performance against benchmarks and peer groups. If a fund underperforms consistently for two quarters, or if your asset allocation drifts, we prepare rebalancing recommendations.'
   },
   {
@@ -69,7 +69,7 @@ const MutualFundPage = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const [hovered, setHovered] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   const handleScrollToContact = () => {
     const contactSection = document.getElementById('mf-contact');
@@ -128,16 +128,16 @@ const MutualFundPage = () => {
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
-        <title>Mutual Fund Advisory — Drishti Wealth</title>
-        <meta name="description" content="Expert mutual fund advisory, SIP setups, portfolio reviews, and goal-based investing." />
-        <meta property="og:title" content="Mutual Fund Advisory — Drishti Wealth" />
-        <meta property="og:description" content="Expert mutual fund advisory, SIP setups, portfolio reviews, and goal-based investing." />
+        <title>Mutual Fund Services | Drishti Wealth</title>
+        <meta name="description" content="Expert mutual fund services, SIP setups, portfolio reviews, and goal-based investing." />
+        <meta property="og:title" content="Mutual Fund Services | Drishti Wealth" />
+        <meta property="og:description" content="Expert mutual fund services, SIP setups, portfolio reviews, and goal-based investing." />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Mutual Fund Advisory — Drishti Wealth" />
-        <meta name="twitter:description" content="Expert mutual fund advisory, SIP setups, portfolio reviews, and goal-based investing." />
+        <meta name="twitter:title" content="Mutual Fund Services | Drishti Wealth" />
+        <meta name="twitter:description" content="Expert mutual fund services, SIP setups, portfolio reviews, and goal-based investing." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
@@ -153,25 +153,25 @@ const MutualFundPage = () => {
               </Link>
             </div>
             <div className="inline-flex items-center gap-[6px] bg-gold/15 border border-gold/30 rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]">
-              <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">Mutual Fund Advisory</span>
+              <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">Mutual Fund Services</span>
             </div>
-            
+
             <h1 className="font-serif text-[36px] md:text-[48px] text-white font-semibold leading-[1.2] mb-[1.25rem] max-w-4xl">
-              We Handle Your Entire Mutual Fund Journey — Start to Finish
+              We Handle Your Entire Mutual Fund Journey: Start to Finish
             </h1>
-            
+
             <p className="text-white/65 text-[16px] leading-[1.6] mb-[2rem] max-w-2xl">
               Most people know they should invest in mutual funds. Very few have the time to actually manage it properly. That's exactly where we come in.
             </p>
 
             <div className="flex flex-wrap gap-4 mt-[2rem]">
-              <a 
+              <a
                 href="tel:+919664977576"
                 className="bg-white/10 text-white border border-white/20 px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-white/20 transition-colors flex items-center gap-2"
               >
                 <span className="text-[18px]">📞</span> Call Us
               </a>
-              <button 
+              <button
                 onClick={handleScrollToContact}
                 className="bg-gold text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-goldLight transition-colors shadow-lg shadow-gold/20"
               >
@@ -181,31 +181,13 @@ const MutualFundPage = () => {
           </div>
         </FadeIn>
       </section>
-
-      {/* Partners / Trust Badges Section */}
-      <section className="bg-white py-[2.5rem] w-full border-b border-navy/10">
-        <FadeIn>
-          <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
-            <p className="text-muted text-[15px] max-w-2xl leading-[1.6]">
-              We are registered sub-brokers with <strong className="text-navy">Prudent Corporate Advisory Services</strong> and operate through the <strong className="text-navy">FundzBazar</strong> platform — one of India's most trusted mutual fund distribution networks.
-            </p>
-            <div className="flex items-center gap-6 opacity-60 grayscale ml-auto">
-              {/* Trust Badges (Unlinked as per global rules) */}
-              <div className="font-serif text-[20px] font-bold text-navy">Prudent</div>
-              <div className="h-8 w-px bg-gray-300"></div>
-              <div className="font-sans text-[18px] font-bold tracking-tight text-navy">FundzBazar</div>
-            </div>
-          </div>
-        </FadeIn>
-      </section>
-
       {/* Services Section ("What we do for you") */}
       <section className="bg-[#faf8f4] py-[4.5rem] w-full">
         <FadeIn>
           <div className="max-w-7xl mx-auto px-4">
             <div className={labelStyles}>Our Services</div>
             <h2 className={titleStyles}>What We Do For You</h2>
-            
+
             <div className="mt-[3rem] w-full premium-feature-card group">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-stretch">
                 {/* Left Column (50%) */}
@@ -221,12 +203,12 @@ const MutualFundPage = () => {
 
                     {/* Title */}
                     <h3 className="font-serif text-[24px] md:text-[26px] font-bold text-textDark mb-3 group-hover:text-navy transition-colors duration-300">
-                      Mutual Fund Advisory
+                      Mutual Fund Services
                     </h3>
 
                     {/* Description */}
                     <p className="text-[15px] leading-relaxed text-muted mb-6">
-                      End-to-end management of your mutual fund journey, including KYC, risk profiling, fund selection, SIP setup, and regular portfolio reviews.
+                      End-to-end management of your mutual fund journey, including account setup, KYC, risk profiling, fund selection, SIP setup, and regular portfolio reviews.
                     </p>
 
                     {/* 3 key benefit points with a gold checkmark */}
@@ -234,7 +216,7 @@ const MutualFundPage = () => {
                       {[
                         'Tailored portfolio selection matching your risk profile',
                         'Seamless online KYC and automatic monthly SIP setup',
-                        'Regular portfolio tracking and quarterly performance reviews'
+                        'Regular portfolio tracking and performance reviews'
                       ].map((benefit, idx) => (
                         <li key={idx} className="flex items-start text-[14.5px] text-muted">
                           <span className="flex-shrink-0 w-5 h-5 rounded-full bg-gold/15 flex items-center justify-center mr-3 mt-[2px] transition-transform duration-300 group-hover:scale-110">
@@ -255,11 +237,11 @@ const MutualFundPage = () => {
                       className="inline-flex items-center text-[14px] font-bold text-gold hover:text-goldLight group/link transition-colors duration-300"
                     >
                       <span className="relative py-1">
-                        Learn more
+                        Start with us
                         <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gold group-hover/link:w-full transition-all duration-300"></span>
                       </span>
                       <svg className="w-4 h-4 ml-1.5 transform group-hover/link:translate-x-1.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                        <path strokeLinecap="round" strokeLinejoin="round" stroke="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
                     </button>
                   </div>
@@ -268,19 +250,19 @@ const MutualFundPage = () => {
                 {/* Right Column (50%) - Tilted 3D Preview Box */}
                 <div className="relative w-full h-full min-h-[320px] md:min-h-full">
                   <div className="relative w-full h-full bg-[#f4f7fa] rounded-[16px] flex flex-col justify-between border border-slate-100 shadow-inner overflow-hidden group/right">
-                    
+
                     {/* Top Area (Approx 80% height): Tilted 3D Preview container */}
-                    <div 
-                      className="relative flex-grow flex items-center justify-center p-8 pb-4" 
+                    <div
+                      className="relative flex-grow flex items-center justify-center p-8 pb-4"
                       style={{ perspective: '1000px' }}
                       onMouseEnter={() => setHovered(true)}
                       onMouseLeave={() => setHovered(false)}
                     >
-                      <div 
+                      <div
                         className="relative w-[90%] aspect-[16/10] bg-white rounded-xl border border-slate-100 overflow-hidden"
-                        style={{ 
-                          transform: hovered 
-                            ? 'rotateX(4deg) rotateY(-6deg) rotateZ(1deg) scale(1.02)' 
+                        style={{
+                          transform: hovered
+                            ? 'rotateX(4deg) rotateY(-6deg) rotateZ(1deg) scale(1.02)'
                             : 'rotateX(8deg) rotateY(-12deg) rotateZ(2deg)',
                           transformStyle: 'preserve-3d',
                           transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease',
@@ -289,9 +271,9 @@ const MutualFundPage = () => {
                             : '0 20px 40px rgba(13,37,69,0.06), 0 5px 15px rgba(0,0,0,0.02)'
                         }}
                       >
-                        <img 
-                          src="/mutual_funds_preview.png" 
-                          alt="Mutual Fund Advisory"
+                        <img
+                          src="/mutual_funds_preview.png"
+                          alt="Mutual Fund Services"
                           className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent pointer-events-none rounded-lg"></div>
@@ -301,7 +283,7 @@ const MutualFundPage = () => {
                     {/* Bottom Bar: White background, service name label and green indicator dot */}
                     <div className="bg-white border-t border-slate-100/80 px-6 py-4 flex items-center justify-between">
                       <span className="text-[13px] font-semibold text-[#5c687e] tracking-wide">
-                        Mutual Fund Advisory
+                        Mutual Fund Services
                       </span>
                       <span className="relative flex h-2 w-2">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -315,47 +297,52 @@ const MutualFundPage = () => {
 
             {/* Interactive sub-services cards grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-[4rem] relative">
+              {expandedIndex !== null && (
+                <div 
+                  className="fixed inset-0 z-40 bg-transparent cursor-default" 
+                  onClick={() => setExpandedIndex(null)}
+                />
+              )}
               {SUB_SERVICES.map((item, index) => {
-                const isHovered = hoveredIndex === index;
-                const isAnyHovered = hoveredIndex !== null;
-                
+                const isExpanded = expandedIndex === index;
+                const isAnyExpanded = expandedIndex !== null;
+
                 // Calculate slide translations based on relative position in a 3-column layout
                 let xTranslate = 0;
                 let yTranslate = 0;
-                
-                if (isAnyHovered && !isHovered) {
+
+                if (isAnyExpanded && !isExpanded) {
                   const r = Math.floor(index / 3);
                   const c = index % 3;
-                  const hr = Math.floor(hoveredIndex / 3);
-                  const hc = hoveredIndex % 3;
-                  
+                  const hr = Math.floor(expandedIndex / 3);
+                  const hc = expandedIndex % 3;
+
                   const dr = r - hr;
                   const dc = c - hc;
-                  
-                  // Translate outwards away from the hovered card
+
+                  // Translate outwards away from the expanded card
                   xTranslate = Math.sign(dc) * 60;
                   yTranslate = Math.sign(dr) * 60;
                 }
-                
+
                 return (
                   <motion.div
                     key={item.id}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
+                    onClick={() => setExpandedIndex(isExpanded ? null : index)}
                     style={{
                       originX: 0.5,
                       originY: 0.5,
                     }}
                     animate={{
-                      scale: isHovered ? 1.06 : isAnyHovered ? 0.92 : 1,
+                      scale: isExpanded ? 1.06 : isAnyExpanded ? 0.92 : 1,
                       x: xTranslate,
                       y: yTranslate,
-                      opacity: isHovered ? 1 : isAnyHovered ? 0.2 : 1,
-                      zIndex: isHovered ? 50 : 1,
-                      boxShadow: isHovered 
-                        ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
+                      opacity: isExpanded ? 1 : isAnyExpanded ? 0.2 : 1,
+                      zIndex: isExpanded ? 50 : 1,
+                      boxShadow: isExpanded
+                        ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)'
                         : '0 4px 6px rgba(13, 37, 69, 0.02)',
-                      borderColor: isHovered ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
+                      borderColor: isExpanded ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
                     }}
                     transition={{
                       type: 'spring',
@@ -366,11 +353,11 @@ const MutualFundPage = () => {
                     className="relative bg-white border border-navy/10 hover:border-gold/50 rounded-[16px] p-6 h-full flex flex-col justify-between cursor-pointer overflow-hidden group min-h-[180px]"
                   >
                     <div className="relative pr-16">
-                      <h3 className="font-serif text-[18px] text-navy font-bold mb-2 group-hover:text-gold transition-colors">{item.title}</h3>
+                      <h3 className={`font-serif text-[18px] font-bold mb-2 transition-colors ${isExpanded ? 'text-gold' : 'text-navy group-hover:text-gold'}`}>{item.title}</h3>
                       <p className="text-muted text-[14px] leading-[1.6]">{item.description}</p>
-                      
+
                       {/* Image Graphic in top right */}
-                      <div className="absolute -top-1 -right-2 w-14 h-14 md:w-16 md:h-16 pointer-events-none transform group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 ease-out">
+                      <div className={`absolute -top-1 -right-2 w-14 h-14 md:w-16 md:h-16 pointer-events-none transform transition-transform duration-500 ease-out ${isExpanded ? 'scale-110 -rotate-3' : 'group-hover:scale-105'}`}>
                         <ServiceCardGraphic id={item.id} />
                       </div>
                     </div>
@@ -378,14 +365,14 @@ const MutualFundPage = () => {
                     <div>
                       <motion.div
                         initial={{ height: 0, opacity: 0 }}
-                        animate={{ 
-                          height: isHovered ? 'auto' : 0, 
-                          opacity: isHovered ? 1 : 0,
-                          marginTop: isHovered ? 16 : 0
+                        animate={{
+                          height: isExpanded ? 'auto' : 0,
+                          opacity: isExpanded ? 1 : 0,
+                          marginTop: isExpanded ? 16 : 0
                         }}
-                        transition={{ 
-                          duration: 0.35, 
-                          ease: [0.16, 1, 0.3, 1] 
+                        transition={{
+                          duration: 0.35,
+                          ease: [0.16, 1, 0.3, 1]
                         }}
                         className="overflow-hidden"
                       >
@@ -393,6 +380,22 @@ const MutualFundPage = () => {
                           {item.detailedDescription}
                         </p>
                       </motion.div>
+                    </div>
+
+                    {/* Expand/Collapse Indicator */}
+                    <div className="absolute bottom-4 right-4 flex items-center justify-center w-6 h-6 rounded-full border border-gold/20 bg-gold/5 group-hover:border-gold/50 group-hover:bg-gold/10 transition-colors">
+                      <motion.svg
+                        animate={{ rotate: isExpanded ? 45 : 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="w-3 h-3 text-gold"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={3}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                      </motion.svg>
                     </div>
                   </motion.div>
                 );
@@ -435,7 +438,7 @@ const MutualFundPage = () => {
                     <label className={formLabelStyles}>Full Name</label>
                     <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Your Name" className={inputStyles} />
                   </div>
-                  
+
                   <div className="md:col-span-1">
                     <label className={formLabelStyles}>Phone / WhatsApp</label>
                     <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="+91 XXXXX XXXXX" className={inputStyles} />

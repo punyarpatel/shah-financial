@@ -9,7 +9,7 @@ const Testimonials = () => {
       location: "Ahmedabad · Salaried professional"
     },
     {
-      quote: "As an NRI based in the UAE I was worried about investing back home. Drishti Wealth made the entire process — KYC, DTAA, fund selection — completely smooth. Highly recommend.",
+      quote: "As an NRI based in the UAE I was worried about investing back home. Drishti Wealth made the entire process: KYC, DTAA, fund selection: completely smooth. Highly recommend.",
       avatar: "PS",
       name: "Priya S.",
       location: "Dubai, UAE · NRI Client"
@@ -21,7 +21,7 @@ const Testimonials = () => {
       location: "Surat, Gujarat"
     },
     {
-      quote: "Managing repatriation from Canada was confusing until I found Drishti Wealth. They handled everything — NRE account setup, fund selection, tax implications. Outstanding service.",
+      quote: "Managing repatriation from Canada was confusing until I found Drishti Wealth. They handled everything: NRE account setup, fund selection, tax implications. Outstanding service.",
       avatar: "MD",
       name: "Mihir D.",
       location: "Toronto, Canada · NRI Client"

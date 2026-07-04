@@ -20,19 +20,19 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
-        <title>Drishti Wealth — AMFI Registered MFD Ahmedabad</title>
+        <title>Drishti Wealth: AMFI Registered MFD Ahmedabad</title>
         <meta 
           name="description" 
-          content="Trusted mutual fund distributor and insurance advisor in Ahmedabad serving 4000 plus families and NRI clients since 2009." 
+          content="Trusted mutual fund distributor and insurance advisor in Ahmedabad serving 6000 plus clients and NRI clients since 2001." 
         />
-        <meta property="og:title" content="Drishti Wealth — AMFI Registered MFD Ahmedabad" />
-        <meta property="og:description" content="Trusted mutual fund distributor and insurance advisor in Ahmedabad serving 4000 plus families and NRI clients since 2009." />
+        <meta property="og:title" content="Drishti Wealth: AMFI Registered MFD Ahmedabad" />
+        <meta property="og:description" content="Trusted mutual fund distributor and insurance advisor in Ahmedabad serving 6000 plus clients and NRI clients since 2001." />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Drishti Wealth — AMFI Registered MFD Ahmedabad" />
-        <meta name="twitter:description" content="Trusted mutual fund distributor and insurance advisor in Ahmedabad serving 4000 plus families and NRI clients since 2009." />
+        <meta name="twitter:title" content="Drishti Wealth: AMFI Registered MFD Ahmedabad" />
+        <meta name="twitter:description" content="Trusted mutual fund distributor and insurance advisor in Ahmedabad serving 6000 plus clients and NRI clients since 2001." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
       
