@@ -9,6 +9,7 @@ import { submitLead } from '../lib/leads';
 import FadeIn from '../components/animations/FadeIn';
 import SliderRow from '../components/calculators/SliderRow';
 import ServiceCardGraphic from '../components/ServiceCardGraphic';
+import BorderGlow from '../components/animations/BorderGlow';
 
 
 const RETIREMENT_STEPS = [
@@ -298,8 +299,8 @@ const RetirementPage = () => {
             <div className={labelStyles}>Our Process</div>
             <h2 className={titleStyles}>How We Build Your Retirement Plan</h2>
 
-            <div className="mt-[3rem] w-full premium-feature-card group">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-stretch">
+            <BorderGlow className="mt-[3rem] w-full group" borderRadius={16} backgroundColor="#ffffff">
+              <div className="p-[40px] grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-stretch">
                 {/* Left Column (50%) */}
                 <div className="flex flex-col justify-between h-full">
                   <div>
@@ -403,7 +404,7 @@ const RetirementPage = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </BorderGlow>
 
             {/* Interactive Process Steps Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-[4rem] relative">
@@ -451,10 +452,6 @@ const RetirementPage = () => {
                         y: yTranslate,
                         opacity: isExpanded ? 1 : isAnyExpanded ? 0.2 : 1,
                         zIndex: isExpanded ? 50 : 1,
-                        boxShadow: isExpanded 
-                          ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
-                          : '0 4px 6px rgba(13, 37, 69, 0.02)',
-                        borderColor: isExpanded ? 'rgba(201, 146, 42, 0.4)' : 'rgba(201, 146, 42, 0.15)',
                       }}
                       transition={{
                         type: 'spring',
@@ -462,41 +459,51 @@ const RetirementPage = () => {
                         damping: 25,
                         mass: 0.8,
                       }}
-                      className="relative bg-navy rounded-[16px] p-6 h-full flex flex-col justify-between overflow-hidden cursor-pointer group min-h-[220px]"
+                      className="relative cursor-pointer h-full min-h-[220px]"
                     >
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gold rounded-full blur-[60px] opacity-20 pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
-                      <div className="relative pr-16">
-                        <h3 className="font-serif text-[18px] text-white font-semibold mb-2">{step.title}</h3>
-                        <p className="text-white/60 text-[14px] leading-[1.6]">{step.description}</p>
-                        {/* Image Graphic in top right */}
-                        <div className="absolute -top-1 -right-2 w-14 h-14 md:w-16 md:h-16 pointer-events-none transform group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 ease-out">
-                          <ServiceCardGraphic id={step.id} />
-                        </div>
-                      </div>
+                      <BorderGlow
+                        className="h-full w-full"
+                        borderRadius={16}
+                        backgroundColor="#0d2545"
+                        glowColor="45 85 50"
+                        glowIntensity={isExpanded ? 1.5 : 1.0}
+                      >
+                        <div className="p-6 h-full flex flex-col justify-between overflow-hidden relative group">
+                          <div className="absolute top-0 right-0 w-32 h-32 bg-gold rounded-full blur-[60px] opacity-20 pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
+                          <div className="relative pr-16">
+                            <h3 className="font-serif text-[18px] text-white font-semibold mb-2">{step.title}</h3>
+                            <p className="text-white/60 text-[14px] leading-[1.6]">{step.description}</p>
+                            {/* Image Graphic in top right */}
+                            <div className="absolute -top-1 -right-2 w-14 h-14 md:w-16 md:h-16 pointer-events-none transform group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 ease-out">
+                              <ServiceCardGraphic id={step.id} />
+                            </div>
+                          </div>
 
-                      <div>
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ 
-                            height: isExpanded ? 'auto' : 0, 
-                            opacity: isExpanded ? 1 : 0,
-                            marginTop: isExpanded ? 16 : 0
-                          }}
-                          transition={{ 
-                            duration: 0.35, 
-                            ease: [0.16, 1, 0.3, 1] 
-                          }}
-                          className="overflow-hidden relative z-10 w-full"
-                        >
-                          <p className="text-white/50 text-[13.5px] leading-[1.6] border-t border-white/10 pt-3 mb-4">
-                            {step.detailedDescription}
-                          </p>
-                          <button onClick={handleScrollToContact}
-                            className="bg-gold text-white py-[10px] px-[20px] rounded-[8px] text-[14px] font-medium hover:bg-goldLight transition-colors w-full relative z-10">
-                            Get My Free Plan →
-                          </button>
-                        </motion.div>
-                      </div>
+                          <div>
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ 
+                                height: isExpanded ? 'auto' : 0, 
+                                opacity: isExpanded ? 1 : 0,
+                                marginTop: isExpanded ? 16 : 0
+                              }}
+                              transition={{ 
+                                duration: 0.35, 
+                                ease: [0.16, 1, 0.3, 1] 
+                              }}
+                              className="overflow-hidden relative z-10 w-full"
+                            >
+                              <p className="text-white/50 text-[13.5px] leading-[1.6] border-t border-white/10 pt-3 mb-4">
+                                {step.detailedDescription}
+                              </p>
+                              <button onClick={handleScrollToContact}
+                                className="bg-gold text-white py-[10px] px-[20px] rounded-[8px] text-[14px] font-medium hover:bg-goldLight transition-colors w-full relative z-10">
+                                Get My Free Plan →
+                              </button>
+                            </motion.div>
+                          </div>
+                        </div>
+                      </BorderGlow>
                     </motion.div>
                   );
                 }
@@ -515,10 +522,6 @@ const RetirementPage = () => {
                       y: yTranslate,
                       opacity: isExpanded ? 1 : isAnyExpanded ? 0.2 : 1,
                       zIndex: isExpanded ? 50 : 1,
-                      boxShadow: isExpanded 
-                        ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
-                        : '0 4px 6px rgba(13, 37, 69, 0.02)',
-                      borderColor: isExpanded ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
                     }}
                     transition={{
                       type: 'spring',
@@ -526,54 +529,64 @@ const RetirementPage = () => {
                       damping: 25,
                       mass: 0.8,
                     }}
-                    className="relative bg-white border border-navy/10 hover:border-gold/50 rounded-[16px] p-6 h-full flex flex-col justify-between cursor-pointer overflow-hidden group min-h-[220px]"
+                    className="relative cursor-pointer h-full min-h-[220px]"
                   >
-                    <div className="relative pr-16">
-                      <div className="font-serif text-[32px] text-navy/15 font-bold leading-none mb-3 select-none">{step.num}</div>
-                      <h3 className="font-serif text-[18px] text-navy font-bold mb-2 group-hover:text-gold transition-colors">{step.title}</h3>
-                      <p className="text-muted text-[14px] leading-[1.6]">{step.description}</p>
-                      
-                      {/* Image Graphic in top right */}
-                      <div className="absolute -top-1 -right-2 w-14 h-14 md:w-16 md:h-16 pointer-events-none transform group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 ease-out">
-                        <ServiceCardGraphic id={step.id} />
+                    <BorderGlow
+                      className="h-full w-full"
+                      borderRadius={16}
+                      backgroundColor="#ffffff"
+                      glowColor="45 85 50"
+                      glowIntensity={isExpanded ? 1.5 : 1.0}
+                    >
+                      <div className="p-6 h-full flex flex-col justify-between group">
+                        <div className="relative pr-16">
+                          <div className="font-serif text-[32px] text-navy/15 font-bold leading-none mb-3 select-none">{step.num}</div>
+                          <h3 className="font-serif text-[18px] text-navy font-bold mb-2 group-hover:text-gold transition-colors">{step.title}</h3>
+                          <p className="text-muted text-[14px] leading-[1.6]">{step.description}</p>
+
+                          {/* Image Graphic in top right */}
+                          <div className="absolute -top-1 -right-2 w-14 h-14 md:w-16 md:h-16 pointer-events-none transform group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 ease-out">
+                            <ServiceCardGraphic id={step.id} />
+                          </div>
+                        </div>
+
+                        <div>
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ 
+                              height: isExpanded ? 'auto' : 0, 
+                              opacity: isExpanded ? 1 : 0,
+                              marginTop: isExpanded ? 16 : 0
+                            }}
+                            transition={{ 
+                              duration: 0.35, 
+                              ease: [0.16, 1, 0.3, 1] 
+                            }}
+                            className="overflow-hidden"
+                          >
+                            <p className="text-muted text-[13.5px] leading-[1.6] border-t border-navy/5 pt-3">
+                              {step.detailedDescription}
+                            </p>
+                          </motion.div>
+                        </div>
+
+                        {/* Expand/Collapse Indicator */}
+                        <div className="absolute bottom-4 right-4 flex items-center justify-center w-6 h-6 rounded-full border border-gold/20 bg-gold/5 group-hover:border-gold/50 group-hover:bg-gold/10 transition-colors">
+                          <motion.svg
+                            animate={{ rotate: isExpanded ? 45 : 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="w-3 h-3 text-gold"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={3}
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5 -7.5h -15" />
+                          </motion.svg>
+                        </div>
                       </div>
-                    </div>
-
-                    <div>
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ 
-                          height: isExpanded ? 'auto' : 0, 
-                          opacity: isExpanded ? 1 : 0,
-                          marginTop: isExpanded ? 16 : 0
-                        }}
-                        transition={{ 
-                          duration: 0.35, 
-                          ease: [0.16, 1, 0.3, 1] 
-                        }}
-                        className="overflow-hidden"
-                      >
-                        <p className="text-muted text-[13.5px] leading-[1.6] border-t border-navy/5 pt-3">
-                          {step.detailedDescription}
-                        </p>
-                      </motion.div>
-                    </div>
-
-                    {/* Expand/Collapse Indicator */}
-                    <div className="absolute bottom-4 right-4 flex items-center justify-center w-6 h-6 rounded-full border border-gold/20 bg-gold/5 group-hover:border-gold/50 group-hover:bg-gold/10 transition-colors">
-                      <motion.svg
-                        animate={{ rotate: isExpanded ? 45 : 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="w-3 h-3 text-gold"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={3}
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5 -7.5h -15" />
-                      </motion.svg>
-                    </div>
+                    </BorderGlow>
                   </motion.div>
                 );
               })}

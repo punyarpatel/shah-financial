@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import FadeIn from './animations/FadeIn';
@@ -6,6 +6,7 @@ import FadeIn from './animations/FadeIn';
 const HeroSection = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const heroMode = 'classic';
 
   const handleScrollToSection = (sectionId) => {
     if (location.pathname !== '/') {
@@ -143,11 +144,49 @@ const HeroSection = () => {
           </FadeIn>
 
           {/* Heading */}
-          <FadeIn delay={0.35}>
-            <h1 className="font-serif text-[42px] font-semibold leading-[1.2] text-white mb-[1.25rem]">
-              Your Trusted Partner for <em className="text-[#c9922a] not-italic">Financial Growth</em>
+          {heroMode === 'blurtext' ? (
+            <h1 className="font-serif text-[42px] font-semibold leading-[1.2] text-white mb-[1.25rem] flex flex-wrap justify-center gap-x-3">
+              <BlurText
+                text="Your Trusted Partner for"
+                delay={80}
+                animateBy="words"
+                direction="top"
+                as="span"
+              />
+              <BlurText
+                text="Financial Growth"
+                delay={80}
+                animateBy="words"
+                direction="bottom"
+                className="text-[#c9922a] not-italic"
+                as="span"
+              />
             </h1>
-          </FadeIn>
+          ) : heroMode === 'decrypted' ? (
+            <h1 className="font-serif text-[42px] font-semibold leading-[1.2] text-white mb-[1.25rem] flex flex-wrap justify-center gap-x-3">
+              <DecryptedText
+                text="Your Trusted Partner for"
+                animateOn="view"
+                speed={80}
+                sequential={true}
+                parentClassName="inline-block"
+              />
+              <DecryptedText
+                text="Financial Growth"
+                animateOn="view"
+                speed={80}
+                sequential={true}
+                className="text-[#c9922a] not-italic"
+                parentClassName="inline-block"
+              />
+            </h1>
+          ) : (
+            <FadeIn delay={0.35}>
+              <h1 className="font-serif text-[42px] font-semibold leading-[1.2] text-white mb-[1.25rem]">
+                Your Trusted Partner for <em className="text-[#c9922a] not-italic">Financial Growth</em>
+              </h1>
+            </FadeIn>
+          )}
 
           {/* Description */}
           <FadeIn delay={0.5}>

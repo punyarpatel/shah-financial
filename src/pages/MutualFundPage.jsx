@@ -8,6 +8,7 @@ import WhatsAppFloat from '../components/WhatsAppFloat';
 import { submitLead } from '../lib/leads';
 import FadeIn from '../components/animations/FadeIn';
 import ServiceCardGraphic from '../components/ServiceCardGraphic';
+import BorderGlow from '../components/animations/BorderGlow';
 
 const SUB_SERVICES = [
   {
@@ -188,8 +189,8 @@ const MutualFundPage = () => {
             <div className={labelStyles}>Our Services</div>
             <h2 className={titleStyles}>What We Do For You</h2>
 
-            <div className="mt-[3rem] w-full premium-feature-card group">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-stretch">
+            <BorderGlow className="mt-[3rem] w-full group" borderRadius={16} backgroundColor="#ffffff">
+              <div className="p-[40px] grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-stretch">
                 {/* Left Column (50%) */}
                 <div className="flex flex-col justify-between h-full">
                   <div>
@@ -293,7 +294,7 @@ const MutualFundPage = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </BorderGlow>
 
             {/* Interactive sub-services cards grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-[4rem] relative">
@@ -339,10 +340,6 @@ const MutualFundPage = () => {
                       y: yTranslate,
                       opacity: isExpanded ? 1 : isAnyExpanded ? 0.2 : 1,
                       zIndex: isExpanded ? 50 : 1,
-                      boxShadow: isExpanded
-                        ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)'
-                        : '0 4px 6px rgba(13, 37, 69, 0.02)',
-                      borderColor: isExpanded ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
                     }}
                     transition={{
                       type: 'spring',
@@ -350,53 +347,63 @@ const MutualFundPage = () => {
                       damping: 25,
                       mass: 0.8,
                     }}
-                    className="relative bg-white border border-navy/10 hover:border-gold/50 rounded-[16px] p-6 h-full flex flex-col justify-between cursor-pointer overflow-hidden group min-h-[180px]"
+                    className="relative cursor-pointer h-full min-h-[180px]"
                   >
-                    <div className="relative pr-16">
-                      <h3 className={`font-serif text-[18px] font-bold mb-2 transition-colors ${isExpanded ? 'text-gold' : 'text-navy group-hover:text-gold'}`}>{item.title}</h3>
-                      <p className="text-muted text-[14px] leading-[1.6]">{item.description}</p>
+                    <BorderGlow
+                      className="h-full w-full"
+                      borderRadius={16}
+                      backgroundColor="#ffffff"
+                      glowColor="45 85 50"
+                      glowIntensity={isExpanded ? 1.5 : 1.0}
+                    >
+                      <div className="p-6 h-full flex flex-col justify-between group">
+                        <div className="relative pr-16">
+                          <h3 className={`font-serif text-[18px] font-bold mb-2 transition-colors ${isExpanded ? 'text-gold' : 'text-navy group-hover:text-gold'}`}>{item.title}</h3>
+                          <p className="text-muted text-[14px] leading-[1.6]">{item.description}</p>
 
-                      {/* Image Graphic in top right */}
-                      <div className={`absolute -top-1 -right-2 w-14 h-14 md:w-16 md:h-16 pointer-events-none transform transition-transform duration-500 ease-out ${isExpanded ? 'scale-110 -rotate-3' : 'group-hover:scale-105'}`}>
-                        <ServiceCardGraphic id={item.id} />
+                          {/* Image Graphic in top right */}
+                          <div className={`absolute -top-1 -right-2 w-14 h-14 md:w-16 md:h-16 pointer-events-none transform transition-transform duration-500 ease-out ${isExpanded ? 'scale-110 -rotate-3' : 'group-hover:scale-105'}`}>
+                            <ServiceCardGraphic id={item.id} />
+                          </div>
+                        </div>
+
+                        <div>
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{
+                              height: isExpanded ? 'auto' : 0,
+                              opacity: isExpanded ? 1 : 0,
+                              marginTop: isExpanded ? 16 : 0
+                            }}
+                            transition={{
+                              duration: 0.35,
+                              ease: [0.16, 1, 0.3, 1]
+                            }}
+                            className="overflow-hidden"
+                          >
+                            <p className="text-muted text-[13.5px] leading-[1.6] border-t border-navy/5 pt-3">
+                              {item.detailedDescription}
+                            </p>
+                          </motion.div>
+                        </div>
+
+                        {/* Expand/Collapse Indicator */}
+                        <div className="absolute bottom-4 right-4 flex items-center justify-center w-6 h-6 rounded-full border border-gold/20 bg-gold/5 group-hover:border-gold/50 group-hover:bg-gold/10 transition-colors">
+                          <motion.svg
+                            animate={{ rotate: isExpanded ? 45 : 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="w-3 h-3 text-gold"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={3}
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                          </motion.svg>
+                        </div>
                       </div>
-                    </div>
-
-                    <div>
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{
-                          height: isExpanded ? 'auto' : 0,
-                          opacity: isExpanded ? 1 : 0,
-                          marginTop: isExpanded ? 16 : 0
-                        }}
-                        transition={{
-                          duration: 0.35,
-                          ease: [0.16, 1, 0.3, 1]
-                        }}
-                        className="overflow-hidden"
-                      >
-                        <p className="text-muted text-[13.5px] leading-[1.6] border-t border-navy/5 pt-3">
-                          {item.detailedDescription}
-                        </p>
-                      </motion.div>
-                    </div>
-
-                    {/* Expand/Collapse Indicator */}
-                    <div className="absolute bottom-4 right-4 flex items-center justify-center w-6 h-6 rounded-full border border-gold/20 bg-gold/5 group-hover:border-gold/50 group-hover:bg-gold/10 transition-colors">
-                      <motion.svg
-                        animate={{ rotate: isExpanded ? 45 : 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="w-3 h-3 text-gold"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={3}
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                      </motion.svg>
-                    </div>
+                    </BorderGlow>
                   </motion.div>
                 );
               })}
@@ -464,7 +471,7 @@ const MutualFundPage = () => {
 
                   <div className="md:col-span-2 mt-3">
                     <button type="submit" disabled={loading} className="w-full bg-gold text-white border-none py-[14px] rounded-[8px] text-[15px] font-medium hover:bg-goldLight transition-colors disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-gold/20">
-                      {loading ? 'Submitting...' : 'Request Advisory Call'}
+                      {loading ? 'Submitting...' : 'Request a Call'}
                     </button>
                   </div>
                 </form>

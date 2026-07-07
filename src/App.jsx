@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
 import supabase from './lib/supabase';
 import { HelmetProvider } from 'react-helmet-async';
 import ScrollToTop from './components/ScrollToTop';
+import DesignSelector from './components/DesignSelector';
 
 // Lazy Loaded Pages
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -85,6 +86,7 @@ export default function App() {
       <BrowserRouter>
         <div className="min-h-screen bg-gray-100 flex flex-col relative">
           <ScrollToTop />
+          <DesignSelector />
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
               <Route path="/" element={<HomePage />} />

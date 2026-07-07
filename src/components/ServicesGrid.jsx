@@ -4,6 +4,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import FadeIn from './animations/FadeIn';
 import StaggerGroup from './animations/StaggerGroup';
 import StaggerItem from './animations/StaggerItem';
+import ScrollStack, { ScrollStackItem } from './animations/ScrollStack';
+import Masonry from './Masonry';
 
 const servicesData = [
   {
@@ -132,6 +134,63 @@ const servicesData = [
   }
 ];
 
+const masonryBackgroundItems = [
+  {
+    id: 'm1',
+    img: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=600&auto=format&fit=crop', // plant growing out of coins
+    url: '#',
+    height: 450
+  },
+  {
+    id: 'm2',
+    img: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=600&auto=format&fit=crop', // happy family outdoors
+    url: '#',
+    height: 350
+  },
+  {
+    id: 'm3',
+    img: 'https://images.unsplash.com/photo-1531844755146-5c5e8c10e08f?q=80&w=600&auto=format&fit=crop', // active senior couple
+    url: '#',
+    height: 480
+  },
+  {
+    id: 'm4',
+    img: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=600&auto=format&fit=crop', // financial chart
+    url: '#',
+    height: 380
+  },
+  {
+    id: 'm5',
+    img: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=600&auto=format&fit=crop', // travel map / NRI
+    url: '#',
+    height: 420
+  },
+  {
+    id: 'm6',
+    img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=600&auto=format&fit=crop', // house keys/planning
+    url: '#',
+    height: 320
+  },
+  {
+    id: 'm7',
+    img: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=600&auto=format&fit=crop', // education graduation
+    url: '#',
+    height: 400
+  },
+  {
+    id: 'm8',
+    img: 'https://images.unsplash.com/photo-1621416894569-0f39ed31d247?q=80&w=600&auto=format&fit=crop', // gold coins stack
+    url: '#',
+    height: 300
+  },
+  {
+    id: 'm9',
+    img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=600&auto=format&fit=crop', // business advisory meeting
+    url: '#',
+    height: 440
+  }
+];
+
 const Service3DGraphic = ({ title, cardGradient, cardText, cardIcon }) => {
   return (
     <div
@@ -199,7 +258,7 @@ const Service3DGraphic = ({ title, cardGradient, cardText, cardIcon }) => {
   );
 };
 
-const ServiceCard = ({ service, index, totalCards, onRef }) => {
+const ServiceCard = ({ service, index, totalCards, onRef, isStack = false }) => {
   const localRef = useRef(null);
   const [isDesktop, setIsDesktop] = useState(true);
 
@@ -228,11 +287,13 @@ const ServiceCard = ({ service, index, totalCards, onRef }) => {
   const isLast = index === totalCards - 1;
 
   // Desktop only scroll-driven scale and fade transitions (with delay so cards don't shrink/fade prematurely)
-  const scale = isLast || !isDesktop ? 1 : useTransform(scrollYProgress, [0, 0.45, 1], [1, 1, 0.94]);
-  const opacity = isLast || !isDesktop ? 1 : useTransform(scrollYProgress, [0, 0.45, 1], [1, 1, 0.65]);
+  // Disabled when inside a stack since the stack container handles this
+  const scale = isStack || isLast || !isDesktop ? 1 : useTransform(scrollYProgress, [0, 0.45, 1], [1, 1, 0.94]);
+  const opacity = isStack || isLast || !isDesktop ? 1 : useTransform(scrollYProgress, [0, 0.45, 1], [1, 1, 0.65]);
 
   // Stepped stacking levels (desktop only)
-  const stickyTop = isDesktop ? 120 + (index * 24) : 0;
+  // Disabled when inside a stack
+  const stickyTop = !isStack && isDesktop ? 120 + (index * 24) : 0;
 
   return (
     <div
@@ -246,10 +307,10 @@ const ServiceCard = ({ service, index, totalCards, onRef }) => {
         style={{
           scale,
           opacity,
-          top: isDesktop ? `${stickyTop}px` : 'auto',
+          top: !isStack && isDesktop ? `${stickyTop}px` : 'auto',
           zIndex: index + 10,
         }}
-        className="lg:sticky relative w-full bg-white rounded-[32px] p-8 md:p-10 lg:p-12 shadow-[0_20px_50px_rgba(13,37,69,0.03)] border border-slate-100/90 hover:shadow-[0_30px_70px_rgba(13,37,69,0.06)] hover:border-slate-200/50 transition-all duration-500 flex flex-col md:flex-row items-center justify-between gap-10 group/card mb-16 lg:mb-24 last:mb-0 origin-top"
+        className={`${!isStack ? 'lg:sticky mb-16 lg:mb-24 last:mb-0' : ''} relative w-full bg-white rounded-[32px] p-8 md:p-10 lg:p-12 shadow-[0_20px_50px_rgba(13,37,69,0.03)] border border-slate-100/90 hover:shadow-[0_30px_70px_rgba(13,37,69,0.06)] hover:border-slate-200/50 transition-all duration-500 flex flex-col md:flex-row items-center justify-between gap-10 group/card origin-top`}
       >
         {/* Left Side Content */}
         <div className="flex-1 text-left w-full md:pr-4">
@@ -306,6 +367,7 @@ const ServiceCard = ({ service, index, totalCards, onRef }) => {
 };
 
 const ServicesGrid = () => {
+  const servicesMode = 'stack';
   const [activeTab, setActiveTab] = useState(0);
   const [isDesktop, setIsDesktop] = useState(true);
   const cardRefs = useRef([]);
@@ -508,107 +570,145 @@ const ServicesGrid = () => {
           </div>
         </FadeIn>
 
-        <FadeIn delay={0.25}>
-          {/* Header */}
-          <div className="text-gold text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]">
-            Our Expertise
+        {/* Background Masonry Section wrapper */}
+        <div className="relative w-full overflow-visible">
+          {/* Background Masonry grid */}
+          <div className="absolute left-1/2 -translate-x-1/2 w-screen -top-12 -bottom-16 z-0 opacity-50 pointer-events-none overflow-hidden select-none">
+            <Masonry
+              items={masonryBackgroundItems}
+              ease="power3.out"
+              duration={0.8}
+              stagger={0.03}
+              animateFrom="bottom"
+              scaleOnHover={false}
+              blurToFocus={true}
+            />
           </div>
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-12 mb-[3rem]">
-            <div className="flex-1 max-w-3xl">
-              <h2 className="font-serif text-[28px] md:text-[36px] text-textDark font-semibold leading-[1.2] mb-[1rem]">
-                Comprehensive Financial Solutions
-              </h2>
-              <p className="text-[15px] text-muted leading-[1.7]">
-                We build personalised investment portfolios from scratch, designed around your goals, risk appetite, and timeline. From mutual funds and tax-saving strategies to life, health, motor, general, and SME insurance, we have everything you need under one roof.                <Link to="/blog" className="text-gold hover:text-goldLight font-medium inline-flex items-center group transition-colors">
-                  Explore more
-                  <span className="ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">...</span>
-                </Link>
-              </p>
-            </div>
 
-            <div className="flex-shrink-0 w-full md:w-[280px] lg:w-[350px] flex justify-center md:justify-end">
-              <div className="relative group/header-img animate-float">
-                {/* Subtle soft shadow glow background */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-gold/10 to-navy/5 rounded-full blur-2xl opacity-60"></div>
+          {/* Foreground section content */}
+          <div className="relative z-10">
+            {servicesMode === 'stack' ? (
+              /* ScrollStack Mode inside a single glassmorphic card tile */
+              <div className="bg-[#fcfbf9]/85 backdrop-blur-[12px] p-8 md:p-10 rounded-[32px] border border-white/40 shadow-[0_15px_35px_rgba(13,37,69,0.02)] relative mt-8 overflow-visible">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start overflow-visible relative">
+                  {/* Left Column: Sticky/Static Header */}
+                  <div className="lg:col-span-4 sticky top-[150px] self-start text-left overflow-visible scroll-stack-left-col">
+                    {/* Header */}
+                    <div className="text-gold text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]">
+                      Our Expertise
+                    </div>
+                    <h2 className="font-serif text-[28px] md:text-[34px] text-textDark font-semibold leading-[1.2] mb-[1rem]">
+                      Comprehensive Financial Solutions
+                    </h2>
+                    <p className="text-[14.5px] text-muted leading-[1.7] mb-6">
+                      We build personalised investment portfolios from scratch, designed around your goals, risk appetite, and timeline. From mutual funds and tax-saving strategies to life, health, motor, general, and SME insurance, we have everything you need under one roof.
+                    </p>
+                    <div>
+                      <Link to="/blog" className="text-gold hover:text-goldLight font-medium inline-flex items-center group transition-colors text-[14px]">
+                        Explore more
+                        <span className="ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">...</span>
+                      </Link>
+                    </div>
+                  </div>
 
-                {/* Matching shape from About section: soft outer box + inner white card */}
-                <div className="relative w-[280px] sm:w-[320px] md:w-[350px] aspect-[16/11] bg-[#f8fafc]/50 rounded-[20px] p-6 border border-slate-100 flex items-center justify-center shadow-inner">
-                  <div className="relative w-full h-full bg-white rounded-xl shadow-[0_15px_35px_rgba(13,37,69,0.04),0_5px_15px_rgba(0,0,0,0.02)] border border-navy/[0.02] overflow-hidden group/graphic hover:scale-[1.02] transition-transform duration-500">
-                    {/* Dot grid background */}
-                    <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#0d2545 1px, transparent 1px)', backgroundSize: '16px 16px' }}></div>
-                    <img
-                      src="/media__1779815978182.png"
-                      alt="Growth and Wealth Management Illustration"
-                      className="w-full h-full object-contain p-4"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy/5 to-transparent pointer-events-none"></div>
+                  {/* Right Column: ScrollStack */}
+                  <div className="w-full lg:col-span-8 overflow-visible relative">
+                    <ScrollStack useWindowScroll={true} itemDistance={60} itemScale={0.02} itemStackDistance={20}>
+                      {servicesData.map((service, index) => (
+                        <ScrollStackItem key={service.id}>
+                          <ServiceCard
+                            service={service}
+                            index={index}
+                            totalCards={servicesData.length}
+                            onRef={() => {}}
+                            isStack={true}
+                          />
+                        </ScrollStackItem>
+                      ))}
+                    </ScrollStack>
                   </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              /* Classic Interactive Sidebar Mode */
+              <>
+                {/* Header (rendered above in sidebar mode, with illustration removed) */}
+                <div className="bg-[#fcfbf9]/85 backdrop-blur-[12px] p-8 md:p-10 rounded-[32px] border border-white/40 shadow-[0_15px_35px_rgba(13,37,69,0.02)] mb-[3rem]">
+                  <div className="text-gold text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]">
+                    Our Expertise
+                  </div>
+                  <h2 className="font-serif text-[28px] md:text-[36px] text-textDark font-semibold leading-[1.2] mb-[1rem]">
+                    Comprehensive Financial Solutions
+                  </h2>
+                  <p className="text-[15px] text-muted leading-[1.7] max-w-4xl">
+                    We build personalised investment portfolios from scratch, designed around your goals, risk appetite, and timeline. From mutual funds and tax-saving strategies to life, health, motor, general, and SME insurance, we have everything you need under one roof.{' '}
+                    <Link to="/blog" className="text-gold hover:text-goldLight font-medium inline-flex items-center group transition-colors">
+                      Explore more
+                      <span className="ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">...</span>
+                    </Link>
+                  </p>
+                </div>
+
+                {/* Mobile Sticky Tab Bar (sticky horizontal menu at the top of the cards) */}
+                <div className="lg:hidden sticky top-[68px] z-30 bg-cream/90 backdrop-blur-md py-3 px-4 border-b border-slate-100/80 -mx-4 mb-8 overflow-x-auto scrollbar-none flex gap-3 scroll-smooth">
+                  {servicesData.map((service, idx) => (
+                    <button
+                      key={service.id}
+                      ref={(el) => (mobileTabRefs.current[idx] = el)}
+                      onClick={() => scrollToCard(idx)}
+                      className={`whitespace-nowrap px-4 py-2 rounded-full text-[13px] font-bold transition-all duration-300 ${activeTab === idx
+                        ? 'bg-gold text-white shadow-md shadow-gold/20'
+                        : 'bg-white text-muted border border-slate-100 hover:border-slate-200 font-sans'
+                        }`}
+                    >
+                      {service.icon} {service.title}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start overflow-visible relative">
+                  {/* Left Column (Sticky Sidebar on Desktop) */}
+                  <div className="hidden lg:block lg:col-span-4 sticky top-[150px] self-start text-left overflow-visible">
+                    <div className="relative border-l-2 border-slate-100 flex flex-col gap-6">
+                      {servicesData.map((service, idx) => (
+                        <button
+                          key={service.id}
+                          onClick={() => scrollToCard(idx)}
+                          className={`text-left pl-6 border-l-2 -ml-[2px] transition-all duration-300 py-1 ${activeTab === idx
+                            ? 'border-gold text-gold font-bold opacity-100 scale-105'
+                            : 'border-transparent text-muted font-medium opacity-65 hover:opacity-100'
+                            }`}
+                        >
+                          <span className="text-[11px] tracking-[0.1em] uppercase block font-bold mb-1 opacity-70 font-sans">
+                            {service.icon} {service.cardText}
+                          </span>
+                          <span className="text-[16px] font-serif block">
+                            {service.title}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right Column (Stacking Cards) */}
+                  <div className="w-full lg:col-span-8 flex flex-col gap-0 overflow-visible relative">
+                    <StaggerGroup staggerDelay={0.15} className="flex flex-col gap-0 overflow-visible relative">
+                      {servicesData.map((service, index) => (
+                        <StaggerItem key={service.id} className="w-full overflow-visible">
+                          <ServiceCard
+                            service={service}
+                            index={index}
+                            totalCards={servicesData.length}
+                            onRef={(el) => (cardRefs.current[index] = el)}
+                          />
+                        </StaggerItem>
+                      ))}
+                    </StaggerGroup>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
-        </FadeIn>
-
-        {/* Mobile Sticky Tab Bar (sticky horizontal menu at the top of the cards) */}
-        <div className="lg:hidden sticky top-[68px] z-30 bg-cream/90 backdrop-blur-md py-3 px-4 border-b border-slate-100/80 -mx-4 mb-8 overflow-x-auto scrollbar-none flex gap-3 scroll-smooth">
-          {servicesData.map((service, idx) => (
-            <button
-              key={service.id}
-              ref={(el) => (mobileTabRefs.current[idx] = el)}
-              onClick={() => scrollToCard(idx)}
-              className={`whitespace-nowrap px-4 py-2 rounded-full text-[13px] font-bold transition-all duration-300 ${activeTab === idx
-                ? 'bg-gold text-white shadow-md shadow-gold/20'
-                : 'bg-white text-muted border border-slate-100 hover:border-slate-200 font-sans'
-                }`}
-            >
-              {service.icon} {service.title}
-            </button>
-          ))}
-        </div>
-
-        {/* 2-Column Showcase Layout (Sticky Left Sidebar + Stacking Right Cards) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start overflow-visible relative">
-
-          {/* Left Column (Sticky Sidebar on Desktop) */}
-          <div className="hidden lg:block lg:col-span-4 sticky top-[150px] self-start text-left overflow-visible">
-
-            <div className="relative border-l-2 border-slate-100 flex flex-col gap-6">
-              {servicesData.map((service, idx) => (
-                <button
-                  key={service.id}
-                  onClick={() => scrollToCard(idx)}
-                  className={`text-left pl-6 border-l-2 -ml-[2px] transition-all duration-300 py-1 ${activeTab === idx
-                    ? 'border-gold text-gold font-bold opacity-100 scale-105'
-                    : 'border-transparent text-muted font-medium opacity-65 hover:opacity-100'
-                    }`}
-                >
-                  <span className="text-[11px] tracking-[0.1em] uppercase block font-bold mb-1 opacity-70 font-sans">
-                    {service.icon} {service.cardText}
-                  </span>
-                  <span className="text-[16px] font-serif block">
-                    {service.title}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Column (Stacking Cards) */}
-          <div className="w-full lg:col-span-8 flex flex-col gap-0 overflow-visible relative">
-            <StaggerGroup staggerDelay={0.15} className="flex flex-col gap-0 overflow-visible relative">
-              {servicesData.map((service, index) => (
-                <StaggerItem key={service.id} className="w-full overflow-visible">
-                  <ServiceCard
-                    service={service}
-                    index={index}
-                    totalCards={servicesData.length}
-                    onRef={(el) => (cardRefs.current[index] = el)}
-                  />
-                </StaggerItem>
-              ))}
-            </StaggerGroup>
-          </div>
-
         </div>
 
       </div>

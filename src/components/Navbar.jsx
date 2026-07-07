@@ -113,6 +113,7 @@ const MobileNavItem = ({ title, mainLink, items, isOpen, toggleOpen, handleLinkC
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const navMode = 'classic';
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenus, setMobileMenus] = useState({
     home: false,
@@ -300,6 +301,30 @@ const Navbar = () => {
     }
   };
 
+  const mobileMenuItems = [
+    { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
+    { label: 'Services', ariaLabel: 'View our services', link: '/services' },
+    { label: 'About Us', ariaLabel: 'Learn about us', link: '/about' },
+    { label: 'Blog', ariaLabel: 'Read our blog', link: '/blog' },
+    { label: 'Get Free Review', ariaLabel: 'Request a free review', link: '#free-review' }
+  ];
+
+  const mobileSocialItems = [
+    { label: '📞 +91 96649 77576', link: 'tel:+919664977576' },
+    { label: '📧 officeinsurance2017@gmail.com', link: 'https://mail.google.com/mail/?view=cm&fs=1&to=officeinsurance2017@gmail.com' },
+    { label: '📍 305, Abhishilp Complex, Satellite, Ahmedabad', link: 'https://maps.google.com/?q=305,+Abhishilp+Complex,+Satellite,+Ahmedabad,+380015' }
+  ];
+
+  const handleStaggeredMenuClick = (e, item) => {
+    if (item.link === '#free-review') {
+      e.preventDefault();
+      resetForm();
+      setIsModalOpen(true);
+    } else {
+      handleLinkClick(e, item.link);
+    }
+  };
+
   return (
     <>
       {/* Invisible hover zone to reveal navbar when hovering at top edge */}
@@ -311,68 +336,101 @@ const Navbar = () => {
       )}
 
       <nav className={`sticky top-0 bg-navy h-[64px] z-[100] w-full shadow-md transition-transform duration-300 ease-in-out ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
-        <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
-          {/* Left Side: Logo */}
-          <Link to="/" className="flex flex-col justify-center" onClick={handleLogoClick}>
-            <span className="font-serif text-white text-[17px] font-semibold leading-tight">
-              Drishti Wealth
-            </span>
-            <span className="text-goldLight text-[10px] uppercase tracking-[0.15em] leading-tight mt-0.5">
-              AMFI Registered &middot; Est. 2001
-            </span>
-          </Link>
-
-          {/* Right Side: Desktop Nav */}
-          <div className="hidden md:flex items-center gap-6 h-full">
-            <DesktopNavItem title="Home" mainLink="/" items={navData.home} handleLinkClick={handleLinkClick} />
-            <DesktopNavItem title="Services" mainLink="/services" items={navData.services} handleLinkClick={handleLinkClick} />
-            <DesktopNavItem title="About Us" mainLink="/about" items={navData.about} handleLinkClick={handleLinkClick} />
-            <DesktopNavItem title="Blog" mainLink="/blog" items={navData.blog} handleLinkClick={handleLinkClick} />
-
-            {/* CTA Button */}
-            <button
-              onClick={() => { resetForm(); setIsModalOpen(true); }}
-              className="bg-gold text-white px-[18px] py-[8px] rounded-[6px] text-[13px] font-medium hover:bg-goldLight transition-colors ml-2 cursor-pointer"
-            >
-              Get Free Review
-            </button>
-          </div>
-
-          {/* Mobile Hamburger Icon */}
-          <button
-            className="md:hidden text-white p-2"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? (
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 12h18M3 6h18M3 18h18" />
-              </svg>
-            )}
-          </button>
-        </div>
-
-        {/* Mobile Dropdown Menu */}
-        {isOpen && (
-          <div className="md:hidden absolute top-[64px] left-0 w-full bg-navy border-t border-white/10 shadow-lg max-h-[calc(100vh-64px)] overflow-y-auto">
-            <div className="flex flex-col px-4 py-4 space-y-4">
-              <MobileNavItem title="Home" mainLink="/" items={navData.home} isOpen={mobileMenus.home} toggleOpen={() => toggleMobileMenu('home')} handleLinkClick={handleLinkClick} />
-              <MobileNavItem title="Services" mainLink="/services" items={navData.services} isOpen={mobileMenus.services} toggleOpen={() => toggleMobileMenu('services')} handleLinkClick={handleLinkClick} />
-              <MobileNavItem title="About Us" mainLink="/about" items={navData.about} isOpen={mobileMenus.about} toggleOpen={() => toggleMobileMenu('about')} handleLinkClick={handleLinkClick} />
-              <MobileNavItem title="Blog" mainLink="/blog" items={navData.blog} isOpen={mobileMenus.blog} toggleOpen={() => toggleMobileMenu('blog')} handleLinkClick={handleLinkClick} />
-
-              <button
-                onClick={() => { closeMenu(); resetForm(); setIsModalOpen(true); }}
-                className="bg-gold text-white px-[18px] py-[10px] rounded-[6px] text-[14px] font-medium hover:bg-goldLight transition-colors w-full text-center mt-2 cursor-pointer"
-              >
-                Get Free Review
-              </button>
+        {navMode === 'staggered' ? (
+          <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
+            <div className="w-full h-full flex items-center justify-between">
+              <StaggeredMenu
+                position="right"
+                isFixed={true}
+                items={mobileMenuItems}
+                socialItems={mobileSocialItems}
+                displaySocials={true}
+                displayItemNumbering={true}
+                menuButtonColor="#fff"
+                openMenuButtonColor="#fff"
+                changeMenuColorOnOpen={false}
+                colors={['#c9922a', '#0d2545']}
+                accentColor="#c9922a"
+                onItemClick={handleStaggeredMenuClick}
+                logo={
+                  <Link to="/" className="flex flex-col justify-center" onClick={handleLogoClick}>
+                    <span className="font-serif text-white text-[17px] font-semibold leading-tight">
+                      Drishti Wealth
+                    </span>
+                    <span className="text-goldLight text-[10px] uppercase tracking-[0.15em] leading-tight mt-0.5">
+                      AMFI Registered &middot; Est. 2001
+                    </span>
+                  </Link>
+                }
+              />
             </div>
           </div>
+        ) : (
+          <>
+            <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
+              {/* Left Side: Logo */}
+              <Link to="/" className="flex flex-col justify-center" onClick={handleLogoClick}>
+                <span className="font-serif text-white text-[17px] font-semibold leading-tight">
+                  Drishti Wealth
+                </span>
+                <span className="text-goldLight text-[10px] uppercase tracking-[0.15em] leading-tight mt-0.5">
+                  AMFI Registered &middot; Est. 2001
+                </span>
+              </Link>
+
+              {/* Right Side: Desktop Nav */}
+              <div className="hidden md:flex items-center gap-6 h-full">
+                <DesktopNavItem title="Home" mainLink="/" items={navData.home} handleLinkClick={handleLinkClick} />
+                <DesktopNavItem title="Services" mainLink="/services" items={navData.services} handleLinkClick={handleLinkClick} />
+                <DesktopNavItem title="About Us" mainLink="/about" items={navData.about} handleLinkClick={handleLinkClick} />
+                <DesktopNavItem title="Blog" mainLink="/blog" items={navData.blog} handleLinkClick={handleLinkClick} />
+
+                {/* CTA Button */}
+                <button
+                  onClick={() => { resetForm(); setIsModalOpen(true); }}
+                  className="bg-gold text-white px-[18px] py-[8px] rounded-[6px] text-[13px] font-medium hover:bg-goldLight transition-colors ml-2 cursor-pointer"
+                >
+                  Get Free Review
+                </button>
+              </div>
+
+              {/* Mobile Hamburger Icon */}
+              <button
+                className="md:hidden text-white p-2"
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label="Toggle menu"
+              >
+                {isOpen ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 12h18M3 6h18M3 18h18" />
+                  </svg>
+                )}
+              </button>
+            </div>
+
+            {/* Mobile Dropdown Menu */}
+            {isOpen && (
+              <div className="md:hidden absolute top-[64px] left-0 w-full bg-navy border-t border-white/10 shadow-lg max-h-[calc(100vh-64px)] overflow-y-auto">
+                <div className="flex flex-col px-4 py-4 space-y-4">
+                  <MobileNavItem title="Home" mainLink="/" items={navData.home} isOpen={mobileMenus.home} toggleOpen={() => toggleMobileMenu('home')} handleLinkClick={handleLinkClick} />
+                  <MobileNavItem title="Services" mainLink="/services" items={navData.services} isOpen={mobileMenus.services} toggleOpen={() => toggleMobileMenu('services')} handleLinkClick={handleLinkClick} />
+                  <MobileNavItem title="About Us" mainLink="/about" items={navData.about} isOpen={mobileMenus.about} toggleOpen={() => toggleMobileMenu('about')} handleLinkClick={handleLinkClick} />
+                  <MobileNavItem title="Blog" mainLink="/blog" items={navData.blog} isOpen={mobileMenus.blog} toggleOpen={() => toggleMobileMenu('blog')} handleLinkClick={handleLinkClick} />
+
+                  <button
+                    onClick={() => { closeMenu(); resetForm(); setIsModalOpen(true); }}
+                    className="bg-gold text-white px-[18px] py-[10px] rounded-[6px] text-[14px] font-medium hover:bg-goldLight transition-colors w-full text-center mt-2 cursor-pointer"
+                  >
+                    Get Free Review
+                  </button>
+                </div>
+              </div>
+            )}
+          </>
         )}
       </nav>
 

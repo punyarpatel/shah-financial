@@ -4,18 +4,32 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import FadeIn from '../components/animations/FadeIn';
+import CircularGallery from '../components/animations/CircularGallery';
 import CoinCarousel from '../components/animations/CoinCarousel';
 import AnimatedCounter from '../components/animations/AnimatedCounter';
 import StaggerGroup from '../components/animations/StaggerGroup';
 import StaggerItem from '../components/animations/StaggerItem';
 import JourneyTimeline from '../components/JourneyTimeline';
 import CredentialsShowcase from '../components/CredentialsShowcase';
+import useDesignMode from '../hooks/useDesignMode';
+import BorderGlow from '../components/animations/BorderGlow';
 
 const AboutPage = () => {
   const labelStyles = "text-gold text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]";
   const titleStyles = "font-serif text-[28px] md:text-[36px] text-textDark font-semibold mb-[2rem] leading-tight";
   const cardStyles = "premium-card";
   const ogImage = `${window.location.origin}/why_choose_us_mockup.png`;
+
+  const partnerItems = [
+    { image: '/hdfc-partner.png', text: 'HDFC' },
+    { image: '/sbi-partner.png', text: 'SBI' },
+    { image: '/icici-partner.png', text: 'ICICI' },
+    { image: '/kotak-partner.png', text: 'KOTAK' },
+    { image: '/axis-partner.png', text: 'AXIS' },
+    { image: '/nippon-partner.png', text: 'NIPPON' }
+  ];
+
+  const achievementsMode = useDesignMode('achievements-mode', 'circular');
 
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
@@ -60,26 +74,34 @@ const AboutPage = () => {
             <h2 className={titleStyles}>What Makes Us Different</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className={cardStyles}>
-                <div className="text-[24px] mb-3">🏛️</div>
-                <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Registered and Compliant</h3>
-                <p className="text-muted text-[14px] leading-[1.6]">AMFI registered MFD and IRDAI licensed insurance advisor. Full regulatory compliance.</p>
-              </div>
-              <div className={cardStyles}>
-                <div className="text-[24px] mb-3">👤</div>
-                <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Personalized Advisory</h3>
-                <p className="text-muted text-[14px] leading-[1.6]">No generic advice. Every recommendation is tailored to your income goals and risk profile.</p>
-              </div>
-              <div className={cardStyles}>
-                <div className="text-[24px] mb-3">🌍</div>
-                <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">NRI Specialist</h3>
-                <p className="text-muted text-[14px] leading-[1.6]">Dedicated service for NRI clients with expertise in DTAA, KYC and cross-border investing.</p>
-              </div>
-              <div className={cardStyles}>
-                <div className="text-[24px] mb-3">🤝</div>
-                <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Long Term Partnership</h3>
-                <p className="text-muted text-[14px] leading-[1.6]">We stay with you for decades. Your growth is our growth.</p>
-              </div>
+              <BorderGlow className="h-full" borderRadius={12} backgroundColor="#ffffff">
+                <div className="p-[1.5rem]">
+                  <div className="text-[24px] mb-3">🏛️</div>
+                  <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Registered and Compliant</h3>
+                  <p className="text-muted text-[14px] leading-[1.6]">AMFI registered MFD and IRDAI licensed insurance advisor. Full regulatory compliance.</p>
+                </div>
+              </BorderGlow>
+              <BorderGlow className="h-full" borderRadius={12} backgroundColor="#ffffff">
+                <div className="p-[1.5rem]">
+                  <div className="text-[24px] mb-3">👤</div>
+                  <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Personalized Advisory</h3>
+                  <p className="text-muted text-[14px] leading-[1.6]">No generic advice. Every recommendation is tailored to your income goals and risk profile.</p>
+                </div>
+              </BorderGlow>
+              <BorderGlow className="h-full" borderRadius={12} backgroundColor="#ffffff">
+                <div className="p-[1.5rem]">
+                  <div className="text-[24px] mb-3">🌍</div>
+                  <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">NRI Specialist</h3>
+                  <p className="text-muted text-[14px] leading-[1.6]">Dedicated service for NRI clients with expertise in DTAA, KYC and cross-border investing.</p>
+                </div>
+              </BorderGlow>
+              <BorderGlow className="h-full" borderRadius={12} backgroundColor="#ffffff">
+                <div className="p-[1.5rem]">
+                  <div className="text-[24px] mb-3">🤝</div>
+                  <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Long Term Partnership</h3>
+                  <p className="text-muted text-[14px] leading-[1.6]">We stay with you for decades. Your growth is our growth.</p>
+                </div>
+              </BorderGlow>
             </div>
           </div>
         </FadeIn>
@@ -133,9 +155,9 @@ const AboutPage = () => {
       {/* Section 4: Our Team (Interactive Showcase) */}
       <CredentialsShowcase />
 
-      {/* Section 4.5: Partners Carousel */}
+      {/* Section 4.5: Partners Gallery */}
       <section className="py-[4rem] w-full bg-navy overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 text-center mb-[2rem]">
+        <div className="max-w-7xl mx-auto px-4 text-center mb-[1rem]">
            <h2 className="font-serif text-[28px] md:text-[36px] text-white font-semibold mb-2">
               Achievement & Partnership Showcase
            </h2>
@@ -144,7 +166,23 @@ const AboutPage = () => {
            </p>
         </div>
 
-        <CoinCarousel />
+        {achievementsMode === 'circular' ? (
+          <div className="relative w-full h-[500px]">
+            <CircularGallery
+              items={partnerItems}
+              bend={3}
+              textColor="#e2e8f0"
+              borderRadius={0.05}
+              scrollEase={0.05}
+              scrollSpeed={2}
+              autoplay={true}
+              autoplaySpeed={10}
+              interactive={false}
+            />
+          </div>
+        ) : (
+          <CoinCarousel />
+        )}
       </section>
 
       {/* Section 5: Office Location Map */}

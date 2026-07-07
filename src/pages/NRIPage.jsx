@@ -10,6 +10,7 @@ import { countriesList } from '../lib/countries';
 import FadeIn from '../components/animations/FadeIn';
 import InsurerLogo from '../components/InsurerLogo';
 import ServiceCardGraphic from '../components/ServiceCardGraphic';
+import BorderGlow from '../components/animations/BorderGlow';
 
 const POLICY_CHECKS = [
   {
@@ -245,8 +246,8 @@ const NRIPage = () => {
             <div className={labelStyles}>Mutual Fund Investments</div>
             <h2 className={titleStyles}>NRI Mutual Fund Investments</h2>
  
-            <div className="mt-[3rem] w-full premium-feature-card group">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-stretch">
+            <BorderGlow className="mt-[3rem] w-full group" borderRadius={16} backgroundColor="#ffffff">
+              <div className="p-[40px] grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-stretch">
                 {/* Left Column (50%) */}
                 <div className="flex flex-col justify-between h-full">
                   <div>
@@ -350,7 +351,7 @@ const NRIPage = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </BorderGlow>
 
             {/* Original NRI Mutual Fund Details Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start mt-[4rem]">
@@ -526,10 +527,6 @@ const NRIPage = () => {
                         y: yTranslate,
                         opacity: isExpanded ? 1 : isAnyExpanded ? 0.2 : 1,
                         zIndex: isExpanded ? 50 : 1,
-                        boxShadow: isExpanded 
-                          ? '0 20px 40px rgba(13, 37, 69, 0.12), 0 8px 16px rgba(201, 146, 42, 0.15)' 
-                          : '0 4px 6px rgba(13, 37, 69, 0.02)',
-                        borderColor: isExpanded ? 'rgba(201, 146, 42, 0.4)' : 'rgba(13, 37, 69, 0.12)',
                       }}
                       transition={{
                         type: 'spring',
@@ -537,53 +534,63 @@ const NRIPage = () => {
                         damping: 25,
                         mass: 0.8,
                       }}
-                      className="relative bg-white border border-navy/10 hover:border-gold/50 rounded-[16px] p-6 h-full flex flex-col justify-between cursor-pointer overflow-hidden group min-h-[220px]"
+                      className="relative cursor-pointer h-full min-h-[220px]"
                     >
-                      <div className="relative pr-16">
-                        <h4 className="font-serif text-[16px] text-navy font-bold mb-2 group-hover:text-gold transition-colors">{c.title}</h4>
-                        <p className="text-muted text-[13px] leading-[1.6]">{c.description}</p>
-                        
-                        {/* Image Graphic in top right */}
-                        <div className="absolute -top-1 -right-2 w-14 h-14 md:w-16 md:h-16 pointer-events-none transform group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 ease-out">
-                          <ServiceCardGraphic id={c.id} />
+                      <BorderGlow
+                        className="h-full w-full"
+                        borderRadius={16}
+                        backgroundColor="#ffffff"
+                        glowColor="45 85 50"
+                        glowIntensity={isExpanded ? 1.5 : 1.0}
+                      >
+                        <div className="p-6 h-full flex flex-col justify-between group">
+                          <div className="relative pr-16">
+                            <h4 className="font-serif text-[16px] text-navy font-bold mb-2 group-hover:text-gold transition-colors">{c.title}</h4>
+                            <p className="text-muted text-[13px] leading-[1.6]">{c.description}</p>
+
+                            {/* Image Graphic in top right */}
+                            <div className="absolute -top-1 -right-2 w-14 h-14 md:w-16 md:h-16 pointer-events-none transform group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 ease-out">
+                              <ServiceCardGraphic id={c.id} />
+                            </div>
+                          </div>
+
+                          <div>
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ 
+                                height: isExpanded ? 'auto' : 0, 
+                                opacity: isExpanded ? 1 : 0,
+                                marginTop: isExpanded ? 16 : 0
+                              }}
+                              transition={{ 
+                                duration: 0.35, 
+                                ease: [0.16, 1, 0.3, 1] 
+                              }}
+                              className="overflow-hidden"
+                            >
+                              <p className="text-muted text-[12.5px] leading-[1.6] border-t border-navy/5 pt-3">
+                                {c.detailedDescription}
+                              </p>
+                            </motion.div>
+                          </div>
+
+                          {/* Expand/Collapse Indicator */}
+                          <div className="absolute bottom-4 right-4 flex items-center justify-center w-6 h-6 rounded-full border border-gold/20 bg-gold/5 group-hover:border-gold/50 group-hover:bg-gold/10 transition-colors">
+                            <motion.svg
+                              animate={{ rotate: isExpanded ? 45 : 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="w-3 h-3 text-gold"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={3}
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5 -7.5h -15" />
+                            </motion.svg>
+                          </div>
                         </div>
-                      </div>
-
-                      <div>
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ 
-                            height: isExpanded ? 'auto' : 0, 
-                            opacity: isExpanded ? 1 : 0,
-                            marginTop: isExpanded ? 16 : 0
-                          }}
-                          transition={{ 
-                            duration: 0.35, 
-                            ease: [0.16, 1, 0.3, 1] 
-                          }}
-                          className="overflow-hidden"
-                        >
-                          <p className="text-muted text-[12.5px] leading-[1.6] border-t border-navy/5 pt-3">
-                            {c.detailedDescription}
-                          </p>
-                        </motion.div>
-                      </div>
-
-                      {/* Expand/Collapse Indicator */}
-                      <div className="absolute bottom-4 right-4 flex items-center justify-center w-6 h-6 rounded-full border border-gold/20 bg-gold/5 group-hover:border-gold/50 group-hover:bg-gold/10 transition-colors">
-                        <motion.svg
-                          animate={{ rotate: isExpanded ? 45 : 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="w-3 h-3 text-gold"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={3}
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5 -7.5h -15" />
-                        </motion.svg>
-                      </div>
+                      </BorderGlow>
                     </motion.div>
                   );
                 })}
