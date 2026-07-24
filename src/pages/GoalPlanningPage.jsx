@@ -92,7 +92,7 @@ const GoalPlanningPage = () => {
       name,
       phone,
       interest: `Goal Planning - ${primaryGoal || 'Not Specified'}`,
-      message: 'Lead from Goal Planning Page'
+      source: 'Goal Planning Page'
     });
 
     if (!res.success) {

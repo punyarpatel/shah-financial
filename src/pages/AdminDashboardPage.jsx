@@ -48,13 +48,15 @@ const AdminDashboardPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [showCharts, setShowCharts] = useState(false);
+  const [selectedLeads, setSelectedLeads] = useState(new Set());
+  const [bulkDeleting, setBulkDeleting] = useState(false);
 
-  const showToast = (message, type = 'success') => {
+  const showToast = (message, type = 'success', action = null) => {
     const id = Date.now();
-    setToasts((prev) => [...prev, { id, message, type }]);
+    setToasts((prev) => [...prev, { id, message, type, action }]);
     setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));
-    }, 3000);
+    }, action ? 7000 : 3500);
   };
 
   const fetchLeads = async () => {
@@ -64,23 +66,27 @@ const AdminDashboardPage = () => {
         api.get('/api/leads')
       ]);
       
-      let allLeads = [];
+      let rawLeads = [];
       if (sbRes.status === 'fulfilled' && sbRes.value.data) {
-        allLeads = [...allLeads, ...sbRes.value.data];
+        rawLeads = [...rawLeads, ...sbRes.value.data];
       }
       if (apiRes.status === 'fulfilled' && apiRes.value.data) {
-        allLeads = [...allLeads, ...apiRes.value.data];
+        rawLeads = [...rawLeads, ...apiRes.value.data];
       }
       
-      // Sort combined leads by date descending
+      // Deduplicate leads by id
+      const leadMap = new Map();
+      rawLeads.forEach(lead => {
+        if (!leadMap.has(lead.id)) {
+          leadMap.set(lead.id, lead);
+        }
+      });
+      const allLeads = Array.from(leadMap.values());
       allLeads.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
       
-      // Filter out archived/deleted leads to keep dashboard clean
-      const activeLeads = allLeads.filter(lead => lead.status !== 'archived' && lead.status !== 'deleted');
-      
       setLeads((prevLeads) => {
-        if (prevLeads.length === 0) return activeLeads;
-        return activeLeads.map((newLead) => {
+        if (prevLeads.length === 0) return allLeads;
+        return allLeads.map((newLead) => {
           const exists = prevLeads.some((oldLead) => oldLead.id === newLead.id);
           return exists ? newLead : { ...newLead, isNewHighlight: true };
         });
@@ -201,12 +207,76 @@ const AdminDashboardPage = () => {
     }
   };
 
+  const handleRestoreLead = async (leadId, restoreStatus = 'new') => {
+    try {
+      const sbPromise = supabase.from('leads').update({ status: restoreStatus }).eq('id', leadId);
+      const apiPromise = api.patch(`/api/leads/${leadId}`, { status: restoreStatus }).catch(() => {});
+      await Promise.allSettled([sbPromise, apiPromise]);
+      if (selectedLead && selectedLead.id === leadId) {
+        setSelectedLead(prev => prev ? { ...prev, status: restoreStatus } : null);
+      }
+      fetchLeads();
+      showToast('Lead restored successfully', 'success');
+    } catch (err) {
+      console.error('Error restoring lead:', err);
+      showToast('Failed to restore lead', 'error');
+    }
+  };
+
+  const handleBulkRestore = async (leadStatusMap) => {
+    try {
+      await Promise.allSettled(
+        leadStatusMap.map(({ id, prevStatus }) =>
+          Promise.allSettled([
+            supabase.from('leads').update({ status: prevStatus }).eq('id', id),
+            api.patch(`/api/leads/${id}`, { status: prevStatus }).catch(() => {})
+          ])
+        )
+      );
+      fetchLeads();
+      showToast('Leads restored successfully', 'success');
+    } catch (err) {
+      console.error('Error restoring bulk leads:', err);
+      showToast('Failed to restore leads', 'error');
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    if (selectedLeads.size === 0) return;
+    setBulkDeleting(true);
+    try {
+      const ids = Array.from(selectedLeads);
+      const leadStatusMap = ids.map(id => ({
+        id,
+        prevStatus: leads.find(l => l.id === id)?.status || 'new'
+      }));
+
+      await supabase.from('leads').update({ status: 'archived' }).in('id', ids);
+      await Promise.allSettled(
+        ids.map(id => api.patch(`/api/leads/${id}`, { status: 'archived' }).catch(() => {}))
+      );
+      setSelectedLeads(new Set());
+      fetchLeads();
+
+      showToast(`${ids.length} lead${ids.length > 1 ? 's' : ''} moved to Trash`, 'success', {
+        label: '↺ Undo',
+        onClick: () => handleBulkRestore(leadStatusMap)
+      });
+    } catch (err) {
+      console.error('Error bulk archiving:', err);
+      showToast('Failed to archive leads', 'error');
+    } finally {
+      setBulkDeleting(false);
+    }
+  };
+
   const handleDeleteLead = async (leadId) => {
     if (!leadId) return;
+    const targetLead = leads.find(l => l.id === leadId);
+    const originalStatus = targetLead?.status || 'new';
     
     setDeletingLead(true);
     try {
-      // Archive lead by setting status to 'archived' (bypasses Supabase DELETE RLS restrictions)
       const sbPromise = supabase.from('leads').update({ status: 'archived' }).eq('id', leadId);
       const apiPromise = api.patch(`/api/leads/${leadId}`, { status: 'archived' }).catch(() => {});
       
@@ -214,7 +284,11 @@ const AdminDashboardPage = () => {
       
       setSelectedLead(null);
       fetchLeads();
-      showToast('Lead archived successfully', 'success');
+
+      showToast('Lead moved to Trash', 'success', {
+        label: '↺ Undo',
+        onClick: () => handleRestoreLead(leadId, originalStatus)
+      });
     } catch (err) {
       console.error('Error deleting lead:', err);
       showToast('Failed to archive lead', 'error');
@@ -313,6 +387,8 @@ const AdminDashboardPage = () => {
       case 'called': return { color: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)' };
       case 'converted': return { color: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.1)' };
       case 'not interested': return { color: '#6b7280', backgroundColor: 'rgba(107, 114, 128, 0.1)' };
+      case 'archived':
+      case 'deleted': return { color: '#dc2626', backgroundColor: 'rgba(220, 38, 38, 0.1)' };
       default: return { color: '#c9922a', backgroundColor: 'rgba(201, 146, 42, 0.1)' }; // default to new
     }
   };
@@ -323,7 +399,16 @@ const AdminDashboardPage = () => {
     const phoneMatch = (lead.phone || '').toLowerCase().includes(search);
     const textMatch = nameMatch || phoneMatch;
 
-    const statusMatch = !filterStatus || (lead.status || 'new') === filterStatus;
+    let statusMatch = false;
+    if (filterStatus === 'archived') {
+      statusMatch = lead.status === 'archived' || lead.status === 'deleted';
+    } else if (filterStatus) {
+      statusMatch = (lead.status || 'new') === filterStatus;
+    } else {
+      // Default: exclude archived/deleted
+      statusMatch = lead.status !== 'archived' && lead.status !== 'deleted';
+    }
+
     const interestMatch = !filterInterest || lead.interest === filterInterest;
 
     let nriMatch = true;
@@ -622,7 +707,7 @@ const AdminDashboardPage = () => {
                   <span className="text-[11px] font-medium text-[#5c6478] bg-[#0d2545]/5 px-2.5 py-1 rounded-[6px]">Daily Submissions</span>
                 </div>
                 <div className="h-[280px] w-full relative">
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                     <LineChart data={lineData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                       <CartesianGrid strokeDasharray="3 3" stroke="rgba(13, 37, 69, 0.05)" />
                       <XAxis 
@@ -666,7 +751,7 @@ const AdminDashboardPage = () => {
                 </div>
                 <div className="h-[280px] w-full relative flex flex-col sm:flex-row items-center justify-center gap-6">
                   <div className="w-[180px] h-[180px] flex-shrink-0 relative">
-                    <ResponsiveContainer width="100%" height="100%">
+                    <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                       <PieChart>
                         <Pie
                           data={pieData}
@@ -742,11 +827,12 @@ const AdminDashboardPage = () => {
               onChange={(e) => setFilterStatus(e.target.value)}
               className="px-[12px] py-[9px] border border-[#0d2545]/15 rounded-[8px] text-[13px] outline-none bg-white cursor-pointer focus:border-[#c9922a] w-full sm:w-auto min-w-[130px]"
             >
-              <option value="">All Statuses</option>
+              <option value="">Active Leads</option>
               <option value="new">New</option>
               <option value="called">Called</option>
               <option value="converted">Converted</option>
               <option value="not interested">Not Interested</option>
+              <option value="archived">📁 Trash / Archived</option>
             </select>
 
             {/* Service Interest Filter */}
@@ -792,7 +878,19 @@ const AdminDashboardPage = () => {
           </div>
 
           {/* Right Column: Actions */}
-          <div className="flex gap-[8px] w-full lg:w-auto">
+          <div className="flex gap-[8px] w-full lg:w-auto flex-wrap">
+            {selectedLeads.size > 0 && (
+              <button
+                onClick={handleBulkDelete}
+                disabled={bulkDeleting}
+                className="flex-1 lg:flex-initial bg-red-600 hover:bg-red-700 disabled:opacity-60 text-white px-[18px] py-[9px] rounded-[8px] text-[13px] font-medium cursor-pointer transition-colors whitespace-nowrap flex items-center gap-2"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                {bulkDeleting ? 'Archiving...' : `Archive Selected (${selectedLeads.size})`}
+              </button>
+            )}
             <button 
               onClick={() => setIsCreateModalOpen(true)}
               className="flex-1 lg:flex-initial bg-[#c9922a] hover:bg-[#b07f21] text-white px-[18px] py-[9px] rounded-[8px] text-[13px] font-medium cursor-pointer transition-colors whitespace-nowrap"
@@ -848,6 +946,23 @@ const AdminDashboardPage = () => {
               <table className="w-full border-collapse min-w-[800px]">
                 <thead className="bg-[#0d2545]/5 sticky top-0">
                   <tr>
+                    <th className="px-[14px] py-[10px] border-b border-[#0d2545]/10 w-[40px]">
+                      <input
+                        type="checkbox"
+                        className="w-[14px] h-[14px] cursor-pointer accent-[#c9922a]"
+                        checked={currentItems.length > 0 && currentItems.every(l => selectedLeads.has(l.id))}
+                        ref={el => {
+                          if (el) el.indeterminate = currentItems.some(l => selectedLeads.has(l.id)) && !currentItems.every(l => selectedLeads.has(l.id));
+                        }}
+                        onChange={() => {
+                          const allSelected = currentItems.every(l => selectedLeads.has(l.id));
+                          const newSet = new Set(selectedLeads);
+                          currentItems.forEach(l => allSelected ? newSet.delete(l.id) : newSet.add(l.id));
+                          setSelectedLeads(newSet);
+                        }}
+                        title="Select all on this page"
+                      />
+                    </th>
                     <th className="px-[14px] py-[10px] text-[12px] uppercase tracking-[0.05em] text-[#5c6478] border-b border-[#0d2545]/10 text-left font-medium">Name</th>
                     <th className="px-[14px] py-[10px] text-[12px] uppercase tracking-[0.05em] text-[#5c6478] border-b border-[#0d2545]/10 text-left font-medium">Phone</th>
                     <th className="px-[14px] py-[10px] text-[12px] uppercase tracking-[0.05em] text-[#5c6478] border-b border-[#0d2545]/10 text-left font-medium">City</th>
@@ -863,17 +978,30 @@ const AdminDashboardPage = () => {
                     const currentStatus = lead.status || 'new';
                     const rowStyles = `border-b border-[#0d2545]/[0.06] ${index % 2 === 0 ? 'bg-white' : 'bg-[#0d2545]/[0.02]'}`;
                     
+                    const isChecked = selectedLeads.has(lead.id);
                     return (
                       <motion.tr 
                         key={lead.id || index} 
                         layout
                         initial={lead.isNewHighlight ? { backgroundColor: 'rgba(201, 146, 42, 0.25)' } : undefined}
                         animate={{ 
-                          backgroundColor: index % 2 === 0 ? '#ffffff' : 'rgba(13, 37, 69, 0.02)'
+                          backgroundColor: isChecked ? 'rgba(201, 146, 42, 0.07)' : index % 2 === 0 ? '#ffffff' : 'rgba(13, 37, 69, 0.02)'
                         }}
-                        transition={{ duration: 3 }}
+                        transition={{ duration: 0.2 }}
                         className={rowStyles}
                       >
+                        <td className="px-[14px] py-[10px] w-[40px]">
+                          <input
+                            type="checkbox"
+                            className="w-[14px] h-[14px] cursor-pointer accent-[#c9922a]"
+                            checked={isChecked}
+                            onChange={() => {
+                              const newSet = new Set(selectedLeads);
+                              isChecked ? newSet.delete(lead.id) : newSet.add(lead.id);
+                              setSelectedLeads(newSet);
+                            }}
+                          />
+                        </td>
                         <td className={`px-[14px] py-[10px] text-[13px] text-[#1a1a2e] ${currentStatus === 'new' ? 'border-l-[3px] border-[#c9922a]' : 'border-l-[3px] border-transparent'}`}>
                           {lead.name || '-'}
                         </td>
@@ -897,15 +1025,25 @@ const AdminDashboardPage = () => {
                             <option value="called">called</option>
                             <option value="converted">converted</option>
                             <option value="not interested">not interested</option>
+                            <option value="archived">archived</option>
                           </select>
                         </td>
-                        <td className="px-[14px] py-[10px]">
+                        <td className="px-[14px] py-[10px] flex items-center gap-2">
                           <button 
                             onClick={() => handleViewDetails(lead)}
                             className="bg-transparent border-none text-[#c9922a] hover:text-[#b07f21] text-[12px] font-medium cursor-pointer transition-colors"
                           >
                             View Details
                           </button>
+                          {(lead.status === 'archived' || lead.status === 'deleted') && (
+                            <button
+                              onClick={() => handleRestoreLead(lead.id, 'new')}
+                              className="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300 text-[11px] font-medium px-2 py-0.5 rounded cursor-pointer transition-colors flex items-center gap-1"
+                              title="Restore Lead"
+                            >
+                              ↺ Restore
+                            </button>
+                          )}
                         </td>
                       </motion.tr>
                     );
@@ -1037,7 +1175,7 @@ const AdminDashboardPage = () => {
                   <div className="grid grid-cols-2 gap-y-3 gap-x-4 text-[13px]">
                     <div>
                       <span className="text-[#5c6478] block text-[11px]">Phone</span>
-                      <a href={`tel:${selectedLead.phone}`} className="font-medium text-[#c9922a] hover:underline">
+                      <a href={`tel:${(selectedLead.phone || '').replace(/[^0-9+\s\-().]/g, '')}`} className="font-medium text-[#c9922a] hover:underline">
                         {selectedLead.phone || '-'}
                       </a>
                     </div>
@@ -1129,18 +1267,24 @@ const AdminDashboardPage = () => {
 
               {/* Footer Actions */}
               <div className="bg-[#faf8f4] border-t border-[#0d2545]/10 px-6 py-4 flex justify-between items-center rounded-b-[14px]">
-                <button
-                  type="button"
-                  disabled={deletingLead}
-                  onClick={() => {
-                    if (window.confirm("Are you sure you want to delete this lead? This action cannot be undone.")) {
-                      handleDeleteLead(selectedLead.id);
-                    }
-                  }}
-                  className="bg-transparent border border-[#dc2626]/20 hover:bg-[#dc2626]/5 text-[#dc2626] text-[13px] font-medium py-[8px] px-[16px] rounded-[8px] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                  {deletingLead ? 'Deleting...' : 'Delete Lead'}
-                </button>
+                {(selectedLead.status === 'archived' || selectedLead.status === 'deleted') ? (
+                  <button
+                    type="button"
+                    onClick={() => handleRestoreLead(selectedLead.id, 'new')}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white text-[13px] font-medium py-[8px] px-[16px] rounded-[8px] cursor-pointer transition-colors flex items-center gap-1.5"
+                  >
+                    ↺ Restore Lead
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    disabled={deletingLead}
+                    onClick={() => handleDeleteLead(selectedLead.id)}
+                    className="bg-transparent border border-[#dc2626]/20 hover:bg-[#dc2626]/5 text-[#dc2626] text-[13px] font-medium py-[8px] px-[16px] rounded-[8px] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    {deletingLead ? 'Archiving...' : 'Archive / Delete Lead'}
+                  </button>
+                )}
               </div>
             </motion.div>
           </>
@@ -1300,7 +1444,7 @@ const AdminDashboardPage = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.9 }}
               transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-              className={`pointer-events-auto px-4 py-3 rounded-[8px] shadow-[0_4px_12px_rgba(0,0,0,0.15)] border text-[13px] font-medium flex items-center gap-2 min-w-[250px] ${
+              className={`pointer-events-auto px-4 py-3 rounded-[8px] shadow-[0_4px_12px_rgba(0,0,0,0.15)] border text-[13px] font-medium flex items-center justify-between gap-3 min-w-[280px] ${
                 toast.type === 'success'
                   ? 'bg-emerald-50 border-emerald-500/20 text-emerald-800'
                   : toast.type === 'error'
@@ -1308,22 +1452,36 @@ const AdminDashboardPage = () => {
                   : 'bg-[#faf8f4] border-[#0d2545]/10 text-[#0d2545]'
               }`}
             >
-              {toast.type === 'success' && (
-                <svg className="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+              <div className="flex items-center gap-2">
+                {toast.type === 'success' && (
+                  <svg className="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )}
+                {toast.type === 'error' && (
+                  <svg className="w-4 h-4 text-rose-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )}
+                {toast.type === 'info' && (
+                  <svg className="w-4 h-4 text-[#c9922a] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )}
+                <span>{toast.message}</span>
+              </div>
+              {toast.action && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    toast.action.onClick();
+                    setToasts((prev) => prev.filter((t) => t.id !== toast.id));
+                  }}
+                  className="bg-[#0d2545] hover:bg-[#1a365d] text-white text-[11px] font-semibold px-2.5 py-1 rounded cursor-pointer transition-colors shadow-sm whitespace-nowrap ml-2"
+                >
+                  {toast.action.label}
+                </button>
               )}
-              {toast.type === 'error' && (
-                <svg className="w-4 h-4 text-rose-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              )}
-              {toast.type === 'info' && (
-                <svg className="w-4 h-4 text-[#c9922a] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              )}
-              <span>{toast.message}</span>
             </motion.div>
           ))}
         </AnimatePresence>

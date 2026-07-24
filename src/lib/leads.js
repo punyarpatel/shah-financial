@@ -1,4 +1,5 @@
 import supabase from './supabase';
+import { trackEvent } from './analytics';
 
 /**
  * Validates and submits a new lead to Supabase
@@ -13,7 +14,7 @@ import supabase from './supabase';
  * @returns {Promise<{success: boolean, error?: string}>}
  */
 export async function submitLead(leadData) {
-  const { name, phone, interest, city = '', is_nri = '', nri_country = '', message = '' } = leadData;
+  const { name, phone, interest, city = '', is_nri = '', nri_country = '', message = '', source = 'Website' } = leadData;
 
   // Basic validation
   if (!name || !phone || !interest) {
@@ -43,22 +44,23 @@ export async function submitLead(leadData) {
 
     if (error) {
       console.error('Supabase submission error:', error);
-      return { 
-        success: false, 
-        error: 'We encountered an issue submitting your request. Please try again or reach out directly via WhatsApp.' 
+      return {
+        success: false,
+        error: 'We encountered an issue submitting your request. Please try again or reach out directly via WhatsApp.'
       };
     }
 
-    // Trigger notifications asynchronously (fire-and-forget so it doesn't block the user interface)
-    sendTelegramNotification({ name, phone, interest, city, is_nri, nri_country, message });
-    sendGenericWebhook({ name, phone, interest, city, is_nri, nri_country, message });
+    // Trigger notifications & analytics asynchronously (fire-and-forget)
+    sendTelegramNotification({ name, phone, interest, city, is_nri, nri_country, message, source });
+    sendGenericWebhook({ name, phone, interest, city, is_nri, nri_country, message, source });
+    trackEvent('lead_submitted', { source, interest });
 
     return { success: true };
   } catch (err) {
     console.error('Submission exception:', err);
-    return { 
-      success: false, 
-      error: 'A connection error occurred. Please verify your internet connection and try again.' 
+    return {
+      success: false,
+      error: 'A connection error occurred. Please verify your internet connection and try again.'
     };
   }
 }
@@ -72,12 +74,12 @@ async function sendTelegramNotification(leadData) {
   if (!token || !chatId) return;
 
   const text = `🔔 *New Lead Received!*\n\n` +
-               `*Name:* ${leadData.name}\n` +
-               `*Phone:* ${leadData.phone}\n` +
-               `*Interest:* ${leadData.interest}\n` +
-               `*City:* ${leadData.city || 'N/A'}\n` +
-               `*NRI:* ${leadData.is_nri || 'No'}${leadData.nri_country ? ` (${leadData.nri_country})` : ''}\n` +
-               `*Message:* ${leadData.message || 'None'}`;
+    `*Name:* ${leadData.name}\n` +
+    `*Phone:* ${leadData.phone}\n` +
+    `*Interest:* ${leadData.interest}\n` +
+    `*City:* ${leadData.city || 'N/A'}\n` +
+    `*NRI:* ${leadData.is_nri || 'No'}${leadData.nri_country ? ` (${leadData.nri_country})` : ''}\n` +
+    `*Message:* ${leadData.message || 'None'}`;
 
   try {
     await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {

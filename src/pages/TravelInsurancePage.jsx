@@ -100,7 +100,7 @@ const TravelInsurancePage = () => {
       name,
       phone,
       interest: `Overseas Travel Insurance - Destination: ${destination}`,
-      message: 'Lead from Travel Insurance Page'
+      source: 'Travel Insurance Page'
     });
 
     if (!res.success) {

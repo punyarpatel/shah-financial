@@ -113,7 +113,8 @@ const NRIPage = () => {
       interest: `NRI Services - ${interest || 'Not Specified'}`,
       is_nri: `Yes - ${nriCountry || 'Not Specified'}`,
       nri_country: nriCountry || '',
-      message: `Timezone: ${timezone || 'Not Specified'} | Lead from NRI Page`
+      message: `Timezone: ${timezone || 'Not Specified'}`,
+      source: 'NRI Page'
     });
 
     if (!res.success) {

@@ -1,9 +1,8 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
 import supabase from './lib/supabase';
 import { HelmetProvider } from 'react-helmet-async';
 import ScrollToTop from './components/ScrollToTop';
-import DesignSelector from './components/DesignSelector';
 
 // Lazy Loaded Pages
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -19,6 +18,7 @@ const BlogPage = lazy(() => import('./pages/BlogPage'));
 const SingleBlogPage = lazy(() => import('./pages/SingleBlogPage'));
 const AdminLoginPage = lazy(() => import('./pages/AdminLoginPage'));
 const AdminDashboardPage = lazy(() => import('./pages/AdminDashboardPage'));
+const AdminResetPasswordPage = lazy(() => import('./pages/AdminResetPasswordPage'));
 const LogoShowcasePage = lazy(() => import('./pages/LogoShowcasePage'));
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
 const TermsOfServicePage = lazy(() => import('./pages/TermsOfServicePage'));
@@ -35,16 +35,36 @@ const LoadingFallback = () => (
 );
 
 // ProtectedRoute Component
+// Checks:
+//   1. The user is logged in (has a Supabase session)
+//   2. Their email is in the admin allowlist (VITE_ADMIN_EMAILS env var,
+//      comma-separated). Falls back to checking user_metadata.is_admin.
 function ProtectedRoute({ children }) {
-  const [session, setSession] = useState(undefined);
+  const [authState, setAuthState] = useState('loading'); // 'loading' | 'admin' | 'denied' | 'unauthenticated'
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
+      if (!session) {
+        setAuthState('unauthenticated');
+        return;
+      }
+
+      const userEmail = session.user?.email || '';
+      const allowedEmails = (import.meta.env.VITE_ADMIN_EMAILS || '')
+        .split(',')
+        .map((e) => e.trim().toLowerCase())
+        .filter(Boolean);
+
+      // Check email allowlist first; fall back to user_metadata flag
+      const isAdmin =
+        (allowedEmails.length > 0 && allowedEmails.includes(userEmail.toLowerCase())) ||
+        session.user?.user_metadata?.is_admin === true;
+
+      setAuthState(isAdmin ? 'admin' : 'denied');
     });
   }, []);
 
-  if (session === undefined) {
+  if (authState === 'loading') {
     return (
       <div style={{
         display: 'flex',
@@ -59,7 +79,8 @@ function ProtectedRoute({ children }) {
     );
   }
 
-  if (!session) return <Navigate to="/admin/login" replace />;
+  if (authState === 'unauthenticated') return <Navigate to="/admin/login" replace />;
+  if (authState === 'denied') return <Navigate to="/" replace />;
 
   return children;
 }
@@ -70,8 +91,8 @@ const NotFoundPage = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#faf8f4]">
       <h1 className="text-[120px] font-serif font-bold text-[#0d2545] leading-none mb-4">404</h1>
       <p className="text-[#5c6478] text-[18px] mb-8">Page not found</p>
-      <Link 
-        to="/" 
+      <Link
+        to="/"
         className="bg-[#c9922a] text-white px-8 py-3 rounded-[8px] font-medium hover:bg-[#f0c96a] transition-colors"
       >
         Go to Home
@@ -80,13 +101,14 @@ const NotFoundPage = () => {
   );
 };
 
+
+
 export default function App() {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <div className="min-h-screen bg-gray-100 flex flex-col relative">
           <ScrollToTop />
-          <DesignSelector />
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
               <Route path="/" element={<HomePage />} />
@@ -101,13 +123,14 @@ export default function App() {
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:slug" element={<SingleBlogPage />} />
               <Route path="/admin/login" element={<AdminLoginPage />} />
-              <Route 
-                path="/admin/dashboard" 
+              <Route path="/admin/reset-password" element={<AdminResetPasswordPage />} />
+              <Route
+                path="/admin/dashboard"
                 element={
                   <ProtectedRoute>
                     <AdminDashboardPage />
                   </ProtectedRoute>
-                } 
+                }
               />
               <Route path="/logo-showcase" element={<LogoShowcasePage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />

@@ -106,7 +106,7 @@ const InsurancePage = () => {
       name,
       phone,
       interest: `Insurance Advisory - ${interest || 'Not Specified'}`,
-      message: 'Lead from Insurance Page'
+      source: 'Insurance Page'
     });
 
     if (!res.success) {

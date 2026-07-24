@@ -97,7 +97,7 @@ const MutualFundPage = () => {
       name,
       phone,
       interest: `Mutual Fund Advisory - ${interest || 'Not Specified'}`,
-      message: 'Lead from Mutual Funds Page'
+      source: 'Mutual Funds Page'
     });
 
     if (!res.success) {

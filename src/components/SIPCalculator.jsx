@@ -774,7 +774,7 @@ const SIPCalculator = () => {
             <div className="mt-[3rem] flex flex-col md:flex-row items-center gap-6 w-full">
               {/* Left: The Graph */}
               <div className="h-[220px] flex-1 w-full">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                   <AreaChart data={chartData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
                     <defs>
                       <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">

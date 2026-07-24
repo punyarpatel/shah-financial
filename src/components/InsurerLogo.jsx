@@ -23,7 +23,7 @@ const IciciLombardLogo = () => (
       <circle cx="15" cy="15" r="3.5" fill="#B02A30" />
     </g>
     <text x="44" y="19" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="13" fill="#B02A30" letterSpacing="-0.01em">ICICI</text>
-    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="10" fill="#005B75" letterSpacing="0.05em" textTransform="uppercase">Lombard</text>
+    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="10" fill="#005B75" letterSpacing="0.05em" style={{ textTransform: 'uppercase' }}>Lombard</text>
   </svg>
 );
 
@@ -48,7 +48,7 @@ const TataAigLogo = () => (
       <circle cx="15" cy="15" r="2.5" fill="#005A9C" />
     </g>
     <text x="44" y="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="13" fill="#005A9C" letterSpacing="0.04em">TATA AIG</text>
-    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#5C687E" letterSpacing="0.12em" textTransform="uppercase">Insurance</text>
+    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#5C687E" letterSpacing="0.12em" style={{ textTransform: 'uppercase' }}>Insurance</text>
   </svg>
 );
 
@@ -87,7 +87,7 @@ const EdelweissZunoLogo = () => (
       <circle cx="15" cy="15" r="13" fill="url(#zunoGrad)" />
       <path d="M 10 10 L 20 10 L 10 20 L 20 20" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
     </g>
-    <text x="44" y="14" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#7A8293" letterSpacing="0.08em" textTransform="uppercase">Edelweiss</text>
+    <text x="44" y="14" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#7A8293" letterSpacing="0.08em" style={{ textTransform: 'uppercase' }}>Edelweiss</text>
     <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="18" fill="url(#zunoGrad)" letterSpacing="-0.03em">zuno</text>
   </svg>
 );
@@ -122,7 +122,7 @@ const CareHealthLogo = () => (
       <circle cx="15" cy="19" r="3.5" fill="white" />
     </g>
     <text x="44" y="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="14" fill="#00A2A6" letterSpacing="0.02em">care</text>
-    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#5C687E" letterSpacing="0.08em" textTransform="uppercase">Health Insurance</text>
+    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#5C687E" letterSpacing="0.08em" style={{ textTransform: 'uppercase' }}>Health Insurance</text>
   </svg>
 );
 
@@ -133,7 +133,7 @@ const StarHealthLogo = () => (
       <polygon points="15,7 17.5,12 23,13 19,17 20.5,22.5 15,20 9.5,22.5 11,17 7,13 12.5,12" fill="white" />
     </g>
     <text x="44" y="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="14" fill="#005EA6" letterSpacing="0.05em">STAR</text>
-    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#5C687E" letterSpacing="0.08em" textTransform="uppercase">Health Insurance</text>
+    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#5C687E" letterSpacing="0.08em" style={{ textTransform: 'uppercase' }}>Health Insurance</text>
   </svg>
 );
 
@@ -160,7 +160,7 @@ const SbiLifeLogo = () => (
       <path d="M 10 24 L 20 24 L 17 16 L 13 16 Z" fill="white" />
     </g>
     <text x="44" y="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="13" fill="#005A9C" letterSpacing="0.02em">SBI LIFE</text>
-    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#5C687E" letterSpacing="0.08em" textTransform="uppercase">Insurance</text>
+    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#5C687E" letterSpacing="0.08em" style={{ textTransform: 'uppercase' }}>Insurance</text>
   </svg>
 );
 
@@ -172,7 +172,7 @@ const IciciPruLogo = () => (
       <circle cx="15" cy="15" r="3.5" fill="#B02A30" />
     </g>
     <text x="44" y="19" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="11" fill="#B02A30" letterSpacing="-0.01em">ICICI PRU</text>
-    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="9" fill="#005B75" letterSpacing="0.05em" textTransform="uppercase">Life Insurance</text>
+    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="9" fill="#005B75" letterSpacing="0.05em" style={{ textTransform: 'uppercase' }}>Life Insurance</text>
   </svg>
 );
 

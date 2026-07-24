@@ -1,0 +1,21 @@
+{
+  "active_color": "green",
+  "blue": {
+    "port": 3001,
+    "status": "standby (rollback ready)",
+    "version": "1.0.0"
+  },
+  "green": {
+    "port": 3002,
+    "status": "active",
+    "version": "1.0.0"
+  },
+  "history": [
+    {
+      "timestamp": "2026-07-24T11:00:56.294Z",
+      "from": "blue",
+      "to": "green",
+      "action": "deploy"
+    }
+  ]
+}
