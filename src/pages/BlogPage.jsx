@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
@@ -9,8 +9,10 @@ import StaggerGroup from '../components/animations/StaggerGroup';
 import StaggerItem from '../components/animations/StaggerItem';
 
 import { blogs } from './SingleBlogPage';
+import ModernFramerBlog from '../components/ModernFramerBlog';
 
 const BlogPage = () => {
+  const [blogMode, setBlogMode] = useState('framer'); // 'classic' | 'framer'
   const ogImage = `${window.location.origin}/why_choose_us_mockup.png`;
 
   return (
@@ -31,12 +33,41 @@ const BlogPage = () => {
 
       <Navbar />
 
-      <section className="flex-grow py-[4rem] w-full">
-        <div className="max-w-7xl mx-auto px-4">
-          
-          {/* Header */}
-          <FadeIn>
-            <div className="text-center mb-[3.5rem]">
+      <section className="flex-grow py-[2rem] w-full">
+        {/* Blog Layout Switcher Pill */}
+        <div className="flex justify-center mb-6">
+          <div className="inline-flex items-center p-1 bg-navy/5 border border-navy/10 rounded-full text-xs font-semibold shadow-sm z-20">
+            <button
+              onClick={() => setBlogMode('classic')}
+              className={`px-4 py-1.5 rounded-full transition-all duration-300 ${
+                blogMode === 'classic'
+                  ? 'bg-navy text-white shadow-md'
+                  : 'text-navy/60 hover:text-navy'
+              }`}
+            >
+              Classic Articles Grid
+            </button>
+            <button
+              onClick={() => setBlogMode('framer')}
+              className={`px-4 py-1.5 rounded-full transition-all duration-300 ${
+                blogMode === 'framer'
+                  ? 'bg-navy text-white shadow-md'
+                  : 'text-navy/60 hover:text-navy'
+              }`}
+            >
+              Framer Intelligence Hub
+            </button>
+          </div>
+        </div>
+
+        {blogMode === 'framer' ? (
+          <ModernFramerBlog />
+        ) : (
+          <div className="max-w-7xl mx-auto px-4">
+            
+            {/* Header */}
+            <FadeIn>
+              <div className="text-center mb-[3.5rem]">
               <div className="inline-block bg-[#c9922a]/10 text-[#c9922a] text-[11px] uppercase tracking-[0.15em] font-medium px-[12px] py-[4px] rounded-[20px] mb-[1rem]">
                 Learn & Grow
               </div>
@@ -80,9 +111,9 @@ const BlogPage = () => {
                 </div>
               </StaggerItem>
             ))}
-          </StaggerGroup>
-          
-        </div>
+            </StaggerGroup>
+          </div>
+        )}
       </section>
 
       <Footer />

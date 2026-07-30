@@ -20,7 +20,7 @@ const faqData = [
   },
   {
     question: "How can I monitor my mutual funds and insurance holdings?",
-    answer: "Every client gets access to dedicated, secure online client desks. Depending on your portfolio setup, you can log in through the NJ Client Desk or Prudent Client Desk platforms directly. Both platforms offer robust web interfaces and mobile apps to track real-time valuations, returns, and transaction histories."
+    answer: "Every client gets access to dedicated, secure online client desks. You can log in through our client portal to track real-time valuations, returns, and transaction histories. The platform offers a robust web interface and mobile app for seamless portfolio monitoring."
   },
   {
     question: "What is your investment philosophy and recommendation process?",

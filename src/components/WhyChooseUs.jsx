@@ -5,7 +5,7 @@ const whyChooseUsData = [
   {
     id: 1,
     title: '25+ Years of Proven Track Record',
-    description: 'Founded in 2001 by Rajesh Shah, we have guided families and businesses through diverse market cycles with research-backed, stable advice.'
+    description: 'Founded in 2001 by Piyush Shah, we have guided families and businesses through diverse market cycles with personalized wealth planning and asset allocation.'
   },
   {
     id: 2,
@@ -19,8 +19,8 @@ const whyChooseUsData = [
   },
   {
     id: 4,
-    title: 'Conflict-Free, Tailored Strategy',
-    description: 'Zero generic templates. Receive custom asset allocation matching your tax saving targets, retirement horizons, or education milestones.'
+    title: 'Conflict-Free, Tailored Risk Planning',
+    description: 'Receive insurance coverage strategies for families to ensure financial protection against accidental losses.'
   }
 ];
 

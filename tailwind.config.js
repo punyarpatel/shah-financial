@@ -35,7 +35,7 @@ export default {
       animation: {
         marquee: 'marquee 35s linear infinite',
         'spin-y': 'spin-y 20s linear infinite',
-        float: 'float 5s ease-in-out infinite'
+        float: 'float 2.5s ease-in-out infinite'
       }
     },
   },

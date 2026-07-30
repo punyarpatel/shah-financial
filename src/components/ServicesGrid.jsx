@@ -85,7 +85,7 @@ const servicesData = [
     highlights: [
       'Seamless NRE & NRO account integration',
       'End to end KYC, complianace & repatriation support',
-      'personalised india focused investment guidance'
+      'Personalized india focused investment guidance'
     ]
   },
   {
@@ -137,55 +137,55 @@ const servicesData = [
 const masonryBackgroundItems = [
   {
     id: 'm1',
-    img: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=600&auto=format&fit=crop', // plant growing out of coins
+    img: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=600&auto=format&fit=crop', // financial growth / gold coin & chart
     url: '#',
     height: 450
   },
   {
     id: 'm2',
-    img: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=600&auto=format&fit=crop', // happy family outdoors
+    img: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=600&auto=format&fit=crop', // happy family sunset / security
     url: '#',
     height: 350
   },
   {
     id: 'm3',
-    img: 'https://images.unsplash.com/photo-1531844755146-5c5e8c10e08f?q=80&w=600&auto=format&fit=crop', // active senior couple
+    img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop', // confident professional guidance
     url: '#',
     height: 480
   },
   {
     id: 'm4',
-    img: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=600&auto=format&fit=crop', // financial chart
+    img: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=600&auto=format&fit=crop', // stock market / investment chart
     url: '#',
     height: 380
   },
   {
     id: 'm5',
-    img: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=600&auto=format&fit=crop', // travel map / NRI
+    img: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop', // airplane wing / travel & NRI
     url: '#',
     height: 420
   },
   {
     id: 'm6',
-    img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=600&auto=format&fit=crop', // house keys/planning
+    img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=600&auto=format&fit=crop', // real estate / home key
     url: '#',
     height: 320
   },
   {
     id: 'm7',
-    img: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=600&auto=format&fit=crop', // education graduation
+    img: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600&auto=format&fit=crop', // education & graduation goal
     url: '#',
     height: 400
   },
   {
     id: 'm8',
-    img: 'https://images.unsplash.com/photo-1621416894569-0f39ed31d247?q=80&w=600&auto=format&fit=crop', // gold coins stack
+    img: 'https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?q=80&w=600&auto=format&fit=crop', // 3D digital gold wealth
     url: '#',
     height: 300
   },
   {
     id: 'm9',
-    img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=600&auto=format&fit=crop', // business advisory meeting
+    img: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=600&auto=format&fit=crop', // handshake / client partnership
     url: '#',
     height: 440
   }

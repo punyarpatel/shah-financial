@@ -3,6 +3,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { submitLead } from '../lib/leads';
 import { countriesList } from '../lib/countries';
+import EyeFollowButton from './EyeFollowButton';
+import ModernNavbar from './ModernNavbar';
 
 const navData = {
   home: [
@@ -113,7 +115,7 @@ const MobileNavItem = ({ title, mainLink, items, isOpen, toggleOpen, handleLinkC
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const navMode = 'classic';
+  const [navMode, setNavMode] = useState('classic');
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenus, setMobileMenus] = useState({
     home: false,
@@ -357,8 +359,8 @@ const Navbar = () => {
                     <span className="font-serif text-white text-[17px] font-semibold leading-tight">
                       Drishti Wealth
                     </span>
-                    <span className="text-goldLight text-[10px] uppercase tracking-[0.15em] leading-tight mt-0.5">
-                      AMFI Registered &middot; Est. 2001
+                    <span className="text-goldLight text-[10px] uppercase tracking-[0.12em] leading-tight mt-0.5">
+                      Your Trusted Partner for Financial Growth
                     </span>
                   </Link>
                 }
@@ -373,8 +375,8 @@ const Navbar = () => {
                 <span className="font-serif text-white text-[17px] font-semibold leading-tight">
                   Drishti Wealth
                 </span>
-                <span className="text-goldLight text-[10px] uppercase tracking-[0.15em] leading-tight mt-0.5">
-                  AMFI Registered &middot; Est. 2001
+                <span className="text-goldLight text-[10px] uppercase tracking-[0.12em] leading-tight mt-0.5">
+                  Your Trusted Partner for Financial Growth
                 </span>
               </Link>
 
@@ -385,13 +387,16 @@ const Navbar = () => {
                 <DesktopNavItem title="About Us" mainLink="/about" items={navData.about} handleLinkClick={handleLinkClick} />
                 <DesktopNavItem title="Blog" mainLink="/blog" items={navData.blog} handleLinkClick={handleLinkClick} />
 
-                {/* CTA Button */}
-                <button
+                {/* CTA Button with Eye Follow animation */}
+                <EyeFollowButton
+                  text="Get Free Review"
                   onClick={() => { resetForm(); setIsModalOpen(true); }}
-                  className="bg-gold text-white px-[18px] py-[8px] rounded-[6px] text-[13px] font-medium hover:bg-goldLight transition-colors ml-2 cursor-pointer"
-                >
-                  Get Free Review
-                </button>
+                  buttonColor="#c9922a"
+                  textColor="#ffffff"
+                  eyeColor="#ffffff"
+                  pupilColor="#0d2545"
+                  className="py-2 px-4 text-[13px] font-semibold tracking-wide ml-2"
+                />
               </div>
 
               {/* Mobile Hamburger Icon */}
@@ -415,18 +420,21 @@ const Navbar = () => {
             {/* Mobile Dropdown Menu */}
             {isOpen && (
               <div className="md:hidden absolute top-[64px] left-0 w-full bg-navy border-t border-white/10 shadow-lg max-h-[calc(100vh-64px)] overflow-y-auto">
-                <div className="flex flex-col px-4 py-4 space-y-4">
+                <div className="flex flex-col px-4 py-4 space-y-4 items-center">
                   <MobileNavItem title="Home" mainLink="/" items={navData.home} isOpen={mobileMenus.home} toggleOpen={() => toggleMobileMenu('home')} handleLinkClick={handleLinkClick} />
                   <MobileNavItem title="Services" mainLink="/services" items={navData.services} isOpen={mobileMenus.services} toggleOpen={() => toggleMobileMenu('services')} handleLinkClick={handleLinkClick} />
                   <MobileNavItem title="About Us" mainLink="/about" items={navData.about} isOpen={mobileMenus.about} toggleOpen={() => toggleMobileMenu('about')} handleLinkClick={handleLinkClick} />
                   <MobileNavItem title="Blog" mainLink="/blog" items={navData.blog} isOpen={mobileMenus.blog} toggleOpen={() => toggleMobileMenu('blog')} handleLinkClick={handleLinkClick} />
 
-                  <button
+                  <EyeFollowButton
+                    text="Get Free Review"
                     onClick={() => { closeMenu(); resetForm(); setIsModalOpen(true); }}
-                    className="bg-gold text-white px-[18px] py-[10px] rounded-[6px] text-[14px] font-medium hover:bg-goldLight transition-colors w-full text-center mt-2 cursor-pointer"
-                  >
-                    Get Free Review
-                  </button>
+                    buttonColor="#c9922a"
+                    textColor="#ffffff"
+                    eyeColor="#ffffff"
+                    pupilColor="#0d2545"
+                    className="w-full justify-center mt-2 py-2.5"
+                  />
                 </div>
               </div>
             )}

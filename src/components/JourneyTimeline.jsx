@@ -5,7 +5,7 @@ const milestones = [
   {
     year: '2001',
     title: 'Sowing the Seeds',
-    description: 'Drishti Wealth was founded in Ahmedabad by Rajesh Shah with a simple vision: helping local families achieve financial freedom with transparent and honest advice.',
+    description: 'Drishti Wealth was founded in Ahmedabad by Piyush Shah with a simple vision: helping local families achieve financial freedom with transparent and honest advice.',
     icon: (
       <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22V12" />
@@ -20,8 +20,8 @@ const milestones = [
   },
   {
     year: '2010',
-    title: 'Strategic Partnership',
-    description: 'Empanelled with NJ Wealth, one of India’s largest mutual fund and wealth distribution platforms, expanding our investment offerings and reach.',
+    title: 'Multi-Asset Expansion',
+    description: 'Empanelled with leading national distribution desks, expanding our mutual fund and life insurance offerings across India.',
     icon: (
       <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
@@ -30,7 +30,7 @@ const milestones = [
         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
     ),
-    stat: 'NJ Wealth Partner',
+    stat: 'National Empanelment',
     tag: 'Expansion'
   },
   {
@@ -65,7 +65,7 @@ const milestones = [
   {
     year: '2021',
     title: 'Digital Transformation',
-    description: 'Partnered with Prudent Corporate FundzBazar, introducing state-of-the-art mobile apps and online tracking systems for seamless, paperless client investment journeys.',
+    description: 'Integrated state-of-the-art mobile apps and online tracking systems for seamless, paperless client investment journeys.',
     icon: (
       <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
@@ -119,8 +119,8 @@ const JourneyTimeline = () => {
 
   // Smooth scrollbar value
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 80,
-    damping: 20,
+    stiffness: 140,
+    damping: 24,
     restDelta: 0.001
   });
 
@@ -160,7 +160,7 @@ const JourneyTimeline = () => {
   return (
     <div 
       ref={containerRef} 
-      className="relative h-[300vh] md:h-[400vh] w-full"
+      className="relative h-[220vh] md:h-[280vh] w-full"
       id="journey-section"
     >
       {/* Sticky Inner Container */}

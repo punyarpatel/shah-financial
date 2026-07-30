@@ -10,7 +10,7 @@ const features = [
   {
     key: 'achievements-mode',
     label: 'Achievements Showcase',
-    defaultValue: 'circular',
+    defaultValue: 'classic',
     options: [
       { value: 'classic', label: 'Rotating Coins' },
       { value: 'circular', label: 'Circular Gallery' }

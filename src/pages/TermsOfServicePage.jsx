@@ -31,7 +31,7 @@ const TermsOfServicePage = () => {
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
       const offsetPosition = elementPosition - offset;
-      
+
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
@@ -43,9 +43,9 @@ const TermsOfServicePage = () => {
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
         <title>Terms of Service | Drishti Wealth Ahmedabad</title>
-        <meta 
-          name="description" 
-          content="Terms of Service of Drishti Wealth. Read the rules, obligations, and legal agreements governing the use of our financial advisory website and platforms." 
+        <meta
+          name="description"
+          content="Terms of Service of Drishti Wealth. Read the rules, obligations, and legal agreements governing the use of our financial advisory website and platforms."
         />
       </Helmet>
 
@@ -61,7 +61,7 @@ const TermsOfServicePage = () => {
             Terms of Service
           </h1>
           <p className="text-white/65 text-[15px] max-w-xl">
-            Effective Date: July 2, 2026. Please read these terms carefully before using our digital platforms or services.
+            Effective Date: September 1, 2026. Please read these terms carefully before using our digital platforms or services.
           </p>
         </div>
       </section>
@@ -70,7 +70,7 @@ const TermsOfServicePage = () => {
       <section className="flex-grow py-[4rem] w-full">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            
+
             {/* Sticky Sidebar Navigation (Desktop) */}
             <aside className="lg:col-span-4 lg:sticky lg:top-28 bg-white border border-navy/5 p-6 rounded-[12px] shadow-sm hidden lg:block">
               <h2 className="font-serif text-navy text-[16px] font-semibold mb-4 border-b border-navy/10 pb-2">
@@ -92,7 +92,7 @@ const TermsOfServicePage = () => {
             {/* Content Column */}
             <div className="lg:col-span-8 bg-white border border-navy/10 rounded-[16px] p-8 md:p-12 shadow-sm">
               <FadeIn>
-                
+
                 <div id="agreement" className="mb-10 scroll-mt-28">
                   <h2 className="font-serif text-navy text-[22px] font-semibold mb-4 border-b border-gold/20 pb-2">
                     1. Agreement & Scope
@@ -129,7 +129,6 @@ const TermsOfServicePage = () => {
                   <ol className="list-decimal pl-5 space-y-3 text-muted text-[14.5px] leading-relaxed">
                     <li>An **AMFI-registered Mutual Fund Distributor (MFD)**. We facilitate mutual fund investment transactions, client onboarding, KYC verification support, and portfolio tracking. We distribute mutual fund schemes from multiple AMCs.</li>
                     <li>An **IRDAI-licensed Insurance Advisor / Agent**. We solicit and facilitate the issuance of life, health, general, and travel insurance products on behalf of licensed insurance providers in India.</li>
-                    <li>An **empanelled partner of NJ Wealth** (NJ India Invest Pvt. Ltd.), leveraging their transactional desks (NJ Client Desk) to provide secure digital execution.</li>
                   </ol>
                   <p className="text-muted text-[14.5px] leading-relaxed mt-4">
                     Please note that we represent various fund houses and insurance partners and act strictly as distributors. The services are facilitation-based, and any calculations, calculators, or reports provided are for illustrative purposes and do not represent guaranteed projections.
@@ -145,7 +144,7 @@ const TermsOfServicePage = () => {
                   </p>
                   <ul className="list-disc pl-5 space-y-2 text-muted text-[14.5px] leading-relaxed">
                     <li>Provide accurate, current, and complete personal, financial, and KYC details during onboarding and declaration.</li>
-                    <li>Maintain the confidentiality of your login credentials (username, passwords, OTPs) for any transactional platform we provide (e.g., NJ Client Desk). You are solely responsible for all activities occurring under your account.</li>
+                    <li>Maintain the confidentiality of your login credentials (username, passwords, OTPs) for any transactional platform we provide. You are solely responsible for all activities occurring under your account.</li>
                     <li>Not use the Platform for any fraudulent or illegal transactions, including money laundering, or in violation of SEBI/RBI regulations.</li>
                     <li>Not copy, crawl, scrape, reverse-engineer, or deface any graphics, design systems, code, or logos of Drishti Wealth.</li>
                   </ul>
@@ -156,13 +155,10 @@ const TermsOfServicePage = () => {
                     5. Fees & Brokerage
                   </h2>
                   <p className="text-muted text-[14.5px] leading-relaxed mb-4">
-                    Drishti Wealth does **not** charge any direct advisory fees to retail clients for mutual fund distribution services. Instead, we receive commissions and distribution payouts directly from the Asset Management Companies (AMCs) as per industry norms.
-                  </p>
-                  <p className="text-muted text-[14.5px] leading-relaxed mb-4">
-                    For insurance advisory, our remuneration consists of commissions, solicitation fees, and brokerage paid directly by the insurance partners, in accordance with the limits defined by IRDAI regulations.
+                    Drishti Wealth does **not** charge any direct advisory fees to retail clients for mutual fund distribution services.
                   </p>
                   <p className="text-muted text-[14.5px] leading-relaxed">
-                    Any transaction charges levied by banks, registrar transfer agencies, or payment gateways for investments/premiums are borne directly by the client. Detailed commission structure details are disclosed in our **Disclosures Page** in compliance with SEBI guidelines.
+                    Any transaction charges levied by banks, registrar transfer agencies, or payment gateways for investments/premiums are borne directly by the client.
                   </p>
                 </div>
 
@@ -199,7 +195,7 @@ const TermsOfServicePage = () => {
                     8. Intellectual Property
                   </h2>
                   <p className="text-muted text-[14.5px] leading-relaxed">
-                    All contents on this Platform, including text, graphics, logos, layouts, buttons, audio-visual elements, and software code, are the intellectual property of Drishti Wealth or its licensed technology partners (including NJ Wealth, AMCs, etc.) and are protected by Indian copyright, trademark, and intellectual property laws. Unauthorized distribution or copying of any content is strictly prohibited.
+                    All contents on this Platform, including text, graphics, logos, layouts, buttons, audio-visual elements, and software code, are the intellectual property of Drishti Wealth or its licensed technology partners (including AMCs, etc.) and are protected by Indian copyright, trademark, and intellectual property laws. Unauthorized distribution or copying of any content is strictly prohibited.
                   </p>
                 </div>
 
@@ -208,7 +204,7 @@ const TermsOfServicePage = () => {
                     9. Governing Law & Dispute Resolution
                   </h2>
                   <p className="text-muted text-[14.5px] leading-relaxed">
-                    These Terms shall be governed by, interpreted, and construed in accordance with the laws of India. Any legal dispute, action, claim, or proceeding arising out of or related to these Terms, the Platform, or our services shall be subject to the exclusive jurisdiction of the courts located in **Ahmedabad, Gujarat, India**.
+                    These Terms shall be governed by, interpreted, and construed in accordance with the laws of India. Any legal dispute, action, claim, or proceeding arising out of or related to these Terms, the Platform, or our services shall be subject to the exclusive jurisdiction of the courts.
                   </p>
                 </div>
 

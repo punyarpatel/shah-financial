@@ -715,39 +715,7 @@ const SIPCalculator = () => {
                 </div>
               </div>
 
-              {/* Download / Share Actions */}
-              <div className="flex flex-wrap gap-3 mt-5 border-t border-white/10 pt-4">
-                <button
-                  type="button"
-                  onClick={downloadPDF}
-                  className="flex-1 sm:flex-initial flex items-center justify-center gap-2 bg-white/5 border border-white/10 hover:border-gold hover:bg-white/10 text-white text-[13px] font-semibold py-2.5 px-4 rounded-[6px] transition-all cursor-pointer whitespace-nowrap"
-                >
-                  <svg className="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.1" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
-                  PDF Report
-                </button>
-                <button
-                  type="button"
-                  onClick={downloadCSV}
-                  className="flex-1 sm:flex-initial flex items-center justify-center gap-2 bg-white/5 border border-white/10 hover:border-gold hover:bg-white/10 text-white text-[13px] font-semibold py-2.5 px-4 rounded-[6px] transition-all cursor-pointer whitespace-nowrap"
-                >
-                  <svg className="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.1" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  CSV Data
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setIsShareModalOpen(true)}
-                  className="flex-1 sm:flex-initial flex items-center justify-center gap-2 bg-white/5 border border-white/10 hover:border-gold hover:bg-white/10 text-white text-[13px] font-semibold py-2.5 px-4 rounded-[6px] transition-all cursor-pointer whitespace-nowrap"
-                >
-                  <svg className="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.1" d="M8.684 10.742l4.87-2.842M8.684 13.258l4.87 2.842M21 12a3 3 0 11-6 0 3 3 0 016 0zm-11-5a3 3 0 11-6 0 3 3 0 016 0zm0 10a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  Share Projection
-                </button>
-              </div>
+
             </div>
 
             {/* Metrics Grid */}

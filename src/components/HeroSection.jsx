@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import FadeIn from './animations/FadeIn';
 
 const HeroSection = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const heroMode = 'classic';
 
   const handleScrollToSection = (sectionId) => {
     if (location.pathname !== '/') {
@@ -29,9 +27,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section
-      className="w-full relative overflow-hidden"
-    >
+    <section className="w-full relative overflow-hidden">
       {/* Background Video */}
       <video
         autoPlay
@@ -58,140 +54,36 @@ const HeroSection = () => {
       {/* Base Dark Overlay */}
       <div className="absolute inset-0 z-[1] bg-navy/80 mix-blend-multiply pointer-events-none" />
 
-      {/* Elegant Aurora Effect */}
-      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none opacity-60 mix-blend-screen">
-        {/* Golden Aurora */}
-        <motion.div
-          className="absolute top-[-20%] left-[-20%] w-[140%] h-[140%] rounded-full opacity-30"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(201, 146, 42, 0.5) 0%, transparent 60%)',
-            filter: 'blur(80px)'
-          }}
-          animate={{
-            x: ['-10%', '10%', '-10%'],
-            y: ['0%', '10%', '0%'],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
+      {/* Golden Ambient Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gold/15 blur-[120px] rounded-full z-[1] pointer-events-none" />
 
-        {/* Deep Navy/Teal Aurora */}
-        <motion.div
-          className="absolute top-[-30%] right-[-20%] w-[150%] h-[150%] rounded-full opacity-40"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(13, 37, 69, 0.8) 0%, transparent 60%)',
-            filter: 'blur(100px)'
-          }}
-          animate={{
-            x: ['10%', '-10%', '10%'],
-            y: ['-5%', '15%', '-5%'],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-
-        {/* Soft Center Glow */}
-        <motion.div
-          className="absolute top-[20%] left-[20%] w-[60%] h-[60%] rounded-full opacity-20"
-          style={{
-            background: 'radial-gradient(circle at center, rgba(240, 201, 106, 0.4) 0%, transparent 70%)',
-            filter: 'blur(60px)'
-          }}
-          animate={{
-            x: ['0%', '5%', '0%'],
-            y: ['5%', '-5%', '5%'],
-            opacity: [0.1, 0.4, 0.1]
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      </div>
-
-      {/* Inner Content */}
-      <div className="max-w-7xl mx-auto pt-[4rem] md:pt-[6rem] pb-[4rem] px-4 relative z-10">
-        <div className="max-w-[680px] mx-auto text-center">
+      <div className="max-w-[1200px] mx-auto px-[24px] pt-[7rem] pb-[5rem] relative z-[2]">
+        <div className="max-w-[800px] mx-auto text-center">
           {/* Badge */}
           <FadeIn delay={0.2}>
-            <div
-              className="inline-flex items-center gap-[6px] rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]"
-              style={{
-                border: '1px solid #c9a84c',
-                background: 'rgba(201, 168, 76, 0.1)'
-              }}
-            >
-              <div
-                className="w-[6px] h-[6px] rounded-full"
-                style={{ backgroundColor: '#c9a84c' }}
-              />
-              <span
-                className="text-[11px] uppercase tracking-[0.12em]"
-                style={{ color: '#c9a84c' }}
-              >
-                AMFI Registered Mutual Fund Distributor
-              </span>
+            <div className="inline-flex items-center gap-[8px] bg-navy/40 border border-white/10 px-[16px] py-[6px] rounded-full text-[12px] text-white/80 backdrop-blur-sm mb-[2rem]">
+              <span className="w-[6px] h-[6px] rounded-full bg-gold animate-pulse"></span>
+              AMFI Registered Mutual Fund Distributor
             </div>
           </FadeIn>
 
-          {/* Heading */}
-          {heroMode === 'blurtext' ? (
-            <h1 className="font-serif text-[42px] font-semibold leading-[1.2] text-white mb-[1.25rem] flex flex-wrap justify-center gap-x-3">
-              <BlurText
-                text="Your Trusted Partner for"
-                delay={80}
-                animateBy="words"
-                direction="top"
-                as="span"
-              />
-              <BlurText
-                text="Financial Growth"
-                delay={80}
-                animateBy="words"
-                direction="bottom"
-                className="text-[#c9922a] not-italic"
-                as="span"
-              />
-            </h1>
-          ) : heroMode === 'decrypted' ? (
-            <h1 className="font-serif text-[42px] font-semibold leading-[1.2] text-white mb-[1.25rem] flex flex-wrap justify-center gap-x-3">
-              <DecryptedText
-                text="Your Trusted Partner for"
-                animateOn="view"
-                speed={80}
-                sequential={true}
-                parentClassName="inline-block"
-              />
-              <DecryptedText
-                text="Financial Growth"
-                animateOn="view"
-                speed={80}
-                sequential={true}
-                className="text-[#c9922a] not-italic"
-                parentClassName="inline-block"
-              />
-            </h1>
-          ) : (
-            <FadeIn delay={0.35}>
-              <h1 className="font-serif text-[42px] font-semibold leading-[1.2] text-white mb-[1.25rem]">
-                Your Trusted Partner for <em className="text-[#c9922a] not-italic">Financial Growth</em>
+          {/* Title & Tagline */}
+          <FadeIn delay={0.35}>
+            <div className="mb-[1.5rem]">
+              <h1 className="font-serif text-[42px] sm:text-[54px] md:text-[64px] font-normal leading-[1.1] text-white tracking-[-0.02em] mb-2">
+                Drishti Wealth
               </h1>
-            </FadeIn>
-          )}
+              <p className="text-[#f0c96a] text-[13px] sm:text-[15px] font-sans font-medium uppercase tracking-[0.16em] leading-snug">
+                Your Trusted Partner for Financial Growth
+              </p>
+            </div>
+          </FadeIn>
 
           {/* Description */}
           <FadeIn delay={0.5}>
             <p className="text-white/65 text-[16px] font-light leading-[1.6] mb-[2.5rem]">
-              Our focus is on building long-term relationships by offering personalized investment solutions, comprehensive insurance protection, and goal-based financial planning tailored to every stage of life.            </p>
+              Our focus is on building long-term relationships by offering personalized investment solutions, comprehensive insurance protection, and goal-based financial planning tailored to every stage of life.
+            </p>
           </FadeIn>
 
           {/* Buttons */}
@@ -199,13 +91,13 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-[4rem]">
               <button
                 onClick={() => handleScrollToSection('contact')}
-                className="w-full sm:w-auto bg-[#c9922a] text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-[#f0c96a] transition-colors"
+                className="w-full sm:w-auto bg-[#c9922a] text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-[#f0c96a] transition-colors cursor-pointer"
               >
                 Start a SIP Today
               </button>
               <button
                 onClick={() => handleScrollToSection('calculator')}
-                className="w-full sm:w-auto bg-transparent border border-white/20 text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-white/5 transition-colors"
+                className="w-full sm:w-auto bg-transparent border border-white/20 text-white px-[24px] py-[12px] rounded-[8px] font-medium hover:bg-white/5 transition-colors cursor-pointer"
               >
                 Calculate SIP Returns
               </button>

@@ -29,7 +29,7 @@ const AboutPage = () => {
     { image: '/nippon-partner.png', text: 'NIPPON' }
   ];
 
-  const achievementsMode = useDesignMode('achievements-mode', 'circular');
+  const achievementsMode = useDesignMode('achievements-mode', 'classic');
 
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">

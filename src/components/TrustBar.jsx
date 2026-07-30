@@ -6,8 +6,6 @@ const TrustBar = () => {
     'HDFC Mutual Fund',
     'ICICI Prudential',
     'Nippon India',
-    'NJ Wealth Partner',
-    'Prudent Partner',
     'HDFC Ergo',
     'Go Digit',
     'Tata AIG',
