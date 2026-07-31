@@ -10,7 +10,6 @@ const navData = {
   home: [
     { icon: '🏠', title: 'Welcome', desc: 'Return to the top of the homepage.', link: '/' },
     { icon: '🧮', title: 'SIP Calculator', desc: 'Direct link to the interactive SIP calculator.', link: '/#calculator' },
-    { icon: '⭐', title: 'Client Testimonials', desc: 'Hear from our happy families.', link: '/#testimonials' },
     { icon: '❓', title: 'FAQs', desc: 'Frequently asked financial questions.', link: '/#faq' },
     { icon: '💬', title: 'Contact Us', desc: 'Jump straight to the enquiry form.', link: '/#contact' },
   ],
@@ -30,10 +29,11 @@ const navData = {
   ],
   blog: [
     { icon: '📈', title: 'What is a SIP?', desc: 'Learn how SIP builds wealth through compounding.', link: '/blog/what-is-sip' },
-    { icon: '🛡️', title: 'Term vs Endowment', desc: 'Choose the right protection for your family.', link: '/blog/term-vs-endowment' },
+    { icon: '🛡️', title: 'Endowment vs ULIP', desc: 'Compare traditional & market-linked savings plans.', link: '/blog/endowment-vs-ulip' },
     { icon: '🌍', title: 'NRI Investing Guide', desc: 'DTAA benefits and NRE account setup.', link: '/blog/nri-guide-investing' },
     { icon: '💰', title: 'Save Tax with ELSS', desc: 'Maximize Section 80C deductions.', link: '/blog/elss-tax-saving' },
     { icon: '🎯', title: 'Goal-Based Planning', desc: 'Align your investments with life goals.', link: '/blog/goal-based-wealth-planning' },
+    { icon: '✨', title: 'Explore more', desc: 'Discover all financial guides & articles.', link: '/blog' },
   ]
 };
 
@@ -264,13 +264,13 @@ const Navbar = () => {
       const [path, hash] = link.split('#');
       if (location.pathname !== path) {
         navigate(link);
-        setTimeout(() => {
-          const section = document.getElementById(hash);
-          if (section) section.scrollIntoView({ behavior: 'auto' });
-        }, 100);
       } else {
         const section = document.getElementById(hash);
-        if (section) section.scrollIntoView({ behavior: 'auto' });
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
       }
     } else {
       if (location.pathname === link) {

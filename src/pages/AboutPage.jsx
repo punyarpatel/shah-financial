@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
@@ -15,10 +16,27 @@ import useDesignMode from '../hooks/useDesignMode';
 import BorderGlow from '../components/animations/BorderGlow';
 
 const AboutPage = () => {
+  const location = useLocation();
   const labelStyles = "text-gold text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]";
   const titleStyles = "font-serif text-[28px] md:text-[36px] text-textDark font-semibold mb-[2rem] leading-tight";
   const cardStyles = "premium-card";
   const ogImage = `${window.location.origin}/why_choose_us_mockup.png`;
+
+  // Auto-scroll to section on hash change or route load
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      const timer = setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 200);
+      return () => clearTimeout(timer);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location]);
 
   const partnerItems = [
     { image: '/hdfc-partner.png', text: 'HDFC' },
@@ -60,7 +78,7 @@ const AboutPage = () => {
               A Family Built on Trust
             </h1>
             <p className="text-white/65 text-[16px] leading-[1.6] max-w-2xl">
-              Drishti Wealth was founded in 2001 in Ahmedabad by a family with a simple belief: every Indian family deserves access to honest, personalized financial guidance. What started as a small advisory practice has grown into a trusted firm serving 6,000 plus clients across India and abroad.
+              Drishti Wealth was founded in 2001 in Ahmedabad by a family with a simple belief that every Indian family deserves access to honest, personalized financial guidance. What started as a small advisory practice has grown into a trusted firm serving 6,000 plus clients across India and abroad.
             </p>
           </div>
         </FadeIn>
@@ -72,7 +90,7 @@ const AboutPage = () => {
           <div className="max-w-7xl mx-auto px-4">
             <div className={labelStyles}>Why Choose Us</div>
             <h2 className={titleStyles}>What Makes Us Different</h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <BorderGlow className="h-full" borderRadius={12} backgroundColor="#ffffff">
                 <div className="p-[1.5rem]">
@@ -152,18 +170,20 @@ const AboutPage = () => {
       {/* Section 3.5: Our Journey Timeline */}
       <JourneyTimeline />
 
-      {/* Section 4: Our Team (Interactive Showcase) */}
-      <CredentialsShowcase />
+      {/* Section 4: Our Team & Credentials Showcase */}
+      <div id="team">
+        <CredentialsShowcase />
+      </div>
 
       {/* Section 4.5: Partners Gallery */}
       <section className="py-[4rem] w-full bg-navy overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 text-center mb-[1rem]">
-           <h2 className="font-serif text-[28px] md:text-[36px] text-white font-semibold mb-2">
-              Achievement & Partnership Showcase
-           </h2>
-           <p className="text-white/60 text-[15px] max-w-2xl mx-auto">
-             Empanelled with leading national asset management companies and transactional platforms in India.
-           </p>
+          <h2 className="font-serif text-[28px] md:text-[36px] text-white font-semibold mb-2">
+            Achievement & Partnership Showcase
+          </h2>
+          <p className="text-white/60 text-[15px] max-w-2xl mx-auto">
+            Empanelled with leading national asset management companies and transactional platforms in India.
+          </p>
         </div>
 
         {achievementsMode === 'circular' ? (
@@ -190,7 +210,7 @@ const AboutPage = () => {
         <FadeIn>
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              
+
               {/* Left Side: Text and Address details */}
               <div className="lg:col-span-5 flex flex-col justify-center">
                 <span className="text-gold text-[11px] tracking-[0.2em] uppercase font-semibold mb-2 block">
@@ -199,7 +219,7 @@ const AboutPage = () => {
                 <h2 className="font-serif text-[32px] md:text-[40px] text-navy font-bold leading-tight mb-6">
                   Visit Our Office
                 </h2>
-                
+
                 <p className="text-muted text-[15.5px] leading-relaxed mb-8">
                   We welcome you to visit our primary office in Ahmedabad. Whether you'd like to discuss a portfolio review, plan a new investment journey, or consult on tax planning, our team is here to assist.
                 </p>
@@ -213,10 +233,10 @@ const AboutPage = () => {
                     <div>
                       <h4 className="font-serif text-[16px] text-navy font-semibold mb-1">Office Address</h4>
                       <p className="text-muted text-[14px] leading-relaxed">
-                        <a 
-                          href="https://maps.google.com/?q=305,+Abhishilp+Complex,+Satellite,+Ahmedabad,+380015" 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
+                        <a
+                          href="https://maps.google.com/?q=305,+Abhishilp+Complex,+Satellite,+Ahmedabad,+380015"
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="hover:text-gold hover:underline transition-colors"
                         >
                           305, Abhishilp Complex,<br />
@@ -264,7 +284,7 @@ const AboutPage = () => {
                     <div>
                       <h4 className="font-serif text-[16px] text-navy font-semibold mb-1">Office Hours</h4>
                       <p className="text-muted text-[14px] leading-relaxed">
-                        Monday – Saturday: 10:00 AM – 7:00 PM<br />
+                        Monday – Saturday: 10:30 AM – 6:30 PM<br />
                         Sunday: Closed
                       </p>
                     </div>
@@ -293,7 +313,7 @@ const AboutPage = () => {
               <div className="lg:col-span-7 relative">
                 {/* Visual shadow decoration */}
                 <div className="absolute -inset-4 bg-gradient-to-r from-gold/10 to-navy/5 rounded-[24px] blur-2xl opacity-60 pointer-events-none"></div>
-                
+
                 {/* Map Frame Card */}
                 <div className="relative bg-white border border-navy/[0.08] p-4 rounded-3xl shadow-xl shadow-navy/[0.03] overflow-hidden group">
                   <div className="w-full aspect-[16/10] md:aspect-[16/9] rounded-2xl overflow-hidden border border-slate-100 relative">

@@ -5,7 +5,7 @@ const milestones = [
   {
     year: '2001',
     title: 'Sowing the Seeds',
-    description: 'Drishti Wealth was founded in Ahmedabad by Piyush Shah with a simple vision: helping local families achieve financial freedom with transparent and honest advice.',
+    description: 'Laid the foundation by introducing comprehensive insurance solutions, focusing on securing the financial future of families.',
     icon: (
       <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22V12" />
@@ -15,13 +15,26 @@ const milestones = [
         <path d="M12 15c1.5-1.5 4-1.5 5.5 0-1.5 1.5-4 1.5-5.5 0z" />
       </svg>
     ),
-    stat: '100+ Families Served',
-    tag: 'Foundation'
+    stat: 'Foundation Set',
+    tag: 'Inception'
   },
   {
-    year: '2010',
-    title: 'Multi-Asset Expansion',
-    description: 'Empanelled with leading national distribution desks, expanding our mutual fund and life insurance offerings across India.',
+    year: '2005',
+    title: 'Mutual Fund Pioneer',
+    description: 'Became one of the first certified Mutual Fund distributors in the region, offering structured investment avenues to clients.',
+    icon: (
+      <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2v20" />
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+      </svg>
+    ),
+    stat: 'Certified Distributor',
+    tag: 'Wealth Creation'
+  },
+  {
+    year: '2007',
+    title: 'Recognition & Expansion',
+    description: 'Gained significant industry recognition for excellence in financial advisory, accompanied by strategic team expansion to enhance client service.',
     icon: (
       <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
@@ -30,27 +43,25 @@ const milestones = [
         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
     ),
-    stat: 'National Empanelment',
+    stat: 'Growing Team',
     tag: 'Expansion'
   },
   {
-    year: '2015',
-    title: 'Going Global (NRI Services)',
-    description: 'Crossed 1,000+ local families and launched a dedicated advisory vertical for Non-Resident Indian (NRI) clients to navigate cross-border investing, compliance, and taxation.',
+    year: '2012',
+    title: 'Crossing ₹50 Crores AUM',
+    description: 'Achieved a major milestone of ₹50 Crores in Assets Under Management, reflecting growing client trust and successful wealth strategies.',
     icon: (
       <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-        <path d="M2 12h20" />
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
       </svg>
     ),
-    stat: '100+ NRI Clients',
-    tag: 'NRI Advisory'
+    stat: '₹50 Cr AUM',
+    tag: 'Growth Milestone'
   },
   {
-    year: '2018',
-    title: 'Crossing ₹100 Crore AUM',
-    description: 'Achieved a major milestone of ₹100 Crores in Assets Under Management (AUM), cementing our position as a highly trusted financial advisor in Gujarat.',
+    year: '2016',
+    title: 'Reaching ₹100 Crores AUM',
+    description: 'Doubled our managed assets to reach ₹100 Crores in AUM, cementing our position as a highly trusted financial advisor.',
     icon: (
       <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <line x1="18" y1="20" x2="18" y2="10" />
@@ -60,38 +71,39 @@ const milestones = [
       </svg>
     ),
     stat: '₹100 Cr AUM',
-    tag: 'Trust Milestone'
+    tag: 'Trust & Scale'
+  },
+  {
+    year: '2019',
+    title: 'Global Footprint',
+    description: 'Expanded our services globally by launching a dedicated NRI investment and insurance vertical, facilitating cross-border reach.',
+    icon: (
+      <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+        <path d="M2 12h20" />
+      </svg>
+    ),
+    stat: 'NRI Advisory',
+    tag: 'Global Reach'
   },
   {
     year: '2021',
     title: 'Digital Transformation',
-    description: 'Integrated state-of-the-art mobile apps and online tracking systems for seamless, paperless client investment journeys.',
+    description: 'Integrated virtual consultation and online tracking systems for seamless, paperless client journeys.',
     icon: (
       <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
         <line x1="12" y1="18" x2="12.01" y2="18" />
       </svg>
     ),
-    stat: 'Paperless Execution',
-    tag: 'Fintech Era'
-  },
-  {
-    year: '2024',
-    title: 'Unlocking Growth',
-    description: 'Surpassed 2,500+ active clients and expanded our team of wealth managers, setting up a high-touch customer support desk in Ahmedabad.',
-    icon: (
-      <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4.5 16.5c-1.5 1.25-2.5 3-2.5 4.5h20c0-1.5-1-3.25-2.5-4.5" />
-        <path d="M12 2C7.5 2 7 6 7 10c0 4.5 5 10 5 10s5-5.5 5-10c0-4-0.5-8-5-8z" />
-      </svg>
-    ),
-    stat: '2,500+ Clients',
-    tag: 'Scaling Wealth'
+    stat: 'Digital Era',
+    tag: 'Innovation'
   },
   {
     year: '2026',
     title: 'The Trusted Destination',
-    description: 'Now serving 6,000+ clients globally with over ₹750 Crores in AUM. Combining personal family values with institutional-grade technology to secure generational wealth.',
+    description: 'Continuing to serve as a premier destination for holistic wealth planning, combining personal family values with institutional-grade technology.',
     icon: (
       <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M3 22h18" />
@@ -102,7 +114,7 @@ const milestones = [
         <path d="M3 11h18L12 3z" />
       </svg>
     ),
-    stat: '₹750 Cr+ AUM',
+    stat: 'Trusted Partner',
     tag: 'Present Day'
   }
 ];
@@ -142,15 +154,15 @@ const JourneyTimeline = () => {
     const element = containerRef.current;
     const rect = element.getBoundingClientRect();
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
+
     // Total scrollable height of the wrapper
     const totalHeight = element.scrollHeight;
     const viewportHeight = window.innerHeight;
     const scrollDistance = totalHeight - viewportHeight;
-    
+
     // Calculate the target scroll position
     const targetScroll = rect.top + scrollTop + (index / (milestones.length - 1)) * scrollDistance;
-    
+
     window.scrollTo({
       top: targetScroll,
       behavior: 'auto'
@@ -158,14 +170,14 @@ const JourneyTimeline = () => {
   };
 
   return (
-    <div 
-      ref={containerRef} 
+    <div
+      ref={containerRef}
       className="relative h-[220vh] md:h-[280vh] w-full"
       id="journey-section"
     >
       {/* Sticky Inner Container */}
       <div className="sticky top-0 h-screen w-full flex flex-col justify-between md:justify-center bg-[#071324] overflow-hidden text-white">
-        
+
         {/* Ambient background glows */}
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-gold/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-navy rounded-full blur-[140px] pointer-events-none" />
@@ -187,7 +199,7 @@ const JourneyTimeline = () => {
 
         {/* Main Content Area */}
         <div className="flex-1 flex flex-col md:flex-row items-center justify-center max-w-7xl mx-auto px-6 w-full z-10 gap-8 md:gap-16 pt-[2vh] md:pt-[10vh] pb-[6vh] md:pb-0 overflow-hidden">
-          
+
           {/* Left Panel: Visual Glassmorphic Card */}
           <div className="w-full md:w-1/2 flex items-center justify-center h-[35vh] md:h-[48vh]">
             <AnimatePresence mode="wait">
@@ -201,7 +213,7 @@ const JourneyTimeline = () => {
               >
                 {/* Visual decorative radial glow */}
                 <div className="absolute -right-20 -top-20 w-44 h-44 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
-                
+
                 {/* Header Row */}
                 <div className="flex items-start justify-between">
                   <div>
@@ -240,12 +252,12 @@ const JourneyTimeline = () => {
 
           {/* Right Panel: Scroll track and text list */}
           <div className="w-full md:w-1/2 flex items-center md:h-[48vh] relative">
-            
+
             {/* Scroll Indicator / Vertical Line */}
             <div className="absolute left-[15px] md:left-[24px] top-4 bottom-4 w-[2px] bg-white/10 z-0">
-              <motion.div 
+              <motion.div
                 className="absolute top-0 left-0 w-full bg-gold origin-top"
-                style={{ 
+                style={{
                   height: "100%",
                   scaleY: smoothProgress
                 }}
@@ -254,7 +266,7 @@ const JourneyTimeline = () => {
 
             {/* Scrolling Milestones List */}
             <div className="w-full pl-8 md:pl-16 flex flex-col justify-start gap-4 md:gap-8 max-h-[38vh] md:max-h-[46vh] overflow-y-hidden relative py-2">
-              
+
               {/* Fade filters for smooth scrolling boundary transitions */}
               <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-[#071324] to-transparent z-10 pointer-events-none" />
               <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#071324] to-transparent z-10 pointer-events-none" />
@@ -270,20 +282,18 @@ const JourneyTimeline = () => {
                 {milestones.map((milestone, idx) => {
                   const isActive = idx === activeIndex;
                   return (
-                    <div 
+                    <div
                       key={milestone.year}
                       onClick={() => handleMilestoneClick(idx)}
-                      className={`relative flex items-center gap-4 cursor-pointer group select-none transition-all duration-300 h-12 md:h-[52px] ${
-                        isActive ? 'opacity-100' : 'opacity-30 hover:opacity-50'
-                      }`}
+                      className={`relative flex items-center gap-4 cursor-pointer group select-none transition-all duration-300 h-12 md:h-[52px] ${isActive ? 'opacity-100' : 'opacity-30 hover:opacity-50'
+                        }`}
                     >
                       {/* Active glowing indicator node */}
                       <div className="absolute left-[-23px] md:left-[-46px] top-0 h-full z-20 flex items-center justify-center">
-                        <div className={`w-[14px] h-[14px] rounded-full border-2 transition-all duration-300 flex items-center justify-center ${
-                          isActive 
-                            ? 'bg-[#071324] border-gold scale-125 shadow-[0_0_10px_rgba(201,146,42,0.8)]' 
+                        <div className={`w-[14px] h-[14px] rounded-full border-2 transition-all duration-300 flex items-center justify-center ${isActive
+                            ? 'bg-[#071324] border-gold scale-125 shadow-[0_0_10px_rgba(201,146,42,0.8)]'
                             : 'bg-[#071324] border-white/40 group-hover:border-white'
-                        }`}>
+                          }`}>
                           {isActive && (
                             <div className="w-[6px] h-[6px] rounded-full bg-gold" />
                           )}
@@ -292,15 +302,13 @@ const JourneyTimeline = () => {
 
                       {/* Milestone Title & Year */}
                       <div className="flex items-center gap-4">
-                        <span className={`font-serif text-[20px] md:text-[28px] font-bold tracking-tight transition-colors duration-300 ${
-                          isActive ? 'text-gold' : 'text-white'
-                        }`}>
+                        <span className={`font-serif text-[20px] md:text-[28px] font-bold tracking-tight transition-colors duration-300 ${isActive ? 'text-gold' : 'text-white'
+                          }`}>
                           {milestone.year}
                         </span>
                         <div className="flex flex-col">
-                          <span className={`text-[13px] md:text-[15px] font-medium tracking-wide transition-colors duration-300 ${
-                            isActive ? 'text-white font-semibold' : 'text-white/60'
-                          }`}>
+                          <span className={`text-[13px] md:text-[15px] font-medium tracking-wide transition-colors duration-300 ${isActive ? 'text-white font-semibold' : 'text-white/60'
+                            }`}>
                             {milestone.title}
                           </span>
                           <span className="text-[11px] text-white/40 mt-0.5 line-clamp-1 max-w-[240px] md:max-w-[320px]">
@@ -319,11 +327,11 @@ const JourneyTimeline = () => {
 
         {/* Scroll Progress Bar Indicator (At bottom) */}
         <div className="w-full h-[3px] bg-white/5 relative z-20 mt-auto">
-          <motion.div 
+          <motion.div
             className="h-full bg-gradient-to-r from-gold/50 via-gold to-goldLight origin-left"
-            style={{ 
+            style={{
               width: "100%",
-              scaleX: smoothProgress 
+              scaleX: smoothProgress
             }}
           />
         </div>

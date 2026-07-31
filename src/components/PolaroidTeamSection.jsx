@@ -11,7 +11,9 @@ const teamMembers = [
     experience: '25+ Years',
     avatar: 'PS',
     bgGradient: 'from-[#0d2545] via-[#132d54] to-[#1a3866]',
-    quote: '"Preserving family wealth through disciplined asset allocation and long-term compounding since 2001."'
+    quote: '"Preserving family wealth through disciplined asset allocation and long-term compounding since 2001."',
+    image: '/piyush_shah.jpg',
+    cropStyle: 'object-[center_10%] scale-[1.45] origin-top'
   },
   {
     id: 2,
@@ -22,7 +24,9 @@ const teamMembers = [
     experience: '12+ Years',
     avatar: 'RS',
     bgGradient: 'from-[#0b2b24] via-[#103d33] to-[#175245]',
-    quote: '"Customizing risk-adjusted SIP strategies tailored to your life goals and market cycles."'
+    quote: '"Customizing risk-adjusted SIP strategies tailored to your life goals and market cycles."',
+    image: '/rutvik_shah.jpg',
+    cropStyle: 'object-[center_28%] scale-[1.8]'
   },
   {
     id: 3,
@@ -33,7 +37,9 @@ const teamMembers = [
     experience: '10+ Years',
     avatar: 'RS',
     bgGradient: 'from-[#1e1b4b] via-[#2e2a72] to-[#3b358c]',
-    quote: '"Providing seamless cross-border NRI financial services with priority execution."'
+    quote: '"Providing seamless cross-border NRI financial services with priority execution."',
+    image: '/reena_shah.jpg',
+    cropStyle: 'object-[center_24%] scale-[1.65]'
   }
 ];
 
@@ -43,30 +49,41 @@ const FLIP_SPRING = { type: 'spring', damping: 24, stiffness: 240, mass: 0.7 };
 const SinglePolaroidCard = ({ member }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const cardRef = useRef(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
+  const mx = useSpring(x, TILT_SPRING);
+  const my = useSpring(y, TILT_SPRING);
 
-  const tiltX = useSpring(useTransform(my, [-0.5, 0.5], [15, -15]), TILT_SPRING);
-  const tiltY = useSpring(useTransform(mx, [-0.5, 0.5], [-15, 15]), TILT_SPRING);
+  const tiltX = useTransform(my, [-0.5, 0.5], [10, -10]);
+  const tiltY = useTransform(mx, [-0.5, 0.5], [-10, 10]);
 
   const handleMouseMove = useCallback((e) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    mx.set((e.clientX - rect.left) / rect.width - 0.5);
-    my.set((e.clientY - rect.top) / rect.height - 0.5);
-  }, [mx, my]);
+    const width = rect.width;
+    const height = rect.height;
+
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+
+    x.set(xPct);
+    y.set(yPct);
+  }, [x, y]);
 
   const handleMouseLeave = useCallback(() => {
-    mx.set(0);
-    my.set(0);
-  }, [mx, my]);
+    x.set(0);
+    y.set(0);
+  }, [x, y]);
 
   const handleClick = useCallback(() => {
-    mx.set(0);
-    my.set(0);
+    x.set(0);
+    y.set(0);
     setIsFlipped((prev) => !prev);
-  }, [mx, my]);
+  }, [x, y]);
 
   return (
     <div
@@ -102,6 +119,9 @@ const SinglePolaroidCard = ({ member }) => {
           >
             {/* Photo Window */}
             <div className={`w-full h-[270px] rounded-xl bg-gradient-to-b ${member.bgGradient} p-5 flex flex-col justify-between relative overflow-hidden shadow-inner`}>
+              {member.image && (
+                <img src={member.image} alt={member.name} className={`absolute inset-0 w-full h-full object-cover opacity-90 ${member.cropStyle || 'object-top'}`} />
+              )}
               <div className="flex justify-between items-center z-10">
                 <div className="w-11 h-11 rounded-xl bg-white/15 backdrop-blur-md border border-white/20 text-gold font-serif font-bold text-lg flex items-center justify-center shadow-sm">
                   {member.avatar}

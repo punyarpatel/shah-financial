@@ -25,14 +25,14 @@ const PageLoader = ({
     return () => unsubscribe();
   }, [motionValue, springValue]);
 
-  // Trigger smooth curved mask exit when counter hits 100
+  // Trigger staggered waterfall shutter exit when counter hits 100
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsClosing(true);
       setTimeout(() => {
         setIsVisible(false);
         if (onComplete) onComplete();
-      }, 700); // Mask animation duration
+      }, 950); // Total staggered exit duration
     }, duration * 1000 + 100);
 
     return () => clearTimeout(timer);
@@ -40,32 +40,51 @@ const PageLoader = ({
 
   if (!isVisible) return null;
 
+  // 5 Vertical Shutter Columns
+  const columns = [0, 1, 2, 3, 4];
+
   return (
     <AnimatePresence>
-      <motion.div
-        className="fixed inset-0 z-[9999] pointer-events-none flex flex-col justify-between overflow-hidden"
-        style={{ perspective: '1200px' }}
-      >
-        {/* Curving Fullscreen Mask Container */}
+      <div className="fixed inset-0 z-[9999] pointer-events-none overflow-hidden">
+        {/* Staggered Vertical 5-Column Waterfall Shutters */}
+        <div className="absolute inset-0 flex w-full h-full z-10">
+          {columns.map((colIdx) => (
+            <motion.div
+              key={colIdx}
+              initial={{ y: '0%' }}
+              animate={isClosing ? { y: '-100%' } : { y: '0%' }}
+              transition={{
+                duration: 0.75,
+                delay: isClosing ? colIdx * 0.08 : 0,
+                ease: [0.77, 0, 0.175, 1]
+              }}
+              className="relative flex-1 h-full bg-[#071324] border-r border-white/5 last:border-r-0 origin-top shadow-2xl"
+            >
+              {/* Subtle Gold Accent Line on Bottom Edge of Each Panel */}
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-gold/30 via-gold to-goldLight/30 opacity-80" />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Foreground Content Container */}
         <motion.div
-          initial={{ borderRadius: '0%' }}
           animate={isClosing ? {
-            borderRadius: '50% 50% 0 0',
-            y: '-105%',
-            scaleY: 0.8
+            opacity: 0,
+            scale: 1.04,
+            filter: 'blur(10px)'
           } : {
-            borderRadius: '0%',
-            y: '0%',
-            scaleY: 1
+            opacity: 1,
+            scale: 1,
+            filter: 'blur(0px)'
           }}
           transition={{
-            duration: 0.75,
-            ease: [0.77, 0.02, 0.24, 1.02]
+            duration: 0.3,
+            ease: 'easeOut'
           }}
-          className="w-full h-full bg-[#071324] text-white flex flex-col justify-between p-8 md:p-14 relative origin-top overflow-hidden shadow-2xl"
+          className="absolute inset-0 z-20 text-white flex flex-col justify-between p-8 md:p-14 pointer-events-none"
         >
           {/* Top Row: Brand Name & Minimalist Badge */}
-          <div className="flex justify-between items-center w-full z-10">
+          <div className="flex justify-between items-center w-full">
             <motion.div
               initial={{ opacity: 0, y: 10, filter: 'blur(8px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -84,19 +103,19 @@ const PageLoader = ({
           </div>
 
           {/* Center Row: Animated Line Mask Bar */}
-          <div className="w-full my-auto py-6 relative z-10 flex flex-col items-center">
+          <div className="w-full my-auto py-6 relative flex flex-col items-center">
             <div className="w-full max-w-4xl h-[2px] bg-white/10 relative overflow-hidden rounded-full">
               <motion.div
                 initial={{ width: '0%' }}
                 animate={{ width: `${displayCount}%` }}
                 transition={{ ease: 'linear' }}
-                className="h-full bg-gradient-to-r from-gold/40 via-gold to-goldLight shadow-[0_0_15px_rgba(201,146,42,0.8)]"
+                className="h-full bg-gradient-to-r from-gold/40 via-gold to-goldLight shadow-[0_0_20px_rgba(212,175,55,0.9)]"
               />
             </div>
           </div>
 
           {/* Bottom Row: Large Numeric Counter & Subtext */}
-          <div className="flex justify-between items-end w-full z-10">
+          <div className="flex justify-between items-end w-full">
             <div className="hidden sm:block text-white/50 text-[12px] uppercase tracking-widest font-mono">
               Loading Financial Platform...
             </div>
@@ -106,11 +125,11 @@ const PageLoader = ({
               <span className="text-[0.4em] font-sans font-light text-goldLight ml-1">%</span>
             </div>
           </div>
-
-          {/* Background Ambient Radial Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-[140px] pointer-events-none" />
         </motion.div>
-      </motion.div>
+
+        {/* Ambient Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-[160px] pointer-events-none z-15" />
+      </div>
     </AnimatePresence>
   );
 };

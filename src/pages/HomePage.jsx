@@ -16,7 +16,6 @@ import FAQSection from '../components/FAQSection';
 import ScrollZoomReveal from '../components/ScrollZoomReveal';
 
 const HomePage = () => {
-  const [showScrollZoom, setShowScrollZoom] = useState(true);
   const ogImage = `${window.location.origin}/why_choose_us_mockup.png`;
 
   return (
@@ -58,45 +57,18 @@ const HomePage = () => {
 
       <WhyChooseUs />
 
-      {/* Scroll Zoom Reveal Section with On/Off Toggle */}
-      <div className="py-6 bg-[#071324] border-t border-white/10 flex flex-col items-center">
-        <div className="inline-flex items-center p-1 bg-white/10 border border-white/20 rounded-full text-xs font-semibold shadow-md mb-2 z-20">
-          <button
-            onClick={() => setShowScrollZoom(true)}
-            className={`px-4 py-1.5 rounded-full transition-all duration-300 ${
-              showScrollZoom
-                ? 'bg-gold text-white shadow-sm'
-                : 'text-white/60 hover:text-white'
-            }`}
-          >
-            Showcase Enabled
-          </button>
-          <button
-            onClick={() => setShowScrollZoom(false)}
-            className={`px-4 py-1.5 rounded-full transition-all duration-300 ${
-              !showScrollZoom
-                ? 'bg-gold text-white shadow-sm'
-                : 'text-white/60 hover:text-white'
-            }`}
-          >
-            Hide Section
-          </button>
-        </div>
-
-        {showScrollZoom && (
-          <div className="w-full">
-            <ScrollZoomReveal
-              leftText="Drishti Wealth"
-              rightText="Established 2001"
-              buttonText="Explore Wealth Planning"
-              videoUrl="/hero-bg.mp4"
-              onButtonClick={() => {
-                const contactSec = document.getElementById('contact');
-                if (contactSec) contactSec.scrollIntoView({ behavior: 'smooth' });
-              }}
-            />
-          </div>
-        )}
+      {/* Scroll Zoom Reveal Section */}
+      <div className="w-full">
+        <ScrollZoomReveal
+          leftText="Drishti Wealth"
+          rightText="Established 2001"
+          buttonText="Explore Wealth Planning"
+          videoUrl="/Generate_an_animated_video_for.mp4"
+          onButtonClick={() => {
+            const contactSec = document.getElementById('contact');
+            if (contactSec) contactSec.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
       </div>
 
       <FadeIn>
@@ -105,11 +77,11 @@ const HomePage = () => {
         </div>
       </FadeIn>
 
-      <FadeIn>
+      {/* <FadeIn>
         <div id="testimonials">
           <Testimonials />
         </div>
-      </FadeIn>
+      </FadeIn> */}
 
       <FadeIn>
         <div id="faq">

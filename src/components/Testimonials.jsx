@@ -1,6 +1,13 @@
 import React from 'react';
 
+// =============================================================================
+// TOGGLE SWITCH: Set SHOW_TESTIMONIALS = true when your site is listed on Google!
+// =============================================================================
+const SHOW_TESTIMONIALS = false;
+
 const Testimonials = () => {
+  if (!SHOW_TESTIMONIALS) return null;
+
   const testimonials = [
     {
       quote: "Started my first SIP with them 5 years ago. The guidance was patient, thorough, and completely jargon-free. My portfolio has grown steadily and I have never felt lost.",
