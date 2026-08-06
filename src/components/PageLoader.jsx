@@ -89,9 +89,13 @@ const PageLoader = ({
               initial={{ opacity: 0, y: 10, filter: 'blur(8px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="flex items-center gap-2"
+              className="flex items-center gap-3"
             >
-              <div className="w-2.5 h-2.5 rounded-full bg-gold animate-pulse"></div>
+              <img
+                src="/DW_22-removebg-preview.png"
+                alt="Drishti Wealth Logo"
+                className="h-10 w-auto object-contain shrink-0"
+              />
               <span className="font-serif text-[22px] md:text-[28px] font-bold text-white tracking-wide">
                 {brandName}
               </span>

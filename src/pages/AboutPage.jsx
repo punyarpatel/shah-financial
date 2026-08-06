@@ -14,6 +14,7 @@ import JourneyTimeline from '../components/JourneyTimeline';
 import CredentialsShowcase from '../components/CredentialsShowcase';
 import useDesignMode from '../hooks/useDesignMode';
 import BorderGlow from '../components/animations/BorderGlow';
+import DwLogo3DViewer from '../components/DwLogo3DViewer';
 
 const AboutPage = () => {
   const location = useLocation();
@@ -68,18 +69,28 @@ const AboutPage = () => {
       <Navbar />
 
       {/* Section 1: Hero */}
-      <section id="story" className="bg-navy py-[4rem] w-full">
+      <section id="story" className="bg-navy py-[3.5rem] lg:py-[4.5rem] w-full overflow-hidden">
         <FadeIn delay={0.1}>
           <div className="max-w-7xl mx-auto px-4">
-            <div className="inline-flex items-center gap-[6px] bg-gold/15 border border-gold/30 rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]">
-              <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">Our Story</span>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              {/* Left Column: Hero Text */}
+              <div className="lg:col-span-7 z-10">
+                <div className="inline-flex items-center gap-[6px] bg-gold/15 border border-gold/30 rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]">
+                  <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">Our Story</span>
+                </div>
+                <h1 className="font-serif text-[36px] md:text-[48px] text-white font-semibold leading-tight mb-[1.25rem]">
+                  A Family Built on Trust
+                </h1>
+                <p className="text-white/65 text-[16px] md:text-[17px] leading-[1.6] max-w-2xl">
+                  Drishti Wealth was founded in 2001 in Ahmedabad by a family with a simple belief that every Indian family deserves access to honest, personalized financial guidance. What started as a small advisory practice has grown into a trusted firm serving 6,000 plus clients across India and abroad.
+                </p>
+              </div>
+
+              {/* Right Column: Interactive 3D DW Logo Model */}
+              <div className="lg:col-span-5 flex justify-center lg:justify-end">
+                <DwLogo3DViewer className="w-full max-w-[440px] h-[340px] md:h-[400px] lg:h-[420px]" />
+              </div>
             </div>
-            <h1 className="font-serif text-[36px] md:text-[48px] text-white font-semibold leading-tight mb-[1.25rem] max-w-3xl">
-              A Family Built on Trust
-            </h1>
-            <p className="text-white/65 text-[16px] leading-[1.6] max-w-2xl">
-              Drishti Wealth was founded in 2001 in Ahmedabad by a family with a simple belief that every Indian family deserves access to honest, personalized financial guidance. What started as a small advisory practice has grown into a trusted firm serving 6,000 plus clients across India and abroad.
-            </p>
           </div>
         </FadeIn>
       </section>

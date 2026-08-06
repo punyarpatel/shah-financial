@@ -12,7 +12,7 @@ const teamMembers = [
     avatar: 'PS',
     bgActive: 'bg-gradient-to-b from-[#0d2545] via-[#132d54] to-[#1a3866]',
     image: '/piyush_shah.jpg',
-    cropStyle: 'object-[center_10%] scale-[1.45] origin-top'
+    cropStyle: 'object-cover object-[center_12%]'
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ const teamMembers = [
     avatar: 'RS',
     bgActive: 'bg-gradient-to-b from-[#1e1b4b] via-[#2e2a72] to-[#3b358c]',
     image: '/reena_shah.jpg',
-    cropStyle: 'object-[center_24%] scale-[1.65]'
+    cropStyle: 'object-cover object-[center_15%]'
   }
 ];
 

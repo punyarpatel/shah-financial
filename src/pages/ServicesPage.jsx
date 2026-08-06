@@ -36,6 +36,18 @@ const servicesList = [
     statLabel: 'Policies Active'
   },
   {
+    id: 'property-insurance',
+    icon: '🏠',
+    category: 'Asset Protection',
+    title: 'Property & Home Insurance',
+    description: 'Comprehensive coverage for residential homes, building structures, home contents, offices, and commercial property against fire, theft, and natural hazards.',
+    link: '/services/property-insurance',
+    gradient: 'linear-gradient(135deg, #b45309 0%, #d97706 50%, #f59e0b 100%)',
+    accent: '#d97706',
+    stat: '100%',
+    statLabel: 'Asset Protection'
+  },
+  {
     id: 'travel-insurance',
     icon: '✈️',
     category: 'Travel Cover',

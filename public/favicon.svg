@@ -1,16 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
-  <!-- Premium Navy Blue Circle Background -->
-  <circle cx="256" cy="256" r="240" fill="#0d2545" />
-  
-  <!-- Stylized Drishti (Vision Eye) Gold Outline -->
-  <path d="M100,256 C170,140 342,140 412,256 C342,372 170,372 100,256 Z" fill="none" stroke="#c9922a" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" />
-  
-  <!-- Central Gold Coin/Pupil -->
-  <circle cx="256" cy="256" r="50" fill="#f0c96a" />
-  
-  <!-- Upward Compounding Wealth Line -->
-  <path d="M150,290 L220,240 L290,265 L360,190" fill="none" stroke="#faf8f4" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" />
-  
-  <!-- Arrow Head -->
-  <polygon points="360,190 345,220 375,220" fill="#faf8f4" transform="rotate(40 360 190)" />
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0c96a" />
+      <stop offset="100%" stop-color="#c9922a" />
+    </linearGradient>
+  </defs>
+
+  <!-- Deep Navy Base Circle with Gold Border -->
+  <circle cx="256" cy="256" r="240" fill="#0d2545" stroke="url(#goldGrad)" stroke-width="12" />
+
+  <!-- Unmistakable Single-Loop Letter 'D' in Gold -->
+  <path d="M 120 140 H 210 C 300 140 320 256 210 372 H 120 Z" fill="none" stroke="url(#goldGrad)" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Sharp Interlocking Letter 'W' in White -->
+  <path d="M 235 220 L 285 370 L 325 270 L 365 370 L 415 220" fill="none" stroke="#ffffff" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Growth Accent Spark Dot -->
+  <circle cx="430" cy="180" r="18" fill="url(#goldGrad)" />
 </svg>

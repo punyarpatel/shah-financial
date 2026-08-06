@@ -556,7 +556,14 @@ const AdminDashboardPage = () => {
       
       {/* Top Nav */}
       <nav className="bg-[#0d2545] h-[56px] flex items-center justify-between px-[2rem]">
-        <div className="text-white font-serif text-[16px]">Drishti Wealth</div>
+        <div className="flex items-center gap-2.5">
+          <img
+            src="/DW_22-removebg-preview.png"
+            alt="Drishti Wealth Logo"
+            className="h-8 w-auto object-contain shrink-0"
+          />
+          <div className="text-white font-serif text-[16px] font-semibold">Drishti Wealth</div>
+        </div>
         <div className="text-white/60 text-[14px]">Admin Dashboard</div>
         <button 
           onClick={handleLogout}

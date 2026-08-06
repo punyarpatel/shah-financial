@@ -68,11 +68,18 @@ const AdminLoginPage = () => {
       <div className="bg-white border border-[#0d2545]/12 rounded-[14px] p-[2.5rem] max-w-[400px] w-[90%] shadow-[0_4px_24px_rgba(0,0,0,0.07)]">
 
         {/* Branding */}
-        <div className="font-serif text-[#0d2545] text-[18px] font-semibold text-center mb-[4px]">
-          Drishti Wealth
-        </div>
-        <div className="text-[#5c6478] text-[11px] uppercase text-center mb-[2rem] tracking-widest">
-          AMFI Registered &middot; Est. 2001
+        <div className="flex flex-col items-center justify-center mb-[1.5rem]">
+          <img
+            src="/DW_22-removebg-preview.png"
+            alt="Drishti Wealth Logo"
+            className="h-14 w-auto object-contain mb-2 shrink-0"
+          />
+          <div className="font-serif text-[#0d2545] text-[20px] font-bold text-center leading-tight">
+            Drishti Wealth
+          </div>
+          <div className="text-[#5c6478] text-[11px] uppercase text-center tracking-widest mt-1">
+            AMFI Registered &middot; Est. 2001
+          </div>
         </div>
 
         {/* ── LOGIN VIEW ── */}

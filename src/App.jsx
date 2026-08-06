@@ -13,6 +13,7 @@ const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 const MutualFundPage = lazy(() => import('./pages/MutualFundPage'));
 const InsurancePage = lazy(() => import('./pages/InsurancePage'));
 const TravelInsurancePage = lazy(() => import('./pages/TravelInsurancePage'));
+const PropertyInsurancePage = lazy(() => import('./pages/PropertyInsurancePage'));
 const RetirementPage = lazy(() => import('./pages/RetirementPage'));
 const GoalPlanningPage = lazy(() => import('./pages/GoalPlanningPage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
@@ -104,6 +105,7 @@ const NotFoundPage = () => {
 
 
 
+
 export default function App() {
   return (
     <HelmetProvider>
@@ -119,6 +121,7 @@ export default function App() {
               <Route path="/services/mutual-funds" element={<MutualFundPage />} />
               <Route path="/services/insurance" element={<InsurancePage />} />
               <Route path="/services/travel-insurance" element={<TravelInsurancePage />} />
+              <Route path="/services/property-insurance" element={<PropertyInsurancePage />} />
               <Route path="/services/retirement" element={<RetirementPage />} />
               <Route path="/services/goal-planning" element={<GoalPlanningPage />} />
               <Route path="/about" element={<AboutPage />} />

@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { submitLead } from '../lib/leads';
 import { countriesList } from '../lib/countries';
 import EyeFollowButton from './EyeFollowButton';
-import ModernNavbar from './ModernNavbar';
 
 const navData = {
   home: [
@@ -16,6 +15,7 @@ const navData = {
   services: [
     { icon: '📊', title: 'Mutual Fund Services', desc: 'End-to-end management of your mutual fund journey from KYC to portfolio reviews.', link: '/services/mutual-funds' },
     { icon: '🛡️', title: 'Life & General Insurance', desc: 'Comprehensive coverage from trusted partners to protect your family and assets.', link: '/services/insurance' },
+    { icon: '🏠', title: 'Property & Home Insurance', desc: 'Protect your building, home contents, office, and commercial assets against fire, natural disasters, and theft.', link: '/services/property-insurance' },
     { icon: '✈️', title: 'Overseas Travel Insurance', desc: 'Comprehensive coverage for medical emergencies, trip cancellations, and lost baggage while traveling abroad.', link: '/services/travel-insurance' },
     { icon: '🌍', title: 'NRI Investment Services', desc: 'Specialized advisory for NRIs including NRE/NRO investing, health insurance, and repatriation.', link: '/nri' },
     { icon: '🎯', title: 'Retirement Planning', desc: 'Build a realistic, inflation-adjusted retirement corpus with dedicated plans and annual reviews.', link: '/services/retirement' },
@@ -150,7 +150,7 @@ const Navbar = () => {
     const val = e.target.value;
     setCountrySearch(val);
     setShowCountryDropdown(true);
-    
+
     // Check if the typed value matches a country exactly
     const match = countriesList.find(c => c.toLowerCase() === val.trim().toLowerCase());
     if (match) {
@@ -337,7 +337,7 @@ const Navbar = () => {
         />
       )}
 
-      <nav className={`sticky top-0 bg-navy h-[64px] z-[100] w-full shadow-md transition-transform duration-300 ease-in-out ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+      <nav className={`sticky top-0 bg-navy h-[64px] z-[100] w-full border-b border-white/10 shadow-md transition-transform duration-300 ease-in-out ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
         {navMode === 'staggered' ? (
           <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
             <div className="w-full h-full flex items-center justify-between">
@@ -355,13 +355,20 @@ const Navbar = () => {
                 accentColor="#c9922a"
                 onItemClick={handleStaggeredMenuClick}
                 logo={
-                  <Link to="/" className="flex flex-col justify-center" onClick={handleLogoClick}>
-                    <span className="font-serif text-white text-[17px] font-semibold leading-tight">
-                      Drishti Wealth
-                    </span>
-                    <span className="text-goldLight text-[10px] uppercase tracking-[0.12em] leading-tight mt-0.5">
-                      Your Trusted Partner for Financial Growth
-                    </span>
+                  <Link to="/" className="flex items-center gap-3 group" onClick={handleLogoClick}>
+                    <img
+                      src="/DW_22-removebg-preview.png"
+                      alt="Drishti Wealth Logo"
+                      className="h-[46px] w-auto max-w-[58px] object-contain shrink-0"
+                    />
+                    <div className="flex flex-col justify-center">
+                      <span className="font-serif text-white text-[17px] font-semibold leading-tight group-hover:text-gold transition-colors">
+                        Drishti Wealth
+                      </span>
+                      <span className="text-goldLight text-[10px] uppercase tracking-[0.12em] leading-tight mt-0.5">
+                        Your Trusted Partner for Financial Growth
+                      </span>
+                    </div>
                   </Link>
                 }
               />
@@ -371,13 +378,20 @@ const Navbar = () => {
           <>
             <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
               {/* Left Side: Logo */}
-              <Link to="/" className="flex flex-col justify-center" onClick={handleLogoClick}>
-                <span className="font-serif text-white text-[17px] font-semibold leading-tight">
-                  Drishti Wealth
-                </span>
-                <span className="text-goldLight text-[10px] uppercase tracking-[0.12em] leading-tight mt-0.5">
-                  Your Trusted Partner for Financial Growth
-                </span>
+              <Link to="/" className="flex items-center gap-3 group" onClick={handleLogoClick}>
+                <img
+                  src="/DW_22-removebg-preview.png"
+                  alt="Drishti Wealth Logo"
+                  className="h-[46px] w-auto max-w-[58px] object-contain shrink-0"
+                />
+                <div className="flex flex-col justify-center">
+                  <span className="font-serif text-white text-[17px] font-semibold leading-tight group-hover:text-gold transition-colors">
+                    Drishti Wealth
+                  </span>
+                  <span className="text-goldLight text-[10px] uppercase tracking-[0.12em] leading-tight mt-0.5">
+                    Your Trusted Partner for Financial Growth
+                  </span>
+                </div>
               </Link>
 
               {/* Right Side: Desktop Nav */}
@@ -447,16 +461,16 @@ const Navbar = () => {
         {isModalOpen && (
           <div className="fixed inset-0 z-[150] flex items-center justify-center p-4">
             {/* Backdrop */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsModalOpen(false)}
               className="absolute inset-0 bg-[#0d2545]/60 backdrop-blur-sm"
             />
-            
+
             {/* Modal Card */}
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
@@ -464,7 +478,7 @@ const Navbar = () => {
               className="relative w-full max-w-[500px] bg-white rounded-2xl border border-[#0d2545]/12 shadow-[0_20px_50px_rgba(13,37,69,0.25)] p-6 md:p-8 z-10 overflow-hidden"
             >
               {/* Close Button */}
-              <button 
+              <button
                 onClick={() => setIsModalOpen(false)}
                 className="absolute top-4 right-4 text-slate-400 hover:text-[#0d2545] transition-colors bg-transparent border-none p-1 cursor-pointer"
                 aria-label="Close modal"
@@ -486,13 +500,13 @@ const Navbar = () => {
                   <h4 className="font-serif text-[18px] font-bold mb-1">Request Submitted!</h4>
                   <p className="text-[13px]">Thank you for reaching out. Our team will contact you within 24 hours.</p>
                   <div className="flex gap-3 justify-center mt-5">
-                    <button 
+                    <button
                       onClick={resetForm}
                       className="bg-[#0d2545]/10 hover:bg-[#0d2545]/20 text-[#0d2545] border border-[#0d2545]/20 px-4 py-2 rounded-lg text-[13.5px] font-medium transition-colors cursor-pointer"
                     >
                       Back to form
                     </button>
-                    <button 
+                    <button
                       onClick={() => setIsModalOpen(false)}
                       className="bg-[#0d2545] text-white px-6 py-2 rounded-lg text-[13.5px] font-medium hover:bg-[#0d2545]/95 transition-colors cursor-pointer border-none"
                     >
@@ -504,10 +518,10 @@ const Navbar = () => {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-left">
                   <div>
                     <label className="block text-[11px] text-[#0d2545]/70 uppercase tracking-[0.05em] font-medium mb-1">Full Name</label>
-                    <input 
-                      type="text" 
-                      placeholder="Your name" 
-                      value={name} 
+                    <input
+                      type="text"
+                      placeholder="Your name"
+                      value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-[13.5px] font-sans text-navy bg-slate-50/50 outline-none focus:border-[#c9922a] focus:bg-white transition-colors placeholder-slate-400"
                     />
@@ -516,10 +530,10 @@ const Navbar = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[11px] text-[#0d2545]/70 uppercase tracking-[0.05em] font-medium mb-1">Phone / WhatsApp</label>
-                      <input 
-                        type="tel" 
-                        placeholder="+91 XXXXX XXXXX" 
-                        value={phone} 
+                      <input
+                        type="tel"
+                        placeholder="+91 XXXXX XXXXX"
+                        value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         className="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-[13.5px] font-sans text-navy bg-slate-50/50 outline-none focus:border-[#c9922a] focus:bg-white transition-colors placeholder-slate-400"
                       />
@@ -527,10 +541,10 @@ const Navbar = () => {
                     {isNri === 'No' ? (
                       <div>
                         <label className="block text-[11px] text-[#0d2545]/70 uppercase tracking-[0.05em] font-medium mb-1">City</label>
-                        <input 
-                          type="text" 
-                          placeholder="Ahmedabad" 
-                          value={city} 
+                        <input
+                          type="text"
+                          placeholder="Ahmedabad"
+                          value={city}
                           onChange={(e) => setCity(e.target.value)}
                           className="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-[13.5px] font-sans text-navy bg-slate-50/50 outline-none focus:border-[#c9922a] focus:bg-white transition-colors placeholder-slate-400"
                         />
@@ -538,9 +552,9 @@ const Navbar = () => {
                     ) : (
                       <div className="relative">
                         <label className="block text-[11px] text-[#0d2545]/70 uppercase tracking-[0.05em] font-medium mb-1">Country of Residence *</label>
-                        <input 
-                          type="text" 
-                          placeholder="Search and select country..." 
+                        <input
+                          type="text"
+                          placeholder="Search and select country..."
                           value={countrySearch}
                           onFocus={() => setShowCountryDropdown(true)}
                           onBlur={() => {
@@ -588,8 +602,8 @@ const Navbar = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[11px] text-[#0d2545]/70 uppercase tracking-[0.05em] font-medium mb-1">I am interested in</label>
-                      <select 
-                        value={interest} 
+                      <select
+                        value={interest}
                         onChange={(e) => setInterest(e.target.value)}
                         className="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-[13.5px] font-sans text-navy bg-slate-50/50 outline-none focus:border-[#c9922a] focus:bg-white transition-colors cursor-pointer"
                       >
@@ -603,8 +617,8 @@ const Navbar = () => {
                     </div>
                     <div>
                       <label className="block text-[11px] text-[#0d2545]/70 uppercase tracking-[0.05em] font-medium mb-1">Are you an NRI?</label>
-                      <select 
-                        value={isNri} 
+                      <select
+                        value={isNri}
                         onChange={(e) => {
                           setIsNri(e.target.value);
                           if (e.target.value === 'Yes') {
@@ -624,9 +638,9 @@ const Navbar = () => {
 
                   <div>
                     <label className="block text-[11px] text-[#0d2545]/70 uppercase tracking-[0.05em] font-medium mb-1">Message (optional)</label>
-                    <textarea 
-                      placeholder="Tell us a little about your goals" 
-                      value={message} 
+                    <textarea
+                      placeholder="Tell us a little about your goals"
+                      value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       className="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-[13.5px] font-sans text-navy bg-slate-50/50 outline-none focus:border-[#c9922a] focus:bg-white transition-colors placeholder-slate-400 h-[65px] resize-none leading-normal"
                     />
@@ -638,8 +652,8 @@ const Navbar = () => {
                     </div>
                   )}
 
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     disabled={loading}
                     className="w-full bg-[#c9922a] text-white border-none py-3 rounded-lg text-[14px] font-medium cursor-pointer font-sans hover:bg-[#f0c96a] transition-all duration-200 mt-2 disabled:opacity-75 disabled:cursor-not-allowed shadow-md shadow-gold/15"
                   >

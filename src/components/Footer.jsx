@@ -62,6 +62,7 @@ const Footer = () => {
               <a href="/services/mutual-funds" onClick={(e) => handleLinkClick(e, '/services/mutual-funds')} className={linkStyles}>Mutual Funds</a>
               <a href="/nri" onClick={(e) => handleLinkClick(e, '/nri')} className={linkStyles}>NRI Investment</a>
               <a href="/services/insurance" onClick={(e) => handleLinkClick(e, '/services/insurance')} className={linkStyles}>Insurance</a>
+              <a href="/services/property-insurance" onClick={(e) => handleLinkClick(e, '/services/property-insurance')} className={linkStyles}>Property Insurance</a>
               <a href="/#contact" onClick={(e) => handleLinkClick(e, '/#contact')} className={linkStyles}>Portfolio Review</a>
             </div>
 
@@ -107,8 +108,15 @@ const Footer = () => {
 
           {/* Right Side: Copyright & Badges (Spans 4 cols on large screens) */}
           <div className="lg:col-span-4 flex flex-col items-start lg:items-end justify-between gap-8 lg:gap-0">
-            <div className="text-white/40 text-[12px]">
-              &copy; 2026 Drishti Wealth. All rights reserved.
+            <div className="flex items-center gap-3">
+              <img
+                src="/DW_22-removebg-preview.png"
+                alt="Drishti Wealth Logo"
+                className="h-10 w-auto object-contain shrink-0"
+              />
+              <div className="text-white/60 text-[13px]">
+                &copy; 2026 Drishti Wealth. All rights reserved.
+              </div>
             </div>
 
             <div className="flex gap-4 items-center">

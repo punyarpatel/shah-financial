@@ -49,6 +49,26 @@ const servicesData = [
     ]
   },
   {
+    id: 'property-insurance',
+    icon: '🏠',
+    title: 'Property & Home Insurance',
+    description: 'Comprehensive coverage for residential homes, building structures, home contents, offices, and commercial property against fire, theft, and natural hazards.',
+    link: '/services/property-insurance',
+    isSpecial: false,
+    cardGradient: 'from-amber-700 via-orange-600 to-amber-500',
+    cardText: 'PROPERTY',
+    cardIcon: (
+      <svg className="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125h9.75s1.125-.504 1.125-1.125V9.75M8.25 21v-6a1.5 1.5 0 011.5-1.5h4.5a1.5 1.5 0 011.5 1.5v6" />
+      </svg>
+    ),
+    highlights: [
+      'Structure, fire & natural disaster protection',
+      'Valuables, electronics & home contents cover',
+      'Commercial office & landlord tenant policies'
+    ]
+  },
+  {
     id: 'travel-insurance',
     icon: '✈️',
     title: 'Overseas Travel Insurance',
