@@ -17,6 +17,7 @@ import {
 } from 'recharts';
 import supabase from '../lib/supabase';
 import api from '../lib/api';
+import PhoneNumberField from '../components/PhoneNumberField';
 
 const AdminDashboardPage = () => {
   const navigate = useNavigate();
@@ -1352,14 +1353,7 @@ const AdminDashboardPage = () => {
 
                 <div>
                   <label className="block text-[11px] text-[#5c6478] uppercase tracking-[0.04em] font-medium mb-[4px]">Phone / WhatsApp *</label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="+91 98765 43210"
-                    value={createFormData.phone}
-                    onChange={(e) => setCreateFormData(prev => ({ ...prev, phone: e.target.value }))}
-                    className="w-full px-[12px] py-[8px] border border-[#0d2545]/15 rounded-[8px] text-[13px] outline-none focus:border-[#c9922a] bg-white transition-colors"
-                  />
+                  <PhoneNumberField variant="light" value={createFormData.phone} onChange={(phone) => setCreateFormData(prev => ({ ...prev, phone }))} />
                 </div>
 
                 <div>

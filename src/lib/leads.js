@@ -21,10 +21,14 @@ export async function submitLead(leadData) {
     return { success: false, error: 'Please fill out all required fields' };
   }
 
-  // Phone validation (remove non-digits, must have at least 10 digits)
-  const cleanPhone = phone.replace(/\D/g, '');
-  if (cleanPhone.length < 10) {
-    return { success: false, error: 'Phone number must have at least 10 digits' };
+  // Phone validation: extract national digits
+  let nationalDigits = phone;
+  if (phone.includes(' ')) {
+    nationalDigits = phone.split(' ').slice(1).join('');
+  }
+  const cleanDigits = nationalDigits.replace(/\D/g, '');
+  if (!cleanDigits || cleanDigits.length !== 10) {
+    return { success: false, error: 'Please enter a valid 10-digit mobile number' };
   }
 
   try {

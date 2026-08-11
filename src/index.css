@@ -191,3 +191,85 @@
   animation: shadow-pulse 6s ease-in-out infinite;
 }
 
+/* Consistent glow and feedback for all form submissions */
+button[type='submit'] {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+button[type='submit']::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.38) 50%, transparent 75%);
+  transform: translateX(-125%);
+  transition: transform 420ms ease;
+}
+
+button[type='submit']:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 4px rgba(201, 146, 42, 0.18), 0 12px 26px rgba(201, 146, 42, 0.42);
+  filter: brightness(1.06);
+}
+
+button[type='submit']:not(:disabled):hover::after {
+  transform: translateX(125%);
+}
+
+button[type='submit']:not(:disabled):active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 0 0 7px rgba(240, 201, 106, 0.3), 0 4px 14px rgba(201, 146, 42, 0.34);
+}
+
+@keyframes form-success-reveal {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); filter: blur(4px); }
+  65% { transform: translateY(-2px) scale(1.015); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.form-success-reveal {
+  animation: form-success-reveal 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Shared success celebration for every enquiry form. */
+.form-success-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.form-success-reveal::before {
+  content: '✓';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 12px;
+  border-radius: 999px;
+  color: white;
+  font-size: 27px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #34d399, #059669);
+  box-shadow: 0 0 0 7px rgba(74, 222, 128, 0.16), 0 10px 24px rgba(5, 150, 105, 0.25);
+  animation: success-seal-pop 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes success-seal-pop {
+  0% { opacity: 0; transform: scale(0) rotate(-40deg); }
+  60% { opacity: 1; transform: scale(1.16) rotate(8deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+.form-success-reveal > div.text-\[32px\],
+.form-success-reveal > span.text-5xl {
+  display: none;
+}
+
+/* The review modal has its own richer particle burst. */
+.success-celebration::before {
+  display: none;
+}
+

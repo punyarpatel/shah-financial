@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import { submitLead } from '../lib/leads';
 import FadeIn from '../components/animations/FadeIn';
+import PhoneNumberField from '../components/PhoneNumberField';
 import ServiceCardGraphic from '../components/ServiceCardGraphic';
 import BorderGlow from '../components/animations/BorderGlow';
 
@@ -528,7 +529,7 @@ const GoalPlanningPage = () => {
             </div>
             <div className="bg-white/5 border border-white/10 rounded-[16px] p-[2rem] md:p-[2.5rem] shadow-2xl backdrop-blur-sm">
               {success ? (
-                <div className="bg-green-500/15 border border-green-500/30 rounded-[10px] p-[2rem] text-center text-[#4ade80] flex flex-col items-center gap-4">
+                <div className="form-success-reveal bg-green-500/15 border border-green-500/30 rounded-[10px] p-[2rem] text-center text-[#4ade80] flex flex-col items-center gap-4">
                   <div className="text-[32px] mb-2">✅</div>
                   <h3 className="font-serif text-[24px] mb-2">Request Received</h3>
                   <p>Thank you! Our advisor will reach out to book your goal planning session.</p>
@@ -548,7 +549,7 @@ const GoalPlanningPage = () => {
                   </div>
                   <div className="md:col-span-1">
                     <label className={formLabelStyles}>Phone / WhatsApp</label>
-                    <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="+91 XXXXX XXXXX" className={inputStyles} />
+                    <PhoneNumberField value={phone} onChange={setPhone} />
                   </div>
                   <div className="md:col-span-1">
                     <label className={formLabelStyles}>Primary Goal</label>

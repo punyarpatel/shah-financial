@@ -86,7 +86,7 @@ const AboutPage = () => {
                 </p>
               </div>
 
-              {/* Right Column: Interactive 3D DW Logo Model */}
+              {/* Right Column: Rotating 3D DW Brand Mark */}
               <div className="lg:col-span-5 flex justify-center lg:justify-end">
                 <DwLogo3DViewer className="w-full max-w-[440px] h-[340px] md:h-[400px] lg:h-[420px]" />
               </div>

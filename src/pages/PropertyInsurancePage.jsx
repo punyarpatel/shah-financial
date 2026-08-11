@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import { submitLead } from '../lib/leads';
 import FadeIn from '../components/animations/FadeIn';
+import PhoneNumberField from '../components/PhoneNumberField';
 
 const PROPERTY_INSURANCE_FEATURES = [
   {
@@ -227,103 +228,96 @@ const PropertyInsurancePage = () => {
       <section id="quote-form" className="py-16 bg-navy/5 border-y border-gold/10 w-full">
         <div className="max-w-4xl mx-auto px-4">
           <FadeIn>
-            <div className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border border-gold/20">
+            <div className="bg-navy/90 rounded-3xl p-8 md:p-12 shadow-2xl border border-white/10 text-white">
               <div className="text-center mb-8">
-                <span className="text-gold text-xs uppercase tracking-widest font-semibold">Free Property Consultation</span>
-                <h3 className="font-serif text-2xl md:text-3xl text-navy font-bold mt-1">Get Customized Property Insurance Quote</h3>
-                <p className="text-muted text-sm mt-2">Fill in your details and our IRDAI-licensed insurance specialist will contact you with optimal policy rates.</p>
+                <span className="text-goldLight text-xs uppercase tracking-widest font-semibold">Free Property Consultation</span>
+                <h3 className="font-serif text-2xl md:text-3xl text-white font-bold mt-1">Get Customized Property Insurance Quote</h3>
+                <p className="text-white/60 text-sm mt-2">Fill in your details and our IRDAI-licensed insurance specialist will contact you with optimal policy rates.</p>
               </div>
 
               {submitted ? (
-                <div className="text-center py-10 bg-cream/60 rounded-2xl border border-gold/30">
+                <div className="form-success-reveal text-center py-10 bg-emerald-500/10 rounded-2xl border border-emerald-500/30 text-emerald-400">
                   <span className="text-5xl mb-4 block">✅</span>
-                  <h4 className="font-serif text-2xl text-navy font-bold mb-2">Thank You!</h4>
-                  <p className="text-textDark text-sm max-w-md mx-auto">
+                  <h4 className="font-serif text-2xl text-white font-bold mb-2">Thank You!</h4>
+                  <p className="text-white/80 text-sm max-w-md mx-auto">
                     Your property insurance inquiry has been received. Our team will contact you within 24 business hours.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   {error && (
-                    <div className="bg-red-50 text-red-700 text-sm p-3 rounded-xl border border-red-200">
+                    <div className="bg-red-500/10 text-red-400 text-sm p-3 rounded-xl border border-red-500/30">
                       {error}
                     </div>
                   )}
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-xs font-medium text-navy uppercase tracking-wider mb-1.5">Full Name *</label>
+                      <label className="block text-xs font-medium text-white/60 uppercase tracking-wider mb-1.5">Full Name *</label>
                       <input
                         type="text"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="e.g. Rajesh Shah"
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-gold text-navy text-sm"
+                        className="w-full px-4 py-3 rounded-xl border border-white/15 bg-white/5 focus:outline-none focus:border-gold focus:bg-white/10 text-white placeholder-white/35 text-sm transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-navy uppercase tracking-wider mb-1.5">Phone Number *</label>
-                      <input
-                        type="tel"
-                        required
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="e.g. 98250 27550"
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-gold text-navy text-sm"
-                      />
+                      <label className="block text-xs font-medium text-white/60 uppercase tracking-wider mb-1.5">Phone Number *</label>
+                      <PhoneNumberField value={formData.phone} onChange={(phone) => setFormData({ ...formData, phone })} />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <div>
-                      <label className="block text-xs font-medium text-navy uppercase tracking-wider mb-1.5">Email Address</label>
+                      <label className="block text-xs font-medium text-white/60 uppercase tracking-wider mb-1.5">Email Address</label>
                       <input
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="rajesh@example.com"
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-gold text-navy text-sm"
+                        className="w-full px-4 py-3 rounded-xl border border-white/15 bg-white/5 focus:outline-none focus:border-gold focus:bg-white/10 text-white placeholder-white/35 text-sm transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-navy uppercase tracking-wider mb-1.5">Property Type</label>
+                      <label className="block text-xs font-medium text-white/60 uppercase tracking-wider mb-1.5">Property Type</label>
                       <select
                         value={formData.propertyType}
                         onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-gold text-navy text-sm bg-white"
+                        className="w-full px-4 py-3 rounded-xl border border-white/15 bg-white/5 focus:outline-none focus:border-gold focus:bg-white/10 text-white text-sm appearance-none cursor-pointer transition-colors"
                       >
-                        <option value="Residential Home">Residential Home / Villa</option>
-                        <option value="Apartment / Flat">Apartment / Flat</option>
-                        <option value="Commercial Office">Commercial Office</option>
-                        <option value="Retail Shop / Showroom">Retail Shop / Showroom</option>
-                        <option value="Industrial / Warehouse">Industrial / Warehouse</option>
+                        <option value="Residential Home" className="bg-[#0d2545] text-white">Residential Home / Villa</option>
+                        <option value="Apartment / Flat" className="bg-[#0d2545] text-white">Apartment / Flat</option>
+                        <option value="Commercial Office" className="bg-[#0d2545] text-white">Commercial Office</option>
+                        <option value="Retail Shop / Showroom" className="bg-[#0d2545] text-white">Retail Shop / Showroom</option>
+                        <option value="Industrial / Warehouse" className="bg-[#0d2545] text-white">Industrial / Warehouse</option>
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-navy uppercase tracking-wider mb-1.5">Property Est. Value</label>
+                      <label className="block text-xs font-medium text-white/60 uppercase tracking-wider mb-1.5">Property Est. Value</label>
                       <select
                         value={formData.estimatedValue}
                         onChange={(e) => setFormData({ ...formData, estimatedValue: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-gold text-navy text-sm bg-white"
+                        className="w-full px-4 py-3 rounded-xl border border-white/15 bg-white/5 focus:outline-none focus:border-gold focus:bg-white/10 text-white text-sm appearance-none cursor-pointer transition-colors"
                       >
-                        <option value="Up to 50 Lakhs">Up to ₹50 Lakhs</option>
-                        <option value="50 Lakhs - 1 Crore">₹50 Lakhs - ₹1 Crore</option>
-                        <option value="1 Crore - 3 Crores">₹1 Crore - ₹3 Crores</option>
-                        <option value="3 Crores - 5 Crores">₹3 Crores - ₹5 Crores</option>
-                        <option value="Above 5 Crores">Above ₹5 Crores</option>
+                        <option value="Up to 50 Lakhs" className="bg-[#0d2545] text-white">Up to ₹50 Lakhs</option>
+                        <option value="50 Lakhs - 1 Crore" className="bg-[#0d2545] text-white">₹50 Lakhs - ₹1 Crore</option>
+                        <option value="1 Crore - 3 Crores" className="bg-[#0d2545] text-white">₹1 Crore - ₹3 Crores</option>
+                        <option value="3 Crores - 5 Crores" className="bg-[#0d2545] text-white">₹3 Crores - ₹5 Crores</option>
+                        <option value="Above 5 Crores" className="bg-[#0d2545] text-white">Above ₹5 Crores</option>
                       </select>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-navy uppercase tracking-wider mb-1.5">Additional Details or Specific Requirements</label>
+                    <label className="block text-xs font-medium text-white/60 uppercase tracking-wider mb-1.5">Additional Details or Specific Requirements</label>
                     <textarea
                       rows={3}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Mention structural details, furniture value, or specific coverage requirements..."
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-gold text-navy text-sm resize-none"
+                      className="w-full px-4 py-3 rounded-xl border border-white/15 bg-white/5 focus:outline-none focus:border-gold focus:bg-white/10 text-white placeholder-white/35 text-sm resize-none transition-colors"
                     />
                   </div>
 

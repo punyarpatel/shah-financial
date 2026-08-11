@@ -223,8 +223,8 @@ const SIPCalculator = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Read URL search params for initial state
-  const queryParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
+  // Read URL search params for initial state on mount
+  const queryParams = useMemo(() => new URLSearchParams(window.location.search), []);
 
   const initialGoalId = queryParams.get('goal') || 'custom';
   const initialCalcMode = queryParams.get('mode') || 'sip';
@@ -241,21 +241,15 @@ const SIPCalculator = () => {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  // Sync state changes to URL search params
-  useEffect(() => {
+  const handleCopyLink = () => {
     const params = new URLSearchParams();
     if (activeGoalId !== 'custom') params.set('goal', activeGoalId);
     params.set('mode', calcMode);
     params.set('sip', sip.toString());
     params.set('rate', rate.toString());
     params.set('years', years.toString());
-    
-    const newRelativePathQuery = window.location.pathname + '?' + params.toString();
-    window.history.replaceState(null, '', newRelativePathQuery);
-  }, [activeGoalId, calcMode, sip, rate, years]);
-
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.href);
+    const shareUrl = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+    navigator.clipboard.writeText(shareUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };

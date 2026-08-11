@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { submitLead } from '../lib/leads';
 import { countriesList } from '../lib/countries';
+import PhoneNumberField from './PhoneNumberField';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
@@ -109,7 +110,7 @@ const ContactForm = () => {
         {/* Card */}
         <div className="bg-white/5 border border-white/10 rounded-[14px] p-[1.5rem]">
           {success ? (
-            <div className="flex flex-col items-center gap-[1rem] bg-green-500/15 border border-green-500/30 rounded-[10px] p-[1.5rem] text-center text-[#4ade80]">
+            <div className="form-success-reveal flex flex-col items-center gap-[1rem] bg-green-500/15 border border-green-500/30 rounded-[10px] p-[1.5rem] text-center text-[#4ade80]">
               <div>Thank you! We will call you within 24 hours.</div>
               <button
                 type="button"
@@ -135,14 +136,7 @@ const ContactForm = () => {
 
               <div>
                 <label className={labelStyles}>Phone / WhatsApp *</label>
-                <input 
-                  type="tel" 
-                  placeholder="+91 XXXXX XXXXX" 
-                  value={phone} 
-                  onChange={(e) => setPhone(e.target.value)}
-                  className={inputStyles}
-                  required
-                />
+                <PhoneNumberField value={phone} onChange={setPhone} />
               </div>
 
               <div>

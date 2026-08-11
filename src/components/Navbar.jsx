@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { submitLead } from '../lib/leads';
 import { countriesList } from '../lib/countries';
 import EyeFollowButton from './EyeFollowButton';
+import PhoneNumberField from './PhoneNumberField';
+import StaggeredMenu from './animations/StaggeredMenu';
 
 const navData = {
   home: [
@@ -255,6 +257,9 @@ const Navbar = () => {
     closeMenu();
 
     if (link === '/') {
+      if (window.location.search) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
       if (location.pathname === '/') {
         window.scrollTo({ top: 0, behavior: 'auto' });
       } else {
@@ -298,6 +303,9 @@ const Navbar = () => {
 
   const handleLogoClick = () => {
     closeMenu();
+    if (window.location.search) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
     if (location.pathname === '/') {
       window.scrollTo({ top: 0, behavior: 'auto' });
     }
@@ -530,13 +538,7 @@ const Navbar = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[11px] text-[#0d2545]/70 uppercase tracking-[0.05em] font-medium mb-1">Phone / WhatsApp</label>
-                      <input
-                        type="tel"
-                        placeholder="+91 XXXXX XXXXX"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-[13.5px] font-sans text-navy bg-slate-50/50 outline-none focus:border-[#c9922a] focus:bg-white transition-colors placeholder-slate-400"
-                      />
+                      <PhoneNumberField value={phone} onChange={setPhone} variant="light" />
                     </div>
                     {isNri === 'No' ? (
                       <div>

@@ -1,12 +1,18 @@
 import React from 'react';
 
 const partners = [
-  { name: 'HDFC', logo: 'H', color: 'from-[#0d2545] to-[#1a365d]', textColor: 'text-white' },
-  { name: 'SBI', logo: 'S', color: 'from-[#1a365d] to-[#2c5282]', textColor: 'text-white' },
-  { name: 'ICICI', logo: 'I', color: 'from-[#2c5282] to-[#2b6cb0]', textColor: 'text-white' },
-  { name: 'KOTAK', logo: 'K', color: 'from-[#0d2545] to-[#1a365d]', textColor: 'text-white' },
-  { name: 'AXIS', logo: 'A', color: 'from-[#1a365d] to-[#2c5282]', textColor: 'text-white' },
-  { name: 'NIPPON', logo: 'N', color: 'from-[#2c5282] to-[#2b6cb0]', textColor: 'text-white' },
+  { name: 'LIC MDRT 2023', image: '/WhatsApp Image 2026-08-11 at 21.33.57.jpeg' },
+  { name: 'IndusInd Star Club', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (1).jpeg' },
+  { name: 'Abu Dhabi Convention', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (2).jpeg', cropPosition: 'center 67%' },
+  { name: 'HDFC ERGO Award', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (3).jpeg' },
+  { name: 'PBT Jaipur', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (4).jpeg', cropPosition: 'center 68%' },
+  { name: 'HDFC ERGO Top 25', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (5).jpeg' },
+  { name: 'PBT Delhi', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (6).jpeg', cropPosition: 'center 68%' },
+  { name: 'No. 1 Advisor', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (7).jpeg' },
+  { name: 'Lakshya Ki Udaan', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (8).jpeg', cropPosition: 'center 68%' },
+  { name: 'Baku Convention', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (9).jpeg', cropPosition: 'center 66%' },
+  { name: 'ICICI Gold Club', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (10).jpeg', cropPosition: 'center 74%' },
+  { name: 'ICICI Prulife', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (11).jpeg', cropPosition: 'center 74%' },
 ];
 
 const CoinCarousel = () => {
@@ -17,14 +23,14 @@ const CoinCarousel = () => {
         style={{ transformStyle: 'preserve-3d' }}
       >
         {partners.map((partner, index) => {
-          const angle = index * 60; // 360 / 6 items
+          const angle = index * (360 / partners.length);
           
           return (
             <div 
               key={partner.name}
               className="absolute top-0 left-0 w-full h-full rounded-full border-[6px] border-[#cbd5e1] flex flex-col items-center justify-center group"
               style={{
-                transform: `rotateY(${angle}deg) translateZ(220px)`,
+                transform: `rotateY(${angle}deg) translateZ(430px)`,
                 backfaceVisibility: 'visible',
                 // Adding a complex box shadow to simulate 3D coin edge and metallic reflection
                 boxShadow: `
@@ -36,14 +42,15 @@ const CoinCarousel = () => {
                 background: `linear-gradient(135deg, #1e293b, #0f172a)`
               }}
             >
-              {/* Inner metallic rim */}
-              <div className="absolute inset-[4px] rounded-full border-[2px] border-white/10 bg-gradient-to-br from-white/10 to-transparent flex flex-col items-center justify-center">
-                <div className="text-[#e2e8f0] text-6xl font-serif font-bold mb-1 drop-shadow-lg opacity-90">
-                  {partner.logo}
-                </div>
-                <div className="text-[#94a3b8] text-[11px] uppercase font-bold tracking-[0.2em]">
-                  {partner.name}
-                </div>
+              {/* Circular image crop inside the existing coin rim */}
+              <div className="absolute inset-[4px] overflow-hidden rounded-full border-[2px] border-white/10 bg-slate-900">
+                <img
+                  src={partner.image}
+                  alt={partner.name}
+                  className="h-full w-full object-cover"
+                  style={{ objectPosition: partner.cropPosition || 'center' }}
+                  loading="lazy"
+                />
               </div>
               
               {/* Fake 3D Edge (visible when rotated) */}
@@ -65,6 +72,9 @@ const CoinCarousel = () => {
                   zIndex: -2
                 }}
               />
+              <div className="absolute left-1/2 top-[calc(100%+10px)] -translate-x-1/2 whitespace-nowrap rounded-full bg-navy/95 px-3 py-1 text-center text-[9px] font-bold uppercase tracking-[0.1em] text-white shadow-lg">
+                {partner.name}
+              </div>
             </div>
           );
         })}
