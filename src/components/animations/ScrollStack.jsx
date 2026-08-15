@@ -30,6 +30,7 @@ const ScrollStack = ({
   const isUpdatingRef = useRef(false);
   const cardOffsetsRef = useRef([]);
   const endOffsetRef = useRef(0);
+  const paddingBottomRef = useRef(0);
 
   const calculateProgress = useCallback((scrollTop, start, end) => {
     if (scrollTop < start) return 0;
@@ -98,6 +99,13 @@ const ScrollStack = ({
       ? document.querySelector('.scroll-stack-end')
       : scrollerRef.current?.querySelector('.scroll-stack-end');
 
+    const innerContainer = useWindowScroll
+      ? document.querySelector('.scroll-stack-inner')
+      : scrollerRef.current?.querySelector('.scroll-stack-inner');
+    if (innerContainer) {
+      paddingBottomRef.current = parseFloat(window.getComputedStyle(innerContainer).paddingBottom) || 0;
+    }
+
     if (endElement) {
       if (useWindowScroll) {
         const rect = endElement.getBoundingClientRect();
@@ -144,12 +152,7 @@ const ScrollStack = ({
       }
     }
 
-    const scroller = scrollerRef.current;
-    const innerContainer = useWindowScroll
-      ? document.querySelector('.scroll-stack-inner')
-      : scroller?.querySelector('.scroll-stack-inner');
-    const paddingBottom = innerContainer ? parseFloat(window.getComputedStyle(innerContainer).paddingBottom) || 0 : 0;
-    const containerBottom = endElementTop + paddingBottom;
+    const containerBottom = endElementTop + paddingBottomRef.current;
     const maxPinEnd = containerBottom - containerHeight;
 
     cardsRef.current.forEach((card, i) => {

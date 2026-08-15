@@ -30,15 +30,21 @@ export const FollowEyes = ({
     return () => clearInterval(interval);
   }, [enableBlinking, blinkInterval]);
 
-  // Mouse tracking logic
+  // Throttled mouse tracking logic with requestAnimationFrame
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!containerRef.current) return;
+    let animationFrameId = null;
+    let latestEvent = null;
+
+    const updateEyePos = () => {
+      if (!latestEvent || !containerRef.current) {
+        animationFrameId = null;
+        return;
+      }
       const rect = containerRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      const mouseX = e.clientX - centerX;
-      const mouseY = e.clientY - centerY;
+      const mouseX = latestEvent.clientX - centerX;
+      const mouseY = latestEvent.clientY - centerY;
 
       const leftEyeOffsetX = -eyeGap / 2;
       const rightEyeOffsetX = eyeGap / 2;
@@ -50,15 +56,32 @@ export const FollowEyes = ({
         if (dist === 0) return { x: 0, y: 0 };
         const clamped = Math.min(dist, maxDistance);
         const angle = Math.atan2(relY, relX);
-        return { x: Math.cos(angle) * clamped, y: Math.sin(angle) * clamped };
+        return {
+          x: Math.round(Math.cos(angle) * clamped * 10) / 10,
+          y: Math.round(Math.sin(angle) * clamped * 10) / 10
+        };
       };
 
-      setLeftPupilPos(calcPos(leftEyeOffsetX));
-      setRightPupilPos(calcPos(rightEyeOffsetX));
+      const newLeft = calcPos(leftEyeOffsetX);
+      const newRight = calcPos(rightEyeOffsetX);
+
+      setLeftPupilPos(prev => (prev.x === newLeft.x && prev.y === newLeft.y ? prev : newLeft));
+      setRightPupilPos(prev => (prev.x === newRight.x && prev.y === newRight.y ? prev : newRight));
+      animationFrameId = null;
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    const handleMouseMove = (e) => {
+      latestEvent = e;
+      if (!animationFrameId) {
+        animationFrameId = requestAnimationFrame(updateEyePos);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    };
   }, [eyeGap, maxDistance]);
 
   return (

@@ -1,12 +1,13 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
 
-# Disallow private admin routes and API endpoints from indexing
-Disallow: /admin/
-Disallow: /admin/*
-Disallow: /api/
-Disallow: /api/*
+User-agent: GPTBot
+Disallow: /
 
-# XML Sitemap Location
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
 Sitemap: https://drishtiwealth.com/sitemap.xml

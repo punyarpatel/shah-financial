@@ -26,15 +26,32 @@ const HomePage = () => {
           name="description" 
           content="Trusted mutual fund distributor and insurance advisor in Ahmedabad serving 6000 plus clients and NRI clients since 2001." 
         />
+        <link rel="canonical" href="https://drishtiwealth.com/" />
         <meta property="og:title" content="Drishti Wealth: AMFI Registered MFD Ahmedabad" />
         <meta property="og:description" content="Trusted mutual fund distributor and insurance advisor in Ahmedabad serving 6000 plus clients and NRI clients since 2001." />
-        <meta property="og:image" content={ogImage} />
+        <meta property="og:image" content="https://drishtiwealth.com/og-image.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={window.location.href} />
+        <meta property="og:url" content="https://drishtiwealth.com/" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Drishti Wealth: AMFI Registered MFD Ahmedabad" />
         <meta name="twitter:description" content="Trusted mutual fund distributor and insurance advisor in Ahmedabad serving 6000 plus clients and NRI clients since 2001." />
         <meta name="twitter:image" content={ogImage} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FinancialService",
+            "name": "Drishti Wealth",
+            "description": "AMFI registered mutual fund distributor and insurance advisor in Ahmedabad",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Ahmedabad",
+              "addressRegion": "Gujarat",
+              "addressCountry": "IN"
+            },
+            "telephone": "+91-9664977576",
+            "url": "https://drishtiwealth.com"
+          })}
+        </script>
       </Helmet>
       
       <Navbar />

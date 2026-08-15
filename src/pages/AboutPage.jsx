@@ -55,11 +55,12 @@ const AboutPage = () => {
       <Helmet>
         <title>About Us | Drishti Wealth Ahmedabad</title>
         <meta name="description" content="Drishti Wealth: trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2001. Serving 6,000+ clients and 100+ NRI clients across India and abroad." />
+        <link rel="canonical" href="https://drishtiwealth.com/about" />
         <meta property="og:title" content="About Us | Drishti Wealth Ahmedabad" />
         <meta property="og:description" content="Drishti Wealth: trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2001. Serving 6,000+ clients and 100+ NRI clients across India and abroad." />
-        <meta property="og:image" content={ogImage} />
+        <meta property="og:image" content="https://drishtiwealth.com/og-image.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={window.location.href} />
+        <meta property="og:url" content="https://drishtiwealth.com/about" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="About Us | Drishti Wealth Ahmedabad" />
         <meta name="twitter:description" content="Drishti Wealth: trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2001. Serving 6,000+ clients and 100+ NRI clients across India and abroad." />
@@ -205,9 +206,9 @@ const AboutPage = () => {
               textColor="#e2e8f0"
               borderRadius={0.05}
               scrollEase={0.05}
-              scrollSpeed={2}
+              scrollSpeed={1}
               autoplay={true}
-              autoplaySpeed={10}
+              autoplaySpeed={0.5}
               interactive={false}
             />
           </div>

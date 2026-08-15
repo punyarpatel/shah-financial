@@ -386,7 +386,7 @@ class App {
       textColor = '#ffffff',
       borderRadius = 0,
       font = 'bold 30px Figtree',
-      scrollSpeed = 2,
+      scrollSpeed = 1,
       scrollEase = 0.05,
       autoplay = false,
       autoplaySpeed = 1,
@@ -399,6 +399,7 @@ class App {
     this.autoplay = autoplay;
     this.autoplaySpeed = autoplaySpeed;
     this.interactive = interactive;
+    this.isVisible = true;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
     this.onCheckDebounce = debounce(this.onCheck, 200);
     this.createRenderer();
@@ -450,7 +451,7 @@ class App {
       { image: `https://picsum.photos/seed/12/800/600?grayscale`, text: 'Palm Trees' }
     ];
     const galleryItems = items && items.length ? items : defaultItems;
-    
+
     // Repeat items until we have at least 18 items to ensure seamless wrapping on all screen sizes
     let repeatedItems = [...galleryItems];
     while (repeatedItems.length < 18) {
@@ -550,6 +551,10 @@ class App {
     }
   }
   update() {
+    if (!this.isVisible) {
+      this.raf = window.requestAnimationFrame(this.update.bind(this));
+      return;
+    }
     if (this.autoplay) {
       this.scroll.target += this.autoplaySpeed * 0.005;
     }
@@ -616,7 +621,7 @@ export default function CircularGallery({
   borderRadius = 0.05,
   font = 'bold 30px Figtree',
   fontUrl,
-  scrollSpeed = 2,
+  scrollSpeed = 1,
   scrollEase = 0.05,
   autoplay = false,
   autoplaySpeed = 1,
@@ -627,6 +632,8 @@ export default function CircularGallery({
     if (!containerRef.current) return;
     let app;
     let isMounted = true;
+    let observer;
+
     resolveFont(font, fontUrl).then(resolvedFont => {
       if (!isMounted || !containerRef.current) return;
       app = new App(containerRef.current, {
@@ -641,10 +648,18 @@ export default function CircularGallery({
         autoplaySpeed,
         interactive
       });
+
+      if ('IntersectionObserver' in window && containerRef.current) {
+        observer = new IntersectionObserver(([entry]) => {
+          if (app) app.isVisible = entry.isIntersecting;
+        }, { threshold: 0.05 });
+        observer.observe(containerRef.current);
+      }
     });
 
     return () => {
       isMounted = false;
+      if (observer) observer.disconnect();
       if (app) app.destroy();
     };
   }, [items, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase, autoplay, autoplaySpeed, interactive]);

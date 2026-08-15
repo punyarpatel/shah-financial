@@ -12,9 +12,8 @@ const app = express();
 // ---------------------------------------------------------------------------
 const allowedOrigins = [
   'http://localhost:5173',
-  'http://localhost:4173',
   'https://drishtiwealth.com',
-  'https://www.drishtiwealth.com',
+  'https://www.drishtiwealth.com'
 ];
 
 app.use(cors({

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { submitLead } from '../lib/leads';
@@ -118,7 +118,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [navMode, setNavMode] = useState('classic');
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollYRef = useRef(0);
   const [mobileMenus, setMobileMenus] = useState({
     home: false,
     services: false,
@@ -214,29 +214,32 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          const prevScrollY = lastScrollYRef.current;
 
-      // If mobile menu is open, don't hide the navbar
-      if (isOpen) {
-        setLastScrollY(currentScrollY);
-        return;
+          if (!isOpen) {
+            if (currentScrollY > prevScrollY && currentScrollY > 100) {
+              setIsVisible(false);
+            } else {
+              setIsVisible(true);
+            }
+          }
+
+          lastScrollYRef.current = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
       }
-
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down and past threshold
-        setIsVisible(false);
-      } else {
-        // Scrolling up
-        setIsVisible(true);
-      }
-
-      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, isOpen]);
+  }, [isOpen]);
 
   const toggleMobileMenu = (key) => {
     setMobileMenus(prev => ({ ...prev, [key]: !prev[key] }));

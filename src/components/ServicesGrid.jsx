@@ -402,13 +402,18 @@ const ServicesGrid = () => {
     return () => window.removeEventListener('resize', checkSize);
   }, []);
 
+  const activeTabRef = useRef(activeTab);
+  useEffect(() => {
+    activeTabRef.current = activeTab;
+  }, [activeTab]);
+
   // Scroll spy to update active tab based on wrapper positions
   useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          let newActiveIndex = activeTab;
+          let newActiveIndex = activeTabRef.current;
 
           // Find the last card whose top is above the middle of the screen
           const triggerPoint = window.innerHeight * 0.4; // 40% from top
@@ -423,7 +428,7 @@ const ServicesGrid = () => {
             }
           }
 
-          if (newActiveIndex !== activeTab) {
+          if (newActiveIndex !== activeTabRef.current) {
             setActiveTab(newActiveIndex);
           }
           ticking = false;
@@ -436,7 +441,7 @@ const ServicesGrid = () => {
     handleScroll(); // Initial check
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [activeTab]);
+  }, []);
 
   // Scroll active tab trigger into view on mobile
   useEffect(() => {

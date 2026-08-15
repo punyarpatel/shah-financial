@@ -17,11 +17,12 @@ const BlogPage = () => {
       <Helmet>
         <title>Financial Insights & Education | Drishti Wealth</title>
         <meta name="description" content="Expert articles on mutual funds, SIP investing, tax-saving ELSS, insurance planning, NRI investments, and personal finance from Drishti Wealth, Ahmedabad." />
+        <link rel="canonical" href="https://drishtiwealth.com/blog" />
         <meta property="og:title" content="Financial Insights & Education | Drishti Wealth" />
         <meta property="og:description" content="Expert articles on mutual funds, SIP investing, tax-saving ELSS, insurance planning, NRI investments, and personal finance from Drishti Wealth, Ahmedabad." />
-        <meta property="og:image" content={ogImage} />
+        <meta property="og:image" content="https://drishtiwealth.com/og-image.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={window.location.href} />
+        <meta property="og:url" content="https://drishtiwealth.com/blog" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Financial Insights & Education | Drishti Wealth" />
         <meta name="twitter:description" content="Expert articles on mutual funds, SIP investing, tax-saving ELSS, insurance planning, NRI investments, and personal finance from Drishti Wealth, Ahmedabad." />

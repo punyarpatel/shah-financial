@@ -182,11 +182,12 @@ const NRIPage = () => {
       <Helmet>
         <title>NRI Investment Services India | Drishti Wealth</title>
         <meta name="description" content="NRI mutual fund investments, NRI health insurance in India, DTAA guidance, KYC, repatriation planning. Serving NRIs across USA, UK, UAE, Canada, Australia, Singapore, GCC, and Europe." />
+        <link rel="canonical" href="https://drishtiwealth.com/nri" />
         <meta property="og:title" content="NRI Investment Services India | Drishti Wealth" />
         <meta property="og:description" content="NRI mutual fund investments, NRI health insurance in India, DTAA guidance, KYC, repatriation planning. Serving NRIs across USA, UK, UAE, Canada, Australia, Singapore, GCC, and Europe." />
-        <meta property="og:image" content={ogImage} />
+        <meta property="og:image" content="https://drishtiwealth.com/og-image.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={window.location.href} />
+        <meta property="og:url" content="https://drishtiwealth.com/nri" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="NRI Investment Services India | Drishti Wealth" />
         <meta name="twitter:description" content="NRI mutual fund investments, NRI health insurance in India, DTAA guidance, KYC, repatriation planning. Serving NRIs across USA, UK, UAE, Canada, Australia, Singapore, GCC, and Europe." />

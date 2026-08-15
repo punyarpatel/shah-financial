@@ -45,7 +45,7 @@ const TermsOfServicePage = () => {
 
               <div className="mb-10">
                 <p className="text-muted text-[14.5px] leading-relaxed mb-4">
-                  These Terms of Service ("Terms") constitute a legally binding electronic agreement between you ("User", "Client", "Investor", or "you") and Drishti Wealth ("we", "us", or "our"), governing your access to and use of this website (www.drishtiwealth.in or similar), mobile applications, and online portals (collectively, the "Platform") and any physical or digital financial services provided by us.
+                  These Terms of Service ("Terms") constitute a legally binding electronic agreement between you ("User", "Client", "Investor", or "you") and Drishti Wealth ("we", "us", or "our"), governing your access to and use of this website (drishtiwealth.com, www.drishtiwealth.com or similar), mobile applications, and online portals (collectively, the "Platform") and any physical or digital financial services provided by us.
                 </p>
                 <p className="text-muted text-[14.5px] leading-relaxed">
                   By browsing, accessing, registering, or transacting on this Platform, you acknowledge that you have read, understood, and agreed to be bound by these Terms and our Privacy Policy. If you do not accept these terms, you must discontinue your use of our Platform immediately.
