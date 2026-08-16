@@ -175,18 +175,19 @@ const AdminDashboardPage = () => {
       // 2. Optimistic state update
       setNotes((prev) => [newNoteObj, ...prev]);
       setNewNoteText('');
+
+      // 3. Background sync to Express API and Supabase (fire-and-forget safely)
+      Promise.allSettled([
+        api.post(`/api/leads/${leadId}/notes`, { text: noteText }).catch(() => {}),
+        supabase.from('lead_notes').insert([{
+          id: newNoteObj.id,
+          lead_id: leadId,
+          text: noteText,
+          created_at: newNoteObj.created_at
+        }]).catch(() => {})
+      ]);
+
       showToast('Follow-up note added', 'success');
-
-      // 3. Background sync to Express API
-      api.post(`/api/leads/${leadId}/notes`, { text: noteText }).catch(() => {});
-
-      // 4. Background sync to Supabase (if table exists)
-      supabase.from('lead_notes').insert([{
-        id: newNoteObj.id,
-        lead_id: leadId,
-        text: noteText,
-        created_at: newNoteObj.created_at
-      }]).catch(() => {});
     } catch (err) {
       console.error('Error adding note:', err);
       showToast('Failed to add note', 'error');
