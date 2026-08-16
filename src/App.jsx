@@ -53,7 +53,7 @@ function ProtectedRoute({ children }) {
       }
 
       const userEmail = session.user?.email || '';
-      const allowedEmails = (import.meta.env.VITE_ADMIN_EMAILS || '')
+      const allowedEmails = (import.meta.env.VITE_ADMIN_EMAILS || 'rutvik4585@gmail.com,officeinsurance2017@gmail.com,punyarpatel4105@gmail.com')
         .split(',')
         .map((e) => e.trim().toLowerCase())
         .filter(Boolean);
