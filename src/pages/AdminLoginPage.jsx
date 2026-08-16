@@ -15,6 +15,14 @@ const AdminLoginPage = () => {
   const [resetError, setResetError] = useState('');
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        navigate('/admin/dashboard');
+      }
+    });
+  }, [navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
