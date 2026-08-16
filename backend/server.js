@@ -285,6 +285,28 @@ app.post('/api/leads', leadSubmissionLimiter, (req, res) => {
   leads.push(newLead);
   writeLeads(leads);
 
+  // Trigger webhook notification if configured
+  const webhookUrl = process.env.VITE_NOTIFICATION_WEBHOOK_URL || 'https://hook.eu1.make.com/h7uju73cjrmr90joev7kwx21kscw7q2r';
+  const siteUrl = process.env.VITE_SITE_URL || 'https://drishtiwealth.com';
+  const dashboardUrl = `${siteUrl.replace(/\/$/, '')}/admin/dashboard`;
+
+  if (webhookUrl) {
+    fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        event: 'lead.created',
+        data: {
+          ...newLead,
+          dashboard_url: dashboardUrl,
+          dashboard_link: dashboardUrl,
+          admin_url: dashboardUrl,
+          url: dashboardUrl,
+        }
+      })
+    }).catch(err => logger.error('Backend webhook error: ' + err.message));
+  }
+
   res.status(201).json({ success: true, lead: newLead });
 });
 

@@ -70,6 +70,17 @@ export async function submitLead(leadData) {
 }
 
 /**
+ * Gets the production dashboard URL for lead notification emails and alerts.
+ */
+function getDashboardUrl() {
+  const siteUrl = import.meta.env.VITE_SITE_URL || 
+    (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' 
+      ? window.location.origin 
+      : 'https://drishtiwealth.com');
+  return `${siteUrl.replace(/\/$/, '')}/admin/dashboard`;
+}
+
+/**
  * Sends a notification message to a Telegram chat/channel via a Bot.
  */
 async function sendTelegramNotification(leadData) {
@@ -77,13 +88,16 @@ async function sendTelegramNotification(leadData) {
   const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
   if (!token || !chatId) return;
 
+  const dashboardUrl = getDashboardUrl();
+
   const text = `🔔 *New Lead Received!*\n\n` +
     `*Name:* ${leadData.name}\n` +
     `*Phone:* ${leadData.phone}\n` +
     `*Interest:* ${leadData.interest}\n` +
     `*City:* ${leadData.city || 'N/A'}\n` +
     `*NRI:* ${leadData.is_nri || 'No'}${leadData.nri_country ? ` (${leadData.nri_country})` : ''}\n` +
-    `*Message:* ${leadData.message || 'None'}`;
+    `*Message:* ${leadData.message || 'None'}\n\n` +
+    `🔗 [Open Admin Dashboard](${dashboardUrl})`;
 
   try {
     await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
@@ -109,6 +123,8 @@ async function sendGenericWebhook(leadData) {
   const url = import.meta.env.VITE_NOTIFICATION_WEBHOOK_URL || 'https://hook.eu1.make.com/h7uju73cjrmr90joev7kwx21kscw7q2r';
   if (!url) return;
 
+  const dashboardUrl = getDashboardUrl();
+
   try {
     await fetch(url, {
       method: 'POST',
@@ -119,6 +135,10 @@ async function sendGenericWebhook(leadData) {
         event: 'lead.created',
         data: {
           ...leadData,
+          dashboard_url: dashboardUrl,
+          dashboard_link: dashboardUrl,
+          admin_url: dashboardUrl,
+          url: dashboardUrl,
           created_at: new Date().toISOString()
         }
       })
@@ -127,3 +147,4 @@ async function sendGenericWebhook(leadData) {
     console.error('Webhook notification error:', err);
   }
 }
+
