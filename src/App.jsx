@@ -111,7 +111,7 @@ export default function App() {
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <PageLoader brandName="Drishti Wealth" duration={0.5} />
+        <PageLoader brandName="Drishti Wealth" duration={1.2} />
         <div className="min-h-screen bg-gray-100 flex flex-col relative">
           <ScrollToTop />
           <CookieConsent />

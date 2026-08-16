@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motio
 
 const PageLoader = ({
   brandName = 'Drishti Wealth',
-  duration = 2.4,
+  duration = 1.2,
   onComplete
 }) => {
   const [displayCount, setDisplayCount] = useState(0);
@@ -32,8 +32,8 @@ const PageLoader = ({
       setTimeout(() => {
         setIsVisible(false);
         if (onComplete) onComplete();
-      }, 350); // Fast exit duration
-    }, duration * 1000 + 100);
+      }, 650); // Clean exit duration for shutters
+    }, duration * 1000 + 50);
 
     return () => clearTimeout(timer);
   }, [duration, onComplete]);
@@ -54,8 +54,8 @@ const PageLoader = ({
               initial={{ y: '0%' }}
               animate={isClosing ? { y: '-100%' } : { y: '0%' }}
               transition={{
-                duration: 0.75,
-                delay: isClosing ? colIdx * 0.08 : 0,
+                duration: 0.55,
+                delay: isClosing ? colIdx * 0.05 : 0,
                 ease: [0.77, 0, 0.175, 1]
               }}
               className="relative flex-1 h-full bg-[#071324] border-r border-white/5 last:border-r-0 origin-top shadow-2xl"
@@ -70,8 +70,8 @@ const PageLoader = ({
         <motion.div
           animate={isClosing ? {
             opacity: 0,
-            scale: 1.04,
-            filter: 'blur(10px)'
+            scale: 1.03,
+            filter: 'blur(8px)'
           } : {
             opacity: 1,
             scale: 1,
@@ -88,7 +88,7 @@ const PageLoader = ({
             <motion.div
               initial={{ opacity: 0, y: 10, filter: 'blur(8px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: 0.4, delay: 0.05 }}
               className="flex items-center gap-3"
             >
               <img
