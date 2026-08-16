@@ -32,7 +32,7 @@ const PageLoader = ({
       setTimeout(() => {
         setIsVisible(false);
         if (onComplete) onComplete();
-      }, 950); // Total staggered exit duration
+      }, 350); // Fast exit duration
     }, duration * 1000 + 100);
 
     return () => clearTimeout(timer);
