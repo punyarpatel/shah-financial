@@ -108,10 +108,31 @@ const NotFoundPage = () => {
 
 
 export default function App() {
+  const [showLoader, setShowLoader] = React.useState(() => {
+    try {
+      return !sessionStorage.getItem('dw_has_loaded');
+    } catch (e) {
+      return false;
+    }
+  });
+
+  const handleLoaderComplete = () => {
+    try {
+      sessionStorage.setItem('dw_has_loaded', 'true');
+    } catch (e) {}
+    setShowLoader(false);
+  };
+
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <PageLoader brandName="Drishti Wealth" duration={1.2} />
+        {showLoader && (
+          <PageLoader
+            brandName="Drishti Wealth"
+            duration={1.0}
+            onComplete={handleLoaderComplete}
+          />
+        )}
         <div className="min-h-screen bg-gray-100 flex flex-col relative">
           <ScrollToTop />
           <CookieConsent />

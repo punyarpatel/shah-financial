@@ -5,6 +5,18 @@
 @tailwind utilities;
 
 @layer base {
+  html, body {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Force Safari GPU Hardware Acceleration */
+  .transform-gpu, [class*="animate-"] {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
   :root {
     --color-navy: 13 37 69;
     --color-gold: 201 146 42;
