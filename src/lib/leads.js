@@ -106,7 +106,7 @@ async function sendTelegramNotification(leadData) {
  * Sends a POST request containing lead details to a generic webhook URL.
  */
 async function sendGenericWebhook(leadData) {
-  const url = import.meta.env.VITE_NOTIFICATION_WEBHOOK_URL;
+  const url = import.meta.env.VITE_NOTIFICATION_WEBHOOK_URL || 'https://hook.eu1.make.com/h7uju73cjrmr90joev7kwx21kscw7q2r';
   if (!url) return;
 
   try {
