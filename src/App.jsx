@@ -4,6 +4,7 @@ import supabase from './lib/supabase';
 import { HelmetProvider } from 'react-helmet-async';
 import ScrollToTop from './components/ScrollToTop';
 import PageLoader from './components/PageLoader';
+import CookieConsent from './components/CookieConsent';
 
 // Lazy Loaded Pages
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -113,6 +114,7 @@ export default function App() {
         <PageLoader brandName="Drishti Wealth" duration={2.2} />
         <div className="min-h-screen bg-gray-100 flex flex-col relative">
           <ScrollToTop />
+          <CookieConsent />
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
               <Route path="/" element={<HomePage />} />

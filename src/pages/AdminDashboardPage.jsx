@@ -102,11 +102,49 @@ const AdminDashboardPage = () => {
   const fetchNotes = async (leadId) => {
     setLoadingNotes(true);
     try {
-      const res = await api.get(`/api/leads/${leadId}/notes`);
-      setNotes(res.data);
+      let fetchedNotes = [];
+
+      // 1. Try Express backend API
+      try {
+        const res = await api.get(`/api/leads/${leadId}/notes`);
+        if (Array.isArray(res.data)) {
+          fetchedNotes = res.data;
+        }
+      } catch (e) {
+        // Ignored fallback
+      }
+
+      // 2. Try Supabase lead_notes table
+      try {
+        const { data: sbNotes } = await supabase.from('lead_notes').select('*').eq('lead_id', leadId);
+        if (Array.isArray(sbNotes)) {
+          fetchedNotes = [...fetchedNotes, ...sbNotes];
+        }
+      } catch (e) {
+        // Ignored fallback
+      }
+
+      // 3. Persistent LocalStorage Backup
+      const localKey = `dw_lead_notes_${leadId}`;
+      const localNotes = JSON.parse(localStorage.getItem(localKey) || '[]');
+
+      // Merge and deduplicate all notes by ID
+      const notesMap = new Map();
+      [...fetchedNotes, ...localNotes].forEach(note => {
+        if (note && note.id) {
+          notesMap.set(note.id, note);
+        }
+      });
+
+      const mergedNotes = Array.from(notesMap.values());
+      mergedNotes.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+      setNotes(mergedNotes);
     } catch (err) {
       console.error('Error fetching notes:', err);
-      setNotes([]);
+      const localKey = `dw_lead_notes_${leadId}`;
+      const localNotes = JSON.parse(localStorage.getItem(localKey) || '[]');
+      setNotes(localNotes);
     } finally {
       setLoadingNotes(false);
     }
@@ -116,14 +154,39 @@ const AdminDashboardPage = () => {
     e.preventDefault();
     if (!newNoteText.trim() || !selectedLead) return;
 
+    const noteText = newNoteText.trim();
+    const leadId = selectedLead.id;
     setSubmittingNote(true);
+
+    const newNoteObj = {
+      id: `note_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+      lead_id: leadId,
+      text: noteText,
+      created_at: new Date().toISOString()
+    };
+
     try {
-      const res = await api.post(`/api/leads/${selectedLead.id}/notes`, {
-        text: newNoteText
-      });
-      setNotes(res.data);
+      // 1. Save to LocalStorage immediately (guaranteed instant persistence)
+      const localKey = `dw_lead_notes_${leadId}`;
+      const existingLocal = JSON.parse(localStorage.getItem(localKey) || '[]');
+      const updatedLocal = [newNoteObj, ...existingLocal];
+      localStorage.setItem(localKey, JSON.stringify(updatedLocal));
+
+      // 2. Optimistic state update
+      setNotes((prev) => [newNoteObj, ...prev]);
       setNewNoteText('');
       showToast('Follow-up note added', 'success');
+
+      // 3. Background sync to Express API
+      api.post(`/api/leads/${leadId}/notes`, { text: noteText }).catch(() => {});
+
+      // 4. Background sync to Supabase (if table exists)
+      supabase.from('lead_notes').insert([{
+        id: newNoteObj.id,
+        lead_id: leadId,
+        text: noteText,
+        created_at: newNoteObj.created_at
+      }]).catch(() => {});
     } catch (err) {
       console.error('Error adding note:', err);
       showToast('Failed to add note', 'error');
@@ -337,26 +400,6 @@ const AdminDashboardPage = () => {
   };
 
   const handleExportCSV = () => {
-    const headers = ["Name", "Phone", "City", "Interest", "NRI", "Country", "Date", "Status"];
-    
-    const rows = leads.map(lead => {
-      const isNriVal = lead.is_nri || lead.isNri || '';
-      return [
-        `"${lead.name || ''}"`,
-        `"${lead.phone || ''}"`,
-        `"${lead.city || ''}"`,
-        `"${lead.interest || ''}"`,
-        `"${isNriVal.startsWith('Yes') ? 'Yes' : 'No'}"`,
-        `"${isNriVal.replace('Yes - ', '') || ''}"`,
-        `"${lead.created_at ? new Date(lead.created_at).toLocaleDateString() : ''}"`,
-        `"${lead.status || 'new'}"`
-      ].join(',');
-    });
-
-    const csvContent = [headers.join(','), ...rows].join('\n');
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
     a.href = url;
     a.download = 'leads.csv';
     a.click();

@@ -39,7 +39,7 @@ const FAQItem = ({ question, answer, isOpen, onToggle }) => {
           {question}
         </span>
         <span className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 bg-[#faf8f4] transition-all duration-300 ${isOpen ? 'rotate-180 bg-gold text-white shadow-md shadow-gold/20' : 'text-navy'}`}>
-          <svg className="w-4.5 h-4.5 stroke-[2.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-5 h-5 stroke-[2.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
           </svg>
         </span>

@@ -214,7 +214,7 @@ const masonryBackgroundItems = [
 const Service3DGraphic = ({ title, cardGradient, cardText, cardIcon }) => {
   return (
     <div
-      className="relative w-full max-w-[320px] aspect-[4/3] flex items-center justify-center select-none overflow-visible"
+      className="relative w-full max-w-[260px] sm:max-w-[320px] aspect-[4/3] flex items-center justify-center select-none overflow-visible mx-auto"
       style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}
     >
       {/* Soft shadow under the pedestal */}
@@ -306,10 +306,12 @@ const ServiceCard = ({ service, index, totalCards, onRef, isStack = false }) => 
 
   const isLast = index === totalCards - 1;
 
-  // Desktop only scroll-driven scale and fade transitions (with delay so cards don't shrink/fade prematurely)
-  // Disabled when inside a stack since the stack container handles this
-  const scale = isStack || isLast || !isDesktop ? 1 : useTransform(scrollYProgress, [0, 0.45, 1], [1, 1, 0.94]);
-  const opacity = isStack || isLast || !isDesktop ? 1 : useTransform(scrollYProgress, [0, 0.45, 1], [1, 1, 0.65]);
+  // Unconditional hook calls at top level (React Rules of Hooks)
+  const transformScale = useTransform(scrollYProgress, [0, 0.45, 1], [1, 1, 0.94]);
+  const transformOpacity = useTransform(scrollYProgress, [0, 0.45, 1], [1, 1, 0.65]);
+
+  const scale = isStack || isLast || !isDesktop ? 1 : transformScale;
+  const opacity = isStack || isLast || !isDesktop ? 1 : transformOpacity;
 
   // Stepped stacking levels (desktop only)
   // Disabled when inside a stack
@@ -330,15 +332,15 @@ const ServiceCard = ({ service, index, totalCards, onRef, isStack = false }) => 
           top: !isStack && isDesktop ? `${stickyTop}px` : 'auto',
           zIndex: index + 10,
         }}
-        className={`${!isStack ? 'lg:sticky mb-16 lg:mb-24 last:mb-0' : ''} relative w-full bg-white rounded-[32px] p-8 md:p-10 lg:p-12 shadow-[0_20px_50px_rgba(13,37,69,0.03)] border border-slate-100/90 hover:shadow-[0_30px_70px_rgba(13,37,69,0.06)] hover:border-slate-200/50 transition-all duration-500 flex flex-col md:flex-row items-center justify-between gap-10 group/card origin-top`}
+        className={`${!isStack ? 'lg:sticky mb-6 lg:mb-24 last:mb-0' : ''} relative w-full bg-white rounded-[24px] sm:rounded-[32px] p-5 sm:p-8 md:p-10 lg:p-12 shadow-[0_15px_40px_rgba(13,37,69,0.04)] border border-slate-100/90 hover:shadow-[0_30px_70px_rgba(13,37,69,0.06)] hover:border-slate-200/50 transition-all duration-500 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 group/card origin-top`}
       >
         {/* Left Side Content */}
         <div className="flex-1 text-left w-full md:pr-4">
-          <h3 className="font-serif text-[28px] md:text-[34px] font-bold text-navy mb-6 leading-tight">
+          <h3 className="font-serif text-[22px] sm:text-[28px] md:text-[34px] font-bold text-navy mb-4 sm:mb-6 leading-tight">
             {service.title}
           </h3>
 
-          <ul className="space-y-4 mb-8">
+          <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
             {service.highlights.map((highlight, idx) => (
               <li key={idx} className="flex items-start gap-3">
                 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-gold text-white flex items-center justify-center mt-0.5 shadow-sm shadow-gold/20">
@@ -614,18 +616,18 @@ const ServicesGrid = () => {
           <div className="relative z-10">
             {servicesMode === 'stack' ? (
               /* ScrollStack Mode inside a single glassmorphic card tile */
-              <div className="bg-[#fcfbf9]/85 backdrop-blur-[12px] p-8 md:p-10 rounded-[32px] border border-white/40 shadow-[0_15px_35px_rgba(13,37,69,0.02)] relative mt-8 overflow-visible">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start overflow-visible relative">
+              <div className="bg-[#fcfbf9]/85 backdrop-blur-[12px] p-4 sm:p-8 md:p-10 rounded-[24px] sm:rounded-[32px] border border-white/40 shadow-[0_15px_35px_rgba(13,37,69,0.02)] relative mt-4 sm:mt-8 overflow-visible">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start overflow-visible relative">
                   {/* Left Column: Sticky/Static Header */}
-                  <div className="lg:col-span-4 sticky top-[150px] self-start text-left overflow-visible scroll-stack-left-col">
+                  <div className="lg:col-span-4 lg:sticky lg:top-[150px] static self-start text-left overflow-visible scroll-stack-left-col">
                     {/* Header */}
                     <div className="text-gold text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]">
                       Our Expertise
                     </div>
-                    <h2 className="font-serif text-[28px] md:text-[34px] text-textDark font-semibold leading-[1.2] mb-[1rem]">
+                    <h2 className="font-serif text-[24px] sm:text-[28px] md:text-[34px] text-textDark font-semibold leading-[1.2] mb-[1rem]">
                       Comprehensive Financial Solutions
                     </h2>
-                    <p className="text-[14.5px] text-muted leading-[1.7] mb-6">
+                    <p className="text-[14px] sm:text-[14.5px] text-muted leading-[1.7] mb-6">
                       We build personalised investment portfolios from scratch, designed around your goals, risk appetite, and timeline. From mutual funds and tax-saving strategies to life, health, motor, general, and SME insurance, we have everything you need under one roof.
                     </p>
                     <div>
@@ -636,21 +638,38 @@ const ServicesGrid = () => {
                     </div>
                   </div>
 
-                  {/* Right Column: ScrollStack */}
+                  {/* Right Column: ScrollStack on Desktop, Clean Cards Feed on Mobile */}
                   <div className="w-full lg:col-span-8 overflow-visible relative">
-                    <ScrollStack useWindowScroll={true} itemDistance={60} itemScale={0.02} itemStackDistance={20}>
+                    {/* Desktop ScrollStack (hidden on mobile) */}
+                    <div className="hidden lg:block">
+                      <ScrollStack useWindowScroll={true} itemDistance={60} itemScale={0.02} itemStackDistance={20}>
+                        {servicesData.map((service, index) => (
+                          <ScrollStackItem key={service.id}>
+                            <ServiceCard
+                              service={service}
+                              index={index}
+                              totalCards={servicesData.length}
+                              onRef={() => {}}
+                              isStack={true}
+                            />
+                          </ScrollStackItem>
+                        ))}
+                      </ScrollStack>
+                    </div>
+
+                    {/* Mobile Clean Card Feed (visible on mobile, hidden on lg) */}
+                    <div className="flex flex-col gap-5 lg:hidden">
                       {servicesData.map((service, index) => (
-                        <ScrollStackItem key={service.id}>
-                          <ServiceCard
-                            service={service}
-                            index={index}
-                            totalCards={servicesData.length}
-                            onRef={() => {}}
-                            isStack={true}
-                          />
-                        </ScrollStackItem>
+                        <ServiceCard
+                          key={service.id}
+                          service={service}
+                          index={index}
+                          totalCards={servicesData.length}
+                          onRef={() => {}}
+                          isStack={false}
+                        />
                       ))}
-                    </ScrollStack>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -732,10 +732,10 @@ const SIPCalculator = () => {
               </div>
             </div>
 
-            {/* Chart Section with Guide */}
-            <div className="mt-[3rem] flex flex-col md:flex-row items-center gap-6 w-full">
+            {/* Chart Section with Guide (hidden on mobile, visible on desktop/laptops) */}
+            <div className="mt-[3rem] hidden md:flex flex-row items-center gap-6 w-full">
               {/* Left: The Graph */}
-              <div className="h-[220px] flex-1 w-full">
+              <div className="h-[220px] min-h-[220px] sm:h-[250px] flex-1 w-full relative">
                 <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                   <AreaChart data={chartData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
                     <defs>

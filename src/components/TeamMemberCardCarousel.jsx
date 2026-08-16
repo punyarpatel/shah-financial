@@ -12,7 +12,7 @@ const teamMembers = [
     avatar: 'PS',
     bgActive: 'bg-gradient-to-b from-[#0d2545] via-[#132d54] to-[#1a3866]',
     image: '/piyush_shah.jpg',
-    cropStyle: 'object-cover object-[center_12%]'
+    cropStyle: 'object-cover object-[center_15%]'
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const teamMembers = [
     avatar: 'RS',
     bgActive: 'bg-gradient-to-b from-[#0b2b24] via-[#103d33] to-[#175245]',
     image: '/rutvik_shah.jpg',
-    cropStyle: 'object-[center_28%] scale-[1.8]'
+    cropStyle: 'object-cover object-[center_15%]'
   },
   {
     id: 3,
@@ -55,7 +55,10 @@ const TeamMemberCardCarousel = () => {
     <LayoutGroup>
       <div className="flex flex-col items-center justify-center my-4 select-none w-full max-w-5xl mx-auto px-4">
         {/* Header Controls */}
-        <div className="flex items-center justify-end w-full mb-6">
+        <div className="flex items-center justify-between w-full mb-6">
+          <div className="text-[12px] font-mono text-gold tracking-widest uppercase bg-gold/10 px-3 py-1.5 rounded-full border border-gold/20">
+            Team Member {activeIndex + 1} of {teamMembers.length}
+          </div>
           {/* Carousel Arrows */}
           <div className="flex items-center gap-2">
             <button
@@ -76,7 +79,7 @@ const TeamMemberCardCarousel = () => {
         </div>
 
         {/* Smooth Accordion Track */}
-        <div className="flex items-stretch justify-center gap-4 sm:gap-6 w-full py-4 min-h-[460px]">
+        <div className="flex items-stretch justify-center gap-4 sm:gap-6 w-full py-2 min-h-[460px]">
           {teamMembers.map((member, idx) => {
             const isActive = idx === activeIndex;
 
@@ -91,12 +94,13 @@ const TeamMemberCardCarousel = () => {
                   damping: 28,
                   mass: 0.9
                 }}
-                className={`relative rounded-[32px] p-6 sm:p-7 cursor-pointer border shadow-xl transition-colors duration-500 overflow-hidden ${isActive
-                  ? 'flex-[2.8] border-gold/60 ring-2 ring-gold/30 shadow-[0_20px_50px_rgba(13,37,69,0.4)] ' + member.bgActive
-                  : 'flex-1 border-white/10 bg-navy/80 hover:bg-navy/90 hover:border-white/20'
-                  }`}
+                className={`relative rounded-[32px] p-6 sm:p-7 border shadow-xl transition-colors duration-500 overflow-hidden ${
+                  isActive
+                    ? 'w-full md:flex-[2.8] border-gold/60 ring-2 ring-gold/30 shadow-[0_20px_50px_rgba(13,37,69,0.4)] ' + member.bgActive
+                    : 'hidden md:block md:flex-1 border-white/10 bg-navy/80 hover:bg-navy/90 hover:border-white/20 cursor-pointer'
+                }`}
               >
-                <div className="flex flex-col md:flex-row h-full w-full justify-between items-stretch gap-4 relative z-10">
+                <div className="flex flex-col md:flex-row h-full w-full justify-between items-stretch gap-6 relative z-10">
                   {/* Left Column Text Content */}
                   <div className="flex-1 flex flex-col justify-between min-w-0">
                     {/* Top Row: Avatar & Badge */}
@@ -132,7 +136,7 @@ const TeamMemberCardCarousel = () => {
                         initial={false}
                         animate={{ opacity: isActive ? 1 : 0.4 }}
                         transition={{ duration: 0.3 }}
-                        className={`text-white/80 leading-relaxed ${isActive ? 'text-[12px]' : 'text-[11px] line-clamp-2'}`}
+                        className={`text-white/80 leading-relaxed ${isActive ? 'text-[12.5px] sm:text-[13px]' : 'text-[11px] line-clamp-2'}`}
                       >
                         {member.details}
                       </motion.p>
@@ -143,12 +147,12 @@ const TeamMemberCardCarousel = () => {
                         transition={{ duration: 0.25 }}
                         className="flex justify-end items-center text-[10px] font-mono text-goldLight mt-3"
                       >
-                        <span className="font-bold text-emerald-400">&bull; VERIFIED</span>
+                        <span className="font-bold text-emerald-400">&bull; VERIFIED ADVISOR</span>
                       </motion.div>
                     </div>
                   </div>
 
-                  {/* Right Column: Member Photo on Empty Space when Card is Expanded */}
+                  {/* Right Column: Member Photo */}
                   <AnimatePresence>
                     {isActive && member.image && (
                       <motion.div
@@ -158,7 +162,7 @@ const TeamMemberCardCarousel = () => {
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                         className="shrink-0 my-auto ml-0 md:ml-4 self-center md:self-stretch flex items-center justify-center"
                       >
-                        <div className="relative group overflow-hidden rounded-2xl border-2 border-gold/40 shadow-[0_12px_30px_rgba(0,0,0,0.5)] w-36 h-48 sm:w-40 sm:h-52 md:w-44 md:h-60 bg-black/30">
+                        <div className="relative group overflow-hidden rounded-2xl border-2 border-gold/40 shadow-[0_12px_30px_rgba(0,0,0,0.5)] w-40 h-52 sm:w-44 sm:h-56 md:w-48 md:h-64 bg-black/30">
                           <img
                             src={member.image}
                             alt={member.name}
@@ -188,6 +192,20 @@ const TeamMemberCardCarousel = () => {
               </motion.div>
             );
           })}
+        </div>
+
+        {/* Mobile Pagination Dots */}
+        <div className="flex items-center justify-center gap-2 mt-4 md:hidden">
+          {teamMembers.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActiveIndex(idx)}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                idx === activeIndex ? 'w-8 bg-gold' : 'w-2.5 bg-navy/30'
+              }`}
+              aria-label={`Go to slide ${idx + 1}`}
+            />
+          ))}
         </div>
       </div>
     </LayoutGroup>

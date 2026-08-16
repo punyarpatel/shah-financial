@@ -95,13 +95,8 @@ const ScrollStack = ({
       }
     });
 
-    const endElement = useWindowScroll
-      ? document.querySelector('.scroll-stack-end')
-      : scrollerRef.current?.querySelector('.scroll-stack-end');
-
-    const innerContainer = useWindowScroll
-      ? document.querySelector('.scroll-stack-inner')
-      : scrollerRef.current?.querySelector('.scroll-stack-inner');
+    const endElement = scrollerRef.current?.querySelector('.scroll-stack-end');
+    const innerContainer = scrollerRef.current?.querySelector('.scroll-stack-inner');
     if (innerContainer) {
       paddingBottomRef.current = parseFloat(window.getComputedStyle(innerContainer).paddingBottom) || 0;
     }
@@ -307,9 +302,7 @@ const ScrollStack = ({
     if (!scroller) return;
 
     const cards = Array.from(
-      useWindowScroll
-        ? document.querySelectorAll('.scroll-stack-card')
-        : scroller.querySelectorAll('.scroll-stack-card')
+      scrollerRef.current ? scrollerRef.current.querySelectorAll('.scroll-stack-card') : []
     );
 
     cardsRef.current = cards;
