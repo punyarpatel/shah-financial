@@ -23,21 +23,24 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
-        <title>Drishti Wealth Pvt. Ltd. | AMFI Registered Mutual Fund Advisor &amp; Distributor Ahmedabad</title>
-        <meta 
-          name="description" 
-          content="Drishti Wealth Pvt. Ltd. - Trusted AMFI registered mutual fund distributor and insurance advisor in Ahmedabad serving 6,000+ clients and NRI clients since 2001." 
-        />
+        <title>Drishti Wealth Pvt. Ltd. | AMFI Registered Mutual Fund Distributor Ahmedabad</title>
+        <meta name="title" content="Drishti Wealth Pvt. Ltd. | AMFI Registered Mutual Fund Distributor Ahmedabad" />
+        <meta name="description" content="Drishti Wealth Pvt. Ltd. - Trusted AMFI-registered mutual fund distributor &amp; insurance consultant in Ahmedabad serving 6,000+ clients and NRIs globally since 2001. Goal-based SIP planning &amp; portfolio reviews." />
+        <meta name="keywords" content="Drishti Wealth, Drishti Wealth Pvt Ltd, Mutual Funds Ahmedabad, AMFI Registered MFD, SIP Calculator, NRI Investment India, Health Insurance Consultant, Retirement Planning" />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://drishtiwealth.com/" />
-        <meta property="og:site_name" content="Drishti Wealth Pvt. Ltd." />
-        <meta property="og:title" content="Drishti Wealth Pvt. Ltd. | AMFI Registered Mutual Fund Advisor &amp; Distributor Ahmedabad" />
-        <meta property="og:description" content="Drishti Wealth Pvt. Ltd. - Trusted AMFI registered mutual fund distributor and insurance advisor in Ahmedabad serving 6,000+ clients and NRI clients since 2001." />
-        <meta property="og:image" content="https://drishtiwealth.com/og-image.jpg" />
+
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Drishti Wealth Pvt. Ltd." />
         <meta property="og:url" content="https://drishtiwealth.com/" />
+        <meta property="og:title" content="Drishti Wealth Pvt. Ltd. | AMFI Registered Mutual Fund Distributor Ahmedabad" />
+        <meta property="og:description" content="Drishti Wealth Pvt. Ltd. - Trusted AMFI-registered mutual fund distributor &amp; insurance consultant serving 6,000+ clients and NRIs globally since 2001." />
+        <meta property="og:image" content="https://drishtiwealth.com/why_choose_us_mockup.png" />
+
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Drishti Wealth Pvt. Ltd. | AMFI Registered Mutual Fund Advisor &amp; Distributor Ahmedabad" />
-        <meta name="twitter:description" content="Drishti Wealth Pvt. Ltd. - Trusted AMFI registered mutual fund distributor and insurance advisor in Ahmedabad serving 6,000+ clients and NRI clients since 2001." />
+        <meta name="twitter:url" content="https://drishtiwealth.com/" />
+        <meta name="twitter:title" content="Drishti Wealth Pvt. Ltd. | AMFI Registered Mutual Fund Distributor Ahmedabad" />
+        <meta name="twitter:description" content="Drishti Wealth Pvt. Ltd. - Trusted AMFI-registered mutual fund distributor &amp; insurance consultant serving 6,000+ clients and NRIs globally since 2001." />
         <meta name="twitter:image" content={ogImage} />
         <script type="application/ld+json">
           {JSON.stringify({

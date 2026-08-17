@@ -82,7 +82,7 @@ const HeroSection = () => {
             <h1 className="font-serif text-[38px] sm:text-[50px] md:text-[62px] font-normal leading-[1.12] text-white tracking-[-0.02em] mb-3">
               Drishti Wealth
               <span className="block text-[18px] sm:text-[22px] md:text-[26px] text-goldLight font-sans font-medium mt-2 tracking-normal">
-                AMFI Registered Mutual Fund Advisor &amp; Distributor in Ahmedabad
+                AMFI Registered Mutual Fund Distributor in Ahmedabad
               </span>
             </h1>
             <p className="text-[#f0c96a] text-[12px] sm:text-[14px] font-sans font-medium uppercase tracking-[0.16em] leading-snug">

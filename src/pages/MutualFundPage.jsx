@@ -155,11 +155,11 @@ const MutualFundPage = () => {
               </Link>
             </div>
             <div className="inline-flex items-center gap-[6px] bg-gold/15 border border-gold/30 rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]">
-              <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">AMFI Registered Mutual Fund Advisor</span>
+              <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">AMFI Registered Mutual Fund Distributor</span>
             </div>
 
             <h1 className="font-serif text-[36px] md:text-[48px] text-white font-semibold leading-[1.2] mb-[1.25rem] max-w-4xl">
-              Mutual Fund Advisor &amp; Distributor in Ahmedabad
+              Mutual Fund Distributor in Ahmedabad
             </h1>
 
             <p className="text-white/65 text-[16px] leading-[1.6] mb-[2rem] max-w-2xl">
