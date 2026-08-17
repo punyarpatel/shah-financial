@@ -177,15 +177,21 @@ const AdminDashboardPage = () => {
       setNewNoteText('');
 
       // 3. Background sync to Express API and Supabase (fire-and-forget safely)
-      Promise.allSettled([
-        api.post(`/api/leads/${leadId}/notes`, { text: noteText }).catch(() => {}),
-        supabase.from('lead_notes').insert([{
-          id: newNoteObj.id,
-          lead_id: leadId,
-          text: noteText,
-          created_at: newNoteObj.created_at
-        }]).catch(() => {})
-      ]);
+      (async () => {
+        try {
+          if (api) await api.post(`/api/leads/${leadId}/notes`, { text: noteText }).catch(() => {});
+        } catch (e) {}
+        try {
+          if (supabase && typeof supabase.from === 'function') {
+            await supabase.from('lead_notes').insert([{
+              id: newNoteObj.id,
+              lead_id: leadId,
+              text: noteText,
+              created_at: newNoteObj.created_at
+            }]).catch(() => {});
+          }
+        } catch (e) {}
+      })();
 
       showToast('Follow-up note added', 'success');
     } catch (err) {
