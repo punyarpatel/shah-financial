@@ -10,21 +10,13 @@ const DisclosuresPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const commissions = [
-    { category: 'Equity Schemes (Large/Mid/Small Cap)', amcRange: '0.75%  to  1.25% p.a.', trailRate: '0.75%  to  1.25% p.a.' },
-    { category: 'Hybrid Schemes (Balanced Advantage/Aggressive)', amcRange: '0.70%  to  1.10% p.a.', trailRate: '0.70%  to  1.10% p.a.' },
-    { category: 'Debt Schemes (Short/Medium/Long Term)', amcRange: '0.30%  to  0.75% p.a.', trailRate: '0.30%  to  0.75% p.a.' },
-    { category: 'Liquid / Overnight Schemes', amcRange: '0.05%  to  0.15% p.a.', trailRate: '0.05%  to  0.15% p.a.' },
-    { category: 'ELSS (Tax Saving Schemes)', amcRange: '0.80%  to  1.20% p.a.', trailRate: '0.80%  to  1.20% p.a.' }
-  ];
-
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
-        <title>Regulatory Disclosures &amp; Commissions | Drishti Wealth</title>
+        <title>Regulatory Disclosures | Drishti Wealth</title>
         <meta
           name="description"
-          content="Official regulatory disclosures and mutual fund commission structures for Drishti Wealth in compliance with SEBI, AMFI, and IRDAI regulations."
+          content="Official regulatory disclosures for Drishti Wealth in compliance with SEBI, AMFI, and IRDAI regulations."
         />
         <link rel="canonical" href="https://drishtiwealth.com/disclosures" />
       </Helmet>
@@ -41,7 +33,7 @@ const DisclosuresPage = () => {
             Regulatory Disclosures
           </h1>
           <p className="text-white/65 text-[15px] max-w-xl">
-            Transparency is our core value. In compliance with SEBI, AMFI, and IRDAI regulations, we disclose our regulatory credentials and commission structures.
+            Transparency is our core value. In compliance with SEBI, AMFI, and IRDAI regulations, we disclose our regulatory credentials.
           </p>
         </div>
       </section>
@@ -74,37 +66,6 @@ const DisclosuresPage = () => {
                     <p className="text-muted text-[13px]"><strong>Partners:</strong> Empanelled with leading Indian Insurers</p>
                   </div>
                 </div>
-              </div>
-
-              <div className="mb-10">
-                <p className="text-muted text-[14.5px] leading-relaxed mb-4">
-                  In accordance with SEBI Circular No. SEBI/IMD/CIR No. 4/168230/09, the details of trail commissions receivable by Drishti Wealth from various Asset Management Companies (AMCs) for mutual fund distributions are disclosed below. These rates represent the standard commission ranges across different asset classes:
-                </p>
-
-                <div className="overflow-x-auto mb-6">
-                  <table className="min-w-full bg-white border border-navy/10 rounded-[8px] overflow-hidden">
-                    <thead className="bg-navy text-white text-[13px] font-medium text-left">
-                      <tr>
-                        <th className="py-3 px-4 font-semibold uppercase tracking-wider">Asset Category</th>
-                        <th className="py-3 px-4 font-semibold uppercase tracking-wider">AMC Trail Commission Range</th>
-                        <th className="py-3 px-4 font-semibold uppercase tracking-wider">Trail Rate structure</th>
-                      </tr>
-                    </thead>
-                    <tbody className="text-[13.5px] text-muted divide-y divide-navy/5">
-                      {commissions.map((c, i) => (
-                        <tr key={i} className="hover:bg-cream/10 transition-colors">
-                          <td className="py-3 px-4 font-medium text-textDark">{c.category}</td>
-                          <td className="py-3 px-4">{c.amcRange}</td>
-                          <td className="py-3 px-4">{c.trailRate}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-
-                <p className="text-muted text-[13.5px] leading-relaxed italic bg-navy/5 p-4 rounded-[6px]">
-                  *Note: The commission rates specified are subject to change by respective AMCs based on regulatory limits, geography (T30 vs B30 cities), and individual scheme structures. The commissions received by Drishti Wealth do not impact the Net Asset Value (NAV) of the scheme directly beyond the standard Expense Ratio charged by the AMC for Regular Plans.
-                </p>
               </div>
 
               <div className="mb-10">
