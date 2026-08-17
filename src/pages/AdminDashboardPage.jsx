@@ -202,6 +202,34 @@ const AdminDashboardPage = () => {
     }
   };
 
+  const handleDeleteNote = async (noteId) => {
+    if (!selectedLead || !noteId) return;
+    const leadId = selectedLead.id;
+
+    // 1. Remove from local state immediately
+    setNotes((prev) => prev.filter((n) => n.id !== noteId));
+
+    // 2. Remove from LocalStorage
+    const localKey = `dw_lead_notes_${leadId}`;
+    const existingLocal = JSON.parse(localStorage.getItem(localKey) || '[]');
+    const updatedLocal = existingLocal.filter((n) => n.id !== noteId);
+    localStorage.setItem(localKey, JSON.stringify(updatedLocal));
+
+    // 3. Background sync to Express API and Supabase
+    (async () => {
+      try {
+        if (api) await api.delete(`/api/leads/${leadId}/notes/${noteId}`).catch(() => {});
+      } catch (e) {}
+      try {
+        if (supabase && typeof supabase.from === 'function') {
+          await supabase.from('lead_notes').delete().eq('id', noteId).catch(() => {});
+        }
+      } catch (e) {}
+    })();
+
+    showToast('Note deleted', 'success');
+  };
+
   const handleViewDetails = (lead) => {
     setSelectedLead(lead);
     fetchNotes(lead.id);
@@ -1304,14 +1332,24 @@ const AdminDashboardPage = () => {
                   ) : (
                     <div className="space-y-4 relative before:absolute before:left-[11px] before:top-[12px] before:bottom-[12px] before:w-[2px] before:bg-[#0d2545]/10">
                       {notes.map((note) => (
-                        <div key={note.id} className="flex gap-4 relative">
+                        <div key={note.id} className="flex gap-4 relative group">
                           {/* Circle Dot */}
                           <div className="w-[24px] h-[24px] rounded-full bg-[#faf8f4] border-2 border-[#c9922a] flex items-center justify-center flex-shrink-0 z-10">
                             <div className="w-[8px] h-[8px] rounded-full bg-[#c9922a]" />
                           </div>
                           {/* Note Card */}
-                          <div className="bg-[#faf8f4] border border-[#0d2545]/5 rounded-[8px] p-3 flex-1 text-[13px]">
-                            <p className="text-[#1a1a2e] whitespace-pre-wrap leading-relaxed">{note.text}</p>
+                          <div className="bg-[#faf8f4] border border-[#0d2545]/5 rounded-[8px] p-3 flex-1 text-[13px] relative">
+                            <div className="flex justify-between items-start gap-2">
+                              <p className="text-[#1a1a2e] whitespace-pre-wrap leading-relaxed flex-1">{note.text}</p>
+                              <button
+                                type="button"
+                                onClick={() => handleDeleteNote(note.id)}
+                                title="Delete Note"
+                                className="text-[#94a3b8] hover:text-[#ef4444] hover:bg-[#ef4444]/10 rounded px-1.5 py-0.5 text-[16px] leading-none transition-colors cursor-pointer"
+                              >
+                                &times;
+                              </button>
+                            </div>
                             <span className="text-[10px] text-[#5c6478] block mt-1.5 font-medium">
                               {new Date(note.created_at).toLocaleString()}
                             </span>
