@@ -1,4 +1,141 @@
 {
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/services/index.html",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/services/mutual-funds/index.html",
+      "destination": "/services/mutual-funds",
+      "permanent": true
+    },
+    {
+      "source": "/services/insurance/index.html",
+      "destination": "/services/insurance",
+      "permanent": true
+    },
+    {
+      "source": "/services/travel-insurance/index.html",
+      "destination": "/services/travel-insurance",
+      "permanent": true
+    },
+    {
+      "source": "/services/property-insurance/index.html",
+      "destination": "/services/property-insurance",
+      "permanent": true
+    },
+    {
+      "source": "/services/retirement/index.html",
+      "destination": "/services/retirement",
+      "permanent": true
+    },
+    {
+      "source": "/services/goal-planning/index.html",
+      "destination": "/services/goal-planning",
+      "permanent": true
+    },
+    {
+      "source": "/nri/index.html",
+      "destination": "/nri",
+      "permanent": true
+    },
+    {
+      "source": "/about/index.html",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/blog/index.html",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/disclosures/index.html",
+      "destination": "/disclosures",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy/index.html",
+      "destination": "/privacy-policy",
+      "permanent": true
+    },
+    {
+      "source": "/terms-of-service/index.html",
+      "destination": "/terms-of-service",
+      "permanent": true
+    },
+    {
+      "source": "/mutual-funds",
+      "destination": "/services/mutual-funds",
+      "permanent": true
+    },
+    {
+      "source": "/insurance",
+      "destination": "/services/insurance",
+      "permanent": true
+    },
+    {
+      "source": "/retirement",
+      "destination": "/services/retirement",
+      "permanent": true
+    },
+    {
+      "source": "/goal-planning",
+      "destination": "/services/goal-planning",
+      "permanent": true
+    },
+    {
+      "source": "/travel-insurance",
+      "destination": "/services/travel-insurance",
+      "permanent": true
+    },
+    {
+      "source": "/property-insurance",
+      "destination": "/services/property-insurance",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.supabase.co https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co https://api.web3forms.com wss://*.supabase.co; frame-src 'self' https://www.youtube.com https://www.google.com https://maps.google.com;"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
