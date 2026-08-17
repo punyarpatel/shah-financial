@@ -18,6 +18,7 @@ const TermsOfServicePage = () => {
           name="description"
           content="Terms of Service of Drishti Wealth. Read the rules, obligations, and legal agreements governing the use of our financial advisory website and platforms."
         />
+        <link rel="canonical" href="https://drishtiwealth.com/terms-of-service" />
       </Helmet>
 
       <Navbar />

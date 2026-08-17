@@ -52,6 +52,7 @@ const SingleBlogPage = () => {
       <Helmet>
         <title>{blog.title} | Drishti Wealth</title>
         <meta name="description" content={blog.excerpt} />
+        <link rel="canonical" href={`https://drishtiwealth.com/blog/${slug}`} />
         <meta property="og:title" content={`${blog.title} | Drishti Wealth`} />
         <meta property="og:description" content={blog.excerpt} />
         <meta property="og:image" content={ogImage} />

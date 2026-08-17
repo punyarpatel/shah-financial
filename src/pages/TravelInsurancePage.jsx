@@ -136,6 +136,7 @@ const TravelInsurancePage = () => {
       <Helmet>
         <title>Overseas Travel Insurance | Drishti Wealth</title>
         <meta name="description" content="Comprehensive overseas travel insurance covering medical emergencies, trip cancellations, lost baggage, and flight delays." />
+        <link rel="canonical" href="https://drishtiwealth.com/services/travel-insurance" />
         <meta property="og:title" content="Overseas Travel Insurance | Drishti Wealth" />
         <meta property="og:description" content="Comprehensive overseas travel insurance covering medical emergencies, trip cancellations, lost baggage, and flight delays." />
         <meta property="og:type" content="website" />

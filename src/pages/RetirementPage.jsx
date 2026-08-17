@@ -215,6 +215,7 @@ const RetirementPage = () => {
       <Helmet>
         <title>Retirement Planning | Drishti Wealth</title>
         <meta name="description" content="Build a realistic, inflation-adjusted retirement corpus plan. Start at 28 or 52; it's never too early or too late." />
+        <link rel="canonical" href="https://drishtiwealth.com/services/retirement" />
         <meta property="og:title" content="Retirement Planning | Drishti Wealth" />
         <meta property="og:description" content="Build a realistic, inflation-adjusted retirement corpus plan. Start at 28 or 52; it's never too early or too late." />
         <meta property="og:image" content={ogImage} />

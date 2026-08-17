@@ -130,8 +130,9 @@ const MutualFundPage = () => {
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
-        <title>Mutual Fund Advisor &amp; Distributor in Ahmedabad | Drishti Wealth</title>
-        <meta name="description" content="Top AMFI-registered mutual fund advisor & distributor in Ahmedabad. Goal-based SIP planning, portfolio reviews, lumpsum investments, and expert fund selection." />
+        <title>Mutual Fund Distributor in Ahmedabad | Drishti Wealth</title>
+        <meta name="description" content="Top AMFI-registered mutual fund distributor in Ahmedabad. Goal-based SIP planning, portfolio reviews, lumpsum investments, and expert fund selection." />
+        <link rel="canonical" href="https://drishtiwealth.com/services/mutual-funds" />
         <meta property="og:title" content="Mutual Fund Advisor &amp; Distributor in Ahmedabad | Drishti Wealth" />
         <meta property="og:description" content="Top AMFI-registered mutual fund advisor & distributor in Ahmedabad. Goal-based SIP planning, portfolio reviews, lumpsum investments, and expert fund selection." />
         <meta property="og:image" content={ogImage} />

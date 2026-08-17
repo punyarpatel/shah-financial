@@ -138,6 +138,7 @@ const GoalPlanningPage = () => {
       <Helmet>
         <title>Goal-Based Wealth Planning | Drishti Wealth</title>
         <meta name="description" content="Plan for every financial goal (education, home, business, retirement) with dedicated investment buckets, tracked annually." />
+        <link rel="canonical" href="https://drishtiwealth.com/services/goal-planning" />
         <meta property="og:title" content="Goal-Based Wealth Planning | Drishti Wealth" />
         <meta property="og:description" content="Plan for every financial goal (education, home, business, retirement) with dedicated investment buckets, tracked annually." />
         <meta property="og:image" content={ogImage} />

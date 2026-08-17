@@ -21,11 +21,12 @@ const DisclosuresPage = () => {
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
-        <title>Regulatory Disclosures & Commissions | Drishti Wealth</title>
+        <title>Regulatory Disclosures &amp; Commissions | Drishti Wealth</title>
         <meta
           name="description"
           content="Official regulatory disclosures and mutual fund commission structures for Drishti Wealth in compliance with SEBI, AMFI, and IRDAI regulations."
         />
+        <link rel="canonical" href="https://drishtiwealth.com/disclosures" />
       </Helmet>
 
       <Navbar />

@@ -158,8 +158,9 @@ const InsurancePage = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col relative">
       <Helmet>
-        <title>Life & General Insurance | Drishti Wealth</title>
+        <title>Life &amp; General Insurance | Drishti Wealth</title>
         <meta name="description" content="Term life, health, motor, fire, marine, and group insurance from India's most trusted insurers. Compare and get covered today." />
+        <link rel="canonical" href="https://drishtiwealth.com/services/insurance" />
         <meta property="og:title" content="Life & General Insurance | Drishti Wealth" />
         <meta property="og:description" content="Term life, health, motor, fire, marine, and group insurance from India's most trusted insurers. Compare and get covered today." />
         <meta property="og:image" content={ogImage} />

@@ -123,8 +123,9 @@ const PropertyInsurancePage = () => {
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
-        <title>Property & Home Insurance Advisory Ahmedabad | Drishti Wealth</title>
+        <title>Property &amp; Home Insurance Advisory Ahmedabad | Drishti Wealth</title>
         <meta name="description" content="Protect your home, office, contents, and commercial property with trusted property insurance policies in Ahmedabad. IRDAI licensed advisor since 2001." />
+        <link rel="canonical" href="https://drishtiwealth.com/services/property-insurance" />
         <meta property="og:title" content="Property & Home Insurance Advisory | Drishti Wealth" />
         <meta property="og:description" content="Protect your home, office, contents, and commercial property with trusted property insurance policies in Ahmedabad. IRDAI licensed advisor since 2001." />
       </Helmet>

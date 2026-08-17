@@ -18,6 +18,7 @@ const PrivacyPolicyPage = () => {
           name="description"
           content="Privacy Policy of Drishti Wealth. Understand how we collect, use, store, and protect your personal and financial information in accordance with Indian regulatory standards."
         />
+        <link rel="canonical" href="https://drishtiwealth.com/privacy-policy" />
       </Helmet>
 
       <Navbar />
