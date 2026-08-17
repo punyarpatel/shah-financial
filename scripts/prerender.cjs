@@ -12,27 +12,27 @@ const DIST_DIR = path.join(__dirname, '..', 'dist');
 const routes = [
   {
     path: 'index.html',
-    title: 'Drishti Wealth: AMFI Registered Mutual Fund Distributor Ahmedabad',
-    description: 'Trusted AMFI-registered mutual fund distributor & insurance advisor in Ahmedabad serving 6,000+ clients and NRIs globally since 2001.',
-    heading: 'Your Trusted Partner for Financial Growth'
+    title: 'Drishti Wealth: AMFI Registered Mutual Fund Advisor & Distributor Ahmedabad',
+    description: 'Top AMFI-registered mutual fund advisor & distributor in Ahmedabad. Goal-based SIP planning, portfolio reviews, and financial planning in India since 2001.',
+    heading: 'AMFI Registered Mutual Fund Advisor & Distributor in Ahmedabad'
   },
   {
     path: 'nri/index.html',
-    title: 'NRI Financial Services & Indian Mutual Fund Advisory | Drishti Wealth',
-    description: 'Specialized Indian mutual fund and health insurance advisory for NRIs in USA, Canada, UK, and UAE.',
-    heading: 'Seamless Wealth Management for Non-Resident Indians'
+    title: 'NRI Investment Advisory & Indian Mutual Fund Services | Drishti Wealth',
+    description: 'Specialized NRI mutual fund investment advisory, NRI health insurance in India, DTAA guidance, and remote KYC setup.',
+    heading: 'NRI Investment Advisory & Mutual Fund Services in India'
   },
   {
     path: 'services/index.html',
-    title: 'Financial Services & Portfolio Advisory | Drishti Wealth',
-    description: 'Comprehensive wealth management services including Mutual Funds, Health Insurance, Travel Insurance, and Retirement Planning.',
-    heading: 'Comprehensive Financial Solutions'
+    title: 'Financial Planning & Investment Advisory Services | Drishti Wealth',
+    description: 'Comprehensive wealth management services including Mutual Funds, Health Insurance, NRI Advisory, and Retirement Planning.',
+    heading: 'Financial Planning & Investment Advisory Services in India'
   },
   {
     path: 'services/mutual-funds/index.html',
-    title: 'Mutual Fund Advisory & SIP Investment | Drishti Wealth Ahmedabad',
-    description: 'Expert mutual fund selection, SIP compounding strategies, and portfolio rebalancing in Ahmedabad.',
-    heading: 'Goal-Based Mutual Fund Investments & SIPs'
+    title: 'Mutual Fund Advisor & Distributor in Ahmedabad | Drishti Wealth',
+    description: 'Top AMFI-registered mutual fund advisor & distributor in Ahmedabad. Goal-based SIP planning, portfolio reviews, and fund selection.',
+    heading: 'Mutual Fund Advisor & Distributor in Ahmedabad'
   },
   {
     path: 'services/insurance/index.html',

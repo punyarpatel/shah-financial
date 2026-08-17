@@ -209,7 +209,7 @@ const NRIPage = () => {
               <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">NRI Investment Services</span>
             </div>
             <h1 className="font-serif text-[34px] md:text-[46px] text-white font-semibold leading-[1.2] mb-[1.25rem] max-w-4xl">
-              Your India Investments & Insurance: Managed Professionally, Even From Abroad
+              NRI Investment Advisory &amp; Mutual Fund Services in India
             </h1>
             <p className="text-white/65 text-[16px] leading-[1.6] mb-[2rem] max-w-2xl">
               You've built a life abroad. Your India investments and insurance deserve the same attention. We specialise in helping NRIs invest, stay compliant, grow their wealth back home, and stay protected every time they visit India.

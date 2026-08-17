@@ -130,16 +130,16 @@ const MutualFundPage = () => {
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
-        <title>Mutual Fund Services | Drishti Wealth</title>
-        <meta name="description" content="Expert mutual fund services, SIP setups, portfolio reviews, and goal-based investing." />
-        <meta property="og:title" content="Mutual Fund Services | Drishti Wealth" />
-        <meta property="og:description" content="Expert mutual fund services, SIP setups, portfolio reviews, and goal-based investing." />
+        <title>Mutual Fund Advisor &amp; Distributor in Ahmedabad | Drishti Wealth</title>
+        <meta name="description" content="Top AMFI-registered mutual fund advisor & distributor in Ahmedabad. Goal-based SIP planning, portfolio reviews, lumpsum investments, and expert fund selection." />
+        <meta property="og:title" content="Mutual Fund Advisor &amp; Distributor in Ahmedabad | Drishti Wealth" />
+        <meta property="og:description" content="Top AMFI-registered mutual fund advisor & distributor in Ahmedabad. Goal-based SIP planning, portfolio reviews, lumpsum investments, and expert fund selection." />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Mutual Fund Services | Drishti Wealth" />
-        <meta name="twitter:description" content="Expert mutual fund services, SIP setups, portfolio reviews, and goal-based investing." />
+        <meta name="twitter:title" content="Mutual Fund Advisor &amp; Distributor in Ahmedabad | Drishti Wealth" />
+        <meta name="twitter:description" content="Top AMFI-registered mutual fund distributor in Ahmedabad for SIP investments & portfolio reviews." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
@@ -155,15 +155,15 @@ const MutualFundPage = () => {
               </Link>
             </div>
             <div className="inline-flex items-center gap-[6px] bg-gold/15 border border-gold/30 rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]">
-              <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">Mutual Fund Services</span>
+              <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">AMFI Registered Mutual Fund Advisor</span>
             </div>
 
             <h1 className="font-serif text-[36px] md:text-[48px] text-white font-semibold leading-[1.2] mb-[1.25rem] max-w-4xl">
-              We Handle Your Entire Mutual Fund Journey: Start to Finish
+              Mutual Fund Advisor &amp; Distributor in Ahmedabad
             </h1>
 
             <p className="text-white/65 text-[16px] leading-[1.6] mb-[2rem] max-w-2xl">
-              Most people know they should invest in mutual funds. Very few have the time to actually manage it properly. That's exactly where we come in.
+              We handle your entire mutual fund journey: from risk profiling and fund selection to seamless monthly SIP execution and quarterly portfolio reviews.
             </p>
 
             <div className="flex flex-wrap gap-4 mt-[2rem]">
