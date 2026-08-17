@@ -12,6 +12,7 @@ const ScrollZoomReveal = ({
   const containerRef = useRef(null);
   const videoRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
+  const isMutedRef = useRef(true);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -22,12 +23,15 @@ const ScrollZoomReveal = ({
   }, []);
 
   const toggleSound = (e) => {
-    e.stopPropagation();
+    if (e) e.stopPropagation();
     if (videoRef.current) {
-      const nextMutedState = !isMuted;
+      const nextMutedState = !isMutedRef.current;
       videoRef.current.muted = nextMutedState;
       setIsMuted(nextMutedState);
-      videoRef.current.play().catch(() => {});
+      isMutedRef.current = nextMutedState;
+      if (!nextMutedState) {
+        videoRef.current.play().catch(() => {});
+      }
     }
   };
 
@@ -43,7 +47,7 @@ const ScrollZoomReveal = ({
       if (!isInSection) {
         videoRef.current.muted = true;
       } else {
-        videoRef.current.muted = isMuted;
+        videoRef.current.muted = isMutedRef.current;
       }
     }
   });
@@ -105,8 +109,9 @@ const ScrollZoomReveal = ({
                   loop
                   muted={isMuted}
                   playsInline
-                  preload="none"
-                  className="absolute inset-0 w-full h-full object-cover z-0"
+                  preload="auto"
+                  onClick={toggleSound}
+                  className="absolute inset-0 w-full h-full object-cover z-0 cursor-pointer"
                 >
                   <source src={videoUrl.replace('.mp4', '.webm')} type="video/webm" />
                   <source src={videoUrl} type="video/mp4" />
