@@ -23,22 +23,76 @@ const routes = [
     heading: 'Seamless Wealth Management for Non-Resident Indians'
   },
   {
-    path: 'services/mutual-funds/index.html',
-    title: 'Mutual Fund Advisory & SIP Investment | Drishti Wealth Ahmedabad',
-    description: 'Expert mutual fund selection, SIP compounding strategies, and portfolio rebalancing in Ahmedabad.',
-    heading: 'Goal-Based Mutual Fund Investments & SIPs'
-  },
-  {
     path: 'services/index.html',
     title: 'Financial Services & Portfolio Advisory | Drishti Wealth',
     description: 'Comprehensive wealth management services including Mutual Funds, Health Insurance, Travel Insurance, and Retirement Planning.',
     heading: 'Comprehensive Financial Solutions'
   },
   {
+    path: 'services/mutual-funds/index.html',
+    title: 'Mutual Fund Advisory & SIP Investment | Drishti Wealth Ahmedabad',
+    description: 'Expert mutual fund selection, SIP compounding strategies, and portfolio rebalancing in Ahmedabad.',
+    heading: 'Goal-Based Mutual Fund Investments & SIPs'
+  },
+  {
+    path: 'services/insurance/index.html',
+    title: 'Insurance Advisory & Health Coverage | Drishti Wealth',
+    description: 'Comprehensive term life, health, and critical illness insurance advisory services.',
+    heading: 'Protect What Matters Most'
+  },
+  {
+    path: 'services/retirement/index.html',
+    title: 'Retirement Planning & SWP Solutions | Drishti Wealth',
+    description: 'Build a bulletproof retirement corpus with tax-efficient Systematic Withdrawal Plans (SWP).',
+    heading: 'Secure Your Financial Independence in Retirement'
+  },
+  {
+    path: 'services/goal-planning/index.html',
+    title: 'Goal-Based Wealth Planning | Drishti Wealth',
+    description: 'Structured financial planning for child education, home buying, and long-term milestones.',
+    heading: 'Turn Your Financial Goals into Reality'
+  },
+  {
+    path: 'services/travel-insurance/index.html',
+    title: 'International Travel Insurance | Drishti Wealth',
+    description: 'Global travel insurance coverage for visitors, students, and overseas business trips.',
+    heading: 'Worry-Free Global Travel Coverage'
+  },
+  {
+    path: 'services/property-insurance/index.html',
+    title: 'Property & Asset Insurance | Drishti Wealth',
+    description: 'Safeguard your commercial and residential property against fire, theft, and natural hazards.',
+    heading: 'Comprehensive Property Protection'
+  },
+  {
     path: 'about/index.html',
     title: 'About Drishti Wealth | AMFI Registered MFD Since 2001',
     description: 'Learn about Drishti Wealth, our 25+ year heritage, values, and commitment to client-centric financial growth.',
     heading: '25+ Years of Trust & Wealth Creation'
+  },
+  {
+    path: 'blog/index.html',
+    title: 'Financial Insights & Education | Drishti Wealth',
+    description: 'Expert articles on mutual funds, SIP investing, tax-saving ELSS, insurance planning, and NRI investments.',
+    heading: 'Financial Insights & Educational Resources'
+  },
+  {
+    path: 'disclosures/index.html',
+    title: 'Disclosures & Regulatory Compliance | Drishti Wealth',
+    description: 'AMFI registration details, SEBI compliance disclosures, and investor grievance redressal policy.',
+    heading: 'Regulatory Disclosures & Investor Safeguards'
+  },
+  {
+    path: 'privacy-policy/index.html',
+    title: 'Privacy Policy | Drishti Wealth',
+    description: 'Drishti Wealth privacy policy detailing data security, collection, and usage standards.',
+    heading: 'Privacy Policy & Data Security'
+  },
+  {
+    path: 'terms-of-service/index.html',
+    title: 'Terms of Service | Drishti Wealth',
+    description: 'Terms and conditions governing the use of Drishti Wealth website and financial services.',
+    heading: 'Terms of Service'
   }
 ];
 
