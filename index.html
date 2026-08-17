@@ -29,7 +29,66 @@
     <meta name="twitter:image" content="https://drishtiwealth.com/why_choose_us_mockup.png" />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <style>
+        #app-initial-loader {
+          position: fixed;
+          inset: 0;
+          background-color: #071324;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          z-index: 99999;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          color: #ffffff;
+        }
+        .dw-loader-brand {
+          font-family: Georgia, serif;
+          font-size: 24px;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          color: #ffffff;
+          margin-top: 14px;
+        }
+        .dw-loader-sub {
+          font-size: 10px;
+          color: #c9922a;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+          margin-top: 4px;
+          font-weight: 600;
+        }
+        .dw-loader-bar-bg {
+          width: 180px;
+          height: 2px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 999px;
+          overflow: hidden;
+          margin-top: 28px;
+          position: relative;
+        }
+        .dw-loader-bar-fill {
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, rgba(201,146,42,0.2), #c9922a, #f0c96a);
+          animation: dwPulse 1.1s infinite ease-in-out;
+        }
+        @keyframes dwPulse {
+          0% { transform: translateX(-100%); }
+          50% { transform: translateX(0%); }
+          100% { transform: translateX(100%); }
+        }
+      </style>
+      <div id="app-initial-loader">
+        <img src="/DW_22-removebg-preview.png" alt="Drishti Wealth" style="height: 44px; width: auto;" />
+        <div class="dw-loader-brand">Drishti Wealth</div>
+        <div class="dw-loader-sub">EST. 2001 &middot; AHMEDABAD</div>
+        <div class="dw-loader-bar-bg">
+          <div class="dw-loader-bar-fill"></div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

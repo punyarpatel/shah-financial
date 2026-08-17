@@ -20,8 +20,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'vendor-three': ['three', 'ogl', '@react-three/fiber', '@react-three/drei'],
-          'vendor-charts': ['recharts'],
           'vendor-motion': ['framer-motion', 'gsap', 'lenis'],
           'vendor-supabase': ['@supabase/supabase-js']
         }
@@ -34,7 +32,6 @@ export default defineConfig({
       'react-dom',
       'react-router-dom',
       'framer-motion',
-      'recharts',
       'axios',
       'lucide-react',
       '@supabase/supabase-js',

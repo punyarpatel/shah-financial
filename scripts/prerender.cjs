@@ -128,7 +128,7 @@ function prerender() {
       </div>
     </div>`;
 
-    prerenderedHtml = prerenderedHtml.replace('<div id="root"></div>', fallbackText);
+    prerenderedHtml = prerenderedHtml.replace(/<div id="root">[\s\S]*?<\/div>/, fallbackText);
 
     fs.writeFileSync(filePath, prerenderedHtml);
     console.log(`  ✔ Pre-rendered: /${route.path}`);

@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import TrustBar from '../components/TrustBar';
 import ServicesGrid from '../components/ServicesGrid';
 import WhyChooseUs from '../components/WhyChooseUs';
-import SIPCalculator from '../components/SIPCalculator';
 import Testimonials from '../components/Testimonials';
 import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
@@ -14,6 +13,9 @@ import FadeIn from '../components/animations/FadeIn';
 import BlogSection from '../components/BlogSection';
 import FAQSection from '../components/FAQSection';
 import ScrollZoomReveal from '../components/ScrollZoomReveal';
+
+// Dynamic lazy import so Recharts (~114kB) is only loaded on demand when SIPCalculator is rendered
+const SIPCalculator = lazy(() => import('../components/SIPCalculator'));
 
 const HomePage = () => {
   const ogImage = `${window.location.origin}/why_choose_us_mockup.png`;
@@ -68,7 +70,16 @@ const HomePage = () => {
       
       <FadeIn>
         <div id="calculator">
-          <SIPCalculator />
+          <Suspense fallback={
+            <div className="max-w-[1200px] mx-auto px-4 py-16 text-center text-gold/70 min-h-[400px] flex items-center justify-center">
+              <div className="inline-flex items-center gap-3 bg-navy/60 px-6 py-4 rounded-xl border border-white/10 shadow-lg">
+                <div className="w-5 h-5 border-2 border-gold border-t-transparent rounded-full animate-spin"></div>
+                <span className="text-sm font-medium">Loading SIP Calculator...</span>
+              </div>
+            </div>
+          }>
+            <SIPCalculator />
+          </Suspense>
         </div>
       </FadeIn>
 

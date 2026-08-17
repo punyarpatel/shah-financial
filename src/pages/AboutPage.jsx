@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
@@ -14,7 +14,9 @@ import JourneyTimeline from '../components/JourneyTimeline';
 import CredentialsShowcase from '../components/CredentialsShowcase';
 import useDesignMode from '../hooks/useDesignMode';
 import BorderGlow from '../components/animations/BorderGlow';
-import DwLogo3DViewer from '../components/DwLogo3DViewer';
+
+// Dynamic lazy import for 3D model viewer (only loads when AboutPage 3D section is rendered)
+const DwLogo3DViewer = lazy(() => import('../components/DwLogo3DViewer'));
 
 const AboutPage = () => {
   const location = useLocation();
@@ -89,7 +91,13 @@ const AboutPage = () => {
 
               {/* Right Column: Rotating 3D DW Brand Mark */}
               <div className="lg:col-span-5 flex justify-center lg:justify-end">
-                <DwLogo3DViewer className="w-full max-w-[440px] h-[340px] md:h-[400px] lg:h-[420px]" />
+                <Suspense fallback={
+                  <div className="w-full max-w-[440px] h-[340px] md:h-[400px] flex items-center justify-center bg-navy/40 rounded-2xl border border-gold/20">
+                    <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin"></div>
+                  </div>
+                }>
+                  <DwLogo3DViewer className="w-full max-w-[440px] h-[340px] md:h-[400px] lg:h-[420px]" />
+                </Suspense>
               </div>
             </div>
           </div>
