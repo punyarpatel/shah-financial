@@ -40,7 +40,7 @@ const DwLogo3DViewer = ({ className = "w-full h-[360px] md:h-[420px] lg:h-[460px
         src="/dw_logo_3d.glb"
         alt="Drishti Wealth 3D Rotating Logo"
         auto-rotate
-        rotation-per-second="40deg"
+        rotation-per-second="-40deg"
         camera-orbit="0deg 78deg 105%"
         field-of-view="30deg"
         exposure="1.1"
