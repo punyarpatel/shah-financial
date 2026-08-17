@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motio
 
 const PageLoader = ({
   brandName = 'Drishti Wealth',
-  duration = 1.2,
+  duration = 0.5,
   onComplete
 }) => {
   const [displayCount, setDisplayCount] = useState(0);

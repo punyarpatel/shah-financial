@@ -34,6 +34,7 @@ const HeroSection = () => {
         muted
         loop
         playsInline
+        preload="metadata"
         poster="/hero-bg.png"
         aria-hidden="true"
         style={{
@@ -48,6 +49,7 @@ const HeroSection = () => {
           filter: 'drop-shadow(0 0 20px rgba(201, 168, 76, 0.3))',
         }}
       >
+        <source src="/hero-bg.webm" type="video/webm" />
         <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
 
@@ -59,22 +61,22 @@ const HeroSection = () => {
 
       <div className="max-w-[1200px] mx-auto px-[24px] pt-[7rem] pb-[5rem] relative z-[2]">
         <div className="max-w-[800px] mx-auto text-center">
-          {/* Badge — Animates after PageLoader finishes (delay 2.3s) */}
+          {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.6, delay: 2.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.5, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="inline-flex items-center gap-[8px] bg-navy/40 border border-white/10 px-[16px] py-[6px] rounded-full text-[12px] text-white/80 backdrop-blur-sm mb-[2rem]"
           >
             <span className="w-[6px] h-[6px] rounded-full bg-gold animate-pulse"></span>
             AMFI Registered Mutual Fund Distributor
           </motion.div>
 
-          {/* Title & Tagline — Animates after PageLoader finishes (delay 2.45s) */}
+          {/* Title & Tagline */}
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.7, delay: 2.45, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
             className="mb-[1.5rem]"
           >
             <h1 className="font-serif text-[42px] sm:text-[54px] md:text-[64px] font-normal leading-[1.1] text-white tracking-[-0.02em] mb-2">
@@ -85,21 +87,21 @@ const HeroSection = () => {
             </p>
           </motion.div>
 
-          {/* Description — Animates after PageLoader finishes (delay 2.6s) */}
+          {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 2.6, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
             className="text-white/65 text-[16px] font-light leading-[1.6] mb-[2.5rem]"
           >
             Our focus is on building long-term relationships by offering personalized investment solutions, comprehensive insurance protection, and goal-based financial planning tailored to every stage of life.
           </motion.p>
 
-          {/* Buttons — Animates after PageLoader finishes (delay 2.75s) */}
+          {/* Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.6, delay: 2.75, type: 'spring', stiffness: 120 }}
+            transition={{ duration: 0.5, delay: 1.05, type: 'spring', stiffness: 120 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-[4rem]"
           >
             <button
@@ -116,7 +118,7 @@ const HeroSection = () => {
             </button>
           </motion.div>
 
-          {/* Stats Grid Cards — Staggered spring entrance after PageLoader (delays 2.90s, 3.02s, 3.14s, 3.26s) */}
+          {/* Stats Grid Cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 pt-[2rem] border-t border-white/10">
             {stats.map((stat, index) => (
               <motion.div
@@ -124,8 +126,8 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 35, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{
-                  duration: 0.6,
-                  delay: 2.9 + index * 0.12,
+                  duration: 0.5,
+                  delay: 1.2 + index * 0.1,
                   type: 'spring',
                   stiffness: 110,
                   damping: 14

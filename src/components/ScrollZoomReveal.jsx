@@ -105,9 +105,10 @@ const ScrollZoomReveal = ({
                   loop
                   muted={isMuted}
                   playsInline
-                  preload="auto"
+                  preload="none"
                   className="absolute inset-0 w-full h-full object-cover z-0"
                 >
+                  <source src={videoUrl.replace('.mp4', '.webm')} type="video/webm" />
                   <source src={videoUrl} type="video/mp4" />
                 </video>
 
