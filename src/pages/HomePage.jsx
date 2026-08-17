@@ -23,35 +23,56 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
-        <title>Drishti Wealth: AMFI Registered MFD Ahmedabad</title>
+        <title>Drishti Wealth Pvt. Ltd. | AMFI Registered Mutual Fund Advisor &amp; Distributor Ahmedabad</title>
         <meta 
           name="description" 
-          content="Trusted mutual fund distributor and insurance advisor in Ahmedabad serving 6000 plus clients and NRI clients since 2001." 
+          content="Drishti Wealth Pvt. Ltd. - Trusted AMFI registered mutual fund distributor and insurance advisor in Ahmedabad serving 6,000+ clients and NRI clients since 2001." 
         />
         <link rel="canonical" href="https://drishtiwealth.com/" />
-        <meta property="og:title" content="Drishti Wealth: AMFI Registered MFD Ahmedabad" />
-        <meta property="og:description" content="Trusted mutual fund distributor and insurance advisor in Ahmedabad serving 6000 plus clients and NRI clients since 2001." />
+        <meta property="og:site_name" content="Drishti Wealth Pvt. Ltd." />
+        <meta property="og:title" content="Drishti Wealth Pvt. Ltd. | AMFI Registered Mutual Fund Advisor &amp; Distributor Ahmedabad" />
+        <meta property="og:description" content="Drishti Wealth Pvt. Ltd. - Trusted AMFI registered mutual fund distributor and insurance advisor in Ahmedabad serving 6,000+ clients and NRI clients since 2001." />
         <meta property="og:image" content="https://drishtiwealth.com/og-image.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://drishtiwealth.com/" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Drishti Wealth: AMFI Registered MFD Ahmedabad" />
-        <meta name="twitter:description" content="Trusted mutual fund distributor and insurance advisor in Ahmedabad serving 6000 plus clients and NRI clients since 2001." />
+        <meta name="twitter:title" content="Drishti Wealth Pvt. Ltd. | AMFI Registered Mutual Fund Advisor &amp; Distributor Ahmedabad" />
+        <meta name="twitter:description" content="Drishti Wealth Pvt. Ltd. - Trusted AMFI registered mutual fund distributor and insurance advisor in Ahmedabad serving 6,000+ clients and NRI clients since 2001." />
         <meta name="twitter:image" content={ogImage} />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "FinancialService",
-            "name": "Drishti Wealth",
-            "description": "AMFI registered mutual fund distributor and insurance advisor in Ahmedabad",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Ahmedabad",
-              "addressRegion": "Gujarat",
-              "addressCountry": "IN"
-            },
-            "telephone": "+91-9664977576",
-            "url": "https://drishtiwealth.com"
+            "@graph": [
+              {
+                "@type": "WebSite",
+                "@id": "https://drishtiwealth.com/#website",
+                "url": "https://drishtiwealth.com/",
+                "name": "Drishti Wealth Pvt. Ltd.",
+                "alternateName": ["Drishti Wealth", "Drishti Wealth Private Limited", "Drishtri Wealth Pvt. Ltd."],
+                "publisher": {
+                  "@id": "https://drishtiwealth.com/#organization"
+                }
+              },
+              {
+                "@type": "FinancialService",
+                "@id": "https://drishtiwealth.com/#organization",
+                "name": "Drishti Wealth Pvt. Ltd.",
+                "legalName": "Drishti Wealth Pvt. Ltd.",
+                "url": "https://drishtiwealth.com/",
+                "logo": "https://drishtiwealth.com/DW_22-removebg-preview.png",
+                "image": "https://drishtiwealth.com/dw-logo-premium.png",
+                "description": "AMFI registered mutual fund distributor and insurance advisor in Ahmedabad",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "305, Abhishilp Complex, Satellite",
+                  "addressLocality": "Ahmedabad",
+                  "addressRegion": "Gujarat",
+                  "postalCode": "380015",
+                  "addressCountry": "IN"
+                },
+                "telephone": "+91-9664977576"
+              }
+            ]
           })}
         </script>
       </Helmet>
