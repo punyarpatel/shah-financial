@@ -216,7 +216,48 @@ const CareHealthLogo = () => (
   </svg>
 );
 
+const LOGO_IMAGE_MAP = {
+  'LIC of India': '/images/insurers/lic.png',
+  'LIC': '/images/insurers/lic.png',
+  'ICICI Prudential Life': '/images/insurers/icici_pru.png',
+  'ICICI Prudential': '/images/insurers/icici_pru.png',
+  'Tata AIA': '/images/insurers/tata_aia.png',
+  'Tata AIA Life': '/images/insurers/tata_aia.png',
+  'HDFC Life': '/images/insurers/hdfc_life.png',
+  'Bajaj Life': '/images/insurers/bajaj_life.png',
+  'Bajaj Allianz Life': '/images/insurers/bajaj_life.png',
+  'HDFC Ergo': '/images/insurers/hdfc_ergo.png',
+  'HDFC ERGO': '/images/insurers/hdfc_ergo.png',
+  'ICICI Lombard': '/images/insurers/icici_lombard.png',
+  'Go Digit': '/images/insurers/godigit.png',
+  'GoDigit': '/images/insurers/godigit.png',
+  'Digit': '/images/insurers/godigit.png',
+  'IndusInd': '/images/insurers/indusind.png',
+  'IndusInd Bank': '/images/insurers/indusind.png',
+  'Bajaj General': '/images/insurers/bajaj_general.png',
+  'Bajaj Allianz General': '/images/insurers/bajaj_general.png',
+  'Niva Bupa': '/images/insurers/niva_bupa.png',
+  'Niva Bupa Star': '/images/insurers/niva_bupa.png',
+  'Star Health': '/images/insurers/star_health.png',
+  'Star': '/images/insurers/star_health.png',
+  'Care Health': '/images/insurers/care_health.png',
+  'Care': '/images/insurers/care_health.png',
+};
+
 const InsurerLogo = ({ name }) => {
+  if (LOGO_IMAGE_MAP[name]) {
+    return (
+      <img
+        src={LOGO_IMAGE_MAP[name]}
+        alt={name}
+        className="max-h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+        onError={(e) => {
+          e.currentTarget.style.display = 'none';
+        }}
+      />
+    );
+  }
+
   switch (name) {
     case 'LIC of India':
     case 'LIC':
