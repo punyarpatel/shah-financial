@@ -55,13 +55,13 @@ const SliderRow = ({ label, value, min, max, step = 1, onChange, prefix, suffix 
 };
 
 const GOALS = [
-  { id: 'custom', label: 'Custom SIP', icon: null, target: null, desc: null },
-  { id: 'retirement', label: 'Retirement', icon: '🛋️', target: 30000000, desc: 'Save for a ₹3.0Cr retirement fund.', defaultSip: 25000, defaultRate: 12, defaultYears: 22 },
-  { id: 'house', label: 'Buy a House', icon: '🏠', target: 5000000, desc: 'Save for a ₹50L down payment on your dream home.', defaultSip: 20000, defaultRate: 12, defaultYears: 11 },
-  { id: 'education', label: 'Child Education', icon: '🎓', target: 3000000, desc: 'Build a ₹30L corpus for higher education.', defaultSip: 10000, defaultRate: 12, defaultYears: 12 },
-  { id: 'car', label: 'Buy a Car', icon: '🚗', target: 2000000, desc: 'Plan for a ₹20L car purchase.', defaultSip: 15000, defaultRate: 12, defaultYears: 8 },
-  { id: 'wedding', label: 'Wedding', icon: '💍', target: 5000000, desc: 'Prepare for a ₹50L dream wedding.', defaultSip: 20000, defaultRate: 12, defaultYears: 11 },
-  { id: 'vacation', label: 'Dream Vacation', icon: '✈️', target: 2000000, desc: 'Save ₹20L for that round-the-world trip.', defaultSip: 10000, defaultRate: 12, defaultYears: 10 },
+  { id: 'custom', label: 'Custom SIP', icon: null, defaultSip: 10000, defaultRate: 12, defaultYears: 10, desc: null },
+  { id: 'retirement', label: 'Retirement', icon: '🛋️', defaultSip: 25000, defaultRate: 12, defaultYears: 30, desc: 'Plan your retirement corpus based on your current age and target retirement age.' },
+  { id: 'house', label: 'Buy a House', icon: '🏠', defaultCost: 5000000, defaultSip: 20000, defaultRate: 12, defaultYears: 10, desc: 'Save for down payment or home purchase with inflation adjustment.' },
+  { id: 'education', label: 'Child Education', icon: '🎓', defaultCost: 2500000, defaultSip: 12000, defaultRate: 12, defaultYears: 15, desc: 'Build a college fund based on your child\'s current and college age.' },
+  { id: 'car', label: 'Buy a Car', icon: '🚗', defaultCost: 1500000, defaultSip: 15000, defaultRate: 12, defaultYears: 5, desc: 'Plan for your vehicle purchase with inflation alignment.' },
+  { id: 'wedding', label: 'Wedding', icon: '💍', defaultCost: 3500000, defaultSip: 20000, defaultRate: 12, defaultYears: 8, desc: 'Prepare for dream wedding expenses factoring in future cost inflation.' },
+  { id: 'vacation', label: 'Dream Vacation', icon: '✈️', defaultCost: 1000000, defaultSip: 10000, defaultRate: 12, defaultYears: 4, desc: 'Save for overseas travel and vacation milestones.' },
 ];
 
 // ─── 3D Pie Chart: solid wedges, thick extrusion, exploded slices, % labels ───
@@ -238,6 +238,14 @@ const SIPCalculator = () => {
   const [rate, setRate] = useState(initialRate);
   const [years, setYears] = useState(initialYears);
 
+  // FundzBazar style Goal-specific Metric states
+  const [currentAge, setCurrentAge] = useState(30);
+  const [retirementAge, setRetirementAge] = useState(60);
+  const [childAge, setChildAge] = useState(3);
+  const [collegeAge, setCollegeAge] = useState(18);
+  const [inflation, setInflation] = useState(6);
+  const [targetCost, setTargetCost] = useState(5000000);
+
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -256,13 +264,24 @@ const SIPCalculator = () => {
 
   const activeGoal = GOALS.find(g => g.id === activeGoalId);
 
-  const applySuggestedValues = () => {
-    if (activeGoal && activeGoal.id !== 'custom') {
-      setSip(activeGoal.defaultSip);
-      setRate(activeGoal.defaultRate);
-      setYears(activeGoal.defaultYears);
+  // Compute effective time horizon in years based on goal selection
+  const effectiveYears = useMemo(() => {
+    if (activeGoalId === 'retirement') {
+      return Math.max(1, retirementAge - currentAge);
     }
-  };
+    if (activeGoalId === 'education') {
+      return Math.max(1, collegeAge - childAge);
+    }
+    return years;
+  }, [activeGoalId, retirementAge, currentAge, collegeAge, childAge, years]);
+
+  // Compute inflation-adjusted target cost for cost-based goals
+  const futureGoalCost = useMemo(() => {
+    if (activeGoalId === 'custom') return null;
+    if (activeGoalId === 'retirement') return null;
+    const baseCost = targetCost || activeGoal?.defaultCost || 2500000;
+    return baseCost * Math.pow(1 + (inflation / 100), effectiveYears);
+  }, [activeGoalId, targetCost, activeGoal, inflation, effectiveYears]);
 
   const handleScrollToContact = () => {
     if (location.pathname !== '/') {
@@ -278,14 +297,15 @@ const SIPCalculator = () => {
   };
 
   const fmt = (val) => {
-    if (val >= 10000000) return `₹${(val / 10000000).toFixed(1)}Cr`;
-    if (val >= 100000) return `₹${(val / 100000).toFixed(1)}L`;
+    if (!val || isNaN(val)) return '₹0';
+    if (val >= 10000000) return `₹${(val / 10000000).toFixed(2)}Cr`;
+    if (val >= 100000) return `₹${(val / 100000).toFixed(2)}L`;
     return `₹${Math.round(val).toLocaleString('en-IN')}`;
   };
 
   const { corpus, invested, gain, chartData } = useMemo(() => {
     const r = rate / 100 / 12;
-    const n = years * 12;
+    const n = effectiveYears * 12;
 
     let investedAmt = 0;
     let corpusAmt = 0;
@@ -301,7 +321,7 @@ const SIPCalculator = () => {
     const gainAmt = corpusAmt - investedAmt;
 
     const data = [];
-    for (let y = 0; y <= years; y++) {
+    for (let y = 0; y <= effectiveYears; y++) {
       const months = y * 12;
       let inv = 0;
       let corp = 0;
@@ -318,9 +338,10 @@ const SIPCalculator = () => {
     }
 
     return { corpus: corpusAmt, invested: investedAmt, gain: gainAmt, chartData: data };
-  }, [sip, rate, years, calcMode]);
+  }, [sip, rate, effectiveYears, calcMode]);
 
-  const wealthRatio = (corpus / invested).toFixed(2);
+  const wealthRatio = (corpus / (invested || 1)).toFixed(2);
+  const realValue = corpus / Math.pow(1 + (inflation / 100), effectiveYears);
 
   const downloadPDF = () => {
     try {
@@ -331,10 +352,9 @@ const SIPCalculator = () => {
       const gold = '#c9922a';
       const textDark = '#1a1a2e';
       const gray = '#5c6478';
-      const bgLight = '#faf8f4';
       
       // Header Logo & Branding
-      doc.setFillColor(13, 37, 69); // navy
+      doc.setFillColor(13, 37, 69);
       doc.rect(0, 0, 210, 30, 'F');
       
       doc.setTextColor(255, 255, 255);
@@ -344,13 +364,13 @@ const SIPCalculator = () => {
       
       doc.setFont("Helvetica", "normal");
       doc.setFontSize(10);
-      doc.text("Investment Growth Report", 195, 20, { align: "right" });
+      doc.text("Goal Investment Report", 195, 20, { align: "right" });
       
       // Document Title
       doc.setTextColor(navy);
       doc.setFont("Helvetica", "bold");
       doc.setFontSize(16);
-      doc.text("SIP Calculator Projected Estimates", 15, 45);
+      doc.text(`${activeGoal?.label || "Custom SIP"} Calculation Report`, 15, 45);
       
       // Date
       doc.setTextColor(gray);
@@ -358,22 +378,22 @@ const SIPCalculator = () => {
       doc.text(`Generated on: ${new Date().toLocaleDateString('en-IN')}`, 15, 52);
       
       // Inputs Table / Box
-      doc.setFillColor(250, 248, 244); // bgLight
+      doc.setFillColor(250, 248, 244);
       doc.rect(15, 58, 180, 35, 'F');
-      doc.setDrawColor(201, 146, 42); // gold
+      doc.setDrawColor(201, 146, 42);
       doc.setLineWidth(0.5);
-      doc.line(15, 58, 15, 93); // border-left
+      doc.line(15, 58, 15, 93);
       
       doc.setTextColor(navy);
       doc.setFontSize(11);
       doc.setFont("Helvetica", "bold");
-      doc.text("Investment Details", 20, 66);
+      doc.text("Investment Metrics", 20, 66);
       
       doc.setTextColor(textDark);
       doc.setFont("Helvetica", "normal");
       doc.setFontSize(10);
       
-      const modeLabel = calcMode === 'sip' ? "Monthly SIP Amount:" : "One-time Investment:";
+      const modeLabel = calcMode === 'sip' ? "Monthly Investment:" : "One-time Investment:";
       doc.text(modeLabel, 20, 75);
       doc.setFont("Helvetica", "bold");
       doc.text(fmt(sip), 75, 75);
@@ -384,14 +404,14 @@ const SIPCalculator = () => {
       doc.text(`${rate}%`, 75, 83);
       
       doc.setFont("Helvetica", "normal");
-      doc.text("Investment Duration:", 110, 75);
+      doc.text("Time Horizon:", 110, 75);
       doc.setFont("Helvetica", "bold");
-      doc.text(`${years} Years`, 160, 75);
+      doc.text(`${effectiveYears} Years`, 160, 75);
       
       doc.setFont("Helvetica", "normal");
-      doc.text("Goal Category:", 110, 83);
+      doc.text("Inflation Rate:", 110, 83);
       doc.setFont("Helvetica", "bold");
-      doc.text(activeGoal?.label || "Custom SIP", 160, 83);
+      doc.text(`${inflation}%`, 160, 83);
       
       // Projection Summary Cards
       doc.setFont("Helvetica", "bold");
@@ -400,7 +420,6 @@ const SIPCalculator = () => {
       doc.text("Projection Summary", 15, 107);
       
       // Three Columns
-      // Invested
       doc.setFillColor(241, 245, 249);
       doc.rect(15, 112, 56, 25, 'F');
       doc.setTextColor(gray);
@@ -411,7 +430,6 @@ const SIPCalculator = () => {
       doc.setFont("Helvetica", "bold");
       doc.text(fmt(invested), 20, 128);
       
-      // Gains
       doc.setFillColor(241, 245, 249);
       doc.rect(77, 112, 56, 25, 'F');
       doc.setTextColor(gray);
@@ -423,8 +441,7 @@ const SIPCalculator = () => {
       doc.setFont("Helvetica", "bold");
       doc.text(fmt(gain), 82, 128);
       
-      // Total Corpus
-      doc.setFillColor(13, 37, 69); // navy
+      doc.setFillColor(13, 37, 69);
       doc.rect(139, 112, 56, 25, 'F');
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(9);
@@ -440,7 +457,6 @@ const SIPCalculator = () => {
       doc.setFont("Helvetica", "bold");
       doc.text("Year-by-Year Growth Details", 15, 149);
       
-      // Table Header
       doc.setFillColor(13, 37, 69);
       doc.rect(15, 154, 180, 8, 'F');
       doc.setTextColor(255, 255, 255);
@@ -450,17 +466,13 @@ const SIPCalculator = () => {
       doc.text("Invested Principal", 70, 159.5);
       doc.text("Future Value (Estimated)", 140, 159.5);
       
-      // Table Content
       let yOffset = 162;
       doc.setFont("Helvetica", "normal");
       doc.setTextColor(textDark);
       
-      // Standard page height is 297mm.
-      // A single page fits ~15 table rows.
-      const step = years > 15 ? Math.ceil(years / 15) : 1;
+      const step = effectiveYears > 15 ? Math.ceil(effectiveYears / 15) : 1;
       
-      for (let y = 0; y <= years; y += step) {
-        // Draw background line shading
+      for (let y = 0; y <= effectiveYears; y += step) {
         if (Math.round(y / step) % 2 === 0) {
           doc.setFillColor(250, 248, 244);
           doc.rect(15, yOffset, 180, 6, 'F');
@@ -478,18 +490,6 @@ const SIPCalculator = () => {
         yOffset += 6;
       }
       
-      // Draw final year if it was skipped due to step
-      if (years % step !== 0) {
-        doc.setFillColor(250, 248, 244);
-        doc.rect(15, yOffset, 180, 6, 'F');
-        doc.setTextColor(textDark);
-        doc.text(`Year ${years}`, 20, yOffset + 4.5);
-        const yrData = chartData[chartData.length - 1];
-        doc.text(fmt(yrData.invested), 70, yOffset + 4.5);
-        doc.text(fmt(yrData.total), 140, yOffset + 4.5);
-        yOffset += 6;
-      }
-      
       // Disclaimer Box at bottom
       doc.setFillColor(250, 248, 244);
       doc.rect(15, 260, 180, 22, 'F');
@@ -503,7 +503,7 @@ const SIPCalculator = () => {
       const disclaimerLines = [
         "Disclaimer: The projections provided in this report are for illustrative purposes only based on the expected annual return input.",
         "They do not guarantee or represent actual future returns. Mutual fund investments are subject to market risks.",
-        "Please read all scheme-related documents carefully before investing or seek professional financial advice.",
+        "Please read all scheme-related documents carefully before investing or seek professional financial guidance.",
         "Drishti Wealth © 2026. All rights reserved."
       ];
       
@@ -513,8 +513,7 @@ const SIPCalculator = () => {
         discY += 3.5;
       });
       
-      // Save the PDF
-      doc.save(`Drishti_Wealth_SIP_Report_${years}Y.pdf`);
+      doc.save(`Drishti_Wealth_${activeGoalId}_Report.pdf`);
     } catch (e) {
       console.error(e);
     }
@@ -523,20 +522,18 @@ const SIPCalculator = () => {
   const downloadCSV = () => {
     try {
       const headers = ["Year", "Invested Principal (INR)", "Estimated Corpus (INR)"];
-      const rows = chartData.map(d => {
-        return [
-          d.year.replace('Yr ', ''),
-          Math.round(d.invested),
-          Math.round(d.total)
-        ];
-      });
+      const rows = chartData.map(d => [
+        d.year.replace('Yr ', ''),
+        Math.round(d.invested),
+        Math.round(d.total)
+      ]);
       
       const csvContent = [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.setAttribute("href", url);
-      link.setAttribute("download", `Drishti_Wealth_SIP_Export_${years}Y.csv`);
+      link.setAttribute("download", `Drishti_Wealth_${activeGoalId}_Export.csv`);
       link.style.visibility = 'hidden';
       document.body.appendChild(link);
       link.click();
@@ -545,13 +542,6 @@ const SIPCalculator = () => {
       console.error(e);
     }
   };
-
-  const getProgress = (current, target) => {
-    if (!target) return 0;
-    return Math.min((current / target) * 100, 100);
-  };
-
-  const activeGoalProgress = getProgress(corpus, activeGoal?.target);
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -574,13 +564,13 @@ const SIPCalculator = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-[2rem]">
           <div>
             <div className="text-gold text-[11px] tracking-[0.15em] uppercase font-medium mb-[0.6rem]">
-              Our Calculator
+              Goal & Wealth Planner
             </div>
             <h2 className="font-serif text-[28px] font-semibold mb-[0.75rem] text-textDark leading-tight">
               See What Your Money Can Grow To.
             </h2>
             <p className="text-muted text-[15px] leading-[1.6] font-light">
-              A simple estimate to get you thinking about your financial future.
+              Select your financial goal, adjust your metrics, and plan your wealth creation path.
             </p>
           </div>
 
@@ -588,7 +578,7 @@ const SIPCalculator = () => {
           <div className="flex flex-col items-start md:items-end gap-2 shrink-0">
             <div className="flex bg-[#F1F5F9] rounded-[100px] p-1 border border-[#E2E8F0] shadow-inner">
               <button
-                onClick={() => { setCalcMode('sip'); setSip(10000); }}
+                onClick={() => { setCalcMode('sip'); if (sip > 200000) setSip(25000); }}
                 className={`px-5 py-2 rounded-[100px] text-[13.5px] font-semibold transition-all duration-300 ${
                   calcMode === 'sip'
                     ? 'bg-white text-[#0d2545] shadow-sm'
@@ -598,7 +588,7 @@ const SIPCalculator = () => {
                 Monthly SIP
               </button>
               <button
-                onClick={() => { setCalcMode('lumpsum'); setSip(100000); }}
+                onClick={() => { setCalcMode('lumpsum'); if (sip < 100000) setSip(500000); }}
                 className={`px-5 py-2 rounded-[100px] text-[13.5px] font-semibold transition-all duration-300 ${
                   calcMode === 'lumpsum'
                     ? 'bg-white text-[#0d2545] shadow-sm'
@@ -623,11 +613,29 @@ const SIPCalculator = () => {
                 key={goal.id}
                 onClick={() => {
                   setActiveGoalId(goal.id);
-                  setCalcMode('sip');
-                  if (goal.id !== 'custom') {
-                    setSip(goal.defaultSip);
-                    setRate(goal.defaultRate);
-                    setYears(goal.defaultYears);
+                  if (goal.id === 'retirement') {
+                    setCurrentAge(30);
+                    setRetirementAge(60);
+                    setSip(25000);
+                    setRate(12);
+                    setInflation(6);
+                  } else if (goal.id === 'education') {
+                    setChildAge(3);
+                    setCollegeAge(18);
+                    setTargetCost(2500000);
+                    setSip(12000);
+                    setRate(12);
+                    setInflation(7);
+                  } else if (goal.defaultCost) {
+                    setTargetCost(goal.defaultCost);
+                    setSip(goal.defaultSip || 20000);
+                    setYears(goal.defaultYears || 10);
+                    setRate(goal.defaultRate || 12);
+                    setInflation(6);
+                  } else {
+                    setSip(goal.defaultSip || 10000);
+                    setRate(goal.defaultRate || 12);
+                    setYears(goal.defaultYears || 10);
                   }
                 }}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-[13px] font-medium transition-colors ${
@@ -645,10 +653,15 @@ const SIPCalculator = () => {
 
         {/* Active Goal Banner */}
         {activeGoal && activeGoal.id !== 'custom' && (
-          <div className="bg-navy/[0.05] rounded-lg p-4 mb-[2rem] flex flex-col sm:flex-row items-start sm:items-center justify-between border border-navy/10">
+          <div className="bg-navy/[0.05] rounded-lg p-4 mb-[2rem] flex flex-col sm:flex-row items-start sm:items-center justify-between border border-navy/10 gap-3">
             <div className="text-textDark/80 text-[14px]">
               <span className="font-semibold text-navy">{activeGoal.icon} {activeGoal.label}</span>: {activeGoal.desc}
             </div>
+            {futureGoalCost && (
+              <div className="bg-gold/15 border border-gold/30 rounded-md px-3 py-1 text-[12.5px] text-navy font-semibold shrink-0">
+                Est. Future Cost: {fmt(futureGoalCost)}
+              </div>
+            )}
           </div>
         )}
 
@@ -658,24 +671,151 @@ const SIPCalculator = () => {
           {/* LEFT: Calculator Card */}
           <div className="flex-1 min-w-0">
             <div className="bg-navy rounded-[12px] p-[1.5rem] sm:p-[2rem] shadow-xl">
-              <div className="flex flex-col gap-[2rem]">
-                <SliderRow
-                  label={calcMode === 'sip' ? "Monthly SIP" : "Investment Amount"}
-                  value={sip}
-                  min={calcMode === 'sip' ? 1000 : 10000}
-                  max={calcMode === 'sip' ? 100000 : 5000000}
-                  step={calcMode === 'sip' ? 1000 : 10000}
-                  onChange={setSip}
-                  prefix="₹"
-                />
-                <SliderRow label="Expected Rate" value={rate} min={12} max={20} step={0.5} onChange={setRate} suffix="%" />
-                <SliderRow label="Time Period" value={years} min={1} max={30} step={1} onChange={setYears} suffix="Yr" />
+              <div className="flex flex-col gap-[1.8rem]">
+
+                {/* RETIREMENT METRICS */}
+                {activeGoalId === 'retirement' && (
+                  <>
+                    <SliderRow
+                      label="Current Age"
+                      value={currentAge}
+                      min={18}
+                      max={65}
+                      step={1}
+                      onChange={(val) => {
+                        setCurrentAge(val);
+                        if (val >= retirementAge) setRetirementAge(val + 5);
+                      }}
+                      suffix="Yrs"
+                    />
+                    <SliderRow
+                      label="Retirement Age"
+                      value={retirementAge}
+                      min={Math.max(40, currentAge + 1)}
+                      max={75}
+                      step={1}
+                      onChange={setRetirementAge}
+                      suffix="Yrs"
+                    />
+                    <SliderRow
+                      label={calcMode === 'sip' ? "Monthly Investment" : "Investment Amount"}
+                      value={sip}
+                      min={calcMode === 'sip' ? 1000 : 50000}
+                      max={calcMode === 'sip' ? 200000 : 5000000}
+                      step={calcMode === 'sip' ? 1000 : 10000}
+                      onChange={setSip}
+                      prefix="₹"
+                    />
+                    <SliderRow label="Expected Return" value={rate} min={8} max={20} step={0.5} onChange={setRate} suffix="%" />
+                    <SliderRow label="Inflation Rate" value={inflation} min={3} max={10} step={0.5} onChange={setInflation} suffix="%" />
+                  </>
+                )}
+
+                {/* CHILD EDUCATION METRICS */}
+                {activeGoalId === 'education' && (
+                  <>
+                    <SliderRow
+                      label="Child's Current Age"
+                      value={childAge}
+                      min={0}
+                      max={17}
+                      step={1}
+                      onChange={(val) => {
+                        setChildAge(val);
+                        if (val >= collegeAge) setCollegeAge(val + 5);
+                      }}
+                      suffix="Yrs"
+                    />
+                    <SliderRow
+                      label="College Age"
+                      value={collegeAge}
+                      min={Math.max(15, childAge + 1)}
+                      max={25}
+                      step={1}
+                      onChange={setCollegeAge}
+                      suffix="Yrs"
+                    />
+                    <SliderRow
+                      label="Education Cost (Today)"
+                      value={targetCost}
+                      min={500000}
+                      max={10000000}
+                      step={100000}
+                      onChange={setTargetCost}
+                      prefix="₹"
+                    />
+                    <SliderRow
+                      label={calcMode === 'sip' ? "Monthly SIP" : "Investment Amount"}
+                      value={sip}
+                      min={calcMode === 'sip' ? 1000 : 20000}
+                      max={calcMode === 'sip' ? 100000 : 2000000}
+                      step={calcMode === 'sip' ? 1000 : 10000}
+                      onChange={setSip}
+                      prefix="₹"
+                    />
+                    <SliderRow label="Expected Return" value={rate} min={8} max={20} step={0.5} onChange={setRate} suffix="%" />
+                    <SliderRow label="Education Inflation" value={inflation} min={4} max={12} step={0.5} onChange={setInflation} suffix="%" />
+                  </>
+                )}
+
+                {/* HOUSE / CAR / WEDDING / VACATION METRICS */}
+                {(activeGoalId === 'house' || activeGoalId === 'car' || activeGoalId === 'wedding' || activeGoalId === 'vacation') && (
+                  <>
+                    <SliderRow
+                      label="Goal Cost (Today)"
+                      value={targetCost}
+                      min={500000}
+                      max={20000000}
+                      step={100000}
+                      onChange={setTargetCost}
+                      prefix="₹"
+                    />
+                    <SliderRow
+                      label="Time Horizon"
+                      value={years}
+                      min={1}
+                      max={30}
+                      step={1}
+                      onChange={setYears}
+                      suffix="Yrs"
+                    />
+                    <SliderRow
+                      label={calcMode === 'sip' ? "Monthly SIP" : "Investment Amount"}
+                      value={sip}
+                      min={calcMode === 'sip' ? 1000 : 20000}
+                      max={calcMode === 'sip' ? 200000 : 5000000}
+                      step={calcMode === 'sip' ? 1000 : 10000}
+                      onChange={setSip}
+                      prefix="₹"
+                    />
+                    <SliderRow label="Expected Return" value={rate} min={8} max={20} step={0.5} onChange={setRate} suffix="%" />
+                    <SliderRow label="Inflation Rate" value={inflation} min={3} max={12} step={0.5} onChange={setInflation} suffix="%" />
+                  </>
+                )}
+
+                {/* CUSTOM SIP METRICS */}
+                {activeGoalId === 'custom' && (
+                  <>
+                    <SliderRow
+                      label={calcMode === 'sip' ? "Monthly SIP" : "Investment Amount"}
+                      value={sip}
+                      min={calcMode === 'sip' ? 1000 : 10000}
+                      max={calcMode === 'sip' ? 200000 : 5000000}
+                      step={calcMode === 'sip' ? 1000 : 10000}
+                      onChange={setSip}
+                      prefix="₹"
+                    />
+                    <SliderRow label="Expected Rate" value={rate} min={8} max={20} step={0.5} onChange={setRate} suffix="%" />
+                    <SliderRow label="Time Period" value={years} min={1} max={30} step={1} onChange={setYears} suffix="Yrs" />
+                  </>
+                )}
+
               </div>
 
               {/* Result Box */}
               <div className="bg-navy/80 rounded-[10px] p-[1.5rem] mt-[2.5rem] flex flex-col md:flex-row justify-between items-start md:items-center gap-[1.5rem] md:gap-0 border border-white/10 transition-all duration-300">
                 <div className="w-full md:w-auto flex-1">
-                  <div className="text-white/60 text-[13px] mb-1">Estimated corpus</div>
+                  <div className="text-white/60 text-[13px] mb-1">Estimated corpus in {effectiveYears} years</div>
                   <div className="font-serif text-white text-[32px] sm:text-[36px] font-semibold leading-tight">
                     {fmt(corpus)}<sup className="text-[18px] text-gold align-super ml-0.5">*</sup>
                   </div>
@@ -685,30 +825,24 @@ const SIPCalculator = () => {
                 </div>
 
                 <div className="w-full md:w-[280px] flex flex-col items-end gap-4">
-                  {activeGoal && activeGoal.id !== 'custom' && (
-                    <div className="w-full mt-2 md:mt-0">
-                      <div className="flex justify-between text-[12px] text-white/80 mb-2">
-                        <span>Goal: {activeGoalProgress.toFixed(0)}% of {fmt(activeGoal.target)}</span>
-                      </div>
-                      <div className="w-full bg-white/15 h-[6px] rounded-full overflow-hidden">
-                        <div
-                          className="bg-gold h-full rounded-full transition-all duration-500"
-                          style={{ width: `${activeGoalProgress}%` }}
-                        />
-                      </div>
-                    </div>
-                  )}
                   <div className="flex flex-col gap-2 w-full mt-2">
                     <button
                       onClick={handleScrollToContact}
-                      className="bg-gold text-white text-[14px] px-[20px] py-[10px] rounded-[6px] font-semibold hover:bg-goldLight hover:text-navy transition-colors whitespace-nowrap w-full text-center shadow-md uppercase tracking-wide"
+                      className="bg-gold text-white text-[14px] px-[20px] py-[10px] rounded-[6px] font-semibold hover:bg-goldLight hover:text-navy transition-colors whitespace-nowrap w-full text-center shadow-md uppercase tracking-wide cursor-pointer"
                     >
                       {calcMode === 'sip' ? 'START YOUR SIP TODAY ↗' : 'START INVESTING TODAY ↗'}
                     </button>
+                    <div className="flex items-center justify-between text-[11px] text-white/50 px-1 pt-1">
+                      <button type="button" onClick={downloadPDF} className="hover:text-gold transition-colors flex items-center gap-1 cursor-pointer">
+                        📄 Download PDF
+                      </button>
+                      <button type="button" onClick={downloadCSV} className="hover:text-gold transition-colors flex items-center gap-1 cursor-pointer">
+                        📊 Export CSV
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-
 
             </div>
 
@@ -723,16 +857,16 @@ const SIPCalculator = () => {
                 <div className="text-navy text-[18px] font-semibold">{fmt(gain)}<sup className="text-[11px] text-gold align-super ml-0.5">*</sup></div>
               </div>
               <div className="bg-navy/[0.05] border border-navy/10 rounded-[10px] p-4">
-                <div className="text-muted text-[12px] mb-1">Wealth ratio</div>
-                <div className="text-navy text-[18px] font-semibold">{wealthRatio}&times;</div>
+                <div className="text-muted text-[12px] mb-1">Time Horizon</div>
+                <div className="text-navy text-[18px] font-semibold">{effectiveYears} Years</div>
               </div>
               <div className="bg-navy/[0.05] border border-navy/10 rounded-[10px] p-4">
-                <div className="text-muted text-[12px] mb-1">CAGR equivalent</div>
-                <div className="text-navy text-[18px] font-semibold">{rate}%</div>
+                <div className="text-muted text-[12px] mb-1">Purchasing Power</div>
+                <div className="text-navy text-[18px] font-semibold">{fmt(realValue)}</div>
               </div>
             </div>
 
-            {/* Chart Section with Guide (hidden on mobile, visible on desktop/laptops) */}
+            {/* Chart Section with Guide */}
             <div className="mt-[3rem] hidden md:flex flex-row items-center gap-6 w-full">
               {/* Left: The Graph */}
               <div className="h-[220px] min-h-[220px] sm:h-[250px] flex-1 w-full relative">
@@ -759,7 +893,6 @@ const SIPCalculator = () => {
 
               {/* Right: Graph Guide Legend */}
               <div className="flex md:flex-col flex-row gap-6 md:gap-4 shrink-0 bg-[#faf8f4]/60 md:bg-transparent p-3 md:p-0 rounded-lg w-full md:w-[160px] border border-navy/5 md:border-none justify-center md:justify-start">
-                {/* Gold Solid line - Estimated Corpus */}
                 <div className="flex items-center gap-3">
                   <div className="flex items-center shrink-0">
                     <span className="w-[18px] h-[3px] bg-gold rounded-full inline-block" />
@@ -770,7 +903,6 @@ const SIPCalculator = () => {
                   </div>
                 </div>
 
-                {/* Slate Dashed line - Total Invested */}
                 <div className="flex items-center gap-3">
                   <div className="flex items-center shrink-0">
                     <span className="w-[18px] h-[3px] border-t-2 border-dashed border-muted inline-block" />
@@ -784,16 +916,14 @@ const SIPCalculator = () => {
             </div>
           </div>
 
-          {/* RIGHT: Standalone Donut Chart (no card bg) */}
+          {/* RIGHT: Standalone Donut Chart */}
           <div className="lg:w-[300px] shrink-0 flex flex-col items-center pt-2 lg:pt-[1rem] select-none">
 
-            {/* Total corpus label up top */}
             <div className="self-start w-full mb-5 pl-1">
               <div className="text-[#6B7280] text-[13px] font-medium mb-1">Resultant Value</div>
               <div className="font-serif text-[32px] font-bold text-[#1a1a2e] leading-none">{fmt(corpus)}<sup className="text-[16px] text-[#c9922a] align-super ml-0.5">*</sup></div>
             </div>
 
-            {/* 3D Pie Chart */}
             <div className="relative w-full flex justify-center -mx-2">
               <ThreeDPieChart invested={invested} gain={gain} />
             </div>
