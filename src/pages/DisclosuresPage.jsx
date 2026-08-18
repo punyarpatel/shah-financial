@@ -60,7 +60,7 @@ const DisclosuresPage = () => {
 
                   <div className="p-5 border border-navy/10 rounded-[10px] bg-cream/30">
                     <p className="text-gold text-[11px] uppercase tracking-wider font-semibold mb-1">Insurance Solicitations</p>
-                    <h4 className="font-serif text-navy text-[16px] font-bold mb-2">IRDAI Licensed Advisor</h4>
+                    <h4 className="font-serif text-navy text-[16px] font-bold mb-2">IRDAI Licensed Specialist</h4>
                     <p className="text-muted text-[13px] mb-1"><strong>License Code:</strong> IRDAI / XXXXXXXXX</p>
                     <p className="text-muted text-[13px] mb-1"><strong>Role:</strong> Life, Health, and General Insurance Solicitor</p>
                     <p className="text-muted text-[13px]"><strong>Partners:</strong> Empanelled with leading Indian Insurers</p>

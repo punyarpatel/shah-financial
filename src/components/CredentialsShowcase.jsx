@@ -14,7 +14,7 @@ const CredentialsShowcase = () => {
             The People Behind Your Wealth
           </h2>
           <p className="text-muted text-[15px] md:text-[16px] leading-relaxed">
-            Meet the dedicated financial advisors and relationship managers focused on protecting and growing your assets.
+            Meet the dedicated team members and relationship managers focused on protecting and growing your assets.
           </p>
         </div>
 

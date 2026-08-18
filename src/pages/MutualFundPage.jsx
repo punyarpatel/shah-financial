@@ -133,13 +133,13 @@ const MutualFundPage = () => {
         <title>Mutual Fund Distributor in Ahmedabad | Drishti Wealth</title>
         <meta name="description" content="Top AMFI-registered mutual fund distributor in Ahmedabad. Goal-based SIP planning, portfolio reviews, lumpsum investments, and expert fund selection." />
         <link rel="canonical" href="https://drishtiwealth.com/services/mutual-funds" />
-        <meta property="og:title" content="Mutual Fund Advisor &amp; Distributor in Ahmedabad | Drishti Wealth" />
-        <meta property="og:description" content="Top AMFI-registered mutual fund advisor & distributor in Ahmedabad. Goal-based SIP planning, portfolio reviews, lumpsum investments, and expert fund selection." />
+        <meta property="og:title" content="Mutual Fund Distributor in Ahmedabad | Drishti Wealth" />
+        <meta property="og:description" content="Top AMFI-registered mutual fund distributor in Ahmedabad. Goal-based SIP planning, portfolio reviews, lumpsum investments, and fund selection." />
         <meta property="og:image" content={ogImage} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Mutual Fund Advisor &amp; Distributor in Ahmedabad | Drishti Wealth" />
+        <meta name="twitter:title" content="Mutual Fund Distributor in Ahmedabad | Drishti Wealth" />
         <meta name="twitter:description" content="Top AMFI-registered mutual fund distributor in Ahmedabad for SIP investments & portfolio reviews." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
@@ -432,7 +432,7 @@ const MutualFundPage = () => {
                 <div className="form-success-reveal bg-green-500/15 border border-green-500/30 rounded-[10px] p-[2rem] text-center text-[#4ade80] flex flex-col items-center gap-4">
                   <div className="text-[32px] mb-2">✅</div>
                   <h3 className="font-serif text-[24px] mb-2">Request Received</h3>
-                  <p>Thank you! Our advisory team will contact you shortly.</p>
+                  <p>Thank you! Our team will contact you shortly.</p>
                   <button
                     type="button"
                     onClick={handleReset}

@@ -516,7 +516,7 @@ const InsurancePage = () => {
                 <div className="form-success-reveal bg-green-500/15 border border-green-500/30 rounded-[10px] p-[2rem] text-center text-[#4ade80] flex flex-col items-center gap-4">
                   <div className="text-[32px] mb-2">✅</div>
                   <h3 className="font-serif text-[24px] mb-2">Request Received</h3>
-                  <p>Thank you! Our insurance advisor will contact you within 24 hours.</p>
+                  <p>Thank you! Our insurance specialist will contact you within 24 hours.</p>
                   <button
                     type="button"
                     onClick={handleReset}

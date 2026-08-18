@@ -104,16 +104,16 @@ const ServicesPage = () => {
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
         <title>Our Services | Drishti Wealth Ahmedabad</title>
-        <meta name="description" content="Explore comprehensive wealth management, mutual fund advisory, life and health insurance, NRI investment planning, and retirement setups." />
+        <meta name="description" content="Explore comprehensive wealth management, mutual fund services, life and health insurance, NRI investment planning, and retirement setups." />
         <link rel="canonical" href="https://drishtiwealth.com/services" />
         <meta property="og:title" content="Our Services | Drishti Wealth Ahmedabad" />
-        <meta property="og:description" content="Explore comprehensive wealth management, mutual fund advisory, life and health insurance, NRI investment planning, and retirement setups." />
+        <meta property="og:description" content="Explore comprehensive wealth management, mutual fund services, life and health insurance, NRI investment planning, and retirement setups." />
         <meta property="og:image" content="https://drishtiwealth.com/og-image.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://drishtiwealth.com/services" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Our Services | Drishti Wealth Ahmedabad" />
-        <meta name="twitter:description" content="Explore comprehensive wealth management, mutual fund advisory, life and health insurance, NRI investment planning, and retirement setups." />
+        <meta name="twitter:description" content="Explore comprehensive wealth management, mutual fund services, life and health insurance, NRI investment planning, and retirement setups." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
 

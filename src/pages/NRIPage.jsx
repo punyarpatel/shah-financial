@@ -209,7 +209,7 @@ const NRIPage = () => {
               <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">NRI Services</span>
             </div>
             <h1 className="font-serif text-[34px] md:text-[46px] text-white font-semibold leading-[1.2] mb-[1.25rem] max-w-4xl">
-              NRI Investment Advisory &amp; Mutual Fund Services in India
+              NRI Wealth &amp; Mutual Fund Services in India
             </h1>
             <p className="text-white/65 text-[16px] leading-[1.6] mb-[2rem] max-w-2xl">
               You've built a life abroad. Your India investments and insurance deserve the same attention. We specialise in helping NRIs invest, stay compliant, grow their wealth back home, and stay protected every time they visit India.
@@ -276,7 +276,7 @@ const NRIPage = () => {
                     <ul className="space-y-3.5 mb-8">
                       {[
                         'NRE & NRO investment account configuration',
-                        'Remote KYC compliance and tax residency advisory',
+                        'Remote KYC compliance and tax residency support',
                         'Repatriation coordination and Indian health coverage'
                       ].map((benefit, idx) => (
                         <li key={idx} className="flex items-start text-[14.5px] text-muted">
@@ -423,7 +423,7 @@ const NRIPage = () => {
             <div className="flex items-center gap-3 bg-gold/10 border border-gold/30 rounded-[12px] p-4 max-w-3xl mb-10">
               <span className="text-[20px] flex-shrink-0">🏷️</span>
               <p className="text-navy text-[14px] font-sans font-medium">
-                <strong>Special NRI Discount Available:</strong> NRIs are eligible for exclusive premium discounts on select Indian health insurance plans. Ask our advisor for details.
+                <strong>Special NRI Discount Available:</strong> NRIs are eligible for exclusive premium discounts on select Indian health insurance plans. Ask our team for details.
               </p>
             </div>
  

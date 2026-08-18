@@ -15,7 +15,7 @@ const whyChooseUsData = [
   {
     id: 3,
     title: 'Fully Regulated & Compliant Partners',
-    description: 'AMFI-registered Mutual Fund Distributor (ARN) and IRDAI-licensed advisor empanelled with leading transactional platforms.'
+    description: 'AMFI-registered Mutual Fund Distributor (ARN) and IRDAI-licensed specialist empanelled with leading transactional platforms.'
   },
   {
     id: 4,

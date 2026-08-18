@@ -34,7 +34,7 @@ const milestones = [
   {
     year: '2007',
     title: 'Recognition & Expansion',
-    description: 'Gained significant industry recognition for excellence in financial advisory, accompanied by strategic team expansion to enhance client service.',
+    description: 'Gained significant industry recognition for excellence in financial distribution, accompanied by strategic team expansion to enhance client service.',
     icon: (
       <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
@@ -61,7 +61,7 @@ const milestones = [
   {
     year: '2016',
     title: 'Reaching ₹100 Crores AUM',
-    description: 'Doubled our managed assets to reach ₹100 Crores in AUM, cementing our position as a highly trusted financial advisor.',
+    description: 'Doubled our managed assets to reach ₹100 Crores in AUM, cementing our position as a highly trusted financial partner.',
     icon: (
       <svg className="w-16 h-16 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <line x1="18" y1="20" x2="18" y2="10" />
@@ -84,7 +84,7 @@ const milestones = [
         <path d="M2 12h20" />
       </svg>
     ),
-    stat: 'NRI Advisory',
+    stat: 'NRI Services',
     tag: 'Global Reach'
   },
   {

@@ -120,7 +120,7 @@ const TeamMemberCardCarousel = () => {
                     {/* Center Title & Role */}
                     <motion.div layout="position" className="my-auto py-3">
                       <span className="text-[9.5px] text-white/50 font-mono uppercase tracking-[0.2em] block mb-1">
-                        DRISHTI WEALTH ADVISOR
+                        DRISHTI WEALTH TEAM
                       </span>
                       <h3 className={`font-serif font-bold text-white leading-tight ${isActive ? 'text-[22px] sm:text-[26px]' : 'text-[17px] sm:text-[19px]'}`}>
                         {member.name}
@@ -147,7 +147,7 @@ const TeamMemberCardCarousel = () => {
                         transition={{ duration: 0.25 }}
                         className="flex justify-end items-center text-[10px] font-mono text-goldLight mt-3"
                       >
-                        <span className="font-bold text-emerald-400">&bull; VERIFIED ADVISOR</span>
+                        <span className="font-bold text-emerald-400">&bull; VERIFIED DISTRIBUTOR</span>
                       </motion.div>
                     </div>
                   </div>

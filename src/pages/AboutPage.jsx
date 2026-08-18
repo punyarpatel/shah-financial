@@ -56,16 +56,16 @@ const AboutPage = () => {
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
         <title>About Us | Drishti Wealth Ahmedabad</title>
-        <meta name="description" content="Drishti Wealth: trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2001. Serving 6,000+ clients and 100+ NRI clients across India and abroad." />
+        <meta name="description" content="Drishti Wealth: trusted AMFI-registered MFD and IRDAI-licensed specialist in Ahmedabad since 2001. Serving 6,000+ clients and 100+ NRI clients across India and abroad." />
         <link rel="canonical" href="https://drishtiwealth.com/about" />
         <meta property="og:title" content="About Us | Drishti Wealth Ahmedabad" />
-        <meta property="og:description" content="Drishti Wealth: trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2001. Serving 6,000+ clients and 100+ NRI clients across India and abroad." />
+        <meta property="og:description" content="Drishti Wealth: trusted AMFI-registered MFD and IRDAI-licensed specialist in Ahmedabad since 2001. Serving 6,000+ clients and 100+ NRI clients across India and abroad." />
         <meta property="og:image" content="https://drishtiwealth.com/og-image.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://drishtiwealth.com/about" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="About Us | Drishti Wealth Ahmedabad" />
-        <meta name="twitter:description" content="Drishti Wealth: trusted AMFI-registered MFD and IRDAI-licensed advisor in Ahmedabad since 2001. Serving 6,000+ clients and 100+ NRI clients across India and abroad." />
+        <meta name="twitter:description" content="Drishti Wealth: trusted AMFI-registered MFD and IRDAI-licensed specialist in Ahmedabad since 2001. Serving 6,000+ clients and 100+ NRI clients across India and abroad." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
@@ -85,7 +85,7 @@ const AboutPage = () => {
                   A Family Built on Trust
                 </h1>
                 <p className="text-white/65 text-[16px] md:text-[17px] leading-[1.6] max-w-2xl">
-                  Drishti Wealth was founded in 2001 in Ahmedabad by a family with a simple belief that every Indian family deserves access to honest, personalized financial guidance. What started as a small advisory practice has grown into a trusted firm serving 6,000 plus clients across India and abroad.
+                  Drishti Wealth was founded in 2001 in Ahmedabad by a family with a simple belief that every Indian family deserves access to honest, personalized financial guidance. What started as a small financial services practice has grown into a trusted firm serving 6,000 plus clients across India and abroad.
                 </p>
               </div>
 
@@ -116,13 +116,13 @@ const AboutPage = () => {
                 <div className="p-[1.5rem]">
                   <div className="text-[24px] mb-3">🏛️</div>
                   <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Registered and Compliant</h3>
-                  <p className="text-muted text-[14px] leading-[1.6]">AMFI registered MFD and IRDAI licensed insurance advisor. Full regulatory compliance.</p>
+                  <p className="text-muted text-[14px] leading-[1.6]">AMFI registered MFD and IRDAI licensed insurance specialist. Full regulatory compliance.</p>
                 </div>
               </BorderGlow>
               <BorderGlow className="h-full" borderRadius={12} backgroundColor="#ffffff">
                 <div className="p-[1.5rem]">
                   <div className="text-[24px] mb-3">👤</div>
-                  <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Personalized Advisory</h3>
+                  <h3 className="font-serif text-[18px] text-navy font-semibold mb-2">Personalized Planning</h3>
                   <p className="text-muted text-[14px] leading-[1.6]">No generic advice. Every recommendation is tailored to your income goals and risk profile.</p>
                 </div>
               </BorderGlow>

@@ -8,7 +8,7 @@ const partners = [
   { name: 'PBT Jaipur', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (4).jpeg', cropPosition: 'center 68%' },
   { name: 'HDFC ERGO Top 25', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (5).jpeg' },
   { name: 'PBT Delhi', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (6).jpeg', cropPosition: 'center 68%' },
-  { name: 'No. 1 Advisor', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (7).jpeg' },
+  { name: 'No. 1 Partner', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (7).jpeg' },
   { name: 'Lakshya Ki Udaan', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (8).jpeg', cropPosition: 'center 68%' },
   { name: 'Baku Convention', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (9).jpeg', cropPosition: 'center 66%' },
   { name: 'ICICI Gold Club', image: '/WhatsApp Image 2026-08-11 at 21.33.57 (10).jpeg', cropPosition: 'center 74%' },

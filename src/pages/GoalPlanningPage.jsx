@@ -533,7 +533,7 @@ const GoalPlanningPage = () => {
                 <div className="form-success-reveal bg-green-500/15 border border-green-500/30 rounded-[10px] p-[2rem] text-center text-[#4ade80] flex flex-col items-center gap-4">
                   <div className="text-[32px] mb-2">✅</div>
                   <h3 className="font-serif text-[24px] mb-2">Request Received</h3>
-                  <p>Thank you! Our advisor will reach out to book your goal planning session.</p>
+                  <p>Thank you! Our team will reach out to book your goal planning session.</p>
                   <button
                     type="button"
                     onClick={handleReset}

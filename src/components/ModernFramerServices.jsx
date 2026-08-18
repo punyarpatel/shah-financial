@@ -165,7 +165,7 @@ const ModernFramerServices = () => {
                   </div>
 
                   <div className="bg-white/5 border border-white/10 p-4 rounded-2xl flex flex-col justify-between">
-                    <span className="text-[10px] font-mono text-white/50 uppercase block">PERSONALIZED ADVISORY</span>
+                    <span className="text-[10px] font-mono text-white/50 uppercase block">PERSONALIZED PLANNING</span>
                     <Link
                       to={activeService.link}
                       className="text-xs font-bold text-goldLight hover:text-white flex items-center gap-1.5 transition-colors mt-2"

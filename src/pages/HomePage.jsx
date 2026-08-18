@@ -64,7 +64,7 @@ const HomePage = () => {
                 "url": "https://drishtiwealth.com/",
                 "logo": "https://drishtiwealth.com/DW_22-removebg-preview.png",
                 "image": "https://drishtiwealth.com/dw-logo-premium.png",
-                "description": "AMFI registered mutual fund distributor and insurance advisor in Ahmedabad",
+                "description": "AMFI registered mutual fund distributor in Ahmedabad",
                 "address": {
                   "@type": "PostalAddress",
                   "streetAddress": "305, Abhishilp Complex, Satellite",

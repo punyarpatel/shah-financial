@@ -123,11 +123,11 @@ const PropertyInsurancePage = () => {
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
-        <title>Property &amp; Home Insurance Advisory Ahmedabad | Drishti Wealth</title>
-        <meta name="description" content="Protect your home, office, contents, and commercial property with trusted property insurance policies in Ahmedabad. IRDAI licensed advisor since 2001." />
+        <title>Property &amp; Home Insurance Services Ahmedabad | Drishti Wealth</title>
+        <meta name="description" content="Protect your home, office, contents, and commercial property with trusted property insurance policies in Ahmedabad. IRDAI licensed specialist since 2001." />
         <link rel="canonical" href="https://drishtiwealth.com/services/property-insurance" />
-        <meta property="og:title" content="Property & Home Insurance Advisory | Drishti Wealth" />
-        <meta property="og:description" content="Protect your home, office, contents, and commercial property with trusted property insurance policies in Ahmedabad. IRDAI licensed advisor since 2001." />
+        <meta property="og:title" content="Property & Home Insurance Protection | Drishti Wealth" />
+        <meta property="og:description" content="Protect your home, office, contents, and commercial property with trusted property insurance policies in Ahmedabad. IRDAI licensed specialist since 2001." />
       </Helmet>
 
       <Navbar />
@@ -163,7 +163,7 @@ const PropertyInsurancePage = () => {
                 rel="noopener noreferrer"
                 className="bg-white/10 hover:bg-white/20 text-white font-medium px-6 py-3.5 rounded-xl border border-white/20 transition-all duration-300"
               >
-                Talk to Advisor on WhatsApp
+                Talk on WhatsApp
               </a>
             </div>
           </FadeIn>
