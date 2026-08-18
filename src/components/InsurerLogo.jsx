@@ -238,6 +238,8 @@ const LOGO_IMAGE_MAP = {
   'Bajaj Allianz General': '/images/insurers/bajaj_general.png',
   'Niva Bupa': '/images/insurers/niva_bupa.png',
   'Niva Bupa Star': '/images/insurers/niva_bupa.png',
+  'Tata AIG': '/images/insurers/tata_aig.png',
+  'TATA AIG': '/images/insurers/tata_aig.png',
   'Star Health': '/images/insurers/star_health.png',
   'Star': '/images/insurers/star_health.png',
   'Care Health': '/images/insurers/care_health.png',
