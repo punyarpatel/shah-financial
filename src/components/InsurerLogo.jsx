@@ -1,207 +1,218 @@
 import React from 'react';
 
-// 1. LIC of India Logo
+// 1. LIC of India Official Logo
 const LicLogo = () => (
-  <svg viewBox="0 0 160 40" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(4, 4)">
-      <rect x="0" y="0" width="32" height="32" rx="4" fill="#0054A6" />
-      {/* LIC Hands protecting flame symbol */}
-      <circle cx="16" cy="11" r="3.5" fill="#FCE303" />
-      <path d="M 9 22 C 9 15, 14 14, 16 14 C 18 14, 23 15, 23 22 Z" fill="#FCE303" opacity="0.9" />
-      <path d="M 7 24 C 11 20, 21 20, 25 24 L 23 27 C 18 24, 14 24, 9 27 Z" fill="#FCE303" />
+  <svg viewBox="0 0 170 42" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2, 3)">
+      {/* Official LIC Deep Blue Rectangle Container */}
+      <rect x="0" y="0" width="36" height="36" rx="4" fill="#0054A6" />
+      {/* Yellow Flame & Protecting Hands Symbol */}
+      <circle cx="18" cy="12" r="4" fill="#FCE303" />
+      <path d="M 10 24 C 10 16, 16 15, 18 15 C 20 15, 26 16, 26 24 Z" fill="#FCE303" opacity="0.9" />
+      <path d="M 7 26 C 12 21, 24 21, 29 26 L 27 30 C 21 26, 15 26, 9 30 Z" fill="#FCE303" />
     </g>
-    <text x="42" y="22" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="17" fill="#0054A6" letterSpacing="-0.02em">LIC</text>
-    <text x="74" y="22" fontFamily="Inter, system-ui, sans-serif" fontWeight="800" fontSize="10" fill="#CA922A" letterSpacing="0.06em">OF INDIA</text>
+    <text x="44" y="24" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="18" fill="#0054A6" letterSpacing="-0.02em">LIC</text>
+    <text x="78" y="24" fontFamily="Inter, system-ui, sans-serif" fontWeight="800" fontSize="10" fill="#CA922A" letterSpacing="0.06em">OF INDIA</text>
+    <text x="44" y="34" fontFamily="Inter, system-ui, sans-serif" fontWeight="600" fontSize="7.5" fill="#5C687E" letterSpacing="0.02em">भारतीय जीवन बीमा निगम</text>
   </svg>
 );
 
-// 2. ICICI Prudential Life Insurance Logo
+// 2. ICICI Prudential Life Insurance Official Logo
 const IciciPruLogo = () => (
-  <svg viewBox="0 0 160 40" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(4, 4)">
-      <circle cx="16" cy="16" r="14" fill="#800020" />
-      <path d="M 8 16 C 8 10, 14 8, 20 12" stroke="#F99D27" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-      <path d="M 12 21 C 16 23, 22 20, 24 16" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+  <svg viewBox="0 0 170 42" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2, 3)">
+      {/* Official ICICI Maroon Box with Orange Swoosh */}
+      <rect x="0" y="0" width="36" height="36" rx="4" fill="#800020" />
+      <path d="M 8 18 C 8 10, 16 8, 24 14" stroke="#F99D27" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M 12 24 C 18 26, 26 22, 28 17" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <circle cx="18" cy="18" r="3.5" fill="#F99D27" />
     </g>
-    <text x="42" y="18" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="12" fill="#800020" letterSpacing="-0.01em">ICICI PRUDENTIAL</text>
-    <text x="42" y="29" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="9" fill="#005B75" letterSpacing="0.05em" style={{ textTransform: 'uppercase' }}>Life Insurance</text>
+    <text x="44" y="19" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="12" fill="#800020" letterSpacing="-0.01em">ICICI PRUDENTIAL</text>
+    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="800" fontSize="9.5" fill="#005B75" letterSpacing="0.06em" style={{ textTransform: 'uppercase' }}>LIFE INSURANCE</text>
   </svg>
 );
 
-// 3. Tata AIA Life Insurance Logo
+// 3. Tata AIA Life Insurance Official Logo
 const TataAiaLogo = () => (
-  <svg viewBox="0 0 160 40" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(4, 4)">
-      <rect x="0" y="0" width="32" height="32" rx="4" fill="#005A9C" />
-      <polygon points="16,6 26,26 6,26" fill="#D32F2F" />
-      <polygon points="16,11 22,23 10,23" fill="#FFFFFF" />
+  <svg viewBox="0 0 170 42" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2, 3)">
+      {/* TATA Blue Rhombus + AIA Red Triangle */}
+      <rect x="0" y="0" width="18" height="36" rx="3" fill="#005A9C" />
+      <text x="9" y="23" fontFamily="Inter, sans-serif" fontWeight="900" fontSize="8" fill="white" textAnchor="middle">TATA</text>
+      <rect x="18" y="0" width="18" height="36" rx="3" fill="#D32F2F" />
+      <polygon points="27,8 33,28 21,28" fill="white" />
+      <polygon points="27,14 31,26 23,26" fill="#D32F2F" />
     </g>
-    <text x="42" y="19" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="13" fill="#005A9C" letterSpacing="0.04em">TATA AIA</text>
-    <text x="42" y="30" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="9" fill="#D32F2F" letterSpacing="0.04em" style={{ textTransform: 'uppercase' }}>LIFE INSURANCE</text>
+    <text x="44" y="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="13.5" fill="#005A9C" letterSpacing="0.04em">TATA AIA</text>
+    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8.5" fill="#D32F2F" letterSpacing="0.06em" style={{ textTransform: 'uppercase' }}>LIFE INSURANCE</text>
   </svg>
 );
 
-// 4. HDFC Life Logo
+// 4. HDFC Life Official Logo
 const HdfcLifeLogo = () => (
-  <svg viewBox="0 0 160 40" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(4, 4)">
-      <rect x="1" y="1" width="30" height="30" rx="3" stroke="#004C8F" strokeWidth="2" fill="none" />
-      <rect x="11" y="11" width="10" height="10" fill="#004C8F" />
-      <polygon points="4,4 10,4 10,6 6,6 6,10 4,10" fill="#ED232A" />
-      <polygon points="28,4 22,4 22,6 26,6 26,10 28,10" fill="#ED232A" />
-      <polygon points="4,28 10,28 10,26 6,26 6,22 4,22" fill="#ED232A" />
-      <polygon points="28,28 22,28 22,26 26,26 26,22 28,22" fill="#ED232A" />
+  <svg viewBox="0 0 170 42" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2, 3)">
+      {/* HDFC Red/Navy Square Emblem */}
+      <rect x="1" y="1" width="34" height="34" rx="3" stroke="#004C8F" strokeWidth="2" fill="none" />
+      <rect x="12" y="12" width="12" height="12" fill="#004C8F" />
+      <polygon points="4,4 11,4 11,6 6,6 6,11 4,11" fill="#ED232A" />
+      <polygon points="32,4 25,4 25,6 30,6 30,11 32,11" fill="#ED232A" />
+      <polygon points="4,32 11,32 11,30 6,30 6,25 4,25" fill="#ED232A" />
+      <polygon points="32,32 25,32 25,30 30,30 30,25 32,25" fill="#ED232A" />
     </g>
-    <text x="42" y="24" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="14" fill="#004C8F" letterSpacing="-0.02em">HDFC</text>
-    <text x="84" y="24" fontFamily="Inter, system-ui, sans-serif" fontWeight="800" fontSize="14" fill="#ED232A" letterSpacing="-0.02em">LIFE</text>
+    <text x="44" y="23" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="14" fill="#004C8F" letterSpacing="-0.02em">HDFC</text>
+    <text x="86" y="23" fontFamily="Inter, system-ui, sans-serif" fontWeight="800" fontSize="14" fill="#ED232A" letterSpacing="-0.02em">LIFE</text>
+    <text x="44" y="33" fontFamily="Inter, system-ui, sans-serif" fontWeight="600" fontSize="7.5" fill="#5C687E" letterSpacing="0.04em">Sar Utha Ke Jiyo</text>
   </svg>
 );
 
-// 5. Bajaj Life Insurance Logo
+// 5. Bajaj Life Insurance Official Logo
 const BajajLifeLogo = () => (
-  <svg viewBox="0 0 160 40" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(4, 4)">
-      <path d="M 6 4 L 16 2 L 26 4 L 26 18 C 26 24, 21 28, 16 30 C 11 28, 6 24, 6 18 Z" fill="#004DA8" />
-      <path d="M 11 11 L 16 13 L 21 11 M 11 17 L 16 19 L 21 17 M 16 13 L 16 24" stroke="white" strokeWidth="2" strokeLinecap="round" fill="none" />
+  <svg viewBox="0 0 170 42" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2, 3)">
+      {/* Bajaj Blue Shield Emblem */}
+      <path d="M 6 4 L 18 2 L 30 4 L 30 20 C 30 27, 24 32, 18 34 C 12 32, 6 27, 6 20 Z" fill="#004DA8" />
+      <path d="M 12 12 L 18 15 L 24 12 M 12 19 L 18 22 L 24 19 M 18 15 L 18 27" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none" />
     </g>
-    <text x="42" y="18" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="12" fill="#004DA8" letterSpacing="0.03em">BAJAJ Allianz</text>
-    <text x="42" y="29" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="9" fill="#5C687E" letterSpacing="0.06em" style={{ textTransform: 'uppercase' }}>Life Insurance</text>
+    <text x="44" y="19" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="12.5" fill="#004DA8" letterSpacing="0.03em">BAJAJ Allianz</text>
+    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="800" fontSize="9" fill="#003781" letterSpacing="0.06em" style={{ textTransform: 'uppercase' }}>LIFE INSURANCE</text>
   </svg>
 );
 
-// 6. HDFC Ergo Logo
+// 6. HDFC ERGO General Insurance Official Logo
 const HdfcErgoLogo = () => (
-  <svg viewBox="0 0 160 40" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(4, 4)">
-      <rect x="1" y="1" width="30" height="30" rx="3" stroke="#004C8F" strokeWidth="2" fill="none" />
-      <rect x="11" y="11" width="10" height="10" fill="#004C8F" />
-      <polygon points="4,4 10,4 10,6 6,6 6,10 4,10" fill="#ED232A" />
-      <polygon points="28,4 22,4 22,6 26,6 26,10 28,10" fill="#ED232A" />
-      <polygon points="4,28 10,28 10,26 6,26 6,22 4,22" fill="#ED232A" />
-      <polygon points="28,28 22,28 22,26 26,26 26,22 28,22" fill="#ED232A" />
+  <svg viewBox="0 0 170 42" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2, 3)">
+      <rect x="1" y="1" width="34" height="34" rx="3" stroke="#004C8F" strokeWidth="2" fill="none" />
+      <rect x="12" y="12" width="12" height="12" fill="#004C8F" />
+      <polygon points="4,4 11,4 11,6 6,6 6,11 4,11" fill="#ED232A" />
+      <polygon points="32,4 25,4 25,6 30,6 30,11 32,11" fill="#ED232A" />
+      <polygon points="4,32 11,32 11,30 6,30 6,25 4,25" fill="#ED232A" />
+      <polygon points="32,32 25,32 25,30 30,30 30,25 32,25" fill="#ED232A" />
     </g>
-    <text x="42" y="24" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="13" fill="#004C8F" letterSpacing="-0.02em">HDFC</text>
-    <text x="84" y="24" fontFamily="Inter, system-ui, sans-serif" fontWeight="800" fontSize="13" fill="#EE0138" letterSpacing="-0.02em">ERGO</text>
+    <text x="44" y="23" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="13.5" fill="#004C8F" letterSpacing="-0.02em">HDFC</text>
+    <text x="86" y="23" fontFamily="Inter, system-ui, sans-serif" fontWeight="800" fontSize="13.5" fill="#EE0138" letterSpacing="-0.02em">ERGO</text>
+    <text x="44" y="33" fontFamily="Inter, system-ui, sans-serif" fontWeight="600" fontSize="7.5" fill="#5C687E" letterSpacing="0.04em">GENERAL INSURANCE</text>
   </svg>
 );
 
-// 7. ICICI Lombard Logo
+// 7. ICICI Lombard General Insurance Official Logo
 const IciciLombardLogo = () => (
-  <svg viewBox="0 0 160 40" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(4, 4)">
-      <circle cx="16" cy="16" r="14" stroke="#F99D27" strokeWidth="3" strokeLinecap="round" fill="none" />
-      <circle cx="16" cy="16" r="9" stroke="#800020" strokeWidth="2.5" fill="none" />
-      <circle cx="16" cy="16" r="3.5" fill="#800020" />
+  <svg viewBox="0 0 170 42" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2, 3)">
+      <circle cx="18" cy="18" r="16" stroke="#F99D27" strokeWidth="3.5" strokeLinecap="round" fill="none" />
+      <circle cx="18" cy="18" r="10" stroke="#800020" strokeWidth="2.5" fill="none" />
+      <circle cx="18" cy="18" r="4" fill="#800020" />
     </g>
-    <text x="42" y="19" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="13" fill="#800020" letterSpacing="-0.01em">ICICI</text>
-    <text x="42" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="10" fill="#005B75" letterSpacing="0.05em" style={{ textTransform: 'uppercase' }}>Lombard</text>
+    <text x="44" y="19" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="13.5" fill="#800020" letterSpacing="-0.01em">ICICI</text>
+    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="800" fontSize="10.5" fill="#005B75" letterSpacing="0.05em" style={{ textTransform: 'uppercase' }}>Lombard</text>
   </svg>
 );
 
-// 8. Tata AIG Logo
+// 8. TATA AIG General Insurance Official Logo
 const TataAigLogo = () => (
-  <svg viewBox="0 0 160 40" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(4, 4)">
-      <circle cx="16" cy="16" r="14" fill="#005A9C" />
-      <path d="M 16 6 C 12 11, 10 18, 11.5 24 C 13.5 18, 15.5 12, 16 6 Z" fill="white" />
-      <path d="M 16 6 C 20 11, 22 18, 20.5 24 C 18.5 18, 16.5 12, 16 6 Z" fill="white" />
+  <svg viewBox="0 0 170 42" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2, 3)">
+      <circle cx="18" cy="18" r="16" fill="#005A9C" />
+      <path d="M 18 6 C 13 12, 11 20, 13 27 C 15 20, 17.5 13, 18 6 Z" fill="white" />
+      <path d="M 18 6 C 23 12, 25 20, 23 27 C 21 20, 18.5 13, 18 6 Z" fill="white" />
     </g>
-    <text x="42" y="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="13" fill="#005A9C" letterSpacing="0.04em">TATA AIG</text>
-    <text x="42" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#5C687E" letterSpacing="0.12em" style={{ textTransform: 'uppercase' }}>Insurance</text>
+    <text x="44" y="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="13.5" fill="#005A9C" letterSpacing="0.04em">TATA AIG</text>
+    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8.5" fill="#5C687E" letterSpacing="0.1em" style={{ textTransform: 'uppercase' }}>INSURANCE</text>
   </svg>
 );
 
-// 9. GoDigit Logo
+// 9. Go Digit (digit.) Official Logo
 const GoDigitLogo = () => (
-  <svg viewBox="0 0 160 40" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(4, 4)">
-      <circle cx="16" cy="16" r="14" fill="#24D366" fillOpacity="0.15" />
-      <circle cx="16" cy="16" r="10" fill="#24D366" />
-      <path d="M 11 16 L 15 20 L 21 13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+  <svg viewBox="0 0 170 42" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2, 3)">
+      <circle cx="18" cy="18" r="16" fill="#24D366" fillOpacity="0.15" />
+      <circle cx="18" cy="18" r="11" fill="#24D366" />
+      <path d="M 12 18 L 16 22 L 23 14" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
     </g>
-    <text x="42" y="25" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="20" fill="#0D2545" letterSpacing="-0.03em">digit</text>
-    <circle cx="73" cy="13.5" r="2.5" fill="#24D366" />
+    <text x="44" y="26" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="22" fill="#0D2545" letterSpacing="-0.03em">digit</text>
+    <circle cx="78" cy="13.5" r="2.8" fill="#24D366" />
   </svg>
 );
 
-// 10. IndusInd Bank / Insurance Partner Logo
+// 10. IndusInd Bank / Partner Insurance Official Logo
 const IndusIndLogo = () => (
-  <svg viewBox="0 0 160 40" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(4, 4)">
-      <rect x="0" y="0" width="32" height="32" rx="4" fill="#800020" />
-      {/* Zebu Bull emblem outline */}
-      <path d="M 8 20 C 8 14, 12 10, 16 10 C 20 10, 24 14, 24 20 L 22 22 L 10 22 Z" fill="#FFFFFF" />
-      <circle cx="16" cy="14" r="2" fill="#800020" />
+  <svg viewBox="0 0 170 42" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2, 3)">
+      <rect x="0" y="0" width="36" height="36" rx="4" fill="#800020" />
+      {/* Indus Zebu Bull Emblem */}
+      <path d="M 9 22 C 9 15, 13 11, 18 11 C 23 11, 27 15, 27 22 L 25 24 L 11 24 Z" fill="#FFFFFF" />
+      <circle cx="18" cy="15" r="2" fill="#800020" />
     </g>
-    <text x="42" y="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="14" fill="#800020" letterSpacing="-0.01em">IndusInd</text>
-    <text x="42" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#005B75" letterSpacing="0.08em" style={{ textTransform: 'uppercase' }}>PARTNER INSURER</text>
+    <text x="44" y="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="14.5" fill="#800020" letterSpacing="-0.01em">IndusInd</text>
+    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#005B75" letterSpacing="0.08em" style={{ textTransform: 'uppercase' }}>PARTNER INSURER</text>
   </svg>
 );
 
-// 11. Bajaj General Insurance Logo
+// 11. Bajaj General Insurance Official Logo
 const BajajGeneralLogo = () => (
-  <svg viewBox="0 0 160 40" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(4, 4)">
-      <path d="M 6 4 L 16 2 L 26 4 L 26 18 C 26 24, 21 28, 16 30 C 11 28, 6 24, 6 18 Z" fill="#004DA8" />
-      <path d="M 11 11 L 16 13 L 21 11 M 11 17 L 16 19 L 21 17 M 16 13 L 16 24" stroke="white" strokeWidth="2" strokeLinecap="round" fill="none" />
+  <svg viewBox="0 0 170 42" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2, 3)">
+      <path d="M 6 4 L 18 2 L 30 4 L 30 20 C 30 27, 24 32, 18 34 C 12 32, 6 27, 6 20 Z" fill="#004DA8" />
+      <path d="M 12 12 L 18 15 L 24 12 M 12 19 L 18 22 L 24 19 M 18 15 L 18 27" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none" />
     </g>
-    <text x="42" y="18" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="12" fill="#004DA8" letterSpacing="0.03em">BAJAJ Allianz</text>
-    <text x="42" y="29" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="9" fill="#003781" letterSpacing="0.04em" style={{ textTransform: 'uppercase' }}>General Insurance</text>
+    <text x="44" y="19" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="12.5" fill="#004DA8" letterSpacing="0.03em">BAJAJ Allianz</text>
+    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="800" fontSize="9" fill="#003781" letterSpacing="0.04em" style={{ textTransform: 'uppercase' }}>GENERAL INSURANCE</text>
   </svg>
 );
 
-// 12. Edelweiss Zuno General Insurance Logo
+// 12. Edelweiss Zuno General Insurance Official Logo
 const ZunoLogo = () => (
-  <svg viewBox="0 0 160 40" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 170 42" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="zunoGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <linearGradient id="zunoGradOfficial" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#FF2E93" />
         <stop offset="100%" stopColor="#FF8A00" />
       </linearGradient>
     </defs>
-    <g transform="translate(4, 4)">
-      <circle cx="16" cy="16" r="14" fill="url(#zunoGrad2)" />
-      <path d="M 10 11 L 22 11 L 10 21 L 22 21" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <g transform="translate(2, 3)">
+      <circle cx="18" cy="18" r="16" fill="url(#zunoGradOfficial)" />
+      <path d="M 11 12 L 25 12 L 11 24 L 25 24" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
     </g>
-    <text x="42" y="14" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#7A8293" letterSpacing="0.08em" style={{ textTransform: 'uppercase' }}>EDELWEISS</text>
-    <text x="42" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="18" fill="url(#zunoGrad2)" letterSpacing="-0.03em">zuno</text>
+    <text x="44" y="14" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#7A8293" letterSpacing="0.08em" style={{ textTransform: 'uppercase' }}>EDELWEISS</text>
+    <text x="44" y="32" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="19" fill="url(#zunoGradOfficial)" letterSpacing="-0.03em">zuno</text>
   </svg>
 );
 
-// 13. Niva Bupa Health Insurance Logo
+// 13. Niva Bupa Health Insurance Official Logo
 const NivaBupaLogo = () => (
-  <svg viewBox="0 0 160 40" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(4, 4)">
-      <circle cx="16" cy="16" r="14" fill="#0A3C6B" />
-      <path d="M 10 16 L 14 20 L 22 12" stroke="#FF4D4D" strokeWidth="2.8" strokeLinecap="round" fill="none" />
+  <svg viewBox="0 0 170 42" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2, 3)">
+      <circle cx="18" cy="18" r="16" fill="#0A3C6B" />
+      <path d="M 11 18 L 15 22 L 25 13" stroke="#FF4D4D" strokeWidth="3" strokeLinecap="round" fill="none" />
     </g>
-    <text x="42" y="25" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="16" fill="#0A3C6B" letterSpacing="-0.02em">niva</text>
-    <text x="80" y="25" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="16" fill="#FF4D4D" letterSpacing="-0.02em">bupa</text>
+    <text x="44" y="26" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="17" fill="#0A3C6B" letterSpacing="-0.02em">niva</text>
+    <text x="82" y="26" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="17" fill="#FF4D4D" letterSpacing="-0.02em">bupa</text>
   </svg>
 );
 
-// 14. Star Health Insurance Logo
+// 14. Star Health Insurance Official Logo
 const StarHealthLogo = () => (
-  <svg viewBox="0 0 160 40" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(4, 4)">
-      <circle cx="16" cy="16" r="14" fill="#005EA6" />
-      <polygon points="16,7 18.8,12.5 25,13.5 20.5,18 21.8,24 16,21 10.2,24 11.5,18 7,13.5 13.2,12.5" fill="white" />
+  <svg viewBox="0 0 170 42" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2, 3)">
+      <circle cx="18" cy="18" r="16" fill="#005EA6" />
+      <polygon points="18,8 21,14 27.5,15 22.5,20 24,26.5 18,23 12,26.5 13.5,20 8.5,15 15,14" fill="white" />
     </g>
-    <text x="42" y="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="14" fill="#005EA6" letterSpacing="0.05em">STAR</text>
-    <text x="42" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#5C687E" letterSpacing="0.08em" style={{ textTransform: 'uppercase' }}>Health Insurance</text>
+    <text x="44" y="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="14.5" fill="#005EA6" letterSpacing="0.05em">STAR</text>
+    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="800" fontSize="8.5" fill="#5C687E" letterSpacing="0.08em" style={{ textTransform: 'uppercase' }}>Health Insurance</text>
   </svg>
 );
 
-// 15. Care Health Insurance Logo
+// 15. Care Health Insurance Official Logo
 const CareHealthLogo = () => (
-  <svg viewBox="0 0 160 40" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(4, 4)">
-      <rect x="2" y="2" width="28" height="28" rx="7" fill="#00A2A6" />
-      <path d="M 10 16 Q 16 10, 22 16" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-      <circle cx="16" cy="20" r="3.5" fill="white" />
+  <svg viewBox="0 0 170 42" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2, 3)">
+      <rect x="2" y="2" width="32" height="32" rx="8" fill="#00A2A6" />
+      <path d="M 11 18 Q 18 11, 25 18" stroke="white" strokeWidth="2.8" strokeLinecap="round" fill="none" />
+      <circle cx="18" cy="22" r="3.5" fill="white" />
     </g>
-    <text x="42" y="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="15" fill="#00A2A6" letterSpacing="0.02em">care</text>
-    <text x="42" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="700" fontSize="8" fill="#5C687E" letterSpacing="0.08em" style={{ textTransform: 'uppercase' }}>Health Insurance</text>
+    <text x="44" y="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="900" fontSize="15.5" fill="#00A2A6" letterSpacing="0.02em">care</text>
+    <text x="44" y="31" fontFamily="Inter, system-ui, sans-serif" fontWeight="800" fontSize="8.5" fill="#5C687E" letterSpacing="0.08em" style={{ textTransform: 'uppercase' }}>HEALTH INSURANCE</text>
   </svg>
 );
 
