@@ -25,12 +25,15 @@ const ScrollZoomReveal = ({
   const toggleSound = (e) => {
     if (e) e.stopPropagation();
     if (videoRef.current) {
-      const nextMutedState = !isMutedRef.current;
+      const nextMutedState = !isMuted;
       videoRef.current.muted = nextMutedState;
+      videoRef.current.volume = 1.0;
       setIsMuted(nextMutedState);
       isMutedRef.current = nextMutedState;
       if (!nextMutedState) {
-        videoRef.current.play().catch(() => {});
+        videoRef.current.play().catch((err) => {
+          console.log("Audio play exception:", err);
+        });
       }
     }
   };
@@ -40,11 +43,11 @@ const ScrollZoomReveal = ({
     offset: ['start start', 'end end']
   });
 
-  // Automatically mute sound when user scrolls away from this section
+  // Mute sound only when user completely scrolls out of the section
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     if (videoRef.current) {
-      const isInSection = latest >= 0.05 && latest <= 0.95;
-      if (!isInSection) {
+      const isCompletelyOutOfView = latest <= 0 || latest >= 1;
+      if (isCompletelyOutOfView) {
         videoRef.current.muted = true;
       } else {
         videoRef.current.muted = isMutedRef.current;
@@ -98,7 +101,8 @@ const ScrollZoomReveal = ({
           {/* Center Expanding Media Window */}
           <motion.div
             style={{ width, height, borderRadius }}
-            className="relative overflow-hidden bg-navy border border-gold/30 shadow-[0_30px_90px_rgba(0,0,0,0.8)] shrink-0 flex items-center justify-center"
+            className="relative overflow-hidden bg-navy border border-gold/30 shadow-[0_30px_90px_rgba(0,0,0,0.8)] shrink-0 flex items-center justify-center cursor-pointer"
+            onClick={toggleSound}
           >
             {/* Background Video / Image */}
             {videoUrl ? (
@@ -113,8 +117,8 @@ const ScrollZoomReveal = ({
                   onClick={toggleSound}
                   className="absolute inset-0 w-full h-full object-cover z-0 cursor-pointer"
                 >
-                  <source src={videoUrl.replace('.mp4', '.webm')} type="video/webm" />
                   <source src={videoUrl} type="video/mp4" />
+                  <source src={videoUrl.replace('.mp4', '.webm')} type="video/webm" />
                 </video>
 
                 {/* Sound Mute / Unmute Button */}
