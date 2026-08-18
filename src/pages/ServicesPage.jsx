@@ -353,55 +353,56 @@ const ServicesPage = () => {
       </section>
 
       {/* ── Services Grid Section ── */}
-      <section id="services-grid" className="py-[4rem] w-full">
+      <section id="services-grid" className="py-[4.5rem] w-full bg-[#faf8f4]">
         <div className="max-w-7xl mx-auto px-4">
 
           {/* Section label */}
           <FadeIn>
             <div className="text-center mb-[3.5rem]">
-              <div className="inline-block bg-gold/10 text-gold text-[11px] uppercase tracking-[0.15em] font-medium px-[12px] py-[4px] rounded-[20px] mb-[1rem]">
+              <div className="inline-block bg-[#fef3c7] text-[#b45309] border border-[#fde68a] text-[11px] uppercase tracking-[0.18em] font-extrabold px-[14px] py-[5px] rounded-[8px] mb-[1rem]">
                 Core Wealth & Protection
               </div>
-              <h2 className="font-serif text-[28px] md:text-[36px] text-textDark font-semibold mb-[1rem] leading-tight">
+              <h2 className="font-serif text-[28px] md:text-[38px] text-[#0d2545] font-bold mb-[1rem] leading-tight">
                 Find the Right Solution for You
               </h2>
-              <p className="text-muted text-[15px] md:text-[16px] leading-[1.6] max-w-[560px] mx-auto">
+              <p className="text-[#475569] text-[15px] md:text-[16px] leading-[1.6] max-w-[560px] mx-auto">
                 From wealth building to protection — every service is crafted around your unique financial journey.
               </p>
             </div>
           </FadeIn>
 
           {/* Grid */}
-          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
+          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {servicesList.map((service) => (
               <StaggerItem key={service.id}>
-                <BorderGlow className="h-full hover:-translate-y-1 transition-all duration-300" borderRadius={14} backgroundColor="#ffffff">
-                  <div className="p-[2rem] h-full flex flex-col group">
-                    <div className="flex items-center justify-between mb-[1.25rem]">
-                      <span className="text-gold text-[11px] uppercase tracking-wider font-semibold bg-gold/10 px-[8px] py-[3px] rounded-[4px]">
+                <div className="bg-white border border-slate-200/90 rounded-[24px] p-7 md:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(13,37,69,0.08)] hover:border-[#ca8a04]/40 transition-all duration-300 flex flex-col justify-between h-full group hover:-translate-y-1">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="bg-[#fef3c7] text-[#b45309] border border-[#fde68a] text-[11px] font-extrabold tracking-wider px-3.5 py-1.5 rounded-[8px] uppercase">
                         {service.category}
                       </span>
-                      <span className="text-[24px] transform group-hover:scale-110 transition-transform duration-300">
+                      <span className="text-[28px] transform group-hover:scale-110 transition-transform duration-300">
                         {service.icon}
                       </span>
                     </div>
 
-                    <h3 className="font-serif text-navy text-[22px] font-semibold mb-[1rem] leading-tight group-hover:text-gold transition-colors duration-300">
+                    <h3 className="font-serif text-[#0d2545] text-[22px] md:text-[25px] font-bold mt-5 mb-3 leading-tight group-hover:text-[#ca8a04] transition-colors duration-300">
                       {service.title}
                     </h3>
 
-                    <p className="text-muted text-[14px] leading-[1.6] mb-[2rem] flex-grow">
+                    <p className="text-[#475569] text-[14.5px] leading-[1.65] mb-8">
                       {service.description}
                     </p>
-
-                    <Link
-                      to={service.link}
-                      className="inline-flex items-center text-gold text-[13px] font-semibold tracking-wide hover:text-navy transition-colors mt-auto"
-                    >
-                      Explore Service &rarr;
-                    </Link>
                   </div>
-                </BorderGlow>
+
+                  <Link
+                    to={service.link}
+                    className="inline-flex items-center text-[#ca8a04] font-bold text-[14.5px] group-hover:text-[#0d2545] transition-colors mt-auto"
+                  >
+                    <span>Explore Service</span>
+                    <span className="ml-1.5 transform group-hover:translate-x-1.5 transition-transform duration-300">&rarr;</span>
+                  </Link>
+                </div>
               </StaggerItem>
             ))}
           </StaggerGroup>
@@ -409,55 +410,53 @@ const ServicesPage = () => {
       </section>
 
       {/* ── Other Investment Services Section ── */}
-      <section id="other-services" className="py-[4.5rem] w-full bg-[#f8fafc] border-t border-navy/10">
+      <section id="other-services" className="py-[4.5rem] w-full bg-[#f8fafc] border-t border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4">
           <FadeIn>
             <div className="text-center mb-[3.5rem]">
-              <div className="inline-block bg-gold/15 border border-gold/30 text-gold text-[11px] uppercase tracking-[0.18em] font-semibold px-[14px] py-[4px] rounded-[20px] mb-[1rem]">
+              <div className="inline-block bg-[#fef3c7] text-[#b45309] border border-[#fde68a] text-[11px] uppercase tracking-[0.18em] font-extrabold px-[14px] py-[5px] rounded-[8px] mb-[1rem]">
                 Expanded Solutions
               </div>
-              <h2 className="font-serif text-[28px] md:text-[38px] text-navy font-bold mb-[1rem] leading-tight">
+              <h2 className="font-serif text-[28px] md:text-[38px] text-[#0d2545] font-bold mb-[1rem] leading-tight">
                 Other Investment Services
               </h2>
-              <p className="text-muted text-[15px] md:text-[16px] leading-[1.6] max-w-[640px] mx-auto">
+              <p className="text-[#475569] text-[15px] md:text-[16px] leading-[1.6] max-w-[640px] mx-auto">
                 Explore specialized investment products, market access platforms, liquidity solutions, and institutional-grade wealth avenues.
               </p>
             </div>
           </FadeIn>
 
-          <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {otherServicesList.map((item) => (
               <StaggerItem key={item.id}>
-                <BorderGlow className="h-full hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-md" borderRadius={14} backgroundColor="#ffffff">
-                  <div 
-                    className="p-6 h-full flex flex-col justify-between group cursor-pointer"
-                    onClick={() => handleInquireService(item.title)}
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-4">
-                        <span className="text-[28px] transform group-hover:scale-110 transition-transform duration-300">
-                          {item.icon}
-                        </span>
-                        <span className="text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-1 rounded bg-navy/5 text-navy group-hover:bg-gold/15 group-hover:text-navy transition-colors">
-                          {item.tag}
-                        </span>
-                      </div>
-
-                      <h3 className="font-serif text-navy text-[18px] font-bold mb-2.5 group-hover:text-gold transition-colors duration-300">
-                        {item.title}
-                      </h3>
-
-                      <p className="text-muted text-[13.5px] leading-[1.6]">
-                        {item.description}
-                      </p>
+                <div 
+                  className="bg-white border border-slate-200/90 rounded-[24px] p-7 md:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(13,37,69,0.08)] hover:border-[#ca8a04]/40 transition-all duration-300 flex flex-col justify-between h-full group cursor-pointer hover:-translate-y-1"
+                  onClick={() => handleInquireService(item.title)}
+                >
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="bg-[#fef3c7] text-[#b45309] border border-[#fde68a] text-[11px] font-extrabold tracking-wider px-3.5 py-1.5 rounded-[8px] uppercase">
+                        {item.tag}
+                      </span>
+                      <span className="text-[28px] transform group-hover:scale-110 transition-transform duration-300">
+                        {item.icon}
+                      </span>
                     </div>
 
-                    <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[12px] font-semibold text-gold group-hover:text-navy transition-colors">
-                      <span>Inquire Desk</span>
-                      <span className="transform group-hover:translate-x-1 transition-transform">&rarr;</span>
-                    </div>
+                    <h3 className="font-serif text-[#0d2545] text-[22px] md:text-[25px] font-bold mt-5 mb-3 leading-tight group-hover:text-[#ca8a04] transition-colors duration-300">
+                      {item.title}
+                    </h3>
+
+                    <p className="text-[#475569] text-[14.5px] leading-[1.65] mb-8">
+                      {item.description}
+                    </p>
                   </div>
-                </BorderGlow>
+
+                  <div className="inline-flex items-center text-[#ca8a04] font-bold text-[14.5px] group-hover:text-[#0d2545] transition-colors mt-auto">
+                    <span>Inquire Desk</span>
+                    <span className="ml-1.5 transform group-hover:translate-x-1.5 transition-transform duration-300">&rarr;</span>
+                  </div>
+                </div>
               </StaggerItem>
             ))}
           </StaggerGroup>
