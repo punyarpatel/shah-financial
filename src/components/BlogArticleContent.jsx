@@ -399,6 +399,9 @@ const BlogArticleContent = ({ slug }) => {
               </tbody>
             </table>
           </div>
+          <p className="text-[12.5px] text-[#71717a] italic -mt-3 mb-6">
+            * Subject to changes as per government regulations
+          </p>
 
           <div className="my-8 p-6 bg-slate-900 text-white rounded-2xl shadow-xl border border-gold/30">
             <div className="text-gold text-[12px] font-mono uppercase tracking-widest mb-1">NUMERICAL TAX CALCULATION</div>
