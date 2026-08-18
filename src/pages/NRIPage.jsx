@@ -180,16 +180,16 @@ const NRIPage = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col relative">
       <Helmet>
-        <title>NRI Investment Services India | Drishti Wealth</title>
+        <title>NRI Services India | Drishti Wealth</title>
         <meta name="description" content="NRI mutual fund investments, NRI health insurance in India, DTAA guidance, KYC, repatriation planning. Serving NRIs across USA, UK, UAE, Canada, Australia, Singapore, GCC, and Europe." />
         <link rel="canonical" href="https://drishtiwealth.com/nri" />
-        <meta property="og:title" content="NRI Investment Services India | Drishti Wealth" />
+        <meta property="og:title" content="NRI Services India | Drishti Wealth" />
         <meta property="og:description" content="NRI mutual fund investments, NRI health insurance in India, DTAA guidance, KYC, repatriation planning. Serving NRIs across USA, UK, UAE, Canada, Australia, Singapore, GCC, and Europe." />
         <meta property="og:image" content="https://drishtiwealth.com/og-image.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://drishtiwealth.com/nri" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="NRI Investment Services India | Drishti Wealth" />
+        <meta name="twitter:title" content="NRI Services India | Drishti Wealth" />
         <meta name="twitter:description" content="NRI mutual fund investments, NRI health insurance in India, DTAA guidance, KYC, repatriation planning. Serving NRIs across USA, UK, UAE, Canada, Australia, Singapore, GCC, and Europe." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
@@ -206,7 +206,7 @@ const NRIPage = () => {
               </Link>
             </div>
             <div className="inline-flex items-center gap-[6px] bg-gold/15 border border-gold/30 rounded-[20px] px-[14px] py-[4px] mb-[1.5rem]">
-              <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">NRI Investment Services</span>
+              <span className="text-goldLight text-[11px] uppercase tracking-[0.12em]">NRI Services</span>
             </div>
             <h1 className="font-serif text-[34px] md:text-[46px] text-white font-semibold leading-[1.2] mb-[1.25rem] max-w-4xl">
               NRI Investment Advisory &amp; Mutual Fund Services in India
@@ -264,7 +264,7 @@ const NRIPage = () => {
  
                     {/* Title */}
                     <h3 className="font-serif text-[24px] md:text-[26px] font-bold text-textDark mb-3 group-hover:text-navy transition-colors duration-300">
-                      NRI Investment Services
+                      NRI Services
                     </h3>
  
                     {/* Description */}
@@ -334,7 +334,7 @@ const NRIPage = () => {
                       >
                         <img 
                           src="/nri_services_preview.png" 
-                          alt="NRI Investment Services"
+                          alt="NRI Services"
                           className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent pointer-events-none rounded-lg"></div>
@@ -344,7 +344,7 @@ const NRIPage = () => {
                     {/* Bottom Bar: White background, service name label and green indicator dot */}
                     <div className="bg-white border-t border-slate-100/80 px-6 py-4 flex items-center justify-between">
                       <span className="text-[13px] font-semibold text-[#5c687e] tracking-wide">
-                        NRI Investment Services
+                        NRI Services
                       </span>
                       <span className="relative flex h-2 w-2">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>

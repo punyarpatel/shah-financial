@@ -4,7 +4,7 @@ and insurance advisor in Ahmedabad, Gujarat.
 
 ## Pages
 - /: Home page with services and contact form
-- /nri: NRI investment services
+- /nri: NRI services
 - /about: About us and credentials
 - /blog: Financial education articles
 - /client-portal: Client portfolio access

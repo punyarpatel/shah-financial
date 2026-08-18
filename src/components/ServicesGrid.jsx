@@ -91,7 +91,7 @@ const servicesData = [
   {
     id: 'nri-services',
     icon: '🌍',
-    title: 'NRI Investment Services',
+    title: 'NRI Services',
     description: 'Specialized advisory for NRIs including NRE/NRO investing, remote KYC, repatriation planning, and health insurance for treatment in India.',
     link: '/nri',
     isSpecial: true,

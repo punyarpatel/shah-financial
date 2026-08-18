@@ -19,7 +19,7 @@ const navData = {
     { icon: '🛡️', title: 'Life & General Insurance', desc: 'Comprehensive coverage from trusted partners to protect your family and assets.', link: '/services/insurance' },
     { icon: '🏠', title: 'Property & Home Insurance', desc: 'Protect your building, home contents, office, and commercial assets against fire, natural disasters, and theft.', link: '/services/property-insurance' },
     { icon: '✈️', title: 'Overseas Travel Insurance', desc: 'Comprehensive coverage for medical emergencies, trip cancellations, and lost baggage while traveling abroad.', link: '/services/travel-insurance' },
-    { icon: '🌍', title: 'NRI Investment Services', desc: 'Specialized advisory for NRIs including NRE/NRO investing, health insurance, and repatriation.', link: '/nri' },
+    { icon: '🌍', title: 'NRI Services', desc: 'Specialized advisory for NRIs including NRE/NRO investing, health insurance, and repatriation.', link: '/nri' },
     { icon: '🎯', title: 'Retirement Planning', desc: 'Build a realistic, inflation-adjusted retirement corpus with dedicated plans and annual reviews.', link: '/services/retirement' },
     { icon: '🎯', title: 'Goal-Based Wealth Planning', desc: 'Create dedicated investment buckets for education, home, business, and vacations.', link: '/services/goal-planning' },
   ],
@@ -615,7 +615,7 @@ const Navbar = () => {
                         <option value="Portfolio Review">Portfolio Review</option>
                         <option value="Mutual Fund SIP">Mutual Fund SIP</option>
                         <option value="Insurance Planning">Insurance Planning</option>
-                        <option value="NRI Investment Services">NRI Investment Services</option>
+                        <option value="NRI Services">NRI Services</option>
                         <option value="Tax Saving ELSS">Tax Saving ELSS</option>
                         <option value="General Enquiry">General Enquiry</option>
                       </select>

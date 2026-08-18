@@ -16,7 +16,7 @@ const faqData = [
   },
   {
     question: "Do you offer remote KYC onboarding and account setups for NRI clients?",
-    answer: "Yes, we specialize in NRI Investment Services. We provide a complete, paperless KYC compliance service for NRIs residing across the globe. We also guide you on NRE/NRO account integration, tax compliance, and smooth repatriation planning."
+    answer: "Yes, we specialize in NRI Services. We provide a complete, paperless KYC compliance service for NRIs residing across the globe. We also guide you on NRE/NRO account integration, tax compliance, and smooth repatriation planning."
   },
   {
     question: "How can I monitor my mutual funds and insurance holdings?",

@@ -230,7 +230,7 @@ const ContactForm = () => {
                   <option value="" className="bg-navy text-white">Select an option</option>
                   <option value="Mutual Fund SIP" className="bg-navy text-white">Mutual Fund SIP</option>
                   <option value="Insurance Planning" className="bg-navy text-white">Insurance Planning</option>
-                  <option value="NRI Investment Services" className="bg-navy text-white">NRI Investment Services</option>
+                  <option value="NRI Services" className="bg-navy text-white">NRI Services</option>
                   <option value="Portfolio Review" className="bg-navy text-white">Portfolio Review</option>
                   <option value="General Enquiry" className="bg-navy text-white">General Enquiry</option>
                 </select>

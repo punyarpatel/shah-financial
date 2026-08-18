@@ -930,7 +930,7 @@ const AdminDashboardPage = () => {
               <option value="">All Interests</option>
               <option value="Mutual Fund SIP">Mutual Fund SIP</option>
               <option value="Insurance Planning">Insurance Planning</option>
-              <option value="NRI Investment Services">NRI Investment Services</option>
+              <option value="NRI Services">NRI Services</option>
               <option value="Portfolio Review">Portfolio Review</option>
               <option value="General Enquiry">General Enquiry</option>
             </select>
@@ -1467,7 +1467,7 @@ const AdminDashboardPage = () => {
                     <option value="">Select interest area</option>
                     <option value="Mutual Fund SIP">Mutual Fund SIP</option>
                     <option value="Insurance Planning">Insurance Planning</option>
-                    <option value="NRI Investment Services">NRI Investment Services</option>
+                    <option value="NRI Services">NRI Services</option>
                     <option value="Tax Saving ELSS">Tax Saving ELSS</option>
                     <option value="Portfolio Review">Portfolio Review</option>
                     <option value="General Enquiry">General Enquiry</option>

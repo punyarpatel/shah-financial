@@ -60,7 +60,7 @@ const Footer = () => {
             <div>
               <h3 className={headingStyles}>Services</h3>
               <a href="/services/mutual-funds" onClick={(e) => handleLinkClick(e, '/services/mutual-funds')} className={linkStyles}>Mutual Funds</a>
-              <a href="/nri" onClick={(e) => handleLinkClick(e, '/nri')} className={linkStyles}>NRI Investment</a>
+              <a href="/nri" onClick={(e) => handleLinkClick(e, '/nri')} className={linkStyles}>NRI Services</a>
               <a href="/services/insurance" onClick={(e) => handleLinkClick(e, '/services/insurance')} className={linkStyles}>Insurance</a>
               <a href="/services/property-insurance" onClick={(e) => handleLinkClick(e, '/services/property-insurance')} className={linkStyles}>Property Insurance</a>
               <a href="/#contact" onClick={(e) => handleLinkClick(e, '/#contact')} className={linkStyles}>Portfolio Review</a>
