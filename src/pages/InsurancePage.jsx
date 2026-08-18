@@ -219,11 +219,11 @@ const InsurancePage = () => {
         <FadeIn>
           <div className="max-w-7xl mx-auto px-4">
             <p className="text-muted text-[12px] uppercase tracking-[0.15em] font-medium mb-[1.25rem]">Our Insurance Partners</p>
-            <div className="flex flex-wrap gap-4 items-center">
+            <div className="flex flex-wrap gap-3.5 items-center">
               {partners.map((partner, idx) => (
                 <div
                   key={idx}
-                  className="bg-white border border-navy/10 hover:border-gold/50 rounded-[12px] p-3 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 select-none w-[170px] h-[56px] min-w-[150px]"
+                  className="bg-white border border-navy/10 hover:border-gold/50 rounded-[12px] px-4 py-2.5 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 select-none min-h-[56px]"
                 >
                   <InsurerLogo name={partner} />
                 </div>

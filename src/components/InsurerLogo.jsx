@@ -244,68 +244,88 @@ const LOGO_IMAGE_MAP = {
   'Care': '/images/insurers/care_health.png',
 };
 
-const InsurerLogo = ({ name }) => {
-  if (LOGO_IMAGE_MAP[name]) {
+const InsurerLogo = ({ name, showName = true }) => {
+  const imageSrc = LOGO_IMAGE_MAP[name];
+
+  if (imageSrc) {
     return (
-      <img
-        src={LOGO_IMAGE_MAP[name]}
-        alt={name}
-        className="max-h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-        onError={(e) => {
-          e.currentTarget.style.display = 'none';
-        }}
-      />
+      <div className="flex items-center gap-3">
+        <img
+          src={imageSrc}
+          alt={name}
+          className="h-8 max-h-8 w-auto object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+          }}
+        />
+        {showName && (
+          <span className="text-[13px] font-bold text-navy leading-tight tracking-tight whitespace-nowrap">
+            {name}
+          </span>
+        )}
+      </div>
     );
   }
 
-  switch (name) {
-    case 'LIC of India':
-    case 'LIC':
-      return <LicLogo />;
-    case 'ICICI Prudential Life':
-    case 'ICICI Prudential':
-      return <IciciPruLogo />;
-    case 'Tata AIA':
-    case 'Tata AIA Life':
-      return <TataAiaLogo />;
-    case 'HDFC Life':
-      return <HdfcLifeLogo />;
-    case 'Bajaj Life':
-    case 'Bajaj Allianz Life':
-      return <BajajLifeLogo />;
-    case 'HDFC Ergo':
-    case 'HDFC ERGO':
-      return <HdfcErgoLogo />;
-    case 'ICICI Lombard':
-      return <IciciLombardLogo />;
-    case 'Tata AIG':
-    case 'TATA AIG':
-      return <TataAigLogo />;
-    case 'Go Digit':
-    case 'GoDigit':
-    case 'Digit':
-      return <GoDigitLogo />;
-    case 'IndusInd':
-    case 'IndusInd Bank':
-      return <IndusIndLogo />;
-    case 'Bajaj General':
-    case 'Bajaj Allianz General':
-      return <BajajGeneralLogo />;
-    case 'Edelweiss Zuno':
-    case 'Zuno':
-      return <ZunoLogo />;
-    case 'Niva Bupa':
-    case 'Niva Bupa Star':
-      return <NivaBupaLogo />;
-    case 'Star Health':
-    case 'Star':
-      return <StarHealthLogo />;
-    case 'Care Health':
-    case 'Care':
-      return <CareHealthLogo />;
-    default:
-      return <span className="font-semibold text-navy">{name}</span>;
-  }
+  return (
+    <div className="flex items-center gap-3">
+      {(() => {
+        switch (name) {
+          case 'LIC of India':
+          case 'LIC':
+            return <LicLogo />;
+          case 'ICICI Prudential Life':
+          case 'ICICI Prudential':
+            return <IciciPruLogo />;
+          case 'Tata AIA':
+          case 'Tata AIA Life':
+            return <TataAiaLogo />;
+          case 'HDFC Life':
+            return <HdfcLifeLogo />;
+          case 'Bajaj Life':
+          case 'Bajaj Allianz Life':
+            return <BajajLifeLogo />;
+          case 'HDFC Ergo':
+          case 'HDFC ERGO':
+            return <HdfcErgoLogo />;
+          case 'ICICI Lombard':
+            return <IciciLombardLogo />;
+          case 'Tata AIG':
+          case 'TATA AIG':
+            return <TataAigLogo />;
+          case 'Go Digit':
+          case 'GoDigit':
+          case 'Digit':
+            return <GoDigitLogo />;
+          case 'IndusInd':
+          case 'IndusInd Bank':
+            return <IndusIndLogo />;
+          case 'Bajaj General':
+          case 'Bajaj Allianz General':
+            return <BajajGeneralLogo />;
+          case 'Edelweiss Zuno':
+          case 'Zuno':
+            return <ZunoLogo />;
+          case 'Niva Bupa':
+          case 'Niva Bupa Star':
+            return <NivaBupaLogo />;
+          case 'Star Health':
+          case 'Star':
+            return <StarHealthLogo />;
+          case 'Care Health':
+          case 'Care':
+            return <CareHealthLogo />;
+          default:
+            return null;
+        }
+      })()}
+      {showName && (
+        <span className="text-[13px] font-bold text-navy leading-tight tracking-tight whitespace-nowrap">
+          {name}
+        </span>
+      )}
+    </div>
+  );
 };
 
 export default InsurerLogo;
