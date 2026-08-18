@@ -257,7 +257,7 @@ const Navbar = () => {
   };
 
   const handleLinkClick = (e, link) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     closeMenu();
 
     if (link === '/') {
@@ -265,15 +265,18 @@ const Navbar = () => {
         window.history.replaceState(null, '', window.location.pathname);
       }
       if (location.pathname === '/') {
-        window.scrollTo({ top: 0, behavior: 'auto' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         navigate('/');
       }
     } else if (link.includes('#')) {
       const [path, hash] = link.split('#');
-      if (location.pathname !== path) {
+      const targetPath = path === '' ? '/' : path;
+
+      if (location.pathname !== targetPath) {
         navigate(link);
       } else {
+        window.history.pushState(null, '', link);
         const section = document.getElementById(hash);
         if (section) {
           section.scrollIntoView({ behavior: 'smooth' });
@@ -283,7 +286,7 @@ const Navbar = () => {
       }
     } else {
       if (location.pathname === link) {
-        window.scrollTo({ top: 0, behavior: 'auto' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         navigate(link);
       }
