@@ -22,6 +22,7 @@ const navData = {
     { icon: '🌍', title: 'NRI Services', desc: 'Specialized advisory for NRIs including NRE/NRO investing, health insurance, and repatriation.', link: '/nri' },
     { icon: '🎯', title: 'Retirement Planning', desc: 'Build a realistic, inflation-adjusted retirement corpus with dedicated plans and annual reviews.', link: '/services/retirement' },
     { icon: '🎯', title: 'Goal-Based Wealth Planning', desc: 'Create dedicated investment buckets for education, home, business, and vacations.', link: '/services/goal-planning' },
+    { icon: '💼', title: 'Other Investment Services', desc: 'Stock Broking, Smallcase, SIF, LAS, Fixed Deposits, NPS, PMS & AIF.', link: '/services#other-services' },
   ],
   about: [
     { icon: '📖', title: 'Our Story', desc: 'A family built on trust since 2001.', link: '/about#story' },

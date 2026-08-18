@@ -97,23 +97,80 @@ const servicesList = [
   },
 ];
 
+const otherServicesList = [
+  {
+    id: 'stock-broking',
+    icon: '📊',
+    tag: 'Direct Equity & Demat',
+    title: 'Stock Broking',
+    description: 'Direct equity trading solutions and seamless Demat account setups with leading Indian brokers for equity shares, ETFs, and market derivatives.'
+  },
+  {
+    id: 'smallcase',
+    icon: '💼',
+    tag: 'Thematic Baskets',
+    title: 'Small Case',
+    description: 'Modern, theme-driven baskets of stocks & ETFs designed around emerging economic trends, key industrial sectors, and quantitative growth strategies.'
+  },
+  {
+    id: 'sif',
+    icon: '🏛️',
+    tag: 'Specialised Funds',
+    title: 'SIF',
+    description: 'Specialised Investment Funds designed for high-conviction strategies, targeted sector allocations, and custom capital growth.'
+  },
+  {
+    id: 'las',
+    icon: '⚡',
+    tag: 'Instant Liquidity',
+    title: 'Loan Against Securities (LAS)',
+    description: 'Access fast, flexible credit lines against your existing mutual funds and equity holdings without liquidating your long-term portfolio.'
+  },
+  {
+    id: 'fixed-income',
+    icon: '📜',
+    tag: 'Guaranteed Yields',
+    title: 'Fixed Deposit / Bonds',
+    description: 'Capital preservation through high-rated Corporate FDs, Sovereign Gold Bonds (SGB), 54EC Capital Gains Tax-Saving Bonds, and Fixed Income Securities.'
+  },
+  {
+    id: 'nps',
+    icon: '🇮🇳',
+    tag: 'Tax-Saved Retirement',
+    title: 'NPS',
+    description: 'National Pension System — government-backed pension scheme offering market-linked growth with exclusive tax benefits under Sec 80CCD(1B).'
+  },
+  {
+    id: 'pms-aif-gift',
+    icon: '💎',
+    tag: 'UHNI & Global Capital',
+    title: 'PMS / AIF / Gift IFSC',
+    description: 'Institutional-grade Portfolio Management Services (PMS), Alternative Investment Funds (AIF), and international GIFT City IFSC investment structures.'
+  }
+];
+
 const ServicesPage = () => {
   const ogImage = `${window.location.origin}/why_choose_us_mockup.png`;
+
+  const handleInquireService = (title) => {
+    const message = encodeURIComponent(`Hi Drishti Wealth team, I would like to inquire about ${title}.`);
+    window.open(`https://wa.me/919664977576?text=${message}`, '_blank');
+  };
 
   return (
     <div className="min-h-screen bg-cream flex flex-col relative">
       <Helmet>
         <title>Our Services | Drishti Wealth Ahmedabad</title>
-        <meta name="description" content="Explore comprehensive wealth management, mutual fund services, life and health insurance, NRI investment planning, and retirement setups." />
+        <meta name="description" content="Explore comprehensive wealth management, mutual fund services, life and health insurance, NRI investment planning, stock broking, LAS, NPS, and retirement setups." />
         <link rel="canonical" href="https://drishtiwealth.com/services" />
         <meta property="og:title" content="Our Services | Drishti Wealth Ahmedabad" />
-        <meta property="og:description" content="Explore comprehensive wealth management, mutual fund services, life and health insurance, NRI investment planning, and retirement setups." />
+        <meta property="og:description" content="Explore comprehensive wealth management, mutual fund services, life and health insurance, NRI investment planning, stock broking, LAS, NPS, and retirement setups." />
         <meta property="og:image" content="https://drishtiwealth.com/og-image.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://drishtiwealth.com/services" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Our Services | Drishti Wealth Ahmedabad" />
-        <meta name="twitter:description" content="Explore comprehensive wealth management, mutual fund services, life and health insurance, NRI investment planning, and retirement setups." />
+        <meta name="twitter:description" content="Explore comprehensive wealth management, mutual fund services, life and health insurance, NRI investment planning, stock broking, LAS, NPS, and retirement setups." />
         <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
@@ -183,8 +240,6 @@ const ServicesPage = () => {
                   customized by certified professionals to suit your lifestyle and
                   financial goals.
                 </p>
-
-
 
                 {/* CTA */}
                 <div className="flex items-center gap-4">
@@ -262,7 +317,7 @@ const ServicesPage = () => {
                         >
                           {service.title}
                         </h3>
-                        <p
+                          <p
                           className="text-[13.5px] leading-relaxed line-clamp-2"
                           style={{ color: 'rgba(255,255,255,0.6)' }}
                         >
@@ -298,14 +353,14 @@ const ServicesPage = () => {
       </section>
 
       {/* ── Services Grid Section ── */}
-      <section id="services-grid" className="flex-grow py-[4rem] w-full">
+      <section id="services-grid" className="py-[4rem] w-full">
         <div className="max-w-7xl mx-auto px-4">
 
           {/* Section label */}
           <FadeIn>
             <div className="text-center mb-[3.5rem]">
               <div className="inline-block bg-gold/10 text-gold text-[11px] uppercase tracking-[0.15em] font-medium px-[12px] py-[4px] rounded-[20px] mb-[1rem]">
-                All Services
+                Core Wealth & Protection
               </div>
               <h2 className="font-serif text-[28px] md:text-[36px] text-textDark font-semibold mb-[1rem] leading-tight">
                 Find the Right Solution for You
@@ -345,6 +400,62 @@ const ServicesPage = () => {
                     >
                       Explore Service &rarr;
                     </Link>
+                  </div>
+                </BorderGlow>
+              </StaggerItem>
+            ))}
+          </StaggerGroup>
+        </div>
+      </section>
+
+      {/* ── Other Investment Services Section ── */}
+      <section id="other-services" className="py-[4.5rem] w-full bg-[#f8fafc] border-t border-navy/10">
+        <div className="max-w-7xl mx-auto px-4">
+          <FadeIn>
+            <div className="text-center mb-[3.5rem]">
+              <div className="inline-block bg-gold/15 border border-gold/30 text-gold text-[11px] uppercase tracking-[0.18em] font-semibold px-[14px] py-[4px] rounded-[20px] mb-[1rem]">
+                Expanded Solutions
+              </div>
+              <h2 className="font-serif text-[28px] md:text-[38px] text-navy font-bold mb-[1rem] leading-tight">
+                Other Investment Services
+              </h2>
+              <p className="text-muted text-[15px] md:text-[16px] leading-[1.6] max-w-[640px] mx-auto">
+                Explore specialized investment products, market access platforms, liquidity solutions, and institutional-grade wealth avenues.
+              </p>
+            </div>
+          </FadeIn>
+
+          <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {otherServicesList.map((item) => (
+              <StaggerItem key={item.id}>
+                <BorderGlow className="h-full hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-md" borderRadius={14} backgroundColor="#ffffff">
+                  <div 
+                    className="p-6 h-full flex flex-col justify-between group cursor-pointer"
+                    onClick={() => handleInquireService(item.title)}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-[28px] transform group-hover:scale-110 transition-transform duration-300">
+                          {item.icon}
+                        </span>
+                        <span className="text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-1 rounded bg-navy/5 text-navy group-hover:bg-gold/15 group-hover:text-navy transition-colors">
+                          {item.tag}
+                        </span>
+                      </div>
+
+                      <h3 className="font-serif text-navy text-[18px] font-bold mb-2.5 group-hover:text-gold transition-colors duration-300">
+                        {item.title}
+                      </h3>
+
+                      <p className="text-muted text-[13.5px] leading-[1.6]">
+                        {item.description}
+                      </p>
+                    </div>
+
+                    <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[12px] font-semibold text-gold group-hover:text-navy transition-colors">
+                      <span>Inquire Desk</span>
+                      <span className="transform group-hover:translate-x-1 transition-transform">&rarr;</span>
+                    </div>
                   </div>
                 </BorderGlow>
               </StaggerItem>

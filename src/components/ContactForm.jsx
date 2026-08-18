@@ -231,6 +231,7 @@ const ContactForm = () => {
                   <option value="Mutual Fund SIP" className="bg-navy text-white">Mutual Fund SIP</option>
                   <option value="Insurance Planning" className="bg-navy text-white">Insurance Planning</option>
                   <option value="NRI Services" className="bg-navy text-white">NRI Services</option>
+                  <option value="Other Investment Services" className="bg-navy text-white">Other Investment Services (Broking, LAS, NPS, PMS, etc.)</option>
                   <option value="Portfolio Review" className="bg-navy text-white">Portfolio Review</option>
                   <option value="General Enquiry" className="bg-navy text-white">General Enquiry</option>
                 </select>
