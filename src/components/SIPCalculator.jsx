@@ -706,7 +706,7 @@ const SIPCalculator = () => {
                       onChange={setSip}
                       prefix="₹"
                     />
-                    <SliderRow label="Expected Return" value={rate} min={8} max={20} step={0.5} onChange={setRate} suffix="%" />
+                    <SliderRow label="Expected Return" value={rate} min={8} max={15} step={0.5} onChange={setRate} suffix="%" />
                     <SliderRow label="Inflation Rate" value={inflation} min={3} max={10} step={0.5} onChange={setInflation} suffix="%" />
                   </>
                 )}
@@ -753,7 +753,7 @@ const SIPCalculator = () => {
                       onChange={setSip}
                       prefix="₹"
                     />
-                    <SliderRow label="Expected Return" value={rate} min={8} max={20} step={0.5} onChange={setRate} suffix="%" />
+                    <SliderRow label="Expected Return" value={rate} min={8} max={15} step={0.5} onChange={setRate} suffix="%" />
                     <SliderRow label="Education Inflation" value={inflation} min={4} max={12} step={0.5} onChange={setInflation} suffix="%" />
                   </>
                 )}
@@ -788,7 +788,7 @@ const SIPCalculator = () => {
                       onChange={setSip}
                       prefix="₹"
                     />
-                    <SliderRow label="Expected Return" value={rate} min={8} max={20} step={0.5} onChange={setRate} suffix="%" />
+                    <SliderRow label="Expected Return" value={rate} min={8} max={15} step={0.5} onChange={setRate} suffix="%" />
                     <SliderRow label="Inflation Rate" value={inflation} min={3} max={12} step={0.5} onChange={setInflation} suffix="%" />
                   </>
                 )}
@@ -805,7 +805,7 @@ const SIPCalculator = () => {
                       onChange={setSip}
                       prefix="₹"
                     />
-                    <SliderRow label="Expected Rate" value={rate} min={8} max={20} step={0.5} onChange={setRate} suffix="%" />
+                    <SliderRow label="Expected Rate" value={rate} min={8} max={15} step={0.5} onChange={setRate} suffix="%" />
                     <SliderRow label="Time Period" value={years} min={1} max={30} step={1} onChange={setYears} suffix="Yrs" />
                   </>
                 )}

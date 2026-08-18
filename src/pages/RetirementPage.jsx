@@ -612,7 +612,7 @@ const RetirementPage = () => {
               <SliderRow label="Life expectancy" value={lifeExpectancy} min={Math.max(retirementAge + 1, 65)} max={100} onChange={v => setLifeExpectancy(Math.max(retirementAge + 1, v))} display={`${lifeExpectancy} yrs`} />
               <SliderRow label="Monthly expenses today" value={monthlyExpenses} min={5000} max={500000} step={1000} onChange={setMonthlyExpenses} display={fmt(monthlyExpenses)} />
               <SliderRow label="Inflation rate" value={inflationRate} min={2} max={12} step={0.5} onChange={setInflationRate} display={`${inflationRate}%`} />
-              <SliderRow label="Expected return on investment" value={roiRate} min={6} max={18} step={0.5} onChange={setRoiRate} display={`${roiRate}%`} />
+              <SliderRow label="Expected return on investment" value={roiRate} min={6} max={15} step={0.5} onChange={setRoiRate} display={`${roiRate}%`} />
               <SliderRow label="Current savings already invested" value={currentSavings} min={0} max={10000000} step={10000} onChange={setCurrentSavings} display={fmt(currentSavings)} />
             </div>
  

@@ -46,20 +46,6 @@ const SUB_SERVICES = [
     title: 'Portfolio Reviews',
     description: 'Regular portfolio reviews: conducted quarterly or whenever market movements demand action.',
     detailedDescription: 'We monitor fund performance against benchmarks and peer groups. If a fund underperforms consistently for two quarters, or if your asset allocation drifts, we prepare rebalancing recommendations.'
-  },
-  {
-    id: 'switches',
-    icon: '🔀',
-    title: 'Fund Switches',
-    description: 'Proactive fund switches deployed automatically whenever a better, more efficient option exists.',
-    detailedDescription: 'We execute switches between scheme categories (e.g., from small-cap to debt during market highs) or move out of underperforming schemes to high-performing ones seamlessly to preserve gains.'
-  },
-  {
-    id: 'redemption',
-    icon: '💰',
-    title: 'Redemption Guidance',
-    description: 'Tax-efficient redemption guidance designed for when you actually need to access your money.',
-    detailedDescription: 'When you reach your goals, we structure your withdrawals to minimize Capital Gains Tax (LTCG/STCG) and avoid Exit Loads, ensuring you pocket the absolute maximum possible returns.'
   }
 ];
 

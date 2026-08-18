@@ -285,7 +285,7 @@ const SipCompoundingVisualizer = () => {
               <input 
                 type="range" 
                 min="8" 
-                max="18" 
+                max="15" 
                 step="0.5"
                 value={returnRate}
                 disabled={isPlaying}
@@ -295,7 +295,7 @@ const SipCompoundingVisualizer = () => {
               <div className="flex justify-between text-[10px] text-white/40 mt-1">
                 <span>8% (Conservative)</span>
                 <span>12% (Balanced)</span>
-                <span>18% (Aggressive)</span>
+                <span>15% (Aggressive Max)</span>
               </div>
             </div>
 

@@ -138,19 +138,20 @@ const InsurancePage = () => {
 
   const partners = [
     'LIC of India',
-    'HDFC Life',
-    'SBI Life',
     'ICICI Prudential Life',
+    'Tata AIA',
+    'HDFC Life',
+    'Bajaj Life',
     'HDFC Ergo',
     'ICICI Lombard',
     'Tata AIG',
-    'Bajaj Allianz',
-    'Niva Bupa',
-    'Care Health',
-    'Star Health',
     'Go Digit',
-    'Reliance General',
-    'Edelweiss Zuno'
+    'IndusInd',
+    'Bajaj General',
+    'Edelweiss Zuno',
+    'Niva Bupa',
+    'Star Health',
+    'Care Health'
   ];
 
   const ogImage = `${window.location.origin}/insurance_preview.png`;
