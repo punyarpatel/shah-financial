@@ -5,8 +5,8 @@ const teamMembers = [
   {
     id: 1,
     name: 'Piyush Shah',
-    role: 'Founder & Principal',
-    tag: 'FOUNDER',
+    role: 'Director',
+    tag: 'DIRECTOR',
     details: '25+ Years of leadership excellence in Mutual Funds & Wealth Management.',
     badgeStyle: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
     avatar: 'PS',
@@ -16,8 +16,8 @@ const teamMembers = [
   {
     id: 2,
     name: 'Rutvik Shah',
-    role: 'Wealth Specialist & Partner',
-    tag: 'WEALTH SPECIALIST',
+    role: 'Director',
+    tag: 'DIRECTOR',
     details: 'Specializing in portfolio allocation, SIP compounding, and equity market analysis.',
     badgeStyle: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
     avatar: 'RS',
@@ -27,8 +27,8 @@ const teamMembers = [
   {
     id: 3,
     name: 'Reena Shah',
-    role: 'Client Relations & NRI Desk',
-    tag: 'CLIENT RELATIONS',
+    role: 'Director',
+    tag: 'DIRECTOR',
     details: 'Dedicated client support, paperless KYC, and cross-border client operations.',
     badgeStyle: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
     avatar: 'RS',

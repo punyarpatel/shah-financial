@@ -63,6 +63,7 @@ const Footer = () => {
               <a href="/nri" onClick={(e) => handleLinkClick(e, '/nri')} className={linkStyles}>NRI Services</a>
               <a href="/services/insurance" onClick={(e) => handleLinkClick(e, '/services/insurance')} className={linkStyles}>Insurance</a>
               <a href="/services/property-insurance" onClick={(e) => handleLinkClick(e, '/services/property-insurance')} className={linkStyles}>Property Insurance</a>
+              <a href="/services/other-investments" onClick={(e) => handleLinkClick(e, '/services/other-investments')} className={linkStyles}>Other Investments</a>
               <a href="/#contact" onClick={(e) => handleLinkClick(e, '/#contact')} className={linkStyles}>Portfolio Review</a>
             </div>
 

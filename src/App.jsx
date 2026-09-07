@@ -17,6 +17,7 @@ const TravelInsurancePage = lazy(() => import('./pages/TravelInsurancePage'));
 const PropertyInsurancePage = lazy(() => import('./pages/PropertyInsurancePage'));
 const RetirementPage = lazy(() => import('./pages/RetirementPage'));
 const GoalPlanningPage = lazy(() => import('./pages/GoalPlanningPage'));
+const OtherInvestmentPage = lazy(() => import('./pages/OtherInvestmentPage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const SingleBlogPage = lazy(() => import('./pages/SingleBlogPage'));
 const AdminLoginPage = lazy(() => import('./pages/AdminLoginPage'));
@@ -147,6 +148,7 @@ export default function App() {
               <Route path="/services/property-insurance" element={<PropertyInsurancePage />} />
               <Route path="/services/retirement" element={<RetirementPage />} />
               <Route path="/services/goal-planning" element={<GoalPlanningPage />} />
+              <Route path="/services/other-investments" element={<OtherInvestmentPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:slug" element={<SingleBlogPage />} />

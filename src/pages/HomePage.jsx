@@ -115,7 +115,7 @@ const HomePage = () => {
           leftText="Drishti Wealth"
           rightText="Established 2001"
           buttonText="Explore Wealth Planning"
-          videoUrl="/Generate_an_animated_video_for.mp4"
+          videoUrl="/Generate_an_animated_video_for (1) COM.mp4"
           onButtonClick={() => {
             const contactSec = document.getElementById('contact');
             if (contactSec) contactSec.scrollIntoView({ behavior: 'smooth' });

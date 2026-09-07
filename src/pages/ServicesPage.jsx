@@ -95,58 +95,18 @@ const servicesList = [
     stat: '₹1Cr+',
     statLabel: 'Goals Achieved'
   },
-];
-
-const otherServicesList = [
   {
-    id: 'stock-broking',
-    icon: '📊',
-    tag: 'Direct Equity & Demat',
-    title: 'Stock Broking',
-    description: 'Direct equity trading solutions and seamless Demat account setups with leading Indian brokers for equity shares, ETFs, and market derivatives.'
-  },
-  {
-    id: 'smallcase',
+    id: 'other-investments',
     icon: '💼',
-    tag: 'Thematic Baskets',
-    title: 'Small Case',
-    description: 'Modern, theme-driven baskets of stocks & ETFs designed around emerging economic trends, key industrial sectors, and quantitative growth strategies.'
+    category: 'Alternative Wealth',
+    title: 'Other Investment Services',
+    description: 'Stock Broking, Smallcase thematic portfolios, SIF, Loan Against Securities (LAS), Fixed Income Bonds, NPS, and PMS/AIF solutions.',
+    link: '/services/other-investments',
+    gradient: 'linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%)',
+    accent: '#334155',
+    stat: '7+ Avenues',
+    statLabel: 'Specialized Solutions'
   },
-  {
-    id: 'sif',
-    icon: '🏛️',
-    tag: 'Specialised Funds',
-    title: 'SIF',
-    description: 'Specialised Investment Funds designed for high-conviction strategies, targeted sector allocations, and custom capital growth.'
-  },
-  {
-    id: 'las',
-    icon: '⚡',
-    tag: 'Instant Liquidity',
-    title: 'Loan Against Securities (LAS)',
-    description: 'Access fast, flexible credit lines against your existing mutual funds and equity holdings without liquidating your long-term portfolio.'
-  },
-  {
-    id: 'fixed-income',
-    icon: '📜',
-    tag: 'Guaranteed Yields',
-    title: 'Fixed Deposit / Bonds',
-    description: 'Capital preservation through high-rated Corporate FDs, Sovereign Gold Bonds (SGB), 54EC Capital Gains Tax-Saving Bonds, and Fixed Income Securities.'
-  },
-  {
-    id: 'nps',
-    icon: '🇮🇳',
-    tag: 'Tax-Saved Retirement',
-    title: 'NPS',
-    description: 'National Pension System — government-backed pension scheme offering market-linked growth with exclusive tax benefits under Sec 80CCD(1B).'
-  },
-  {
-    id: 'pms-aif-gift',
-    icon: '💎',
-    tag: 'UHNI & Global Capital',
-    title: 'PMS / AIF / Gift IFSC',
-    description: 'Institutional-grade Portfolio Management Services (PMS), Alternative Investment Funds (AIF), and international GIFT City IFSC investment structures.'
-  }
 ];
 
 const ServicesPage = () => {
@@ -402,60 +362,6 @@ const ServicesPage = () => {
                     <span>Explore Service</span>
                     <span className="ml-1.5 transform group-hover:translate-x-1.5 transition-transform duration-300">&rarr;</span>
                   </Link>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
-        </div>
-      </section>
-
-      {/* ── Other Investment Services Section ── */}
-      <section id="other-services" className="py-[4.5rem] w-full bg-[#f8fafc] border-t border-slate-200/80">
-        <div className="max-w-7xl mx-auto px-4">
-          <FadeIn>
-            <div className="text-center mb-[3.5rem]">
-              <div className="inline-block bg-[#fef3c7] text-[#b45309] border border-[#fde68a] text-[11px] uppercase tracking-[0.18em] font-extrabold px-[14px] py-[5px] rounded-[8px] mb-[1rem]">
-                Expanded Solutions
-              </div>
-              <h2 className="font-serif text-[28px] md:text-[38px] text-[#0d2545] font-bold mb-[1rem] leading-tight">
-                Other Investment Services
-              </h2>
-              <p className="text-[#475569] text-[15px] md:text-[16px] leading-[1.6] max-w-[640px] mx-auto">
-                Explore specialized investment products, market access platforms, liquidity solutions, and institutional-grade wealth avenues.
-              </p>
-            </div>
-          </FadeIn>
-
-          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {otherServicesList.map((item) => (
-              <StaggerItem key={item.id}>
-                <div 
-                  className="bg-white border border-slate-200/90 rounded-[24px] p-7 md:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(13,37,69,0.08)] hover:border-[#ca8a04]/40 transition-all duration-300 flex flex-col justify-between h-full group cursor-pointer hover:-translate-y-1"
-                  onClick={() => handleInquireService(item.title)}
-                >
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span className="bg-[#fef3c7] text-[#b45309] border border-[#fde68a] text-[11px] font-extrabold tracking-wider px-3.5 py-1.5 rounded-[8px] uppercase">
-                        {item.tag}
-                      </span>
-                      <span className="text-[28px] transform group-hover:scale-110 transition-transform duration-300">
-                        {item.icon}
-                      </span>
-                    </div>
-
-                    <h3 className="font-serif text-[#0d2545] text-[22px] md:text-[25px] font-bold mt-5 mb-3 leading-tight group-hover:text-[#ca8a04] transition-colors duration-300">
-                      {item.title}
-                    </h3>
-
-                    <p className="text-[#475569] text-[14.5px] leading-[1.65] mb-8">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  <div className="inline-flex items-center text-[#ca8a04] font-bold text-[14.5px] group-hover:text-[#0d2545] transition-colors mt-auto">
-                    <span>Inquire Desk</span>
-                    <span className="ml-1.5 transform group-hover:translate-x-1.5 transition-transform duration-300">&rarr;</span>
-                  </div>
                 </div>
               </StaggerItem>
             ))}

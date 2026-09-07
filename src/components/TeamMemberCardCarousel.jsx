@@ -5,8 +5,8 @@ const teamMembers = [
   {
     id: 1,
     name: 'Piyush Shah',
-    role: 'Founder, Director & CEO',
-    tag: 'FOUNDER | CEO',
+    role: 'Director',
+    tag: 'DIRECTOR',
     details: 'The driving force behind Drishti Wealth since its inception over 25 years ago, leading the firm’s growth with an unwavering commitment to trust, integrity, and helping clients achieve their financial goals.',
     badgeStyle: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
     avatar: 'PS',
@@ -17,8 +17,8 @@ const teamMembers = [
   {
     id: 2,
     name: 'Rutvik Shah',
-    role: 'Managing Director & Partner',
-    tag: 'MANAGING DIRECTOR',
+    role: 'Director',
+    tag: 'DIRECTOR',
     details: 'Committed to combining analytical thinking, business acumen, and a forward-looking approach to deliver thoughtful solutions while carrying forward Drishti Wealth’s legacy of trust and long-term relationships.',
     badgeStyle: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
     avatar: 'RS',
@@ -29,8 +29,8 @@ const teamMembers = [
   {
     id: 3,
     name: 'Reena Shah',
-    role: 'Co-founder',
-    tag: 'CO-FOUNDER',
+    role: 'Director',
+    tag: 'DIRECTOR',
     details: 'A founding pillar of Drishti Wealth, instrumental in the firm’s journey through unwavering support, guidance, and a strong commitment to shape its growth and long-term vision.',
     badgeStyle: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
     avatar: 'RS',

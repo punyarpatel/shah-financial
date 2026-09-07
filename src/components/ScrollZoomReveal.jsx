@@ -7,7 +7,7 @@ const ScrollZoomReveal = ({
   buttonText = 'Explore Wealth Solutions',
   onButtonClick,
   imageSrc = 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=2000&q=80',
-  videoUrl = '/Generate_an_animated_video_for.mp4'
+  videoUrl = '/Generate_an_animated_video_for (1) COM.mp4'
 }) => {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
@@ -117,8 +117,7 @@ const ScrollZoomReveal = ({
                   onClick={toggleSound}
                   className="absolute inset-0 w-full h-full object-cover z-0 cursor-pointer"
                 >
-                  <source src={videoUrl} type="video/mp4" />
-                  <source src={videoUrl.replace('.mp4', '.webm')} type="video/webm" />
+                  <source src={encodeURI(videoUrl)} type="video/mp4" />
                 </video>
 
                 {/* Sound Mute / Unmute Button */}
