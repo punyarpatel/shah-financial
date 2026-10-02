@@ -287,22 +287,34 @@ app.post('/api/leads', leadSubmissionLimiter, (req, res) => {
 
   // Trigger webhook notification if configured
   const webhookUrl = process.env.VITE_NOTIFICATION_WEBHOOK_URL || 'https://hook.eu1.make.com/h7uju73cjrmr90joev7kwx21kscw7q2r';
-  const siteUrl = process.env.VITE_SITE_URL || 'https://drishtiwealth.com';
-  const dashboardUrl = `${siteUrl.replace(/\/$/, '')}/admin/dashboard`;
+  const dashboardUrl = 'https://drishtiwealth.com/admin/dashboard';
 
   if (webhookUrl) {
+    const leadFields = {
+      name: newLead.name || '',
+      phone: newLead.phone || '',
+      interest: newLead.interest || '',
+      city: newLead.city || 'N/A',
+      is_nri: newLead.is_nri || 'No',
+      nri: newLead.is_nri || 'No',
+      nri_country: newLead.nri_country || '',
+      country: newLead.nri_country || '',
+      message: newLead.message || 'None',
+      source: 'Website Backend',
+      dashboard_url: dashboardUrl,
+      dashboard_link: dashboardUrl,
+      admin_url: dashboardUrl,
+      url: dashboardUrl,
+      created_at: newLead.created_at || new Date().toISOString()
+    };
+
     fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        ...leadFields,
         event: 'lead.created',
-        data: {
-          ...newLead,
-          dashboard_url: dashboardUrl,
-          dashboard_link: dashboardUrl,
-          admin_url: dashboardUrl,
-          url: dashboardUrl,
-        }
+        data: leadFields
       })
     }).catch(err => logger.error('Backend webhook error: ' + err.message));
   }

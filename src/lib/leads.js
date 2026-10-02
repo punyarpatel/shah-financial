@@ -73,11 +73,7 @@ export async function submitLead(leadData) {
  * Gets the production dashboard URL for lead notification emails and alerts.
  */
 function getDashboardUrl() {
-  const siteUrl = import.meta.env.VITE_SITE_URL || 
-    (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' 
-      ? window.location.origin 
-      : 'https://drishtiwealth.com');
-  return `${siteUrl.replace(/\/$/, '')}/admin/dashboard`;
+  return 'https://drishtiwealth.com/admin/dashboard';
 }
 
 /**
@@ -124,6 +120,25 @@ async function sendGenericWebhook(leadData) {
   if (!url) return;
 
   const dashboardUrl = getDashboardUrl();
+  const createdAt = new Date().toISOString();
+
+  const leadFields = {
+    name: leadData.name || '',
+    phone: leadData.phone || '',
+    interest: leadData.interest || '',
+    city: leadData.city || 'N/A',
+    is_nri: leadData.is_nri || 'No',
+    nri: leadData.is_nri || 'No',
+    nri_country: leadData.nri_country || '',
+    country: leadData.nri_country || '',
+    message: leadData.message || 'None',
+    source: leadData.source || 'Website',
+    dashboard_url: dashboardUrl,
+    dashboard_link: dashboardUrl,
+    admin_url: dashboardUrl,
+    url: dashboardUrl,
+    created_at: createdAt
+  };
 
   try {
     await fetch(url, {
@@ -132,15 +147,9 @@ async function sendGenericWebhook(leadData) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        ...leadFields,
         event: 'lead.created',
-        data: {
-          ...leadData,
-          dashboard_url: dashboardUrl,
-          dashboard_link: dashboardUrl,
-          admin_url: dashboardUrl,
-          url: dashboardUrl,
-          created_at: new Date().toISOString()
-        }
+        data: leadFields
       })
     });
   } catch (err) {
