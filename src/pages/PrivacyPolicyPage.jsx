@@ -143,7 +143,7 @@ const PrivacyPolicyPage = () => {
                     </a>
                   </p>
                   <p className="text-muted text-[13.5px] mb-1">📞 Phone: +91 96649 77576</p>
-                  <p className="text-muted text-[13.5px]">✉️ Email: officeinsurance2017@gmail.com</p>
+                  <p className="text-muted text-[13.5px]">✉️ Email: info@drishtiwealth.com</p>
                 </div>
               </div>
 

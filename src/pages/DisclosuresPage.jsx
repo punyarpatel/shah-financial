@@ -53,7 +53,7 @@ const DisclosuresPage = () => {
                   <div className="p-5 border border-navy/10 rounded-[10px] bg-cream/30">
                     <p className="text-gold text-[11px] uppercase tracking-wider font-semibold mb-1">Mutual Fund Distribution</p>
                     <h4 className="font-serif text-navy text-[16px] font-bold mb-2">AMFI Registered MFD</h4>
-                    <p className="text-muted text-[13px] mb-1"><strong>ARN Code:</strong> ARN-XXXXX</p>
+                    <p className="text-muted text-[13px] mb-1"><strong>ARN Code:</strong> ARN-14098</p>
                     <p className="text-muted text-[13px] mb-1"><strong>Status:</strong> Active & Fully Registered</p>
                     <p className="text-muted text-[13px]"><strong>Incidental Services:</strong> Mutual Fund Distribution</p>
                   </div>
@@ -88,7 +88,7 @@ const DisclosuresPage = () => {
                 <ol className="list-decimal pl-5 space-y-4 text-muted text-[14.5px] leading-relaxed mb-6">
                   <li>
                     <strong>Level 1: Grievance Desk</strong><br />
-                    Submit your concern to our support desk via email at <a href="mailto:officeinsurance2017@gmail.com" className="text-gold hover:underline">officeinsurance2017@gmail.com</a> or phone at <strong>+91 96649 77576</strong>. Most operational issues are resolved within 3 business days.
+                    Submit your concern to our support desk via email at <a href="mailto:info@drishtiwealth.com" className="text-gold hover:underline">info@drishtiwealth.com</a> or phone at <strong>+91 96649 77576</strong>. Most operational issues are resolved within 3 business days.
                   </li>
                   <li>
                     <strong>Level 2: Compliance Officer</strong><br />

@@ -328,7 +328,7 @@ const Navbar = () => {
 
   const mobileSocialItems = [
     { label: '📞 +91 96649 77576', link: 'tel:+919664977576' },
-    { label: '📧 officeinsurance2017@gmail.com', link: 'https://mail.google.com/mail/?view=cm&fs=1&to=officeinsurance2017@gmail.com' },
+    { label: '📧 info@drishtiwealth.com', link: 'https://mail.google.com/mail/?view=cm&fs=1&to=info@drishtiwealth.com' },
     { label: '📍 305, Abhishilp Complex, Satellite, Ahmedabad', link: 'https://maps.google.com/?q=305,+Abhishilp+Complex,+Satellite,+Ahmedabad,+380015' }
   ];
 

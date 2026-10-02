@@ -76,13 +76,13 @@ const Footer = () => {
                 <span>+91 96649 77576</span>
               </a>
               <a 
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=officeinsurance2017@gmail.com" 
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=info@drishtiwealth.com" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className={`${linkStyles} flex items-center gap-2`}
               >
                 <span className="text-gold shrink-0">📧</span>
-                <span>officeinsurance2017@gmail.com</span>
+                <span>info@drishtiwealth.com</span>
               </a>
               <div className={`${textStyles} flex items-start gap-2`}>
                 <span className="text-gold shrink-0 mt-[3px]">📍</span>
@@ -125,7 +125,7 @@ const Footer = () => {
               <div className="w-24 h-24 rounded-full border-[3px] border-white/20 flex flex-col items-center justify-center text-center p-2 bg-white/5">
                 <span className="text-[#f0c96a] font-bold text-[10px] leading-tight">AMFI</span>
                 <span className="text-white font-bold text-[11px] leading-tight mt-1">REGISTERED</span>
-                <span className="text-white/60 text-[9px] mt-1">MUTUAL FUNDS</span>
+                <span className="text-white/60 text-[9px] mt-1">ARN-14098</span>
               </div>
 
               {/* Badge 2 (Circular) */}

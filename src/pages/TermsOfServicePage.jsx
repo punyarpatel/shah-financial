@@ -69,7 +69,7 @@ const TermsOfServicePage = () => {
                   Drishti Wealth operates as:
                 </p>
                 <ol className="list-decimal pl-5 space-y-3 text-muted text-[14.5px] leading-relaxed">
-                  <li>An AMFI-registered Mutual Fund Distributor (MFD). We facilitate mutual fund investment transactions, client onboarding, KYC verification support, and portfolio tracking. We distribute mutual fund schemes from multiple AMCs.</li>
+                  <li>An AMFI-registered Mutual Fund Distributor (MFD - ARN 14098). We facilitate mutual fund investment transactions, client onboarding, KYC verification support, and portfolio tracking. We distribute mutual fund schemes from multiple AMCs.</li>
                   <li>An IRDAI-licensed Insurance Advisor / Agent. We solicit and facilitate the issuance of life, health, general, and travel insurance products on behalf of licensed insurance providers in India.</li>
                 </ol>
                 <p className="text-muted text-[14.5px] leading-relaxed mt-4">

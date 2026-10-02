@@ -97,7 +97,7 @@ const NRIPage = () => {
   };
 
   const handleEmail = () => {
-    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=officeinsurance2017@gmail.com&su=NRI%20Investment%20%26%20Insurance%20Enquiry', '_blank');
+    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=info@drishtiwealth.com&su=NRI%20Investment%20%26%20Insurance%20Enquiry', '_blank');
   };
 
   const handleSubmit = async (e) => {

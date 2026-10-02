@@ -69,7 +69,7 @@ const HeroSection = () => {
             className="inline-flex items-center gap-[8px] bg-navy/40 border border-white/10 px-[16px] py-[6px] rounded-full text-[12px] text-white/80 backdrop-blur-sm mb-[2rem]"
           >
             <span className="w-[6px] h-[6px] rounded-full bg-gold animate-pulse"></span>
-            AMFI Registered Mutual Fund Distributor
+            AMFI Registered Mutual Fund Distributor (ARN-14098)
           </motion.div>
 
           {/* Title & Tagline */}

@@ -289,8 +289,8 @@ const AboutPage = () => {
                     <div>
                       <h4 className="font-serif text-[16px] text-navy font-semibold mb-1">Email Address</h4>
                       <p className="text-muted text-[14px] leading-relaxed">
-                        <a href="mailto:officeinsurance2017@gmail.com" className="hover:text-gold transition-colors font-medium">
-                          officeinsurance2017@gmail.com
+                        <a href="mailto:info@drishtiwealth.com" className="hover:text-gold transition-colors font-medium">
+                          info@drishtiwealth.com
                         </a>
                       </p>
                     </div>
