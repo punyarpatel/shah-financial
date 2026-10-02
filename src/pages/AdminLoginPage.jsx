@@ -28,18 +28,53 @@ const AdminLoginPage = () => {
     setLoading(true);
     setError('');
 
-    const { error: authError } = await supabase.auth.signInWithPassword({
-      email: email,
+    const cleanEmail = email.trim().toLowerCase();
+
+    // 1. Try standard Supabase authentication
+    let { data: signInData, error: authError } = await supabase.auth.signInWithPassword({
+      email: cleanEmail,
       password: password,
     });
 
-    if (authError) {
-      setError('Invalid email or password.');
-      setLoading(false);
+    if (!authError && signInData?.session) {
+      navigate('/admin/dashboard');
       return;
     }
 
-    navigate('/admin/dashboard');
+    // 2. If user is not yet registered in Supabase Auth, attempt auto-provisioning for admin
+    const allowedEmails = (import.meta.env.VITE_ADMIN_EMAILS || 'info@drishtiwealth.com')
+      .split(',')
+      .map((e) => e.trim().toLowerCase())
+      .filter(Boolean);
+
+    if (allowedEmails.includes(cleanEmail)) {
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+        email: cleanEmail,
+        password: password,
+        options: {
+          data: { is_admin: true }
+        }
+      });
+
+      if (!signUpError && signUpData?.session) {
+        navigate('/admin/dashboard');
+        return;
+      }
+
+      // Retry sign-in if account was created without email verification required
+      const { data: retryData, error: retryError } = await supabase.auth.signInWithPassword({
+        email: cleanEmail,
+        password: password,
+      });
+
+      if (!retryError && retryData?.session) {
+        navigate('/admin/dashboard');
+        return;
+      }
+    }
+
+    setError('Invalid email or password.');
+    setLoading(false);
   };
 
   const handleForgotPassword = async (e) => {
@@ -176,7 +211,7 @@ const AdminLoginPage = () => {
                       value={resetEmail}
                       onChange={(e) => setResetEmail(e.target.value)}
                       className={inputStyles}
-                      placeholder="rutvik4585@gmail.com"
+                      placeholder="info@drishtiwealth.com"
                       required
                     />
                   </div>

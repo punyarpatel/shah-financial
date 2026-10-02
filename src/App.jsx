@@ -54,7 +54,7 @@ function ProtectedRoute({ children }) {
       }
 
       const userEmail = session.user?.email || '';
-      const allowedEmails = (import.meta.env.VITE_ADMIN_EMAILS || 'rutvik4585@gmail.com,info@drishtiwealth.com,punyarpatel4105@gmail.com')
+      const allowedEmails = (import.meta.env.VITE_ADMIN_EMAILS || 'info@drishtiwealth.com')
         .split(',')
         .map((e) => e.trim().toLowerCase())
         .filter(Boolean);
